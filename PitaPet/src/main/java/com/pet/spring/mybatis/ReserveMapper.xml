@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reserve">
+
+	<select id="getList" parameterType="reserveDto" resultType="reserveDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM AS rnum
+			FROM
+				(SELECT num, shelterName, title, id, viewCount, reservedDate
+				FROM reserve
+				WHERE id=#{id}
+				ORDER BY num DESC) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+
+	<select id="getCount" parameterType="reserveDto" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM reserve
+		WHERE id=#{id}
+	</select>
+	
+	<insert id="insert" parameterType="reserveDto">
+		INSERT INTO reserve
+		(num, id, title, shelterName, reservedDate, reservedTime)
+		VALUES(#{num}, #{id}, #{title}, ${shelterName}, SYSDATE, #{reservedTime})
+	</insert>
+
+	<select id="getData" parameterType="int" resultType="reserveDto">
+		SELECT result1.*
+		FROM
+			(SELECT num, title, shelterName, r.id, viewCount, reservedDate, reservedTime, name, phoneNumber
+			FROM reserve r INNER JOIN petUsers p
+			ON r.id = p.id) result1
+		WHERE num=#{num}
+	</select>
+
+	<update id="addViewCount" parameterType="int">
+		UPDATE reserve
+		SET viewCount=viewCount+1
+		WHERE num=#{num}
+	</update>
+	
+	<update id="update" parameterType="reserveDto">
+		UPDATE reserve
+		SET title=#{title}, shelterName=#{shelterName}, reservedTime=#{reservedTime}
+		WHERE num=#{num}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM reserve
+		WHERE num=#{num}
+	</delete>
+	
+</mapper>
