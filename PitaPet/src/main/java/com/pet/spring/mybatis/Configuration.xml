@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
  <configuration>
  	<typeAliases>
- 	
+ 		<typeAlias type="com.pet.spring.users.dto.UsersDto" alias="usersDto"/>
  	</typeAliases>
  	<mappers>
- 		<mapper resource="com/pet/spring/mybatis/MemberMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/UsersMapper.xml"/>
  	</mappers>
  </configuration>
