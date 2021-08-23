@@ -4,9 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
  <configuration>
  	<typeAliases>
- 	
+ 		<typeAlias type="com.pet.spring.review.dto.ReviewDto" alias="reviewDto"/>
+ 		<typeAlias type="com.pet.spring.review.dto.ReviewCommentDto" alias="reviewCommentDto"/>
  	</typeAliases>
+ 	
  	<mappers>
- 		<mapper resource="com/pet/spring/mybatis/MemberMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/ReviewMapper.xml" />
+ 		<mapper resource="com/pet/spring/mybatis/ReviewCommentMapper.xml" />
  	</mappers>
  </configuration>
