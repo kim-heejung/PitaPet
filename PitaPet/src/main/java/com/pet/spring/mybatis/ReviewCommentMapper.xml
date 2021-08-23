@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewComment">
+
+	<select id="getList" parameterType="reviewCommentDto" resultType="reviewCommentDto">
+		SELECT *
+      	FROM
+         (SELECT result1.*, ROWNUM AS rnum
+         FROM
+            (SELECT num, id, content, target_nick, ref_group, comment_group, deleted, board_review_comment.regdate, profile
+            FROM board_review_comment
+            INNER JOIN petusers
+            ON board_review_comment.id=petusers.id
+            WHERE ref_group=#{ref_group}
+            ORDER BY comment_group ASC, num ASC) result1)
+      WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	
+	<select id="getCount" parameterType="int" resultType="int">
+      SELECT NVL(MAX(ROWNUM), 0)
+      FROM board_review_comment
+      WHERE ref_group=#{ref_group}
+   </select>
+   
+   <select id="getData" parameterType="int" resultType="reviewCommentDto">
+      SELECT num,id,content,ref_group,comment_group,deleted,regdate
+      FROM board_review_comment
+      WHERE num=#{num}   
+   </select>
+	
+	<select id="getSequence" resultType="int">
+      SELECT board_review_comment_seq.NEXTVAL
+      FROM DUAL
+   </select>
+   
+   <insert id="insert" parameterType="reviewCommentDto">
+	INSERT INTO board_review_comment
+ 	(num, id, content, target_nick, ref_group, comment_group, regdate)
+	VALUES(#{num}, #{id}, #{content}, #{target_nick}, #{ref_group}, #{comment_group}, SYSDATE)
+   </insert>
+   
+   <update id="update" parameterType="reviewCommentDto">
+      UPDATE board_review_comment
+      SET content=#{content}
+      WHERE num=#{num}   
+   </update>
+   
+   <update id="delete" parameterType="int">
+	  UPDATE board_review_comment
+      SET deleted='yes'
+      WHERE num=#{num}
+   </update>
+
+</mapper>
