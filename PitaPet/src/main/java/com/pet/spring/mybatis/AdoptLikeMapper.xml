@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adoptLike">
+
+	<insert id="insert" parameterType="adoptLikeDto">
+		INSERT INTO adoptLike
+		(num, id)
+		VALUES(#{num}, #{id})
+	</insert>
+	
+	<update id="updateY" parameterType="adoptLikeDto">
+		UPDATE adoptLike
+		SET liked='yes'
+		WHERE num=#{num} AND id=#{id}
+	</update>
+	
+	<update id="UpdateN" parameterType="adoptLikeDto">
+		UPDATE adoptLike
+		SET liked='no'
+		WHERE num=#{num} AND id=#{id}
+	</update>
+	
+	<select id="getData" parameterType="adoptLikeDto" resultType="adoptDto">
+		SELECT liked
+		FROM adoptLike
+		WHERE num=#{num} AND id=#{id}
+	</select>
+
+	<select id="getMyList" parameterType="string" resultType="adoptLikeDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM AS rnum
+			FROM
+				(SELECT r.num, shelterName, title, r.id, viewCount, reservedDate, liked
+				FROM adoptLike b, reserve r
+				WHERE b.num = r.num AND liked='yes' AND b.id=#{id}) result1)
+	</select>
+	
+	<select id="getCount" parameterType="int" resultType="int">
+		SELECT count(*) AS count
+		FROM adoptLike
+		WHERE num=#{num} AND liked='yes'
+	</select>
+					
+	<select id="isExist" parameterType="adoptLikeDto" resultType="int">
+		SELECT count(*) AS count
+		FROM adoptLike
+		WHERE num=#{num} AND id=#{id}
+	</select>
+					
+</mapper>
