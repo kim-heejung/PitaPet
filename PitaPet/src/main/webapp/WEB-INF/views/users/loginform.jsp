@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +9,14 @@
 </head>
 <body>
 <div class="container">
-	<h1>로그인 폼 입니다</h1>
+	<h1>로그인 폼</h1>
 	<form action="${pageContext.request.contextPath}/users/login.do" method="post">
 		<c:choose>
-			<c:when test="${empty param.url }">
-				<input type="hidden" name="url" value="${pageContext.request.contextPath}/" />
+			<c:when test="${ empty param.url }">
+				<input type="hidden" name="url" value="${pageContext.request.contextPath}/"/>
 			</c:when>
 			<c:otherwise>
-				<input type="hidden" name="url" value=${param.url }/>
+				<input type="hidden" name="url" value="${param.url }"/>
 			</c:otherwise>
 		</c:choose>
 		<div>
