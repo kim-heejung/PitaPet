@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+  pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,8 +56,8 @@ pageEncoding="UTF-8"%>
 				<label class="control-label" for="household">가구원</label>
 				<select name="household" id="household">
 					<option value="one">1명</option>
-					<option value="one">2명</option>
-					<option value="one">3명이상</option>
+					<option value="two">2명</option>
+					<option value="three">3명이상</option>
 				</select>
 			</div>
 		</form>
@@ -230,5 +232,6 @@ document.querySelector("#myForm").addEventListener("submit", function(e){
 
 
 </script>
+
 </body>
 </html>
