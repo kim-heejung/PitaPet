@@ -4,9 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
  <configuration>
  	<typeAliases>
- 	
+ 		<typeAlias type="com.pet.spring.adopt.dto.AdoptDto" alias="adoptDto"/>
+ 		<typeAlias type="com.pet.spring.adopt.dto.AdoptLikeDto" alias="adoptLikeDto"/>
+ 		<typeAlias type="com.pet.spring.adopt.dto.ReserveDto" alias="reserveDto"/>
  	</typeAliases>
  	<mappers>
  		<mapper resource="com/pet/spring/mybatis/MemberMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/AdoptMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/AdoptLikeMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/ReserveMapper.xml"/>
  	</mappers>
  </configuration>
