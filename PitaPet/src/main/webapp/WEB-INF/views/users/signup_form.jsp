@@ -60,6 +60,7 @@
 					<option value="three">3명이상</option>
 				</select>
 			</div>
+			<input type="hidden" name="groupNum" value="0" />
 		</form>
 	</div>
 		
@@ -105,6 +106,7 @@
 			<input class="form-control" type="text" name="email" id="email"/>
 			<div class="invalid-feedback">이메일 형식을 확인 하세요.</div>
 		</div>
+		<input type="hidden" name="groupNum" value="1" />
 		</form>
 	</div>
 	<button class="btn btn-primary" type="submit">가입</button>

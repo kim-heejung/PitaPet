@@ -11,12 +11,10 @@
  		<typeAlias type="com.pet.spring.adopt.dto.AdoptLikeDto" alias="adoptLikeDto"/>
  		<typeAlias type="com.pet.spring.adopt.dto.ReserveDto" alias="reserveDto"/>
  	</typeAliases>
- 	
  	<mappers>
  		<mapper resource="com/pet/spring/mybatis/UsersMapper.xml"/>
  		<mapper resource="com/pet/spring/mybatis/ReviewMapper.xml" />
  		<mapper resource="com/pet/spring/mybatis/ReviewCommentMapper.xml" />
- 		<mapper resource="com/pet/spring/mybatis/MemberMapper.xml"/>
  		<mapper resource="com/pet/spring/mybatis/AdoptMapper.xml"/>
  		<mapper resource="com/pet/spring/mybatis/AdoptLikeMapper.xml"/>
  		<mapper resource="com/pet/spring/mybatis/ReserveMapper.xml"/>
