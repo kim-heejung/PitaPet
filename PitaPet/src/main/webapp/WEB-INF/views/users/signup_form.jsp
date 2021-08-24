@@ -35,6 +35,16 @@ div.tab.btn.btn-primary {
 <body>
 	<div class="container">
       <h1>회원가입하기 폼</h1>
+      
+      <div class="tabs">
+       <div class="tab btn btn-primary" data-tab-target="#tab1">
+         <p>일반회원</p>
+       </div>
+       <div class="tab btn btn-primary" data-tab-target="#tab2">
+         <p>보호소</p>
+       </div>
+   	 </div>
+     
       <div id="tab1" data-tab-content class="items active">
         <h2>일반회원 회원가입 폼</h2>
         	<form action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm">
@@ -139,14 +149,7 @@ div.tab.btn.btn-primary {
   
 	 <button class="btn btn-primary" type="submit">가입</button>
 	
-     <div class="tabs">
-       <div class="tab btn btn-primary" data-tab-target="#tab1">
-         <p>일반회원</p>
-       </div>
-       <div class="tab btn btn-primary" data-tab-target="#tab2">
-         <p>보호소</p>
-       </div>
-     </div>
+     
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
@@ -175,7 +178,6 @@ document.querySelector("#id").addEventListener("input", function(){
 document.querySelector("#id").classList.remove("is-valid");
 document.querySelector("#id").classList.remove("is-invalid");
 
-```
 //1. 입력한 아이디 value 값 읽어오기
 let inputId=this.value;
 //입력한 아이디를 검증할 정규 표현식
@@ -207,7 +209,7 @@ ajaxPromise("${pageContext.request.contextPath}/users/checkid.do", "get", "input
 	}
 });
 
-```
+
 
 });
 
@@ -216,7 +218,6 @@ function checkPwd(){
 document.querySelector("#pwd").classList.remove("is-valid");
 document.querySelector("#pwd").classList.remove("is-invalid");
 
-```
 const pwd=document.querySelector("#pwd").value;
 const pwd2=document.querySelector("#pwd2").value;
 
@@ -237,7 +238,6 @@ if(pwd != pwd2){//비밀번호와 비밀번호 확인란이 다르면
 	document.querySelector("#pwd").classList.add("is-valid");
 }
 
-```
 
 }
 
@@ -250,7 +250,6 @@ document.querySelector("#email").addEventListener("input", function(){
 document.querySelector("#email").classList.remove("is-valid");
 document.querySelector("#email").classList.remove("is-invalid");
 
-```
 //1. 입력한 이메일을 읽어와서
 const inputEmail=this.value;
 //2. 이메일을 검증할 정규 표현식 객체를 만들어서
@@ -264,13 +263,12 @@ if(reg_email.test(inputEmail)){//만일 매칭된다면
 	document.querySelector("#email").classList.add("is-invalid");
 }
 
-```
 
 });
 
 //폼에 submit 이벤트가 발생했을때 실행할 함수 등록
 document.querySelector("#myForm").addEventListener("submit", function(e){
-[//console.log](notion://console.log/)(e);
+//[console.log](notion://console.log/)(e);
 /*
 입력한 아이디, 비밀번호, 이메일의 유효성 여부를 확인해서 하나라도 유효 하지 않으면
 e.preventDefault();
