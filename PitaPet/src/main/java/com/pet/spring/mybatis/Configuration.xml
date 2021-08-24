@@ -4,9 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
  <configuration>
  	<typeAliases>
- 	
+ 		<typeAlias type="com.pet.spring.users.dto.UsersDto" alias="usersDto"/>
+ 		<typeAlias type="com.pet.spring.review.dto.ReviewDto" alias="reviewDto"/>
+ 		<typeAlias type="com.pet.spring.review.dto.ReviewCommentDto" alias="reviewCommentDto"/>
+ 		<typeAlias type="com.pet.spring.adopt.dto.AdoptDto" alias="adoptDto"/>
+ 		<typeAlias type="com.pet.spring.adopt.dto.AdoptLikeDto" alias="adoptLikeDto"/>
+ 		<typeAlias type="com.pet.spring.adopt.dto.ReserveDto" alias="reserveDto"/>
+ 		<typeAlias type="com.pet.spring.shelter.dto.ShelterDto" alias="shelterDto"/>
  	</typeAliases>
  	<mappers>
- 		<mapper resource="com/pet/spring/mybatis/MemberMapper.xml"/>
- 	</mappers>
+ 		<mapper resource="com/pet/spring/mybatis/UsersMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/ReviewMapper.xml" />
+ 		<mapper resource="com/pet/spring/mybatis/ReviewCommentMapper.xml" />
+ 		<mapper resource="com/pet/spring/mybatis/AdoptMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/AdoptLikeMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/ReserveMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/ShelterMapper.xml"/>
+  </mappers>
+
  </configuration>

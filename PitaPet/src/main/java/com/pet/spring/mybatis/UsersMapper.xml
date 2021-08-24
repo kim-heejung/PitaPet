@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="users">
+	<insert id="insert" parameterType="usersDto">
+		INSERT INTO petusers
+		(id,pwd,email,name,phoneNumber,birth,address,household,regdate,groupNum)
+		VALUES(#{id},#{pwd},#{email},#{name},#{phoneNumber},#{birth},#{address},#{household},SYSDATE,#{groupNum})
+	</insert>
+	<select id="isExist" parameterType="java.lang.String" resultType="string">
+		SELECT id
+		FROM petusers
+		WHERE id=#{id}
+	</select>
+	<select id="getData" parameterType="string" resultType="usersDto">
+		SELECT id,pwd,name,email,phoneNumber,address,household,profile,TO_CHAR(regdate,'YYYY-MM-DD')AS regdate,groupNum
+		FROM petusers
+		WHERE id=#{id}
+	</select>
+	<update id="pwdUpdate" parameterType="usersDto">
+		UPDATE petusers
+		SET pwd=#{pwd}
+		WHERE id=#{id}
+	</update>
+	<update id="updateInfo" parameterType="usersDto">
+		UPDATE petusers
+		SET profile=#{profile},email=#{email},phoneNumber=#{phoneNumber},address=#{address},household=#{household}
+		WHERE id=#{id}
+	</update>	
+	<delete id="deleteUser" parameterType="string">
+		DELETE petusers
+		WHERE id=#{id}
+	</delete>
+</mapper>

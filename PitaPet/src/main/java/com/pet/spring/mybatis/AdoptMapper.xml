@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adopt">
+
+	<sql id="searchCondition">
+		<if test="name != null">
+			WHERE name LIKE '%'||#{name}||'%'
+		</if>
+	</sql>
+
+	<select id="getList" parameterType="adoptDto" resultType="adoptDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM AS rnum
+			FROM
+				(SELECT num, imagePath, name, title, writer, viewCount, a.regdate
+				FROM board_adopt a INNER JOIN shelter
+				ON writer = id
+				<include refid="searchCondition"/>
+				ORDER BY num DESC) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	
+	<select id="getCount" parameterType="adoptDto" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM board_adopt INNER JOIN shelter
+		ON writer = id
+		<include refid="searchCondition"/>
+	</select>
+	
+	<select id="getData" parameterType="adoptDto" resultType="adoptDto">
+		SELECT *
+		FROM
+			(SELECT num, name, title, viewCount, writer, breed, petName, petAge, petGender, 
+			vaccination, neutralization, findDate, caption, imagePath, a.regdate,   
+			LAG(num, 1, 0) OVER (ORDER BY num DESC) AS prevNum,
+			LEAD(num, 1, 0) OVER (ORDER BY num DESC) AS nextNum
+			FROM board_adopt a INNER JOIN shelter
+			ON writer = id
+			<include refid="searchCondition"/>
+			)
+		WHERE num = #{num}
+	</select>
+	
+	<update id="addViewCount" parameterType="int">
+		UPDATE board_adopt
+		SET viewCount=viewCount+1
+		WHERE num=#{num}
+	</update>
+	
+	<insert id="insert" parameterType="adoptDto">
+		INSERT INTO board_adopt
+		(num, title, writer, breed, petName, petAge, petGender, vaccination, 
+		neutralization, findDate, caption, imagePath, regdate)
+		VALUES(board_adopt_seq.NEXTVAL, #{writer}, #{title}, #{breed}, #{petName}, #{petAge}, #{petGender}, #{vaccination}, 
+		#{neutralization}, #{findDate}, #{caption}, #{imagePath}, SYSDATE)
+	</insert>
+
+	<update id="update" parameterType="adoptDto">
+		UPDATE board_adopt
+		SET title=#{title}, breed=#{breed}, petName=#{petName}, petAge=#{petAge}, petGender=#{petGender}, 
+		vaccination=#{vaccination}, neutralization=#{neutralization}, findDate=#{findDate}, 
+		caption=#{caption}, imagePath=#{imagePath}
+		WHERE num=#{num}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM board_adopt
+		WHERE num=#{num}
+	</delete>
+
+</mapper>

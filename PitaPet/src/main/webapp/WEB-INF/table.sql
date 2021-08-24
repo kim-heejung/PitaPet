@@ -1,15 +1,15 @@
 CREATE TABLE petusers(
    id VARCHAR2(100) PRIMARY KEY,
    pwd VARCHAR2(100),
-	groupNum NUMBER, --회원분류(0:일반회원, 1:보호소회원)
-	name VARCHAR2(100),
+	 groupNum NUMBER DEFAULT 0, --0 일반회원 /1 보호소 /2 관리자
+	 name VARCHAR2(100),
    phoneNumber VARCHAR2(100),
    birth VARCHAR2(100),
    email VARCHAR2(100),
    address VARCHAR2(100),
    household VARCHAR2(100),
    profile VARCHAR2(100),
-	donation NUMBER, --기부금
+	donation NUMBER,
    regdate DATE
 );
 
