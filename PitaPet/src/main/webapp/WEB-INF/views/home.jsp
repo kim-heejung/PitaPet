@@ -11,6 +11,7 @@
 <div class="container">
 	<a href="${pageContext.request.contextPath}/users/loginform.do">로그인</a>
 	<a href="${pageContext.request.contextPath}/users/signup_form.do">회원가입</a>
+	<a href="${pageContext.request.contextPath}/review/list.do">입양후기 게시판</a>
 </div>
 </body>
 </html>

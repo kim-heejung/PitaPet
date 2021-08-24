@@ -26,6 +26,11 @@ public class ReviewDaoImpl implements ReviewDao{
 	public ReviewDto getData(int num) {
 		return session.selectOne("review.getData", num);
 	}
+	
+	@Override
+	public ReviewDto getData(ReviewDto dto) {		
+		return session.selectOne("review.getData2", dto);
+	}
 
 	@Override
 	public void addViewCount(int num) {
@@ -46,4 +51,5 @@ public class ReviewDaoImpl implements ReviewDao{
 	public void delete(int num) {
 		session.delete("review.delete", num);
 	}
+
 }
