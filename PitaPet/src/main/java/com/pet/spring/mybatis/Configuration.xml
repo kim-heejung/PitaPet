@@ -10,6 +10,7 @@
  		<typeAlias type="com.pet.spring.adopt.dto.AdoptDto" alias="adoptDto"/>
  		<typeAlias type="com.pet.spring.adopt.dto.AdoptLikeDto" alias="adoptLikeDto"/>
  		<typeAlias type="com.pet.spring.adopt.dto.ReserveDto" alias="reserveDto"/>
+ 		<typeAlias type="com.pet.spring.shelter.dto.ShelterDto" alias="shelterDto"/>
  	</typeAliases>
  	<mappers>
  		<mapper resource="com/pet/spring/mybatis/UsersMapper.xml"/>
@@ -18,6 +19,7 @@
  		<mapper resource="com/pet/spring/mybatis/AdoptMapper.xml"/>
  		<mapper resource="com/pet/spring/mybatis/AdoptLikeMapper.xml"/>
  		<mapper resource="com/pet/spring/mybatis/ReserveMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/ShelterMapper.xml"/>
   </mappers>
 
  </configuration>

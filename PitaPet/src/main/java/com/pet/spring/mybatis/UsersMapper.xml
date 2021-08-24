@@ -12,8 +12,22 @@
 		WHERE id=#{id}
 	</select>
 	<select id="getData" parameterType="string" resultType="usersDto">
-		SELECT id,pwd,email,profile,regdate
+		SELECT id,pwd,name,email,phoneNumber,address,household,profile,TO_CHAR(regdate,'YYYY-MM-DD')AS regdate,groupNum
 		FROM petusers
 		WHERE id=#{id}
 	</select>
+	<update id="pwdUpdate" parameterType="usersDto">
+		UPDATE petusers
+		SET pwd=#{pwd}
+		WHERE id=#{id}
+	</update>
+	<update id="updateInfo" parameterType="usersDto">
+		UPDATE petusers
+		SET profile=#{profile},email=#{email},phoneNumber=#{phoneNumber},address=#{address},household=#{household}
+		WHERE id=#{id}
+	</update>	
+	<delete id="deleteUser" parameterType="string">
+		DELETE petusers
+		WHERE id=#{id}
+	</delete>
 </mapper>
