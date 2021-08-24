@@ -36,19 +36,19 @@ public class UsersDaoImpl implements UsersDao{
 
 	@Override
 	public void updatePwd(UsersDto dto) {
-		// TODO Auto-generated method stub
+		session.update("users.pwdUpdate", dto);
 		
 	}
 
 	@Override
 	public void updateInfo(UsersDto dto) {
-		// TODO Auto-generated method stub
+		session.update("users.updateInfo",dto);
 		
 	}
 
 	@Override
 	public void deleteUser(String id) {
-		// TODO Auto-generated method stub
+		session.delete("users.deleteUser",id);
 		
 	}
 
