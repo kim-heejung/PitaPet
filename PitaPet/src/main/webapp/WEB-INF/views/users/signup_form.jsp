@@ -9,11 +9,12 @@
 <title>/views/users/signup_form.jsp</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-<script src="src/index.js"></script>
 <style>
 button {
-	margin-top:50px;
 	margin-left:-60px;
+}
+#btn{
+	margin-top:90px;
 }
 * {
   margin: 0;
@@ -91,7 +92,7 @@ div.tab.btn.btn-primary {
       
       <div id="tab2" data-tab-content class="items">
         <h2>보호소회원 회원가입 폼</h2>
-        <form action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm">
+        <form action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm2">
 			<div>
 				<label class="control-label" for="id">아이디</label>
 				<input class="form-control" type="text" name="id" id="id"/>
@@ -136,8 +137,8 @@ div.tab.btn.btn-primary {
 			<input type="hidden" name="groupNum" value="1" />
 		</form>
       </div>
-  
-	 <button class="btn btn-primary" type="submit">가입</button>
+
+	 <button id="btn" class="btn btn-primary" type="submit">가입</button>
 	
      <div class="tabs">
        <div class="tab btn btn-primary" data-tab-target="#tab1">
@@ -147,21 +148,21 @@ div.tab.btn.btn-primary {
          <p>보호소</p>
        </div>
      </div>
-</div>
+ </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-const tabs = document.querySelectorAll("[data-tab-target]");
-const tabcon = document.querySelectorAll("[data-tab-content]");
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    const target = document.querySelector(tab.dataset.tabTarget);
-    tabcon.forEach((tabc_all) => {
-      tabc_all.classList.remove("active");
-    });
-
-    target.classList.add("active");
-  });
-});
+	const tabs = document.querySelectorAll("[data-tab-target]");
+	const tabcon = document.querySelectorAll("[data-tab-content]");
+	tabs.forEach((tab) => {
+	  tab.addEventListener("click", () => {
+	    const target = document.querySelector(tab.dataset.tabTarget);
+	    tabcon.forEach((tabc_all) => {
+	      tabc_all.classList.remove("active");
+	    });
+	
+	    target.classList.add("active");
+	  });
+	});
 </script>
 <script>
 //아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입
@@ -175,7 +176,6 @@ document.querySelector("#id").addEventListener("input", function(){
 document.querySelector("#id").classList.remove("is-valid");
 document.querySelector("#id").classList.remove("is-invalid");
 
-```
 //1. 입력한 아이디 value 값 읽어오기
 let inputId=this.value;
 //입력한 아이디를 검증할 정규 표현식
@@ -207,8 +207,6 @@ ajaxPromise("${pageContext.request.contextPath}/users/checkid.do", "get", "input
 	}
 });
 
-```
-
 });
 
 //비밀 번호를 확인 하는 함수
@@ -216,7 +214,6 @@ function checkPwd(){
 document.querySelector("#pwd").classList.remove("is-valid");
 document.querySelector("#pwd").classList.remove("is-invalid");
 
-```
 const pwd=document.querySelector("#pwd").value;
 const pwd2=document.querySelector("#pwd2").value;
 
@@ -237,8 +234,6 @@ if(pwd != pwd2){//비밀번호와 비밀번호 확인란이 다르면
 	document.querySelector("#pwd").classList.add("is-valid");
 }
 
-```
-
 }
 
 //비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
@@ -250,7 +245,6 @@ document.querySelector("#email").addEventListener("input", function(){
 document.querySelector("#email").classList.remove("is-valid");
 document.querySelector("#email").classList.remove("is-invalid");
 
-```
 //1. 입력한 이메일을 읽어와서
 const inputEmail=this.value;
 //2. 이메일을 검증할 정규 표현식 객체를 만들어서
@@ -264,26 +258,31 @@ if(reg_email.test(inputEmail)){//만일 매칭된다면
 	document.querySelector("#email").classList.add("is-invalid");
 }
 
-```
-
 });
 
-//폼에 submit 이벤트가 발생했을때 실행할 함수 등록
-document.querySelector("#myForm").addEventListener("submit", function(e){
-[//console.log](notion://console.log/)(e);
-/*
-입력한 아이디, 비밀번호, 이메일의 유효성 여부를 확인해서 하나라도 유효 하지 않으면
-e.preventDefault();
-가 수행 되도록 해서 폼의 제출을 막아야 한다.
-*/
-//폼 전체의 유효성 여부 알아내기
-let isFormValid = isIdValid && isPwdValid && isEmailValid;
-if(!isFormValid){//폼이 유효하지 않으면
-//폼 전송 막기
-e.preventDefault();
-}
-});
+	//폼에 submit 이벤트가 발생했을때 실행할 함수 등록
+	document.querySelector("#myForm").addEventListener("submit", function(e){
+		/*
+			입력한 아이디, 비밀번호, 이메일의 유효성 여부를 확인해서 하나라도 유효 하지 않으면
+			e.preventDefault(); 
+			가 수행 되도록 해서 폼의 제출을 막아야 한다. 
+		*/
+		//폼 전체의 유효성 여부 알아내기 
+		let isFormValid = isIdValid && isPwdValid && isEmailValid;
+		if(!isFormValid){//폼이 유효하지 않으면
+			//폼 전송 막기 
+			e.preventDefault();
+		}	
+	});
+	
+	document.querySelector("#myForm2").addEventListener("submit", function(e){
 
+		let isFormValid2 = isIdValid && isPwdValid && isEmailValid;
+		if(!isFormValid2){//폼이 유효하지 않으면
+			//폼 전송 막기 
+			e.preventDefault();
+		}	
+	});
 </script>
 </body>
 </html>
