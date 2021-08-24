@@ -11,6 +11,7 @@ public interface ReviewDao {
 	public int getCount(ReviewDto dto);
 	//한개의 게시글 정보
 	public ReviewDto getData(int num);
+	public ReviewDto getData(ReviewDto dto);
 	//조회수 증가
 	public void addViewCount(int num);
 	//게시글(추가)

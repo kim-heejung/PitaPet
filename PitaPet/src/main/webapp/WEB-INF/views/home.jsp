@@ -7,6 +7,7 @@
 </head>
 <body>
 <div class="container">
+
 	<c:choose>
 		<c:when test="${empty sessionScope.id }">
 			<a href="${pageContext.request.contextPath}/users/loginform.do">로그인</a>
@@ -19,6 +20,9 @@
 			</p>
 		</c:otherwise>
 	</c:choose>
+  
+	<a href="${pageContext.request.contextPath}/review/list.do">입양후기 게시판</a>
+
 </div>
 </body>
 </html>

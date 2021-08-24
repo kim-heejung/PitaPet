@@ -1,13 +1,11 @@
 package com.pet.spring.review.service;
 
-import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.pet.spring.review.dao.ReviewCommentDao;
 import com.pet.spring.review.dao.ReviewDao;
@@ -79,6 +77,14 @@ public class ReviewServiceImpl implements ReviewService{
 		int num=Integer.parseInt(request.getParameter("num"));
 		//조회수 올리기
 		reviewDao.addViewCount(num);
+		
+		//ReviewDto 객체를 생성한 후
+		ReviewDto dto=new ReviewDto();
+		//자세히 보여줄 글 번호를 넣어준다.
+		dto.setNum(num);
+		
+		//ReviewDto 객체를 메소드의 인자로 전달해서 새로운 ReviewDto 객체의 참조값을 얻어온다.
+		dto=reviewDao.getData(dto);
 				
 		// [댓글 페이징처리 로직]
 		
@@ -108,6 +114,7 @@ public class ReviewServiceImpl implements ReviewService{
 		int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
 		
 		//view page 에서 필요한 값 request 에 담아주기
+		request.setAttribute("dto", dto);
 		request.setAttribute("commentList", commentList);
 		request.setAttribute("totalRow", totalRow);
 		request.setAttribute("totalPageCount", totalPageCount);		
@@ -124,39 +131,7 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void saveContent(ReviewDto dto, HttpServletRequest request) {
-		//업로드된 파일의 정보를 가지고 있는 MultipartFile 객체의 참조값을 얻어오기
-		MultipartFile image=dto.getImgFile();
-		
-		String orgFileName=image.getOriginalFilename();
-		
-		// webapp/upload 폴더 까지의 실제 경로(서버의 파일 시스템 상에서의 경로)
-		String realPath=request.getSession().getServletContext().getRealPath("/upload");
-		//db 에 저장할 저장할 파일의 상세 경로
-		String filePath = realPath + File.separator;
-		//디렉토리를 만들 파일 객체 생성
-		File upload = new File(filePath);
-		if(!upload.exists()) {
-			//만약 디렉토리가 존재하지X
-			upload.mkdir();//폴더 생성
-		}
-		//저장할 파일의 이름을 구성한다.
-		String saveFileName=System.currentTimeMillis()+orgFileName;
-		
-		try {
-			//upload 폴더에 파일을 저장한다.
-			image.transferTo(new File(filePath + saveFileName));
-			System.out.println(); //임시출력
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		String id=(String)request.getSession().getAttribute("id");
-		dto.setWriter(id);
-		
-		//이미지 경로 담기
-		dto.setImg("/upload" + saveFileName);
-		
+	public void saveContent(ReviewDto dto) {
 		reviewDao.insert(dto);
 	}
 
