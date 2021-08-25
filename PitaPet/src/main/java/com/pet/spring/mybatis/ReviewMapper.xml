@@ -23,7 +23,7 @@
 	<select id="getData" parameterType="int" resultType="reviewDto">
 		SELECT result1.*
       	FROM
-        	(SELECT num,writer,title,content,viewCount,
+        	(SELECT num,writer,title,img,content,viewCount,
             	TO_CHAR(regdate,'YYYY.MM.DD HH:MI') AS regdate,
             	LAG(num,1,0) OVER (ORDER BY num DESC) AS prevNum,
             	LEAD(num,1,0) OVER (ORDER BY num DESC) AS nextNum
@@ -34,7 +34,7 @@
 	<select id="getData2" parameterType="reviewDto" resultType="reviewDto">
 		SELECT result1.*
     	FROM
-         	(SELECT num,writer,title,content,viewCount,
+         	(SELECT num,writer,title,img,content,viewCount,
             	TO_CHAR(regdate,'YYYY.MM.DD HH:MI') AS regdate,
             	LAG(num,1,0) OVER (ORDER BY num DESC) AS prevNum,
             	LEAD(num,1,0) OVER (ORDER BY num DESC) AS nextNum
@@ -50,8 +50,8 @@
 	
 	<insert id="insert" parameterType="reviewDto">
 		INSERT INTO board_review
-		(num,writer,title,content,viewCount,regdate)
-		VALUES(board_review_seq.NEXTVAL, #{writer}, #{title}, #{content}, #{viewCount}, SYSDATE)
+		(num,writer,title,img,content,viewCount,regdate)
+		VALUES(board_review_seq.NEXTVAL, #{writer}, #{title}, #{img}, #{content}, #{viewCount}, SYSDATE)
 	</insert>
 	
 	<update id="update" parameterType="reviewDto">

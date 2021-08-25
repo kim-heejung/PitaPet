@@ -41,10 +41,10 @@ public class ReviewController {
    }
    
    @RequestMapping("/review/private/insert")
-   public String insert(ReviewDto dto, HttpSession session) {
-	   String id=(String)session.getAttribute("id");
+   public String insert(ReviewDto dto, HttpServletRequest request) {
+	   String id = (String)request.getSession().getAttribute("id");
 	   dto.setWriter(id);
-	   service.saveContent(dto);
+	   service.saveContent(dto, request);
 	   return "review/insert";
    }
    
