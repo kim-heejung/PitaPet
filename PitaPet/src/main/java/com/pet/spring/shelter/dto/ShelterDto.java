@@ -1,30 +1,33 @@
 package com.pet.spring.shelter.dto;
 
 public class ShelterDto {
-	private int serialNum;
+	private String serialNum;
 	private String id;
 	private String name;
 	private String email;
+	private String phoneNumber;
 	private String address;
 	private String regdate;
 	
 	public ShelterDto() {}
 
-	public ShelterDto(int serialNum, String id, String name, String email, String address, String regdate) {
+	public ShelterDto(String serialNum, String id, String name, String email, String phoneNumber, String address,
+			String regdate) {
 		super();
 		this.serialNum = serialNum;
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.regdate = regdate;
 	}
 
-	public int getSerialNum() {
+	public String getSerialNum() {
 		return serialNum;
 	}
 
-	public void setSerialNum(int serialNum) {
+	public void setSerialNum(String serialNum) {
 		this.serialNum = serialNum;
 	}
 
@@ -52,6 +55,14 @@ public class ShelterDto {
 		this.email = email;
 	}
 
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -67,6 +78,8 @@ public class ShelterDto {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+
+	
 	
 	
 }

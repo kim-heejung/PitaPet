@@ -4,7 +4,7 @@
 	<insert id="insert" parameterType="usersDto">
 		INSERT INTO petusers
 		(id,pwd,email,name,phoneNumber,birth,address,household,regdate,groupNum)
-		VALUES(#{id},#{pwd},#{email},#{name},#{phoneNumber},#{birth},#{address},#{household},SYSDATE,#{groupNum})
+		VALUES(#{id},#{pwd},#{email},#{name},#{phoneNumber},#{birth, jdbcType=VARCHAR},#{address},#{household, jdbcType=VARCHAR},SYSDATE,#{groupNum})
 	</insert>
 	<select id="isExist" parameterType="java.lang.String" resultType="string">
 		SELECT id
@@ -23,7 +23,7 @@
 	</update>
 	<update id="updateInfo" parameterType="usersDto">
 		UPDATE petusers
-		SET profile=#{profile},email=#{email},phoneNumber=#{phoneNumber},address=#{address},household=#{household}
+		SET profile=#{profile},email=#{email},phoneNumber=#{phoneNumber},address=#{address},household=#{household, jdbcType=VARCHAR}
 		WHERE id=#{id}
 	</update>	
 	<delete id="deleteUser" parameterType="string">

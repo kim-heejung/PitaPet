@@ -1,5 +1,8 @@
 package com.pet.spring.shelter.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,13 @@ public class ShlterServiceImpl implements ShelterService{
 		String id=(String)session.getAttribute("id");
 		dao.deleteShelter(id);
 		
+	}
+
+	@Override
+	public Map<String, Object> isExistNum(String inputNum) {
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("isExist",dao.isExist(inputNum));
+		return map;
 	}
 
 }

@@ -12,7 +12,7 @@
 		WHERE id=#{id}
 	</update>
 	<select id="getData" parameterType="string" resultType="shelterDto">
-		SELECT id,name,serialNum,email,phoneNumber,address,TO_CHAR(regdate,'YYYY-MM-DD')AS regdate,groupNum
+		SELECT id,name,serialNum,email,phoneNumber,address,TO_CHAR(regdate,'YYYY-MM-DD')AS regdate
 		FROM shelter
 		WHERE id=#{id}
 	</select>
@@ -20,4 +20,9 @@
 		DELETE shelter
 		WHERE id=#{id}
 	</delete>
+	<select id="isExist" parameterType="string" resultType="string">
+		SELECT serialNum
+		FROM shelter
+		WHERE serialNum=#{num}
+	</select>
 </mapper>

@@ -100,7 +100,7 @@
 		      </tr>
 		      <tr>
 		      	<th>고유번호</th>
-		      	<tr>${sDto.serialNum }</tr>
+		      	<td>${sDto.serialNum }</td>
 		      </tr>
 		      <tr>
 		      	<th>보호소 이름</th>
