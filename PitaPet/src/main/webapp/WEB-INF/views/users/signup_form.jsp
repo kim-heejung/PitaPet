@@ -287,7 +287,7 @@ div.tab.btn.btn-primary {
 		let inputNum=this.value;
 		const reg_id=/^[0-9]+\-[0-9]+\-[0-9]+$/;
 		if(!reg_id.test(inputNum)){
-			isIdValid=false; 
+			isSerialValid=false; 
 			this.classList.add("is-invalid");
 			return; 
 		}
@@ -303,13 +303,33 @@ div.tab.btn.btn-primary {
 			console.log(data);
 			
 			if(data.isExist){
-				isIdValid=false;
+				isSerialValid=false;
 				self.classList.add("is-invalid");
 			}else{
-				isIdValid=true;
+				isSerialValid=true;
 				self.classList.add("is-valid");
 			}
 		});
+	});
+	
+	document.querySelector("#myForm").addEventListener("submit",function(e){
+
+		let isFormValid=isIdValid && isUsersPwdValid && isEmailValid;
+		if(!isFormValid){ 
+			e.preventDefault();
+			alert("폼을 확인해주세요");
+		}
+		
+	});
+	
+	document.querySelector("#myForm2").addEventListener("submit",function(e){
+
+		let isFormValid=isIdValid && isShelterPwdValid && isEmailValid && isSerialValid;
+		if(!isFormValid){ 
+			e.preventDefault();
+			alert("폼을 확인해주세요");
+		}
+		
 	});
 </script>
 </body>
