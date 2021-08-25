@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pet.spring.shelter.dao.ShelterDao;
+import com.pet.spring.shelter.dto.ShelterDto;
 import com.pet.spring.users.dao.UsersDao;
 import com.pet.spring.users.dto.UsersDto;
 
@@ -34,9 +36,10 @@ public class UsersServiceImpl implements UsersService{
 		map.put("isExist",dao.isExist(inputId));
 		return map;
 	}
-
+	
+	@Transactional
 	@Override
-	public void addUser(UsersDto dto) {
+	public void addUser(UsersDto dto,ShelterDto sDto) {
 		
 		String pwd=dto.getPwd();
 		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
@@ -44,7 +47,9 @@ public class UsersServiceImpl implements UsersService{
 		dto.setPwd(encodedPwd);
 		
 		dao.insert(dto);
-		
+		if(dto.getGroupNum()==1) {
+			sDao.insert(sDto);
+		}
 	}
 
 	@Override
@@ -113,12 +118,16 @@ public class UsersServiceImpl implements UsersService{
 		   
 		return map;
 	}
-
+	
+	@Transactional
 	@Override
-	public void updateUser(HttpSession session, UsersDto dto) {
+	public void updateUser(HttpSession session, UsersDto dto,ShelterDto sDto) {
 		String id=(String)session.getAttribute("id");
 		dto.setId(id);
 		dao.updateInfo(dto);
+		if(dto.getGroupNum()==1) {
+			sDao.updateInfo(sDto);
+		}
 	}
 
 	@Override

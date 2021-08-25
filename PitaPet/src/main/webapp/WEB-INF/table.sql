@@ -14,7 +14,7 @@ CREATE TABLE petusers(
 );
 
 CREATE TABLE shelter(
-	serialNum NUMBER PRIMARY KEY, --고유번호
+	serialNum VARCHAR2(100) PRIMARY KEY, --고유번호
    id VARCHAR2(100), --usersid
 	name VARCHAR2(100), --보호소이름
    phoneNumber VARCHAR2(100),--연락처

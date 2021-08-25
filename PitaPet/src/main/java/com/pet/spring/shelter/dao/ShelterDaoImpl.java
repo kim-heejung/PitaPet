@@ -33,4 +33,15 @@ public class ShelterDaoImpl implements ShelterDao{
 		session.delete("shelter.deleteShelter",id);
 	}
 
+	@Override
+	public boolean isExist(String inputNum) {
+		
+		String serialNum=session.selectOne("shelter.isExist",inputNum);
+		if(serialNum==null) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+
 }

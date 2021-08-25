@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,10 +53,8 @@ public class UsersController {
 	@RequestMapping(value = "/api/users/signup",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> signup(UsersDto dto,ShelterDto sDto) {
-		service.addUser(dto);
-		if(dto.getGroupNum()==1) { //보호소 회원이면
-			service2.addShelter(sDto);
-		}
+		service.addUser(dto,sDto);
+
 		Map<String,Object> map=new HashMap<>();
 		map.put("isSuccess",true);
 		   
@@ -72,13 +71,18 @@ public class UsersController {
 	public Map<String,Object> checkid(@RequestParam String inputId){
 		return service.isExistId(inputId);
 	}
+	
+	
+	@RequestMapping("users/checkSerialNum")
+	@ResponseBody
+	public Map<String,Object> checkSerialNum(@RequestParam String inputNum){
+		return service2.isExistNum(inputNum);
+	}
 		
 	@RequestMapping(value = "/users/signup",method=RequestMethod.POST)
 	public ModelAndView signup(ModelAndView mView,UsersDto dto,ShelterDto sDto) {
-		service.addUser(dto);
-		if(dto.getGroupNum()==1) {
-			service2.addShelter(sDto);
-		}
+		service.addUser(dto,sDto);
+		
 		mView.setViewName("users/signup");
 		return mView;
 	}
@@ -121,8 +125,7 @@ public class UsersController {
 	
 	@RequestMapping(value="/users/update",method=RequestMethod.POST)
 	public ModelAndView authUpdate(HttpSession session,ModelAndView mView,UsersDto dto,HttpServletRequest request,ShelterDto sDto) {
-		service.updateUser(session, dto);
-		service2.updateShelter(session, sDto);
+		service.updateUser(session, dto,sDto);
 		mView.setViewName("redirect:/users/info.do");
 		return mView;
 	}
