@@ -211,7 +211,6 @@ div.tab.btn.btn-primary {
 		
 		const pwd=document.querySelector("#users_pwd").value;
 		const pwd2=document.querySelector("#users_pwd2").value;
-
 		const reg_pwd=/^.{5,10}$/;
 		if(!reg_pwd.test(pwd)){
 			isUsersPwdValid=false;
@@ -239,7 +238,6 @@ div.tab.btn.btn-primary {
 		
 		const pwd=document.querySelector("#shelter_pwd").value;
 		const pwd2=document.querySelector("#shelter_pwd2").value;
-
 		const reg_pwd=/^.{5,10}$/;
 		if(!reg_pwd.test(pwd)){
 			isShelterPwdValid=false;
@@ -267,7 +265,6 @@ div.tab.btn.btn-primary {
 		emails[i].addEventListener("input",function(){
 			this.classList.remove("is-invalid");
 			this.classList.remove("is-valid");
-
 			const inputEmail=this.value;
 			const reg_email=/@/;
 			if(reg_email.test(inputEmail)){
@@ -313,7 +310,6 @@ div.tab.btn.btn-primary {
 	});
 	
 	document.querySelector("#myForm").addEventListener("submit",function(e){
-
 		let isFormValid=isIdValid && isUsersPwdValid && isEmailValid;
 		if(!isFormValid){ 
 			e.preventDefault();
@@ -323,7 +319,6 @@ div.tab.btn.btn-primary {
 	});
 	
 	document.querySelector("#myForm2").addEventListener("submit",function(e){
-
 		let isFormValid=isIdValid && isShelterPwdValid && isEmailValid && isSerialValid;
 		if(!isFormValid){ 
 			e.preventDefault();

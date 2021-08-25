@@ -8,11 +8,17 @@
 <title>/users/signup.jsp</title>
 </head>
 <body>
-<div class="container">
-	<p>
-		<a href="${pageContext.request.contextPath}/users/loginform.do">로그인 하러가기</a>
-	</p>	
+<div id="app">
+	<a :href="loginFormLink">로그인 하러가기</a>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el: "#app",
+		data: {
+			loginFormLink: "${pageContext.request.contextPath}/users/loginform.do"
+		}
+	});
+</script>
 </body>
 </html>
