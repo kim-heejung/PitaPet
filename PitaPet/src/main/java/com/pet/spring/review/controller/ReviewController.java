@@ -1,10 +1,10 @@
 package com.pet.spring.review.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,15 +12,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.pet.spring.review.dao.ReviewDao;
 import com.pet.spring.review.dto.ReviewCommentDto;
 import com.pet.spring.review.dto.ReviewDto;
 import com.pet.spring.review.service.ReviewService;
 
 @Controller
 public class ReviewController {
-   @Autowired ReviewService service;
+   @Autowired private ReviewService service;
+   @Autowired private ReviewDao dao;
+   
+   //게시글 목록을 json으로 응답 (Vue)
+   @RequestMapping("/api/review/list")
+   @ResponseBody
+   public List<ReviewDto> getList(ReviewDto dto){
+	   return dao.getList(dto);
+   }
+   
+   //게시글 하나의 정보를 json 으로 응답 (Vue)
+   @RequestMapping("/api/review/detail")
+   @ResponseBody
+   public ReviewDto detail(@RequestParam int num) {
+	   return dao.getData(num);
+   }
    
    @RequestMapping("/review/list")
    public String getList(HttpServletRequest request) {
