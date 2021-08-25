@@ -1,10 +1,13 @@
 package com.pet.spring.review.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ReviewDto {
 	private int num;
 	private String writer;
 	private String title;
 	private String img; //이미지 경로
+	private MultipartFile imgFile; //이미지 파일 업로드 처리를 위한 필드
 	private String content;
 	private int viewCount;
 	private String regdate;
@@ -15,13 +18,14 @@ public class ReviewDto {
 	
 	public ReviewDto() {}
 
-	public ReviewDto(int num, String writer, String title, String img, String content, int viewCount, String regdate,
-			int startRowNum, int endRowNum, int prevNum, int nextNum) {
+	public ReviewDto(int num, String writer, String title, String img, MultipartFile imgFile, String content,
+			int viewCount, String regdate, int startRowNum, int endRowNum, int prevNum, int nextNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
 		this.title = title;
 		this.img = img;
+		this.imgFile = imgFile;
 		this.content = content;
 		this.viewCount = viewCount;
 		this.regdate = regdate;
@@ -61,6 +65,14 @@ public class ReviewDto {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	public MultipartFile getImgFile() {
+		return imgFile;
+	}
+
+	public void setImgFile(MultipartFile imgFile) {
+		this.imgFile = imgFile;
 	}
 
 	public String getContent() {
@@ -118,4 +130,5 @@ public class ReviewDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
+
 }

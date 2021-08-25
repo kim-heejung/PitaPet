@@ -10,7 +10,7 @@ public interface ReviewService {
 	public void getDetail(HttpServletRequest request);
 	public void getData(HttpServletRequest request);
 	//게시글
-	public void saveContent(ReviewDto dto);
+	public void saveContent(ReviewDto dto, HttpServletRequest request);
 	public void updateContent(ReviewDto dto);
 	public void deleteContent(int num, HttpServletRequest request);
 	//댓글

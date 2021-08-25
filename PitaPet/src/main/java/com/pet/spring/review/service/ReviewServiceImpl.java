@@ -1,11 +1,13 @@
 package com.pet.spring.review.service;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pet.spring.review.dao.ReviewCommentDao;
 import com.pet.spring.review.dao.ReviewDao;
@@ -20,7 +22,7 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public void getList(HttpServletRequest request) {
 		//한 페이지에 몇개씩 표시할 것인지
-	    final int PAGE_ROW_COUNT=5;
+	    final int PAGE_ROW_COUNT=3;
 	    //하단 페이지를 몇개씩 표시할 것인지
 	    final int PAGE_DISPLAY_COUNT=5;
 	      
@@ -131,7 +133,34 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void saveContent(ReviewDto dto) {
+	public void saveContent(ReviewDto dto, HttpServletRequest request) {
+		//업로드된 파일의 정보를 가지고 있는 MultipartFile 객체의 참조값을 얻어오기
+		MultipartFile image = dto.getImgFile();
+		//원본 파일명
+		String orgFileName = image.getOriginalFilename();
+		
+		// webapp/upload 폴더 까지의 실제 경로(서버의 파일 시스템 상에서의 경로)
+		String realPath = request.getServletContext().getRealPath("/upload");
+		//db 에 저장할 저장할 파일의 상세 경로
+		String filePath = realPath + File.separator;
+		//디렉토리를 만들 파일 객체 생성
+		File upload = new File(filePath);
+		if(!upload.exists()) {
+			//만약 디렉토리가 존재하지X
+			upload.mkdir();//폴더 생성
+		}
+		//저장할 파일의 이름
+		String saveFileName = System.currentTimeMillis() + orgFileName;
+		
+		try {
+			//upload 폴더에 파일을 저장한다.
+			image.transferTo(new File(filePath + saveFileName));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	
+		dto.setImg("/upload/" + saveFileName);
+		
 		reviewDao.insert(dto);
 	}
 
