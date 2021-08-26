@@ -4,12 +4,7 @@
 <html>
 <head>
 	<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-   	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css" />
+	<jsp:include page="/resources/resource.jsp"></jsp:include>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 	<style>
 		.container{
