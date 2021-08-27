@@ -2,10 +2,14 @@ package com.pet.spring.adopt.dao;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.pet.spring.adopt.dto.AdoptLikeDto;
 
 public interface AdoptLikeDao {
 
+	public List<AdoptLikeDto> getYCountList();
+	//public List<AdoptLikeDto> getYList(String id);
 	public void insert(AdoptLikeDto dto);
 	public void updateY(AdoptLikeDto dto);
 	public void updateN(AdoptLikeDto dto);
