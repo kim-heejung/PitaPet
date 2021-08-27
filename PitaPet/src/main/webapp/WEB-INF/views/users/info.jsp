@@ -138,6 +138,7 @@
 			location.href="${pageContext.request.contextPath}/users/delete.do";
 		}
 	}
+	
 </script>
 </body>
 </html>

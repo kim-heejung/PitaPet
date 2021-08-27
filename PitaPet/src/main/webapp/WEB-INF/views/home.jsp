@@ -22,9 +22,10 @@
 	</section>
 
 	<c:choose>
-		<c:when test="${empty sessionScope.id }">
+		<c:when test="${empty sessionScope.id}">
 			<a href="${pageContext.request.contextPath}/users/loginform.do">로그인</a>
 			<a href="${pageContext.request.contextPath}/users/signup_form.do">회원가입</a>
+			
 		</c:when>
 		<c:otherwise>
 			<p>
