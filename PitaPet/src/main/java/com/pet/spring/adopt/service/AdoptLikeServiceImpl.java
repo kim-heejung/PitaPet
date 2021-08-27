@@ -19,7 +19,7 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 
 	@Autowired
 	private AdoptLikeDao dao;
-
+	/*
 	@Override
 	public void insert(HttpServletRequest request) {
 		
@@ -89,7 +89,7 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 		
 		return list;
 	}
-	
+	*/
 	/*
 	//테스트용 
 	public List<AdoptLikeDto> testGetYList(HttpSession session){
@@ -105,7 +105,7 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 	}
 	*/
 	
-	
+	/*
 	@Override
 	public AdoptLikeDto getData(HttpServletRequest request) {
 		
@@ -158,4 +158,5 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 		
 		return list;
 	}
+	*/
 }

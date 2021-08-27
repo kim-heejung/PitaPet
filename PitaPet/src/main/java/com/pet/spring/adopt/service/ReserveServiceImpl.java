@@ -21,7 +21,7 @@ public class ReserveServiceImpl implements ReserveService {
    @Autowired
    private ReserveDao dao;
 
-   
+   /*
 	@Override
 	public List<ReserveDto> getList(HttpServletRequest request, int num) {
 
@@ -144,7 +144,7 @@ public class ReserveServiceImpl implements ReserveService {
 		map.put("isSuccess", true);
 		
 		return map;
-	}
+	}*/
    /*
    @Override
    public void insert(ReserveDto dto) {
@@ -166,6 +166,7 @@ public class ReserveServiceImpl implements ReserveService {
       request.setAttribute("dto", dto);
       
    }*/
+   /*
 	@Override
 	public ReserveDto getDetail(HttpServletRequest request) {
 
@@ -193,7 +194,8 @@ public class ReserveServiceImpl implements ReserveService {
       
    }
 
-   
+   */
+   /*
    @Override
    public Map<String, Object> delete(int num, HttpServletRequest request) {
       
@@ -203,6 +205,7 @@ public class ReserveServiceImpl implements ReserveService {
       // 삭제할 글의 작성자
       //String writer=dao.getData(num).getId();
       // 만일 글의 작성자가 로그인된 아이디와 다르면
+       */
       /*
       if(! writer.equals(id)) {
          // spring 에서는 service 에서 직접 응답해버리면 로직이 꼬이기 때문에
@@ -211,7 +214,7 @@ public class ReserveServiceImpl implements ReserveService {
          // runtimeexception 을 상속 받았기 때문에 try, catch 문으로 묶지 않아도 됨.
       }
       */
-   
+   /*
       dao.delete(num); 
       
       Map<String, Object> map=new HashMap<>();
@@ -220,6 +223,6 @@ public class ReserveServiceImpl implements ReserveService {
       return map;
       
    }
-
+*/
 
 }

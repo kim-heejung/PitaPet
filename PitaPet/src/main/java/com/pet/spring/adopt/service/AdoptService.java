@@ -14,7 +14,7 @@ public interface AdoptService {
 
 	public List<AdoptDto> getList(HttpServletRequest request);
 	//테스트용
-	public void testGetList(HttpServletRequest request);
+/*	public void testGetList(HttpServletRequest request);
 	
 	public AdoptDto getDetail(HttpServletRequest request);
 	
@@ -23,5 +23,5 @@ public interface AdoptService {
 	public Map<String, Object> update(AdoptDto dto, HttpServletRequest request);
 	
 	public Map<String, Object> delete(int num, HttpServletRequest request);
-	
+*/	
 }

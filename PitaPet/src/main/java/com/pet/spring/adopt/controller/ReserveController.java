@@ -25,7 +25,7 @@ public class ReserveController {
    private ReserveService service;
    
    
-   
+   /*
    @RequestMapping("api/reserve/list")
    @ResponseBody
    public List<ReserveDto> getList(HttpServletRequest request, @RequestParam int num) {
@@ -79,7 +79,7 @@ public class ReserveController {
 
 	}
 
-	
+	*/
    //확인하기
 	/*
    @RequestMapping("/reserve/updateform")
@@ -91,6 +91,7 @@ public class ReserveController {
    } 
    */
    //테스트용
+   /*
    @RequestMapping("/reserve/updateform2")
    public ModelAndView authUpdateform2(HttpServletRequest request) {
       
@@ -114,5 +115,5 @@ public class ReserveController {
 
 		return service.delete(num, request);
 	}	
-	
+	*/
 }

@@ -24,7 +24,7 @@ public class AdoptLikeController {
 	
 	
 	//insert, getData는 adoptController에 적용.
-	
+	/*
 	//updateY, updateN은 vue로도 할 수도 있을거 같지만 일단 만듬.
 	@RequestMapping("/api/adoptlike/like")
 	@ResponseBody
@@ -78,5 +78,5 @@ public class AdoptLikeController {
 		
 		return service.getMyList(session);	
 	}
-
+	*/
 }

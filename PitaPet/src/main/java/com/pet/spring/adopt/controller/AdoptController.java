@@ -28,20 +28,21 @@ public class AdoptController {
 	@Autowired
 	private AdoptService service;
 	//테스트용
-	@Autowired
-	private ReserveService reserveService;
+	//@Autowired
+	//private ReserveService reserveService;
 	//테스트용
-	@Autowired
-	private AdoptLikeService adoptLikeService;
+	//@Autowired
+	//private AdoptLikeService adoptLikeService;
 	
 	
 	
 	@RequestMapping("/api/adopt/list")
 	@ResponseBody
 	public List<AdoptDto> getList(HttpServletRequest request) {
-
+		
 		return service.getList(request);
 	}
+	/*
 	//테스트용
 	@RequestMapping("/adopt/list")
 	public String testGetList(HttpServletRequest request,
@@ -57,14 +58,15 @@ public class AdoptController {
 
 		return "adopt/list";
 	}
-	
-	
+	*/
+	/*
 	@RequestMapping(value = "api/adopt/detail", method = RequestMethod.GET)
 	@ResponseBody
 	public AdoptDto detail(HttpServletRequest request) {
 		
 		return service.getDetail(request);
 	}
+	*/
 	//테스트용
 	/*
 	@RequestMapping(value = "adopt/detail", method = RequestMethod.GET)
@@ -82,6 +84,7 @@ public class AdoptController {
 		 return "adopt/detail";
 	}
 	*/
+	/*
 	//테스트용
 	@RequestMapping("adopt/detail")
 	public String testDetail(HttpServletRequest request) {
@@ -112,6 +115,7 @@ public class AdoptController {
 		return service.insert(dto, request);
 		
 	}
+	*/
 	
 	
 	/*
@@ -122,6 +126,7 @@ public class AdoptController {
 
 		return new ModelAndView("adopt/updateform");
 	}*/
+	/*
 	//테스트용
 	@RequestMapping("/adopt/updateform2")
 	public ModelAndView testUpdateform(@RequestParam int num, HttpServletRequest request) {
@@ -149,5 +154,5 @@ public class AdoptController {
 		
 		
 	}
-		
+	*/	
 }

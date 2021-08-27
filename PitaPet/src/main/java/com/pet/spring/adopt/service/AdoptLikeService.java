@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.pet.spring.adopt.dto.AdoptLikeDto;
 
 public interface AdoptLikeService {
-
+	/*
 	public void insert(HttpServletRequest request);
 	
 	//좋아요 클릭 시 (liked가 yes 일 때)
@@ -34,4 +34,5 @@ public interface AdoptLikeService {
 	public Map<String, Object> getCount(int num);
 	
 	public List<AdoptLikeDto> getMyList(HttpSession session);
+	*/
 }
