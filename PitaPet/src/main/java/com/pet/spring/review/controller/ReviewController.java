@@ -26,8 +26,8 @@ public class ReviewController {
    //게시글 목록을 json으로 응답 (Vue)
    @RequestMapping("/api/review/list")
    @ResponseBody
-   public List<ReviewDto> getList(ReviewDto dto){
-	   return dao.getList(dto);
+   public List<ReviewDto> getList2(HttpServletRequest request){
+	   return service.getList2(request);
    }
    
    //게시글 하나의 정보를 json 으로 응답 (Vue)

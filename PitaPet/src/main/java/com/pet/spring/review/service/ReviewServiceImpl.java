@@ -266,4 +266,32 @@ public class ReviewServiceImpl implements ReviewService{
 		request.setAttribute("commentList", commentList);			
 	}
 
+	@Override
+	public List<ReviewDto> getList2(HttpServletRequest request) {
+	    final int PAGE_ROW_COUNT=3;
+	    final int PAGE_DISPLAY_COUNT=5;
+	      
+
+	    int pageNum=1;
+	    String strPageNum=request.getParameter("pageNum");
+
+	    if(strPageNum != null){
+	       pageNum=Integer.parseInt(strPageNum);
+	    }
+	      
+
+	    int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
+
+	    int endRowNum=pageNum*PAGE_ROW_COUNT;
+	    
+	    ReviewDto dto=new ReviewDto();
+	    dto.setStartRowNum(startRowNum);
+	    dto.setEndRowNum(endRowNum);
+	    
+
+	    List<ReviewDto> list=reviewDao.getList(dto);
+	    
+		return list;
+	}
+
 }

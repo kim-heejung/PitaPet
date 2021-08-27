@@ -12,7 +12,7 @@
 	<h1>로그인 폼</h1>
 	<form action="${pageContext.request.contextPath}/users/login.do" method="post">
 		<c:choose>
-			<c:when test="${ empty param.url }">
+			<c:when test="${ empty param.url2 }">
 				<input type="hidden" name="url" value="${pageContext.request.contextPath}/"/>
 			</c:when>
 			<c:otherwise>
@@ -29,6 +29,11 @@
 		</div>
 		<button type="submit">로그인</button>
 	</form>
+	<!-- 네이버 로그인 창으로 이동 --> 
+	<div id="naver_id_login" style="text-align:center">
+		<a href="${Nurl}"> 
+		<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
+	</div> 
 </div>
 </body>
 </html>

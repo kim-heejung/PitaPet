@@ -14,6 +14,9 @@
 	</style>
 </head>
 <body>
+
+<a href="${pageContext.request.contextPath}/review/list.do">입양후기 게시판</a>
+
 <div id="home">
 	<div class="container" style="position:absolute; top:0; left:50%; transform:translateX(-50%);display:flex; align-items:center; justify-content:flex-end; height:44px;">
 		<c:choose>
@@ -35,6 +38,7 @@
 		<family-component></family-component>
 	</div>
 	<footer-component></footer-component>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
