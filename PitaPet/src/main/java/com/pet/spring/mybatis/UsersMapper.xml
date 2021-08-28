@@ -30,4 +30,9 @@
 		DELETE petusers
 		WHERE id=#{id}
 	</delete>
+	<update id="updateDonate" parameterType="usersDto">
+		UPDATE petusers
+		SET donation=#{donation}
+		WHERE id=#{id}
+	</update>
 </mapper>

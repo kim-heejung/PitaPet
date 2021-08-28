@@ -52,4 +52,9 @@ public class UsersDaoImpl implements UsersDao{
 		
 	}
 
+	@Override
+	public void updateDonate(UsersDto dto) {
+		session.update("users.updateDonate", dto);
+	}
+
 }
