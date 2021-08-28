@@ -15,17 +15,17 @@ import com.pet.spring.users.dto.UsersDto;
 public class DonationController {
 	@Autowired private DonationService service;
 	
-	@RequestMapping("/donation/main")
+	@RequestMapping("/donation/modal")
 	public ModelAndView donate(ModelAndView mView, HttpSession session) {
 		service.dbInfo(mView, session);
-		mView.setViewName("donation/main");
+		mView.setViewName("donation/modal");
 		return mView;
 	}
 	
-	@RequestMapping("/donation/test")
+	@RequestMapping("/donation/payment")
 	public String updateDona(HttpServletRequest request, UsersDto dto) {
 		service.updateDona(request, dto);
-		return "donation/test";
+		return "donation/payment";
 	}
 	
 }

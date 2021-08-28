@@ -27,10 +27,14 @@ public class DonationServiceImpl implements DonationService{
 	public void updateDona(HttpServletRequest request, UsersDto dto) {
 		int donation=Integer.parseInt(request.getParameter("donation"));
 		String id = (String)request.getSession().getAttribute("id");
+		
+		UsersDto donaUser=dao.getData(id);
+		int prevDona=donaUser.getDonation();
+		
 	    dto=new UsersDto();
 		dto.setId(id);
-	    dto.setDonation(donation);
-	      
+	    dto.setDonation(prevDona+donation);
+	    
 	    dao.updateDonate(dto);	
 	}
 

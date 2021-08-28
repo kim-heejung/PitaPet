@@ -12,7 +12,7 @@
 		WHERE id=#{id}
 	</select>
 	<select id="getData" parameterType="string" resultType="usersDto">
-		SELECT id,pwd,name,email,phoneNumber,address,household,profile,TO_CHAR(regdate,'YYYY-MM-DD')AS regdate,groupNum
+		SELECT id,pwd,name,email,phoneNumber,address,household,profile,TO_CHAR(regdate,'YYYY-MM-DD')AS regdate,groupNum,donation
 		FROM petusers
 		WHERE id=#{id}
 	</select>

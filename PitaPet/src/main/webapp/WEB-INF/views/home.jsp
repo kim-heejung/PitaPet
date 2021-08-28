@@ -16,7 +16,7 @@
 <body>
 
 <a href="${pageContext.request.contextPath}/review/list.do">입양후기 게시판</a>
-<a href="${pageContext.request.contextPath}/donation/main.do">후원하기 게시판</a>
+<a href="${pageContext.request.contextPath}/donation/modal.do">후원하기 게시판</a>
 
 <div id="home">
 	<div class="container" style="position:absolute; top:0; left:50%; transform:translateX(-50%);display:flex; align-items:center; justify-content:flex-end; height:44px;">
