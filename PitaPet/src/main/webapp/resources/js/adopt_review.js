@@ -17,7 +17,7 @@ Vue.component("review-component-gallery", {
 
 Vue.component("review-component", {
     template:`
-	      <div id="AdoptReview"> 
+	      <div id="AdoptReview" class="container"> 
 		        <div class="tit_area">
 		            <h1 class="main_tit">Adopt Revie</h1>
 		            <p class="main_txt">가족이 된 아이들을 자랑해주세요</p>
