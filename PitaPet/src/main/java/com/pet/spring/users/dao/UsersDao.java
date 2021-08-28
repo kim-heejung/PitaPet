@@ -15,4 +15,6 @@ public interface UsersDao {
 	public void updateInfo(UsersDto dto);
 	
 	public void deleteUser(String id);
+	
+	public void updateDonate(UsersDto dto);
 }
