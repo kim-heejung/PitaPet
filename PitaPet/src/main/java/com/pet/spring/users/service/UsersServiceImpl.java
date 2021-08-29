@@ -129,11 +129,16 @@ public class UsersServiceImpl implements UsersService{
 			sDao.updateInfo(sDto);
 		}
 	}
-
+	
+	@Transactional
 	@Override
 	public void deleteUser(HttpSession session, ModelAndView mView) {
 		String id=(String)session.getAttribute("id");
 		dao.deleteUser(id);
+		if(dao.getData(id).getGroupNum()==1) {
+			sDao.deleteShelter(id);
+		}
+
 		session.removeAttribute("id");
 		mView.addObject("id", id);
 	}

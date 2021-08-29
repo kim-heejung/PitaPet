@@ -4,7 +4,7 @@
 	<insert id="insert" parameterType="usersDto">
 		INSERT INTO petusers
 		(id,pwd,email,name,phoneNumber,birth,address,household,regdate,groupNum)
-		VALUES(#{id},#{pwd},#{email},#{name},#{phoneNumber},#{birth, jdbcType=VARCHAR},#{address},#{household, jdbcType=VARCHAR},SYSDATE,#{groupNum})
+		VALUES(#{id},#{pwd},#{email},#{name},#{phoneNumber},#{birth, jdbcType=VARCHAR},#{address, jdbcType=VARCHAR},#{household, jdbcType=VARCHAR},SYSDATE,#{groupNum})
 	</insert>
 	<select id="isExist" parameterType="java.lang.String" resultType="string">
 		SELECT id
