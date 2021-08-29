@@ -6,41 +6,52 @@ public class AdoptDto {
 	
 	private int num;
 	private String writer;
+	private String title;
 	private String breed;
 	private String petName;
-	private int petAge;
+	private String petAge;
 	private String petGender; 
+	private String vaccination;
 	private String neutralization;
 	private String findDate;
 	private String caption;
 	private String imagePath;
 	private String regdate;
+	private int viewCount;
 	private int startRowNum;
 	private int endRowNum;
 	private int prevNum;
 	private int nextNum; 
 	private MultipartFile image; //이미지 파일 업로드 처리를 위한 필드
+	private String name;
 	
-	public AdoptDto(int num, String writer, String breed, String petName, int petAge, String petGender,
-			String neutralization, String findDate, String caption, String imagePath, String regdate, int startRowNum,
-			int endRowNum, int prevNum, int nextNum, MultipartFile image) {
+	public AdoptDto() {}
+
+	public AdoptDto(int num, String writer, String title, String breed, String petName, String petAge, String petGender,
+			String vaccination, String neutralization, String findDate, String caption, String imagePath,
+			String regdate, int viewCount, int startRowNum, int endRowNum, int prevNum, int nextNum,
+			MultipartFile image, String name) {
 		super();
 		this.num = num;
 		this.writer = writer;
+		this.title = title;
 		this.breed = breed;
 		this.petName = petName;
 		this.petAge = petAge;
 		this.petGender = petGender;
+		this.vaccination = vaccination;
 		this.neutralization = neutralization;
 		this.findDate = findDate;
 		this.caption = caption;
 		this.imagePath = imagePath;
 		this.regdate = regdate;
+		this.viewCount = viewCount;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
 		this.image = image;
+		this.name = name;
 	}
 
 	public int getNum() {
@@ -59,6 +70,14 @@ public class AdoptDto {
 		this.writer = writer;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getBreed() {
 		return breed;
 	}
@@ -75,11 +94,11 @@ public class AdoptDto {
 		this.petName = petName;
 	}
 
-	public int getPetAge() {
+	public String getPetAge() {
 		return petAge;
 	}
 
-	public void setPetAge(int petAge) {
+	public void setPetAge(String petAge) {
 		this.petAge = petAge;
 	}
 
@@ -89,6 +108,14 @@ public class AdoptDto {
 
 	public void setPetGender(String petGender) {
 		this.petGender = petGender;
+	}
+
+	public String getVaccination() {
+		return vaccination;
+	}
+
+	public void setVaccination(String vaccination) {
+		this.vaccination = vaccination;
 	}
 
 	public String getNeutralization() {
@@ -131,6 +158,14 @@ public class AdoptDto {
 		this.regdate = regdate;
 	}
 
+	public int getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+
 	public int getStartRowNum() {
 		return startRowNum;
 	}
@@ -169,6 +204,14 @@ public class AdoptDto {
 
 	public void setImage(MultipartFile image) {
 		this.image = image;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

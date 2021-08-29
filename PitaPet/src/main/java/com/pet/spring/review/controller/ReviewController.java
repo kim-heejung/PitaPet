@@ -23,6 +23,38 @@ public class ReviewController {
    @Autowired private ReviewService service;
    @Autowired private ReviewDao dao;
    
+   //Gallery 하단 페이징 처리에 필요한 데이터 리턴하는 메소드 (Vue)
+   @RequestMapping("/api/review/paging")
+   @ResponseBody
+   public Map<String, Object> paging(@RequestParam int pageNum){
+	   final int PAGE_ROW_COUNT=3;
+	   final int PAGE_DISPLAY_COUNT=5;
+	      
+	   //하단 시작 페이지 번호
+	   int startPageNum = 1 + ((pageNum - 1) / PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;
+	   //하단 끝 페이지 번호
+	   int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
+	   
+	   //전체 Row의 개수
+	   int totalRow=dao.getCount();
+	   //전체 페이지 개수 구하기
+	   int totalPageCount = (int) Math.ceil(totalRow / (double) PAGE_ROW_COUNT);
+	   
+	   //끝 페이지 번호가 전체 페이지의 갯수보다 크다면 잘못된 값이므로 보정해주기
+	   if(endPageNum > totalPageCount){
+	         endPageNum = totalPageCount; 
+	   }
+	   
+	   //json 문자열로 응답할 데이터를 Map 에 담기
+	   Map<String, Object> map=new HashMap<String, Object>();
+	   map.put("startPageNum", startPageNum);
+	   map.put("endPageNum", endPageNum);
+	   map.put("totalPageCount", totalPageCount);
+	   
+	   return map;
+	   
+   }
+   
    //게시글 목록을 json으로 응답 (Vue)
    @RequestMapping("/api/review/list")
    @ResponseBody

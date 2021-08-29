@@ -49,14 +49,14 @@ public class ReviewServiceImpl implements ReviewService{
 	    //글 목록 얻어오기
 	    List<ReviewDto> list=reviewDao.getList(dto);
 	    
-	    //전체글의 갯수
-	    int totalRow=reviewDao.getCount(dto);
-	    
 	    //하단 시작 페이지 번호 
 	    int startPageNum = 1 + ((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
 	    //하단 끝 페이지 번호
 	    int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
-	      
+	    
+	    //전체글의 갯수
+	    int totalRow=reviewDao.getCount();
+	    	      
 	    //전체 페이지의 갯수
 	    int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
 	    //끝 페이지 번호가 전체 페이지 갯수보다 크다면 잘못된 값이므로,
@@ -68,7 +68,6 @@ public class ReviewServiceImpl implements ReviewService{
 	    request.setAttribute("pageNum", pageNum);
 	    request.setAttribute("startPageNum", startPageNum);
 	    request.setAttribute("endPageNum", endPageNum);
-	    request.setAttribute("totalRow", totalRow);
 	    request.setAttribute("totalPageCount", totalPageCount);
 	    request.setAttribute("list", list);		
 	}
@@ -279,16 +278,14 @@ public class ReviewServiceImpl implements ReviewService{
 	       pageNum=Integer.parseInt(strPageNum);
 	    }
 	      
-
+	    
 	    int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
-
 	    int endRowNum=pageNum*PAGE_ROW_COUNT;
 	    
 	    ReviewDto dto=new ReviewDto();
 	    dto.setStartRowNum(startRowNum);
 	    dto.setEndRowNum(endRowNum);
-	    
-
+	    	    
 	    List<ReviewDto> list=reviewDao.getList(dto);
 	    
 		return list;

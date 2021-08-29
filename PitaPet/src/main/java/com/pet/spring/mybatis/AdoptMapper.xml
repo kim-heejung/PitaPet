@@ -2,10 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adopt">
 
-	<sql id="searchCondition">
-		<if test="name != null">
-			WHERE name LIKE '%'||#{name}||'%'
-		</if>
+	<sql id="selectShelter">
+		<choose>
+			<when test="name != null">
+				WHERE name = #{name}
+			</when>
+		</choose>
 	</sql>
 
 	<select id="getList" parameterType="adoptDto" resultType="adoptDto">
@@ -13,10 +15,10 @@
 		FROM
 			(SELECT result1.*, ROWNUM AS rnum
 			FROM
-				(SELECT num, imagePath, name, title, writer, viewCount, a.regdate
+				(SELECT num, name, imagePath, title, writer, viewCount, a.regdate
 				FROM board_adopt a INNER JOIN shelter
 				ON writer = id
-				<include refid="searchCondition"/>
+				<include refid="selectShelter"/>
 				ORDER BY num DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
@@ -25,7 +27,7 @@
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM board_adopt INNER JOIN shelter
 		ON writer = id
-		<include refid="searchCondition"/>
+		<include refid="selectShelter"/>
 	</select>
 	
 	<select id="getData" parameterType="adoptDto" resultType="adoptDto">
@@ -37,7 +39,7 @@
 			LEAD(num, 1, 0) OVER (ORDER BY num DESC) AS nextNum
 			FROM board_adopt a INNER JOIN shelter
 			ON writer = id
-			<include refid="searchCondition"/>
+			<include refid="selectShelter"/>
 			)
 		WHERE num = #{num}
 	</select>
@@ -52,7 +54,7 @@
 		INSERT INTO board_adopt
 		(num, title, writer, breed, petName, petAge, petGender, vaccination, 
 		neutralization, findDate, caption, imagePath, regdate)
-		VALUES(board_adopt_seq.NEXTVAL, #{writer}, #{title}, #{breed}, #{petName}, #{petAge}, #{petGender}, #{vaccination}, 
+		VALUES(board_adopt_seq.NEXTVAL, #{title}, #{writer}, #{breed}, #{petName}, #{petAge}, #{petGender}, #{vaccination}, 
 		#{neutralization}, #{findDate}, #{caption}, #{imagePath}, SYSDATE)
 	</insert>
 

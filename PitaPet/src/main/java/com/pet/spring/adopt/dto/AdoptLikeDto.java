@@ -4,13 +4,17 @@ public class AdoptLikeDto {
 
 	private int num;
 	private String id;
-	private String bookmark;
+	private String liked;
+	private int cnt;
 	
-	public AdoptLikeDto(int num, String id, String bookmark) {
+	public AdoptLikeDto() {}
+
+	public AdoptLikeDto(int num, String id, String liked, int cnt) {
 		super();
 		this.num = num;
 		this.id = id;
-		this.bookmark = bookmark;
+		this.liked = liked;
+		this.cnt = cnt;
 	}
 
 	public int getNum() {
@@ -29,12 +33,20 @@ public class AdoptLikeDto {
 		this.id = id;
 	}
 
-	public String getBookmark() {
-		return bookmark;
+	public String getLiked() {
+		return liked;
 	}
 
-	public void setBookmark(String bookmark) {
-		this.bookmark = bookmark;
+	public void setLiked(String liked) {
+		this.liked = liked;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 	
 }
