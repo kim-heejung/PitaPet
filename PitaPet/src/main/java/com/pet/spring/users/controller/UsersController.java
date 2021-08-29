@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -88,14 +89,34 @@ public class UsersController {
 		//3. 데이터 파싱 
 		//Top레벨 단계 _response 파싱 
 		JSONObject response_obj = (JSONObject)jsonObj.get("response"); 
-		//response의 nickname 파싱 
-		String nickname = (String)response_obj.get("nickname"); 
-		System.out.println(nickname); 
-		//4.파싱 닉네임 세션으로 저장 
-		session.setAttribute("id",nickname); 
+		String id=(String)response_obj.get("email");
+		id="na_"+id.split("@")[0];
+		System.out.println(response_obj); 
+		
+		//4.파싱 아이디 세션으로 저장 
+		session.setAttribute("id",id); 
 		//세션 생성 
 		model.addAttribute("result", apiResult); 
-		return "users/login"; 
+		
+		Map<String, Object> map=service.isExistId(id);
+		boolean isExist=(boolean)map.get("isExist");
+		if(!isExist) {
+			UsersDto dto=new UsersDto();
+			dto.setId(id);
+			dto.setName((String)response_obj.get("name"));
+			dto.setEmail((String)response_obj.get("email"));
+			dto.setPhoneNumber((String)response_obj.get("mobile"));
+			dto.setBirth((String)response_obj.get("birthyear"));
+			dto.setGroupNum(0);
+			
+			BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+			String encodedPwd=encoder.encode("12345");
+			dto.setPwd(encodedPwd);
+			
+			service.addUser(dto, null);
+		}
+		
+		return "users/naver_login"; 
 	}
 	
 
@@ -211,7 +232,6 @@ public class UsersController {
 	@RequestMapping("/users/delete")
 	public ModelAndView authDelete(HttpSession session,ModelAndView mView,HttpServletRequest request) {
 		service.deleteUser(session,mView);
-		service2.deleteShelter(session);
 		mView.setViewName("users/delete");
 		return mView;
 	}
