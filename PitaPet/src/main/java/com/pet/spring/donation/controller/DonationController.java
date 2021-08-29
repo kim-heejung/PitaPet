@@ -22,10 +22,10 @@ public class DonationController {
 		return mView;
 	}
 	
-	@RequestMapping("/donation/test")
+	@RequestMapping("/donation/payment")
 	public String updateDona(HttpServletRequest request, UsersDto dto) {
 		service.updateDona(request, dto);
-		return "donation/test";
+		return "donation/payment";
 	}
 	
 }
