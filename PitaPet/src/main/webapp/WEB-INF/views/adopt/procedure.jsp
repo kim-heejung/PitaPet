@@ -23,7 +23,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<header-component :cpath="cpath"></header-component>
+		<jsp:include page="/resources/header.jsp"></jsp:include>
 		<procedure-visual></procedure-visual>
 		<div id="scroll-bg">
 			<div class="bg" 
@@ -141,7 +141,7 @@
 			graphicElems = this.$refs.graphicElems;
 		  	currentItem = graphicElems[0];
 			  
-		 	const io = new IntersectionObserver(entries, observer) => { ioIndex = entries[0].target.dataset.index * 1; };
+		 	const io = new IntersectionObserver((entries, observer) => { ioIndex = entries[0].target.dataset.index * 1; });
 		 	for (let i = 0; i < stepElems.length; i++) {
 		 	    io.observe(stepElems[i]);
 		 	    stepElems[i].dataset.index = i;
