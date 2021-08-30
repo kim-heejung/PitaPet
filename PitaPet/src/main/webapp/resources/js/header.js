@@ -34,7 +34,7 @@ Vue.component("header-component", {
                   },
                   {
                 	  menu: "입양하기",
-                      path: "/list.html"
+                      path: "/adopt/list.do"
                   },
                   {
                 	  menu: "입양후기",

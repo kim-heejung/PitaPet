@@ -28,8 +28,8 @@ public class AdoptController {
 	@Autowired
 	private AdoptService service;
 	//테스트용
-	@Autowired
-	private ReserveService reserveService;
+	//@Autowired
+	//private ReserveService reserveService;
 	//테스트용
 	@Autowired
 	private AdoptLikeService adoptLikeService;
@@ -39,62 +39,90 @@ public class AdoptController {
 	@RequestMapping("/api/adopt/list")
 	@ResponseBody
 	public List<AdoptDto> getList(HttpServletRequest request) {
-
+		
 		return service.getList(request);
 	}
-	//테스트용
+	//테스트용-후에 삭제될 부분
 	@RequestMapping("/adopt/list")
-	public String testGetList(HttpServletRequest request,
-			HttpSession session) {
+	public String testGetList(HttpServletRequest request, HttpSession session
+		) {
 
-		service.testGetList(request);
+		String id=(String)session.getAttribute("id");
 		
-		adoptLikeService.testGetYCountList(request);
+		if(id == null) {
+			service.testGetList(request);
+		}else {
+			
+			request.setAttribute("idCheck", id);
+			
+			service.testGetIdList(request);
+			adoptLikeService.testGetYCountList(request);
+		}
 		
-		//List<AdoptLikeDto> list=adoptLikeService.testGetYList(session);
-		//request.setAttribute("myList", list);
+		//service.testGetList(request);
+
+		
+
+		/*
+		String id=(String)session.getAttribute("id");
+		if(!id.equals("")) {
+			
+		}
+		*/
+		
+		//adoptLikeService.testIdYList(session);
+		//List<AdoptLikeDto> list=adoptLikeService.getIdYList(session);
+		//request.setAttribute("idYList", list);
+		
+		//AdoptLikeDto dto=adoptLikeService.getData(request);
+		//request.setAttribute("idYdata", dto);
 		
 
 		return "adopt/list";
 	}
+	// 테스트용-후에 삭제될 부분
+	/*
+	@RequestMapping("/adoptlike/test")
+	public String test(HttpServletRequest request, HttpSession session) {
+
+		AdoptLikeDto dto=adoptLikeService.getData(request);
+		request.setAttribute("idYdata", dto);
+
+		return "redirect:/adopt/list.do";
+	}*/
 	
 	
-	@RequestMapping(value = "api/adopt/detail", method = RequestMethod.GET)
+	@RequestMapping("api/adopt/detail")
 	@ResponseBody
 	public AdoptDto detail(HttpServletRequest request) {
 		
 		return service.getDetail(request);
 	}
-	//테스트용
-	/*
+	//테스트용-후에 삭제될 부분
 	@RequestMapping(value = "adopt/detail", method = RequestMethod.GET)
 	public String testDetail(@RequestParam int num, HttpServletRequest request) {
 
-		 AdoptDto dto=service.getDetail(request);
-		 
-		 List<ReserveDto> list=reserveService.testGetList(request, num);
-		 
-		 request.setAttribute("dto", dto);
-		 request.setAttribute("list", list);
-		 
-		 //둘중에 하나라도 값이 없으면 오류남.
+		String id=(String)request.getSession().getAttribute("id");
 		
-		 return "adopt/detail";
-	}
-	*/
-	//테스트용
-	@RequestMapping("adopt/detail")
-	public String testDetail(HttpServletRequest request) {
+		if(id != null) {
+			request.setAttribute("idCheck", id);
+			
+			AdoptLikeDto dto2=adoptLikeService.getData(request);
+			request.setAttribute("like", dto2);
+		}
+		
+		AdoptDto dto = service.getDetail(request);
+		int count=adoptLikeService.getTestCount(num);
+		
+		// List<ReserveDto> list=reserveService.testGetList(request, num);
 
-		 AdoptDto dto=service.getDetail(request);
-		 //List<ReserveDto> list=reserveService.testGetList(request);
-		 
-		 request.setAttribute("dto", dto);
-		 //request.setAttribute("list", list);
-		 
-		 //둘중에 하나라도 값이 없으면 오류남.
-		
-		 return "adopt/detail";
+		request.setAttribute("dto", dto);
+		request.setAttribute("count", count);
+		// request.setAttribute("list", list);
+
+		// 둘중에 하나라도 값이 없으면 오류남.
+
+		return "adopt/detail";
 	}
 	
 	
@@ -102,7 +130,6 @@ public class AdoptController {
 	public String authInsertForm() {
 
 		return "adopt/insertform";
-		
 	}
 	
 	@RequestMapping("api/adopt/insert")
@@ -110,28 +137,17 @@ public class AdoptController {
 	public Map<String, Object> authInsert(AdoptDto dto, HttpServletRequest request) {
 		
 		return service.insert(dto, request);
-		
 	}
 	
 	
-	/*
 	@RequestMapping("/adopt/updateform")
-	public ModelAndView authUpdateform(@RequestParam int num) {
+	public String testUpdateform(HttpServletRequest request) {
 
-		service.getDetail(num);
-
-		return new ModelAndView("adopt/updateform");
-	}*/
-	//테스트용
-	@RequestMapping("/adopt/updateform2")
-	public ModelAndView testUpdateform(@RequestParam int num, HttpServletRequest request) {
-
-		//service.getDetail(num);
-		//AdoptDto dto=service.getDetail(num);
-		//request.setAttribute("dto", dto);
-
-		return new ModelAndView("adopt/updateform");
+		service.updateDetail(request);
+		
+		return "adopt/updateform";
 	}
+	
 	
 	@RequestMapping("/api/adopt/update")
 	@ResponseBody
@@ -143,11 +159,9 @@ public class AdoptController {
 	
 	@RequestMapping("/api/adopt/delete")
 	@ResponseBody
-	public Map<String, Object> authDelete(HttpServletRequest request, @RequestParam int num) {
+	public Map<String, Object> authDelete(@RequestParam int num) {
 
-		return service.delete(num, request);
-		
-		
+		return service.delete(num);
 	}
-		
+	
 }

@@ -1,5 +1,6 @@
 package com.pet.spring.adopt.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,15 +23,32 @@ public class AdoptLikeController {
 	private AdoptLikeService service;
 	
 	
+	//테스트용-후에 삭제될 부분
+	@RequestMapping("/adoptlike/like")
+	public String testInsert(HttpServletRequest request) {
+		
+		String id=(String)request.getSession().getAttribute("id");
+		int isExist=service.isExist(request);
+		
+		if(isExist < 1) {
+			service.insert(request);
+		}else {
+			service.updateY(request);
+		}
+		
+		return "redirect:/adopt/list.do";
+	}
 	
-	//insert, getData는 adoptController에 적용.
-	
-	//updateY, updateN은 vue로도 할 수도 있을거 같지만 일단 만듬.
 	@RequestMapping("/api/adoptlike/like")
 	@ResponseBody
 	public Map<String, Object> updateY(HttpServletRequest request){
 		
-		return service.updateY(request);
+		service.updateY(request);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("isSuccess", true);
+		
+		return map;
 	}
 	
 	@RequestMapping("/api/adoptlike/unlike")
@@ -39,20 +57,13 @@ public class AdoptLikeController {
 		
 		return service.updateN(request);
 	}
-	
+	 
 	
 	@RequestMapping("/api/adoptlike/check")
 	@ResponseBody
 	public AdoptLikeDto getData(HttpServletRequest request){
 		 
 		return service.getData(request);
-	}
-	
-	@RequestMapping("/api/adoptlike/checklist")
-	@ResponseBody
-	public List<AdoptLikeDto> getDataList(HttpServletRequest request){
-		 
-		return null;
 	}
 	
 	
@@ -71,12 +82,4 @@ public class AdoptLikeController {
 		return service.getYCountList();
 	}
 	
-	
-	@RequestMapping("/api/adoptlike/mylist")
-	@ResponseBody
-	public List<AdoptLikeDto> getMyList(HttpSession session){
-		
-		return service.getMyList(session);	
-	}
-
 }

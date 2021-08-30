@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>pit a pet</title>
+<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
 <%-- bootstrap 읽어오기 --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
 <style>
@@ -45,8 +45,8 @@
 </head>
 <body>
 <div class="container">
-   	<a href="${pageContext.request.contextPath}/adopt/insertform.do">사진 업로드 하러 가기</a><br/>
-   	<h1>겔러리 목록 입니다.</h1>
+   	<h1>입양하기 게시판</h1>
+   	<a href="${pageContext.request.contextPath}/adopt/insertform.do">새글 작성</a><br/>
    	<form action="list.do" method="get">
    		<select name="shelterName" id="shelter" onchange="formChange(this.form)">
    			<option value="선택하기">선택하기</option>
@@ -64,102 +64,85 @@
 	                  		<img class="card-img-top" src="${pageContext.request.contextPath }${tmp.imagePath}" />
 	               		</div>
             		</a>
-            		<p>
-            		
-      
+            		<p class="card-text">${tmp.name}</p>
+            		<p class="card-text">${tmp.title}</p>
+               		<p class="card-text">by <strong>${tmp.writer}</strong></p>
+               		<p class="card-text">${tmp.viewCount}</p>
+               		<p><small>${tmp.regdate}</small></p>
+            		<p style="color:red;">
             			<c:choose>
-	            			<c:when test="">
-	            				♥
-	            			</c:when>
-	            			<c:otherwise>
-	            				♡
-	            			</c:otherwise>
-	            		</c:choose>
-            		</p>
-            		
-            		<p>
-            			♥
-            			<c:forEach var="i" items="${likeCountList}">
-	            			<c:choose>
-	            				<c:when test="${tmp.num eq i.num}">
-	            					<span>${i.cnt }</span>
-	            				</c:when>
-	            				<c:otherwise>	
-	            					<span>0</span>
-	            				</c:otherwise>	
-	            			</c:choose>	
-	            		</c:forEach>
-            		</p>
-            		
-            		<!--  
-            		<div class="card-body">
-            			<p class="card-text">${tmp.title}</p>
-            			
+				        	<c:when test="${empty idCheck }">
+				         		<p style="color:red;">♡</p>	
+				         	</c:when>
+				         	<c:otherwise>
+				         		<c:choose>
+				         			<c:when test="${tmp.liked eq 'yes' }">
+				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/api/adoptlike/unlike.do?num=${dto.num }">♥</a></p>
+				         			</c:when>
+				         			<c:otherwise>
+				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/adoptlike/like.do?num=${dto.num }">♡</a></p>
+				         			</c:otherwise>
+				         		</c:choose>
+				         	</c:otherwise>
+				        </c:choose>
             			<c:choose>
-							<c:when test="${isLike}">
-								
-								
-								
-								<p>
-						        	♥
-						    	</p>	
-							</c:when>
-							<c:otherwise>
-								<p>
-						                              ♡
-						    	</p>
-							</c:otherwise>
-						</c:choose>-->	
-						<p class="card-text">${tmp.name}</p>
-               			<p class="card-text">by <strong>${tmp.writer}</strong></p>
-               			<p class="card-text">${tmp.viewCount}</p>
-               			<p><small>${tmp.regdate}</small></p>
-            	
+            				<c:when test="${not empty likeCountList }">
+            					<c:forEach var="like" items="${likeCountList }">
+            						<c:if test="${like.num eq tmp.num }">
+            							${like.cnt}
+            						</c:if>
+            					</c:forEach>
+            				</c:when>
+            				<c:otherwise>
+            					<span>${tmp.cnt }</span>
+            				</c:otherwise>
+            			</c:choose>
+            		</p>	
          		</div>
       		</div>
 		</c:forEach>
    	</div>
-   	<nav>
-	<ul class="pagination justify-content-center">
-		<c:choose>
-			<c:when test="${startPageNum ne 1 }">
-				<li class="page-item">
-               		<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${startPageNum - 1}&shelterName=${name}">Prev</a>
-            	</li>
-			</c:when>
-			<c:otherwise>
-				<li class="page-item disabled">
-               		<a class="page-link" href="javascript:">Prev</a>
-            	</li>
-			</c:otherwise>
-		</c:choose>
-		<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+	<nav>
+		<ul class="pagination justify-content-center">
 			<c:choose>
-				<c:when test="${i eq pageNum }">
-					<li class="page-item active">
-                  		<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${name}">${i }</a>
-               		</li>
+				<c:when test="${startPageNum ne 1 }">
+					<li class="page-item">
+               			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${startPageNum - 1}&shelterName=${name}">Prev</a>
+            		</li>
 				</c:when>
 				<c:otherwise>
-					<li class="page-item">
-                  		<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${name}">${i}</a>
-               		</li>
+					<li class="page-item disabled">
+               			<a class="page-link" href="javascript:">Prev</a>
+            		</li>
 				</c:otherwise>
 			</c:choose>
-		</c:forEach>
-		<c:choose>
-			<c:when test="${endPageNum lt totalPageCount }">
-				<li class="page-item">
-               		<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${endPageNum + 1}&shelterName=${name}">Next</a>
-            	</li>
-			</c:when>
-			<c:otherwise>
-				<li class="page-item disabled">
-               		<a class="page-link" href="javascript:">Next</a>
-            	</li>
-			</c:otherwise>
-		</c:choose>
-      </ul>
+			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<c:choose>
+					<c:when test="${i eq pageNum }">
+						<li class="page-item active">
+                  			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${name}">${i }</a>
+               			</li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item">
+                  			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${name}">${i}</a>
+               			</li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:choose>
+				<c:when test="${endPageNum lt totalPageCount }">
+					<li class="page-item">
+               			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${endPageNum + 1}&shelterName=${name}">Next</a>
+            		</li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item disabled">
+               			<a class="page-link" href="javascript:">Next</a>
+            		</li>
+				</c:otherwise>
+			</c:choose>
+      	</ul>
    </nav>
    <script>
 	function formChange(obj)
@@ -173,11 +156,6 @@
 		//『폼객체.submit();』 함수의 호출을 통해
 		//form 객체의 데이터를 서버로 전송하는 것이 가능하다.	
 	}
-	/*
-	
-	-
-	
-	 */
    </script>   
 </div>
 </body>

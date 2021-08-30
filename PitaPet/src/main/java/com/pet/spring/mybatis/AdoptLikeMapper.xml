@@ -9,14 +9,6 @@
 		GROUP BY num
 	</select>
 	
-	<!--  
-	<select id="getYList" parameterMap="java.lang.String" resultType="adoptLikeDto">
-		SELECT num, liked
-		FROM adoptlike
-		WHERE id = #{id}
-	</select>
-	-->
-	
 	<insert id="insert" parameterType="adoptLikeDto">
 		INSERT INTO adoptLike
 		(num, id)
@@ -36,19 +28,9 @@
 	</update>
 	
 	<select id="getData" parameterType="adoptLikeDto" resultType="adoptLikeDto">
-		SELECT liked
+		SELECT num, liked
 		FROM adoptLike
-		WHERE num=#{num} AND id=#{id}
-	</select>
-
-	<select id="getMyList" parameterType="string" resultType="adoptLikeDto">
-		SELECT *
-		FROM
-			(SELECT result1.*, ROWNUM AS rnum
-			FROM
-				(SELECT a.num, title, a.writer, viewCount, regDate
-				FROM adoptLike l, board_adopt a
-				WHERE l.num = a.num AND liked='yes' AND l.id=#{id}) result1)
+		WHERE num=#{num} AND id=#{id} 
 	</select>
 	
 	<select id="getCount" parameterType="int" resultType="int">
