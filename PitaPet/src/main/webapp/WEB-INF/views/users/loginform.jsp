@@ -10,7 +10,7 @@
 <body>
 <div id="loginform">
 	<div class="container">
-		<h1>로그인 폼</h1>
+		<h1 v-bind:id="loginformId">로그인 폼</h1>
 		<form action="${pageContext.request.contextPath}/users/login.do" method="post">
 			<c:choose>
 				<c:when test="${ empty param.url2 }">
@@ -28,7 +28,7 @@
 				<label for="pwd">비밀번호</label>
 				<input type="password" name="pwd" id="pwd"/>
 			</div>
-			<button type="submit">로그인</button>
+			<button v-on:click="login" type="submit">로그인</button>
 		</form>
 		<!-- 네이버 로그인 창으로 이동 --> 
 		<a href="${Nurl}">
@@ -42,13 +42,18 @@
 	</div>
 </div>
 <script>
-new Vue({
+let loginform = new Vue({
 	el:"#loginform",
 	data(){
 		return{
-			
+			loginformId:'로그인 폼',
 		}
-	}
+	},
+	methods:{
+	    login(){
+	    	id:"id",
+	    	pwd:"pwd"
+	    }
 });
 </script>
 </body>
