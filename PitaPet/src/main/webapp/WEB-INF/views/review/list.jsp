@@ -49,22 +49,28 @@
 	<div class="container">
 	      <a href="${pageContext.request.contextPath}/review/private/insertform.do">추가하기</a><br/>
 	      <div class="row">
-	      <c:forEach var="tmp" items="${list }">
-	         <div class="col-2 col-md-5 col-lg-4">
-	               <div class="card mb-3">
-	                  <a href="${pageContext.request.contextPath}/review/detail.do?num=${tmp.num}">
-	                        <div class="img-wrapper">
-	                           <img class="card-img-top" src="${pageContext.request.contextPath }${tmp.img}" />
-	                        </div>
-	                  </a>
-	                  <div class="card-body">
-	                        <p class="card-text">${tmp.title}</p>
-	                        <p class="card-text">by <strong>${tmp.writer}</strong></p>
-	                        <p><small>${tmp.regdate}</small></p>
-	                  </div>
-	               </div>
-	            </div>
-	      </c:forEach>
+	      	<div v-for="tmp in reviews" v-bind:key="tmp.num" class="col-2 col-md-5 col-lg-4">
+	      		<div class="card mb-3">
+	      			<a href="">
+	      				<div class="img-wrapper">
+                           <img class="card-img-top" :src="cpath + tmp.img" />
+                        </div>
+	      			</a>
+	      			<div class="card-body">
+	      				<p class="card-text">{{tmp.title}}</p>
+                        <p class="card-text">by <strong>{{tmp.writer}}</strong></p>
+                        <p><small>{{tmp.regdate}}</small></p>
+	      			</div>
+	      		</div>
+	      	</div>
+	      
+	      
+	      
+
+	      
+	      
+	      
+	      
 	      </div>
 	      <nav>
 	   <ul class="pagination justify-content-center">
@@ -117,12 +123,27 @@
 <script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <script>
 	const base_url="http://localhost:8888/spring";
-	new Vue({
+	let reviewList = new Vue({
 		el:"#reviewList",
 		data(){
 			return{
 				cpath: "${pageContext.request.contextPath}",
+				reviews: [],
+				currentReviews: []
 			}
+		},
+		created(){
+			const self = this;
+			axios.get("http://localhost:8888/spring/api/review/list.do")
+			.then(function(response){
+				if(response.status == 200){
+					self.reviews = response.data;
+					self.currentReviews = response.data;
+				}
+			})
+			.catch(function(error){
+				console.log(error);
+			});
 		}
 	});
 </script>

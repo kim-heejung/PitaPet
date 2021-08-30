@@ -30,10 +30,14 @@
 		<button type="submit">로그인</button>
 	</form>
 	<!-- 네이버 로그인 창으로 이동 --> 
-	<div id="naver_id_login" style="text-align:center">
-		<a href="${Nurl}"> 
-		<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a>
-	</div> 
+	<a href="${Nurl}">
+		<img width="223" src="${pageContext.request.contextPath}/resources/images/naver_login.png"/>
+	</a>
+
+	<!-- 카카오 로그인 창으로 이동 --> 
+	 <a href="https://kauth.kakao.com/oauth/authorize?client_id=f925a85d9447bd400ba51c4ff5efdbd7&redirect_uri=http://localhost:8888/spring/users/kakao.do&response_type=code">
+	 	<img src="${pageContext.request.contextPath}/resources/images/kakao_login_medium_narrow.png" alt="" />
+	 </a>
 </div>
 </body>
 </html>

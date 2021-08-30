@@ -1,6 +1,6 @@
 Vue.component("family-component", {
       template:`
-	     <div id="AdoptFamily">
+	     <div id="AdoptFamily" class="container">
 	        <div class="tit-area">
 	            <h1 class="main-tit">Adopt animals, Adopt Family</h1>
 	            <p class="main-txt">
