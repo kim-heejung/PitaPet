@@ -17,15 +17,15 @@
          </div>
      </div>
      <nav class="nav-bar container">
-         <a href="${pageContext.request.contextPath}" class="logo">
-             <img src="${pageContext.request.contextPath}/resources/images/logo.png">
+         <a href="${pageContext.request.contextPath}/home.do" class="logo">
+             <img src="${pageContext.request.contextPath}/resources/images/logo.png"/>
              <span>Pit a Pet</span>
          </a>
          <ul class="menu-wrap">
-             <li class="menu-list"><a href="${pageContext.request.contextPath}/list.do">입양절차알아보기</a></li>
-             <li class="menu-list"><a href="${pageContext.request.contextPath}/list.do">입양하기</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/adopt/procedure.do">입양절차알아보기</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/adopt/list.do">입양하기</a></li>
              <li class="menu-list"><a href="${pageContext.request.contextPath}/review/list.do">입양후기</a></li>
-             <li class="menu-list"><a href="${pageContext.request.contextPath}/list.do">후원하기</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/donation/main.do">후원하기</a></li>
          </ul>
      </nav>
 </header>
