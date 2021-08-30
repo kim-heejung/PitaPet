@@ -8,6 +8,10 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 </head>
 <body>
+
+<a href="${pageContext.request.contextPath}/review/list.do">입양후기 게시판</a>
+<a href="javascript:" onclick="userAccess()">후원하기 게시판</a>
+
 <div id="home">
 	<jsp:include page="/resources/header.jsp"></jsp:include>
 	<slider-component :cpath="cpath"></slider-component>
@@ -30,6 +34,15 @@
 			cpath: "${pageContext.request.contextPath}",
 		}
 	});
+</script>
+ <script type="text/javascript">
+	function userAccess(){
+		if(${empty sessionScope.id }){
+			alert("pit a pet(핏어펫) 회원만 접근할 수 있는 페이지 입니다.");
+		}else{
+			location.href="${pageContext.request.contextPath}/donation/main.do";
+		}
+	}
 </script>
 </body>
 </html>
