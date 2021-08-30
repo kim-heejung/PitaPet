@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 </head>
 <body>
-
+<a href="${pageContext.request.contextPath}/adopt/procedure.do">입양절차 알아보기</a> 
 <a href="${pageContext.request.contextPath}/review/list.do">입양후기 게시판</a>
 <a href="${pageContext.request.contextPath}/donation/main.do">후원하기 게시판</a>
 
