@@ -30,123 +30,125 @@ div.tab.btn.btn-primary {
 </style>
 </head>
 <body>
-<div class="container">
-      <h1>회원가입하기 폼</h1>
-     <div class="tabs">
-     	<div class="tab btn btn-primary" data-tab-target="#tab1">
-         	<p>일반회원</p>
-       	</div>
-	     <div class="tab btn btn-primary" data-tab-target="#tab2">
-	        <p>보호소</p>
-	     </div>
-	  </div>
-     <br />
-      <div id="tab1" data-tab-content class="items active">
-        <h2>일반회원 회원가입 폼</h2>
-        	<form action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm">
+<div id="signup_form">
+	<div class="container">
+	      <h1>회원가입하기 폼</h1>
+	     <div class="tabs">
+	     	<div class="tab btn btn-primary" data-tab-target="#tab1">
+	         	<p>일반회원</p>
+	       	</div>
+		     <div class="tab btn btn-primary" data-tab-target="#tab2">
+		        <p>보호소</p>
+		     </div>
+		  </div>
+	     <br />
+	      <div id="tab1" data-tab-content class="items active">
+	        <h2>일반회원 회원가입 폼</h2>
+	        	<form action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm">
+					<div>
+						<label class="control-label" for="id">아이디</label>
+						<input class="form-control id" type="text" name="id" id="users_id"/>
+						<small class="form-text text-muted">영문자 소문자로 시작하고 5글자~10글자 이내로 입력하세요.</small>
+						<div class="invalid-feedback">사용할수 없는 아이디 입니다.</div>
+					</div>
+					<div>
+						<label class="control-label" for="pwd">비밀번호</label>
+						<input class="form-control" type="password" name="pwd" id="users_pwd"/>
+						<small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
+						<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
+					</div>
+					<div>
+						<label class="control-label" for="pwd">비밀번호 확인</label>
+						<input class="form-control" type="password" name="pwd2" id="users_pwd2"/>
+					</div>
+					<br />
+					<div>
+						<label for="name">이름</label>
+						<input class="form-control" type="text" name="name" id="users_name" />
+					</div>
+					<br />
+					<div>
+						<label class="control-label" for="phoneNumber">연락처</label>		
+						<input class="form-control" type="tel" name="phoneNumber" id="users_phoneNumber"/>
+					</div>
+					<br />
+					<div>
+						<label for="birth">생년월일</label>
+						<input class="form-control" type="date" name="birth" value="1998-08-20" />
+					</div>
+					<br />
+					<div>
+						<label class="control-label" for="email">이메일</label>
+						<input class="form-control email" type="text" name="email" id="users_email"/>
+						<div class="invalid-feedback">이메일 형식을 확인 하세요.</div>
+					</div>
+					<div>
+						<label class="control-label" for="address">주소</label>
+						<input class="form-control" type="text" name="address" id="users_address" />
+					</div>
+					<br />
+					<div>
+						<label class="control-label" for="household">가구원</label>
+						<select class="form-select" name="household" id="household">
+							<option value="one">1명</option>
+							<option value="two">2명</option>
+							<option value="three">3명이상</option>
+						</select>
+					</div>
+					<input type="hidden" name="groupNum" value="0" />
+					 <button class="btn btn-primary" type="submit">가입</button>
+				</form>
+	      </div>
+	      
+	      <div id="tab2" data-tab-content class="items">
+			<h2>보호소회원 회원가입 폼</h2>
+			<form action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm2">
 				<div>
 					<label class="control-label" for="id">아이디</label>
-					<input class="form-control id" type="text" name="id" id="users_id"/>
+					<input class="form-control id" type="text" name="id" id="shelter_id"/>
 					<small class="form-text text-muted">영문자 소문자로 시작하고 5글자~10글자 이내로 입력하세요.</small>
 					<div class="invalid-feedback">사용할수 없는 아이디 입니다.</div>
 				</div>
 				<div>
 					<label class="control-label" for="pwd">비밀번호</label>
-					<input class="form-control" type="password" name="pwd" id="users_pwd"/>
+					<input class="form-control" type="password" name="pwd" id="shelter_pwd"/>
 					<small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
 					<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
 				</div>
 				<div>
 					<label class="control-label" for="pwd">비밀번호 확인</label>
-					<input class="form-control" type="password" name="pwd2" id="users_pwd2"/>
+					<input class="form-control" type="password" name="pwd2" id="shelter_pwd2"/>
+				</div>
+				<div>
+					<label class="control-label" for="name">보호소 이름</label>
+					<input class="form-control" type="text" name="name" id="shelter_name"/>
+				</div>
+				<div>
+					<label class="control-label" for="serialNum">고유번호</label>
+					<input class="form-control" type="text" name="serialNum" id="serialNum"/>
+					<small class="form-text text-muted">000-00-00000 형식으로 입력하세요</small>
+					<div class="invalid-feedback">고유번호를 확인하세요.</div>
+				</div>
+				<div>
+					<label class="control-label" for="address">보호소 위치</label>
+					<input class="form-control" type="text" name="address" id="shelter_address" />
 				</div>
 				<br />
 				<div>
-					<label for="name">이름</label>
-					<input class="form-control" type="text" name="name" id="users_name" />
-				</div>
-				<br />
-				<div>
-					<label class="control-label" for="phoneNumber">연락처</label>		
-					<input class="form-control" type="tel" name="phoneNumber" id="users_phoneNumber"/>
-				</div>
-				<br />
-				<div>
-					<label for="birth">생년월일</label>
-					<input class="form-control" type="date" name="birth" value="1998-08-20" />
+					<label class="control-label" for="phoneNumber">연락처</label>
+					<input class="form-control" type="tel" name="phoneNumber" id="shelter_phoneNumber"/>
 				</div>
 				<br />
 				<div>
 					<label class="control-label" for="email">이메일</label>
-					<input class="form-control email" type="text" name="email" id="users_email"/>
+					<input class="form-control email" type="text" name="email" id="shelter_email"/>
 					<div class="invalid-feedback">이메일 형식을 확인 하세요.</div>
 				</div>
-				<div>
-					<label class="control-label" for="address">주소</label>
-					<input class="form-control" type="text" name="address" id="users_address" />
-				</div>
-				<br />
-				<div>
-					<label class="control-label" for="household">가구원</label>
-					<select class="form-select" name="household" id="household">
-						<option value="one">1명</option>
-						<option value="two">2명</option>
-						<option value="three">3명이상</option>
-					</select>
-				</div>
-				<input type="hidden" name="groupNum" value="0" />
-				 <button class="btn btn-primary" type="submit">가입</button>
+				<input type="hidden" name="groupNum" value="1" />
+				<button class="btn btn-primary" type="submit">가입</button>
 			</form>
-      </div>
-      
-      <div id="tab2" data-tab-content class="items">
-		<h2>보호소회원 회원가입 폼</h2>
-		<form action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm2">
-			<div>
-				<label class="control-label" for="id">아이디</label>
-				<input class="form-control id" type="text" name="id" id="shelter_id"/>
-				<small class="form-text text-muted">영문자 소문자로 시작하고 5글자~10글자 이내로 입력하세요.</small>
-				<div class="invalid-feedback">사용할수 없는 아이디 입니다.</div>
 			</div>
-			<div>
-				<label class="control-label" for="pwd">비밀번호</label>
-				<input class="form-control" type="password" name="pwd" id="shelter_pwd"/>
-				<small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
-				<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-			</div>
-			<div>
-				<label class="control-label" for="pwd">비밀번호 확인</label>
-				<input class="form-control" type="password" name="pwd2" id="shelter_pwd2"/>
-			</div>
-			<div>
-				<label class="control-label" for="name">보호소 이름</label>
-				<input class="form-control" type="text" name="name" id="shelter_name"/>
-			</div>
-			<div>
-				<label class="control-label" for="serialNum">고유번호</label>
-				<input class="form-control" type="text" name="serialNum" id="serialNum"/>
-				<small class="form-text text-muted">000-00-00000 형식으로 입력하세요</small>
-				<div class="invalid-feedback">고유번호를 확인하세요.</div>
-			</div>
-			<div>
-				<label class="control-label" for="address">보호소 위치</label>
-				<input class="form-control" type="text" name="address" id="shelter_address" />
-			</div>
-			<br />
-			<div>
-				<label class="control-label" for="phoneNumber">연락처</label>
-				<input class="form-control" type="tel" name="phoneNumber" id="shelter_phoneNumber"/>
-			</div>
-			<br />
-			<div>
-				<label class="control-label" for="email">이메일</label>
-				<input class="form-control email" type="text" name="email" id="shelter_email"/>
-				<div class="invalid-feedback">이메일 형식을 확인 하세요.</div>
-			</div>
-			<input type="hidden" name="groupNum" value="1" />
-			<button class="btn btn-primary" type="submit">가입</button>
-		</form>
-		</div>
+	</div>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
@@ -326,6 +328,15 @@ div.tab.btn.btn-primary {
 		}
 		
 	});
+	
+	new Vue({
+	      el: "#signup_form",
+	      data() {
+	    	  return{
+	    		 	 cpath: "${pageContext.request.contextPath}",
+	    	  }
+	      }
+	   });
 </script>
 </body>
 </html>
