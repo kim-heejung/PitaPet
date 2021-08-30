@@ -28,6 +28,9 @@
 		</form>
 	</div>
 </div>
+<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 	//폼에 submit 이벤트가 발생했을때 실행할 함수(비밀번호 일치 확인)
 	document.querySelector("#myForm").addEventListener("submit", function(e){

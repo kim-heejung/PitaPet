@@ -28,8 +28,11 @@
 		</c:choose>
 	</div>
 </div>
+<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-new Vue({
+let login = new Vue({
 	el:"#login",
 	data(){
 		return{

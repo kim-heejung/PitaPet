@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/loginform.jsp</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<style>
+.idForm, .pwdForm{
+	margin-bottom:10px;
+}
+</style>
 </head>
 <body>
 <div id="loginform">
@@ -20,15 +27,15 @@
 					<input type="hidden" name="url" value="${param.url }"/>
 				</c:otherwise>
 			</c:choose>
-			<div>
+			<div class="idForm">
 				<label for="id">아이디</label>
 				<input type="text" name="id" id="id"/>
 			</div>
-			<div>
+			<div class="pwdForm">
 				<label for="pwd">비밀번호</label>
 				<input type="password" name="pwd" id="pwd"/>
 			</div>
-			<button v-on:click="login" type="submit">로그인</button>
+			<button class="btn btn-primary" v-on:click="login" type="submit">로그인</button>
 		</form>
 		<!-- 네이버 로그인 창으로 이동 --> 
 		<a href="${Nurl}">
@@ -41,6 +48,9 @@
 		 </a>
 	</div>
 </div>
+<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 let loginform = new Vue({
 	el:"#loginform",
