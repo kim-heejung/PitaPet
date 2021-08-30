@@ -142,7 +142,7 @@
 		if(isDelete){
 			location.href="${pageContext.request.contextPath}/users/delete.do";
 		}
-	};
+	}
 	
 	let info =new Vue({
 		el:"#info",
