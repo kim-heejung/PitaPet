@@ -35,6 +35,10 @@ public class AdoptController {
 	private AdoptLikeService adoptLikeService;
 	
 	
+	@RequestMapping("/adopt/procedure")
+	public String adoptionProcedure() {
+		return "adopt/procedure";
+	}
 	
 	@RequestMapping("/api/adopt/list")
 	@ResponseBody
