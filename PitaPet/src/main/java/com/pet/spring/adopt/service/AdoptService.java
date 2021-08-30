@@ -13,15 +13,15 @@ import com.pet.spring.adopt.dto.ReserveDto;
 public interface AdoptService {
 
 	public List<AdoptDto> getList(HttpServletRequest request);
-	//테스트용
-/*	public void testGetList(HttpServletRequest request);
+	//테스트용-후에 삭제될 부분
+	public void testGetList(HttpServletRequest request);
+	//테스트용-후에 삭제될 부분
+	public void testGetIdList(HttpServletRequest request);
 	
 	public AdoptDto getDetail(HttpServletRequest request);
-	
-	public Map<String, Object> insert(AdoptDto dto, HttpServletRequest request);
-	
+	public AdoptDto updateDetail(HttpServletRequest request);
+	public Map<String, Object> insert(AdoptDto dto, HttpServletRequest request);	
 	public Map<String, Object> update(AdoptDto dto, HttpServletRequest request);
+	public Map<String, Object> delete(int num);
 	
-	public Map<String, Object> delete(int num, HttpServletRequest request);
-*/	
 }

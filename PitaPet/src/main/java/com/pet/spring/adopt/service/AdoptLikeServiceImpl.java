@@ -19,7 +19,8 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 
 	@Autowired
 	private AdoptLikeDao dao;
-	/*
+	
+	
 	@Override
 	public void insert(HttpServletRequest request) {
 		
@@ -37,9 +38,27 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 		}
 		
 	}
-
+	
+	
 	@Override
 	public Map<String, Object> updateY(HttpServletRequest request) {
+
+		int num = Integer.parseInt(request.getParameter("num"));
+		String id = (String) request.getSession().getAttribute("id");
+
+		AdoptLikeDto dto = new AdoptLikeDto();
+		dto.setNum(num);
+		dto.setId(id);
+
+		dao.updateY(dto);
+
+		Map<String, Object> map=new HashMap<>();
+		map.put("isSuccess", true);
+		return map;
+	}
+	//테스트용-후에 삭제될 부분
+	@Override
+	public void testUpdateY(HttpServletRequest request) {
 		
 		int num=Integer.parseInt(request.getParameter("num"));
 		String id=(String)request.getSession().getAttribute("id");
@@ -50,11 +69,8 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 		
 		dao.updateY(dto);
 		
-		Map<String, Object> map=new HashMap<>();
-		map.put("isSuccess", true);
-		return map;
 	}
-
+	
 	@Override
 	public Map<String, Object> updateN(HttpServletRequest request) {
 		
@@ -70,8 +86,8 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 		Map<String, Object> map=new HashMap<>();
 		map.put("isSuccess", true);
 		return map;
-		
 	}
+	
 	
 	public List<AdoptLikeDto> getYCountList(){
 		
@@ -79,33 +95,17 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 		
 		return list;
 	}
-	//테스트용
+	//테스트용-후에 삭제될 부분
 	public List<AdoptLikeDto> testGetYCountList(HttpServletRequest request){
 		
 		List<AdoptLikeDto> list=dao.getYCountList();
-		
 		
 		request.setAttribute("likeCountList", list);
 		
 		return list;
 	}
-	*/
-	/*
-	//테스트용 
-	public List<AdoptLikeDto> testGetYList(HttpSession session){
-		
-		String id=(String)session.getAttribute("id");
-		
-		AdoptLikeDto dto=new AdoptLikeDto();
-		dto.setId(id);
-		
-		List<AdoptLikeDto> list=dao.getYList(id);
-		
-		return list;
-	}
-	*/
 	
-	/*
+	
 	@Override
 	public AdoptLikeDto getData(HttpServletRequest request) {
 		
@@ -119,25 +119,9 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 		AdoptLikeDto dto2=dao.getData(dto);
 		
 		return dto2;
-		
-	}
-	//테스트용
-	@Override
-	public void testGetData(HttpServletRequest request) {
-		
-		int num=Integer.parseInt(request.getParameter("num"));
-		String id=(String)request.getSession().getAttribute("id");
-		
-		AdoptLikeDto dto=new AdoptLikeDto();
-		dto.setNum(num);
-		dto.setId(id);
-		
-		dao.updateN(dto);
-		
-		request.setAttribute("likeDto", dto);
-		
 	}
 
+	
 	@Override
 	public Map<String, Object> getCount(int num) {
 		
@@ -148,15 +132,29 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 		
 		return map;
 	}
-
+	//테스트용-후에 삭제될 부분
 	@Override
-	public List<AdoptLikeDto> getMyList(HttpSession session) {
+	public int getTestCount(int num) {
 		
-		String id=(String)session.getAttribute("id");
+		int count=dao.getCount(num);
 		
-		List<AdoptLikeDto> list=dao.getMyList(id);
-		
-		return list;
+		return count;
 	}
-	*/
+	
+	
+	@Override
+	public int isExist(HttpServletRequest request) {
+		
+		int num=Integer.parseInt(request.getParameter("num"));
+		String id=(String)request.getSession().getAttribute("id");
+		
+		AdoptLikeDto dto=new AdoptLikeDto();
+		dto.setNum(num);
+		dto.setId(id);
+		
+		int count=dao.isExist(dto);
+		
+		return count;
+	}
+	
 }

@@ -28,13 +28,13 @@ public class AdoptLikeDaoImpl implements AdoptLikeDao {
 	}
 	*/
 	
-	/*
+	
 	@Override
-	public List<AdoptLikeDto> getYList(AdoptLikeDto dto) {
+	public List<AdoptLikeDto> getIdYList(AdoptLikeDto dto) {
 		
-		return session.selectList("adoptLike.getYList", dto);
+		return session.selectList("adoptLike.getIdYList", dto);
 	}
-	*/
+	
 	
 	
 	@Override
@@ -69,6 +69,7 @@ public class AdoptLikeDaoImpl implements AdoptLikeDao {
 
 	@Override
 	public int isExist(AdoptLikeDto dto) {
+		
 		return session.selectOne("adoptLike.isExist", dto);
 	}
 

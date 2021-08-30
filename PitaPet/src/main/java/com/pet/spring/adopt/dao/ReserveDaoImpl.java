@@ -21,8 +21,8 @@ public class ReserveDaoImpl implements ReserveDao {
 
 	
 	@Override
-	public int getCount(ReserveDto dto) {
-		return session.selectOne("reserve.getCount", dto);
+	public int getCount() {
+		return session.selectOne("reserve.getCount");
 	}
 	
 

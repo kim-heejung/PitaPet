@@ -15,6 +15,7 @@
 </head>
 <body>
 
+<a href="${pageContext.request.contextPath}/adopt/list.do">입양하기 게시판</a>
 <a href="${pageContext.request.contextPath}/review/list.do">입양후기 게시판</a>
 
 <div id="home">

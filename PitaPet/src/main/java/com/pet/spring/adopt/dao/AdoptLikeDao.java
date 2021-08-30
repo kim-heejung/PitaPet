@@ -9,7 +9,7 @@ import com.pet.spring.adopt.dto.AdoptLikeDto;
 public interface AdoptLikeDao {
 
 	public List<AdoptLikeDto> getYCountList();
-	//public List<AdoptLikeDto> getYList(String id);
+	public List<AdoptLikeDto> getIdYList(AdoptLikeDto dto);
 	public void insert(AdoptLikeDto dto);
 	public void updateY(AdoptLikeDto dto);
 	public void updateN(AdoptLikeDto dto);
