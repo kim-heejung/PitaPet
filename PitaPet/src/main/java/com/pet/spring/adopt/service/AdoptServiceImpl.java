@@ -166,6 +166,37 @@ public class AdoptServiceImpl implements AdoptService {
 		request.setAttribute("name", shelterName);
 	}
 	
+	
+	@Override
+	public Map<String, Object> getListPaging(int pageNum, AdoptDto dto) {
+		
+		//한 페이지에 몇개씩 표시할 것인지
+		final int PAGE_ROW_COUNT = 8;
+		//하단 페이지를 몇개씩 표시할 것인지
+		final int PAGE_DISPLAY_COUNT = 5;
+
+		//하단 시작 페이지 번호
+		int startPageNum = 1 + ((pageNum - 1) / PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;
+		//하단 끝 페이지 번호
+		int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
+
+		//전체 row 의 갯수
+		int totalRow = dao.getCount(dto);
+		//전체 페이지의 갯수 구하기
+		int totalPageCount = (int) Math.ceil(totalRow / (double) PAGE_ROW_COUNT);
+		// 끝 페이지 번호가 이미 전체 페이지 갯수보다 크게 계산되었다면 잘못된 값이다.
+		if (endPageNum > totalPageCount) {
+			endPageNum = totalPageCount; //보정해 준다.
+		}
+		//json 문자열로 응답할 데이터를 일단 Map 에 담는다.
+		Map<String, Object> map = new HashMap<>();
+		map.put("startPageNum", startPageNum);
+		map.put("endPageNum", endPageNum);
+		map.put("totalPageCount", totalPageCount);
+		
+		return map;
+	};
+	
 	//테스트용-후에 삭제될 부분
 	@Override
 	public void testGetIdList(HttpServletRequest request) {
@@ -290,9 +321,8 @@ public class AdoptServiceImpl implements AdoptService {
 		//업로드된 파일의 정보를 가지고 있는 MultipartFile 객체의 참조값을 얻어오기
 		MultipartFile image = dto.getImage();
 		//원본 파일명 -> 저장할 파일 이름 만들기위해서 사용됨
-		String orgFileName = image.getOriginalFilename();
+		String orgImageName = image.getOriginalFilename();
 		//파일 크기 -> 다운로드가 없으므로, 여기서는 필요 없다.
-		long fileSize = image.getSize();
 
 		//webapp/upload 폴더 까지의 실제 경로(서버의 파일 시스템 상에서의 경로)
 		String realPath = request.getServletContext().getRealPath("/upload");
@@ -304,8 +334,9 @@ public class AdoptServiceImpl implements AdoptService {
 			//만약 디렉토리가 존재하지X
 			upload.mkdir();// 폴더 생성
 		}
+		
 		//저장할 파일의 이름을 구성한다. -> 우리가 직접 구성해줘야한다.
-		String saveFileName = System.currentTimeMillis() + orgFileName;
+		String saveFileName = System.currentTimeMillis() + orgImageName;
 
 		try {
 			//upload 폴더에 파일을 저장한다.
@@ -317,26 +348,30 @@ public class AdoptServiceImpl implements AdoptService {
 
 		String id = (String) request.getSession().getAttribute("id");
 		dto.setWriter(id);
+		
 		// imagePath 만 저장해주면 됨
 		dto.setImagePath("/upload/" + saveFileName);
+		dto.setOrgImageName(orgImageName);
 
 		dao.insert(dto);
 
 		Map<String, Object> map=new HashMap<>();
 		map.put("isSuccess", true);
 		
+		
 		return map;			
 	}
 	
 	@Override
 	public Map<String, Object> update(AdoptDto dto, HttpServletRequest request) {
-
+		
+		//String newImage=dto.getImage().getOriginalFilename();
+		
 		//업로드된 파일의 정보를 가지고 있는 MultipartFile 객체의 참조값을 얻어오기
 		MultipartFile image = dto.getImage();
 		//원본 파일명 -> 저장할 파일 이름 만들기위해서 사용됨
-		String orgFileName = image.getOriginalFilename();
+		String orgImageName = image.getOriginalFilename();
 		//파일 크기 -> 다운로드가 없으므로, 여기서는 필요 없다.
-		long fileSize = image.getSize();
 
 		//webapp/upload 폴더 까지의 실제 경로(서버의 파일 시스템 상에서의 경로)
 		String realPath = request.getServletContext().getRealPath("/upload");
@@ -349,7 +384,7 @@ public class AdoptServiceImpl implements AdoptService {
 			upload.mkdir();// 폴더 생성
 		}
 		//저장할 파일의 이름을 구성한다. -> 우리가 직접 구성해줘야한다.
-		String saveFileName = System.currentTimeMillis() + orgFileName;
+		String saveFileName = System.currentTimeMillis() + orgImageName;
 
 		try {
 			//upload 폴더에 파일을 저장한다.
@@ -360,6 +395,14 @@ public class AdoptServiceImpl implements AdoptService {
 		}
 		
 		dto.setImagePath("/upload/" + saveFileName);
+		dto.setOrgImageName(orgImageName);
+		/*
+		if(newImage != null) {
+			
+		}else {	
+			
+		}
+		*/
 		dao.update(dto);
 		
 		Map<String, Object> map=new HashMap<>();

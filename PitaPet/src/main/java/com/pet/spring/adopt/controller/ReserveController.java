@@ -1,6 +1,5 @@
 package com.pet.spring.adopt.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.pet.spring.adopt.dao.ReserveDao;
 import com.pet.spring.adopt.dto.ReserveDto;
 import com.pet.spring.adopt.service.ReserveService;
 
@@ -21,8 +19,6 @@ public class ReserveController {
 
 	@Autowired
 	private ReserveService service;
-	@Autowired
-	private ReserveDao dao;
    
     
 	@RequestMapping("api/reserve/list")
