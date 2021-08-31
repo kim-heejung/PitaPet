@@ -51,6 +51,7 @@ public class ReserveController {
 
 		return "reserve/insertform";
 	}
+	
 	@RequestMapping(value = "/api/reserve/insert")
 	@ResponseBody
 	public Map<String, Object> authInsert(ReserveDto dto, HttpServletRequest request) {

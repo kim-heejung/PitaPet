@@ -59,7 +59,7 @@
    		<c:forEach var="tmp" items="${list }">
 			<div class="col-6 col-md-4 col-lg-3">
          		<div class="card mb-3">
-            		<a href="${pageContext.request.contextPath}/adopt/detail.do?num=${tmp.num}&shelterName=${name}">
+            		<a href="${pageContext.request.contextPath}/adopt/detail.do?num=${tmp.num}&shelterName=${shelterName}">
 	               		<div class="img-wrapper">
 	                  		<img class="card-img-top" src="${pageContext.request.contextPath }${tmp.imagePath}" />
 	               		</div>
@@ -107,7 +107,7 @@
 			<c:choose>
 				<c:when test="${startPageNum ne 1 }">
 					<li class="page-item">
-               			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${startPageNum - 1}&shelterName=${name}">Prev</a>
+               			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${startPageNum - 1}&shelterName=${shelterName}">Prev</a>
             		</li>
 				</c:when>
 				<c:otherwise>
@@ -120,12 +120,12 @@
 				<c:choose>
 					<c:when test="${i eq pageNum }">
 						<li class="page-item active">
-                  			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${name}">${i }</a>
+                  			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${shelterName}">${i }</a>
                			</li>
 					</c:when>
 					<c:otherwise>
 						<li class="page-item">
-                  			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${name}">${i}</a>
+                  			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${shelterName}">${i}</a>
                			</li>
 					</c:otherwise>
 				</c:choose>
@@ -133,7 +133,7 @@
 			<c:choose>
 				<c:when test="${endPageNum lt totalPageCount }">
 					<li class="page-item">
-               			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${endPageNum + 1}&shelterName=${name}">Next</a>
+               			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${endPageNum + 1}&shelterName=${shelterName}">Next</a>
             		</li>
 				</c:when>
 				<c:otherwise>

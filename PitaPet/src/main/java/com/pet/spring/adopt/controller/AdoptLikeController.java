@@ -23,9 +23,8 @@ public class AdoptLikeController {
 	private AdoptLikeService service;
 	
 	
-	//테스트용-후에 삭제될 부분
 	@RequestMapping("/adoptlike/like")
-	public String testInsert(HttpServletRequest request) {
+	public String insert(HttpServletRequest request) {
 		
 		String id=(String)request.getSession().getAttribute("id");
 		int isExist=service.isExist(request);

@@ -27,10 +27,7 @@ public class AdoptController {
 
 	@Autowired
 	private AdoptService service;
-	//테스트용
-	//@Autowired
-	//private ReserveService reserveService;
-	//테스트용
+	//테스트용-후에 삭제될 부분
 	@Autowired
 	private AdoptLikeService adoptLikeService;
 	
@@ -84,17 +81,13 @@ public class AdoptController {
 
 		return "adopt/list";
 	}
-	// 테스트용-후에 삭제될 부분
-	/*
-	@RequestMapping("/adoptlike/test")
-	public String test(HttpServletRequest request, HttpSession session) {
-
-		AdoptLikeDto dto=adoptLikeService.getData(request);
-		request.setAttribute("idYdata", dto);
-
-		return "redirect:/adopt/list.do";
-	}*/
 	
+	@RequestMapping("/api/adopt/idlist")
+	@ResponseBody
+	public List<AdoptDto> getIdList(HttpServletRequest request) {
+		
+		return service.getIdList(request);
+	}
 	
 	@RequestMapping("/api/adopt/paging")
 	@ResponseBody
