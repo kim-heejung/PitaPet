@@ -8,4 +8,6 @@ public interface ShopDao {
 	public void insert(ShopDto dto);
 	public List<ShopDto> getList(ShopDto dto);
 	public int getCount();
+	public void minusCount(int num);
+	public int getPrice(int num);
 }

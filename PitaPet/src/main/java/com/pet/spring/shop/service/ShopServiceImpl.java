@@ -6,20 +6,33 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pet.spring.shop.dao.OrderDao;
 import com.pet.spring.shop.dao.ShopDao;
+import com.pet.spring.shop.dto.OrderDto;
 import com.pet.spring.shop.dto.ShopDto;
+import com.pet.spring.users.dao.UsersDao;
+import com.pet.spring.users.dto.UsersDto;
 
 @Service
 public class ShopServiceImpl implements ShopService{
 
 	@Autowired
 	private ShopDao dao;
+	
+	@Autowired
+	private UsersDao usersDao;
+	
+	@Autowired
+	private OrderDao orderDao;
 
 	@Override
 	public void getList(ModelAndView mView,HttpServletRequest request) {
@@ -100,6 +113,33 @@ public class ShopServiceImpl implements ShopService{
 	      map.put("imgPath", imgPath);
 	      
 	      return map;
+	}
+
+	@Override
+	public void dbInfo(ModelAndView mView, HttpServletRequest request) {
+		String id=(String)request.getSession().getAttribute("id");
+		UsersDto dto=usersDao.getData(id);
+		mView.addObject("dto", dto);
+		
+	}
+	
+	@Transactional
+	@Override
+	public void buy(HttpServletRequest request, UsersDto dto) {
+		String id=(String)request.getSession().getAttribute("id");
+		int num=Integer.parseInt(request.getParameter("num"));
+		
+		UsersDto user=usersDao.getData(id);
+		String addr=user.getAddress();
+		
+		dao.minusCount(num);
+		
+		OrderDto dto2=new OrderDto();
+		dto2.setId(id);
+		dto2.setCode(num);
+		dto2.setAddr(addr);
+
+		orderDao.addOrder(dto2);
 	}
 
 
