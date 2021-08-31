@@ -19,14 +19,12 @@
 	<div class="container card login" v-if="!registerActive" v-bind:class="{ error: emptyFields }">
 		<h1>로그인 폼</h1>
 		<form action="${pageContext.request.contextPath}/users/login.do" method="post">
-			<c:choose>
-				<c:when test="${ empty param.url2 }">
+				<div v-if="${ empty param.url2 }">
 					<input type="hidden" name="url" value="${pageContext.request.contextPath}/"/>
-				</c:when>
-				<c:otherwise>
+				</div>
+				<div v-else>
 					<input type="hidden" name="url" value="${param.url }"/>
-				</c:otherwise>
-			</c:choose>
+				</div>
 			<div class="idForm">
 				<label for="id">아이디</label>
 				<input class="form-control" v-model="idLogin" type="text" name="id" id="id"/>
@@ -56,8 +54,8 @@ let loginform = new Vue({
 	el:"#loginform",
 	data(){
 		return{
-			emailLogin: "",
-		    passwordLogin: "",
+			idLogin: "",
+		    pwdLogin: "",
 		    emptyFields: false
 		}
 	},
