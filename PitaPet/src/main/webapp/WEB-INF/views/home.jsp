@@ -9,10 +9,7 @@
 </head>
 <body>
 <div id="home">
-	<a href="${pageContext.request.contextPath}/review/list.do">입양후기 게시판</a>
-	<a href="${pageContext.request.contextPath}/shop/list.do">쇼핑하기 </a>
 	<a v-on:click.prevent="userAccess()" href="">후원하기 게시판</a>
-
 	<jsp:include page="/resources/header.jsp"></jsp:include>
 	<slider-component :cpath="cpath"></slider-component>
 	<intro-component></intro-component>

@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 .board-wrap{
-	min-height:1400px;
+	min-height:1200px;
+	padding-bottom:100px;
 }
 .img-wrapper{
 	position:relative;
@@ -150,3 +151,8 @@
          transform: rotate(360deg);
       }
    }
+   
+   
+   #content{
+		height: 500px;
+	}

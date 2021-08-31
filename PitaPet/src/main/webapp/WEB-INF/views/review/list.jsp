@@ -13,7 +13,7 @@
 <div id="reviewPage" >
 	<jsp:include page="/resources/header.jsp"></jsp:include>
 	<div class="board-wrap">
-		<page-category :name="'입양후기'"></page-category>
+		<page-category class="adopt-review" :name="'입양후기'"></page-category>
     	<router-view></router-view>
     </div>
 	<footer-component></footer-component>
