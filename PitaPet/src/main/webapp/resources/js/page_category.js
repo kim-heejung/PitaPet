@@ -1,8 +1,13 @@
 Vue.component("page-category", {
     template:`
-	     <div class="page-category" style=" border-top:1px solid #ddd; text-align:center;">
-			<div class="container" style="padding:6rem 0 4rem; position:relative;">
-				<h1 style="font-weight:500; font-size:2.8rem; font-family:'Cormorant Garamond', 'Nanum Myeongjo';">{{name}}</h1>
+	     <div class="page-category">
+	     	<div class="img-area"></div>
+			<div class="txt-area container">
+				<h1>{{name}}</h1>
+				<p>
+					보호동물의 가족이 되어준 분들입니다<br>
+					홈페이지 소식은 입양 후 7-10일 정도 소요가 될 수 있습니다
+				</p>
 				<nav aria-label="breadcrumb" style="position:absolute; top:20px; right:0;">
 				  <ol class="breadcrumb">
 				    <li class="breadcrumb-item"><a href="/spring/home.do">Home</a></li>
