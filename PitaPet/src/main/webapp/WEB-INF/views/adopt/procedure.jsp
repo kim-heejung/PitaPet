@@ -11,18 +11,6 @@
 </head>
 <body>
 	<div id="procedure">
-		<div class="container" style="position:absolute; top:0; left:50%; transform:translateX(-50%);display:flex; align-items:center; justify-content:flex-end; height:44px;">
-			<c:choose>
-				<c:when test="${empty sessionScope.id }">
-					<a href="${pageContext.request.contextPath}/users/loginform.do">로그인</a>
-					<a href="${pageContext.request.contextPath}/users/signup_form.do">회원가입</a>
-				</c:when>
-				<c:otherwise>
-					<a href="${pageContext.request.contextPath}/users/info.do">${sessionScope.id }</a> 로그인 중..
-					<a href="${pageContext.request.contextPath}/users/logout.do">로그아웃</a>
-				</c:otherwise>
-			</c:choose>
-		</div>
 		<jsp:include page="/resources/header.jsp"></jsp:include>
 		<procedure-visual></procedure-visual>
 		<div id="scroll-bg">
