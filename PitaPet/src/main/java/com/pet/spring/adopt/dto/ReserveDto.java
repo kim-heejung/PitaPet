@@ -3,30 +3,35 @@ package com.pet.spring.adopt.dto;
 public class ReserveDto {
 	
 	private int num;
-	private String id;
 	private String shelterName;
 	private String title;
-	private String name;
-	private String phoneNumber;
+	private String writer;
 	private String reservedDate;
 	private String reservedTime;
+	private String name;
+	private String phoneNumber;
+	private String content;
+	private String regdate;
 	private int viewCount;
 	private int startRowNum;
 	private int endRowNum;
 	
 	public ReserveDto() {}
 
-	public ReserveDto(int num, String id, String shelterName, String title, String name, String phoneNumber,
-			String reservedDate, String reservedTime, int viewCount, int startRowNum, int endRowNum) {
+	public ReserveDto(int num, String shelterName, String title, String writer, String reservedDate,
+			String reservedTime, String name, String phoneNumber, String content, String regdate, int viewCount,
+			int startRowNum, int endRowNum) {
 		super();
 		this.num = num;
-		this.id = id;
 		this.shelterName = shelterName;
 		this.title = title;
-		this.name = name;
-		this.phoneNumber = phoneNumber;
+		this.writer = writer;
 		this.reservedDate = reservedDate;
 		this.reservedTime = reservedTime;
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.content = content;
+		this.regdate = regdate;
 		this.viewCount = viewCount;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
@@ -38,14 +43,6 @@ public class ReserveDto {
 
 	public void setNum(int num) {
 		this.num = num;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getShelterName() {
@@ -64,20 +61,12 @@ public class ReserveDto {
 		this.title = title;
 	}
 
-	public String getName() {
-		return name;
+	public String getWriter() {
+		return writer;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	public String getReservedDate() {
@@ -94,6 +83,38 @@ public class ReserveDto {
 
 	public void setReservedTime(String reservedTime) {
 		this.reservedTime = reservedTime;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
 	}
 
 	public int getViewCount() {

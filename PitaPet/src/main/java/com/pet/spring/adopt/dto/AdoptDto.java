@@ -24,13 +24,16 @@ public class AdoptDto {
 	private int nextNum; 
 	private MultipartFile image; //이미지 파일 업로드 처리를 위한 필드
 	private String name;
+	private int cnt;
+	private String id;
+	private String liked;
 	
 	public AdoptDto() {}
 
 	public AdoptDto(int num, String writer, String title, String breed, String petName, String petAge, String petGender,
 			String vaccination, String neutralization, String findDate, String caption, String imagePath,
 			String regdate, int viewCount, int startRowNum, int endRowNum, int prevNum, int nextNum,
-			MultipartFile image, String name) {
+			MultipartFile image, String name, int cnt, String id, String liked) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -52,6 +55,9 @@ public class AdoptDto {
 		this.nextNum = nextNum;
 		this.image = image;
 		this.name = name;
+		this.cnt = cnt;
+		this.id = id;
+		this.liked = liked;
 	}
 
 	public int getNum() {
@@ -212,6 +218,30 @@ public class AdoptDto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getLiked() {
+		return liked;
+	}
+
+	public void setLiked(String liked) {
+		this.liked = liked;
 	}
 	
 }

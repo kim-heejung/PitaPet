@@ -7,32 +7,29 @@
 		FROM
 			(SELECT result1.*, ROWNUM AS rnum
 			FROM
-				(SELECT num, title, id, viewCount, reservedDate
+				(SELECT num, shelterName, title, writer, viewCount, regdate
 				FROM reserve
-				WHERE num=#{num} AND id=#{id}
 				ORDER BY num DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 
-	<select id="getCount" parameterType="reserveDto" resultType="int">
+	<select id="getCount" resultType="int">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM reserve
-		WHERE num=#{num}
 	</select>
 	
 	<insert id="insert" parameterType="reserveDto">
 		INSERT INTO reserve
-		(num, id, title, reservedDate, reservedTime)
-		VALUES(#{num}, #{id}, #{title}, SYSDATE, #{reservedTime})
+		(num, title, writer, shelterName, reservedDate, reservedTime, name, phoneNumber, regDate)
+		VALUES(reserve_seq.NEXTVAL, #{title}, #{writer}, #{shelterName}, #{reservedDate}, #{reservedTime}, 
+		#{name}, #{phoneNumber}, SYSDATE)
 	</insert>
 
 	<select id="getData" parameterType="int" resultType="reserveDto">
-		SELECT result1.*
-		FROM
-			(SELECT num, title, r.id, viewCount, reservedDate, reservedTime, name, phoneNumber
-			FROM reserve r INNER JOIN petUsers p
-			ON r.id = p.id) result1
-		WHERE num=#{num}
+		SELECT num, shelterName, title, writer, viewCount, regdate, reservedDate, reservedTime, 
+		name, phoneNumber, content
+		FROM reserve
+		WHERE num = #{num}
 	</select>
 
 	<update id="addViewCount" parameterType="int">
@@ -43,7 +40,8 @@
 	
 	<update id="update" parameterType="reserveDto">
 		UPDATE reserve
-		SET title=#{title}, reservedTime=#{reservedTime}
+		SET shelterName=#{shelterName}, title=#{title}, reservedDate=#{reservedDate}, reservedTime=#{reservedTime},
+		name=#{name}, phoneNumber=#{phoneNumber}, content=#{content}
 		WHERE num=#{num}
 	</update>
 

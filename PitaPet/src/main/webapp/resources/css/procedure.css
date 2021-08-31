@@ -1,0 +1,343 @@
+@charset "UTF-8";
+
+@keyframes colorSlide{
+	0%{
+		background-position: 0% 100%;
+	}
+	20%{
+	 	background-position: 0% 0%;
+	}
+	21%{
+		background:rgb(246 227 220);
+		background-position: 0% 0%;
+	}
+	29.99%{
+		background-color:#fff;
+		background-position:0% 100%;
+	}
+	30%{
+		background-color:rgb(246 227 220);
+		background-position:0% 100%;
+	}
+	50%{
+		background-position: 0% 0%;
+	}
+	51%{
+		background-color:rgb(246 227 220);
+	}
+	59%{
+		background-color:#fff;
+		background-position: 0% 0%;
+	}
+	80%{
+		background-position: 0% 0%;
+	}
+	81%{
+		background-color:rgb(246 227 220);
+	}
+	90%, 100%{
+		background-color:#fff;
+	}
+}
+@keyframes colorText{
+	21%{
+		color:rgb(246 227 220);
+	}
+	30%{
+		color:#fff;
+	}
+	51%{
+		color:rgb(246 227 220);
+	}
+	60%{
+		color:#fff;
+	}
+	81%{
+		color:rgb(246 227 220);
+	}
+	90%{
+		color:#fff;
+	}
+}
+
+@keyframes trackBallSlide{
+	0%{
+		opacity:1;
+		transform:scale(1) translateY(-20px);
+	}
+	6%{
+		opacity:1;
+		transform:scale(0.9) translateY(5px);
+	}
+	14%{
+		opacity:0;
+		transform:scale(0.4) translateY(40px);
+	}
+	14%{
+		opacity:0;
+		transform:scale(0.4) translateY(40px);
+	}
+	15%, 19%{
+		opacity:0;
+		transform:scale(0.4) translateY(-20px);
+	}
+	28%, 29,99%{
+		opacity:1;
+		transform:scale(1) translateY(-20px);
+	}
+	30%{
+		opacity:1;
+		transform:scale(1) translateY(-20px);
+	}
+	36%{
+		opacity:1;
+		transform:scale(0.9) translateY(5px);
+	}
+	44%{
+		opacity:0;
+		transform:scale(0.4) translateY(40px);
+	}
+	45%, 49%{
+		opacity:0;
+		transform:scale(0.4) translateY(-20px);
+	}
+	58%, 59.99%{
+		opacity:1;
+		transform:scale(1) translateY(-20px);
+	}
+	60%{
+		opacity:1;
+		transform:scale(0.9) translateY(5px);
+	}
+	66%{
+		opacity:1;
+		transform:scale(0.9) translateY(5px);
+	}
+	74%{
+		opacity:0;
+		transform:scale(0.4) translateY(-20px);
+	}
+	75%, 79%{
+		opacity:0;
+		transform:scale(0.4) translateY(-20px);
+	}
+	88%, 100%{
+		opacity:1;
+		transform:scale(1) translateY(-20px);
+	}
+}
+
+@keyframes nodgeMouse{
+	0%{
+		transform: translateY(0);
+	}
+	20%{
+		transform: translateY(8px);
+	}
+	30%{
+		transform: translateY(0);
+	}
+	50%{
+		transform: translateY(8px);
+	}
+	60%{
+		transform: translateY(0);
+	}
+	80%{
+		transform: translateY(8px);
+	}
+	90%{
+		transform: translateY(0);
+	}
+}
+
+@keyframes nudgeText{
+	0%{
+		transform: translateY(0);
+	}
+	20%{
+		transform: translateY(2px);
+	}
+	30%{
+		transform: translateY(0);
+	}
+	50%{
+		transform: translateY(2px);
+	}
+	60%{
+		transform: translateY(0);
+	}
+	80%{
+		transform: translateY(2px);
+	}
+	90%{
+		transform: translateY(0);
+	}
+}
+#scroll-bg{
+	overflow:hidden;
+	position:sticky;
+	top:0;
+	height:100vh;
+	/*background-image:radial-gradient(circle at 10% 20%, rgb(255, 229, 168) 0%, rgb(251, 174, 222) 100.7%);*/
+}
+#scroll-bg .bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity:0;
+  transition: 0.5s;
+  will-change: opacity; /*브라우저한테 준비를시키는, 제한적으로 쓰는게좋음*/
+  z-index:0;
+}
+#scroll-bg .bg.visible {
+  opacity: 1;
+}
+.scene-img{
+	width:100%;
+	height:100%;
+	display:block;
+	background-size:100%;
+	background-repeat:no-repeat;
+	background-position:center bottom;
+}
+.step {
+	position:relative;
+	z-index:1;
+	text-align:center;
+	margin-bottom: 70vh;
+	padding: 3rem 1rem;
+	background:rgba(255,255,255,0.2);
+	border-radius:2rem;
+}
+.step:last-of-type{
+	margin-bottom:24vh;
+}
+.step .step-tit{
+	font-size: 1.6rem;
+    font-family: 'Cormorant Garamond', 'Nanum Myeongjo';
+}
+.step .main-tit{
+       font-size: 2.2rem;
+    font-family: 'Cormorant Garamond', 'Nanum Myeongjo';
+    line-height: 1.6;
+}
+.step .main-txt{
+    font-size: 1.2rem;
+    font-family: 'Cormorant Garamond', 'Nanum Myeongjo';
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.35);
+    margin-top: 30px;
+}
+.step .list-txt{
+	margin-top: 30px;
+}
+.step .list-txt,
+.step .list-txt li{
+    font-size: 1.2rem;
+    font-family: 'Cormorant Garamond', 'Nanum Myeongjo';
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.35);
+    list-style-type:decimal-leading-zero;
+    list-style-position:inside;
+    
+}
+.step.ball{
+	position:relative;
+}
+.step.ball::before{
+    content: "";
+    position: absolute;
+    top: 220px;
+    right: 40px;
+    width: 220px;
+    height: 220px;
+    border-radius: 100%;
+    background-image: radial-gradient(circle at 10% 20%, rgb(163, 175, 243) 0%, rgb(220, 182, 232) 100.2%);
+    transform: translate3d(0px, 0px, 0px);
+    animation: ball 3.5s alternate infinite both;
+    transition: 1s;
+}
+.step.ball::after{
+       content: "";
+    position: absolute;
+    top: -300px;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    border-radius: 100%;
+    background-image: radial-gradient(circle at 10% 20%, rgb(255, 229, 168) 0%, rgb(251, 174, 222) 100.7%);
+    animation: ball 3s alternate infinite both;
+}
+.first-txt{
+	padding-top:14vh;
+	text-align:center;
+}
+
+.first-txt .main-tit{
+       font-size: 2.2rem;
+    font-family: 'Cormorant Garamond', 'Nanum Myeongjo';
+    line-height: 1.6;
+}
+.first-txt .main-txt{
+    font-size: 1.2rem;
+    font-family: 'Cormorant Garamond', 'Nanum Myeongjo';
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.35);
+    margin-top: 30px;
+    margin-bottom:0;
+}
+.scoll-wrap{
+	position:relative;
+	text-align:center;
+	top:120px;
+}
+.mouse{
+	bottom:0;
+	width:48px;
+	height:84px;
+	position:relative;
+	background:rgb(246 227 220) linear-gradient(transparent 0%, transparent 50%, #ffffff 50%, #ffffff 100%);
+	background-size:100% 200%;
+	border-radius:100px;
+	animation: colorSlide 5s linear infinite, nodgeMouse 5s ease-out infinite;
+	filter:grayscale(0.1) saturate(0.9);
+	display:inline-block;
+}
+.mouse:before,
+.mouse:after{
+	content:"";
+	position:absolute;
+	top:0;
+	bottom:0;
+	right:0;
+	left:0;
+	margin:auto;
+}
+.mouse:before{
+	width:42px;
+	height:78px;
+	background-color: rgb(235, 211, 202);
+	border-radius:100px;
+}
+.mouse:after{
+	background-color:#fff;
+	width:10px;
+	height:10px;
+	border-radius:100%;
+	animation:trackBallSlide 5s linear infinite;
+}
+.mouse-txt{
+	position:relative;
+	margin:20px 0 0 0;
+	color:#fff;
+	transition:1s;
+	animation:colorText 5s ease-out infinite, nudgeText 5s ease-out infinite;
+	display:block;	
+	filter:grayscale(0.1) saturate(0.9);
+}
