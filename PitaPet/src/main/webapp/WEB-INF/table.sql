@@ -1,3 +1,26 @@
+-- 상품테이블
+CREATE TABLE shop(
+   num NUMBER PRIMARY KEY, --상품번호
+   name VARCHAR2(30), --상품이름
+   category VARCHAR2(100),
+   price NUMBER, --상품가격
+   remainCount NUMBER CHECK(remainCount >= 0), --재고갯수 
+	imgPath VARCHAR2(100) --상품 이미지 경로
+);
+-- 상품 테이블에 사용할 시퀀스 
+CREATE SEQUENCE shop_seq;
+
+-- 주문 테이블
+CREATE TABLE client_order(
+   num NUMBER PRIMARY KEY, -- 주문번호
+   id VARCHAR2(30), -- 주문 고객의 아이디
+   code NUMBER, -- 주문한 상품의 번호 
+   addr VARCHAR2(50) -- 배송 주소
+);
+
+-- 주문 테이블에 사용할 시퀀스 
+CREATE SEQUENCE client_order_seq;
+
 CREATE TABLE petusers(
    id VARCHAR2(100) PRIMARY KEY,
    pwd VARCHAR2(100),
