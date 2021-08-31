@@ -51,9 +51,9 @@
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-		        <p id="price">가격: ${tmp.price }</p>
-		        <p id="amount">수량: </p>
-		        <p id="addr">주소:</p>
+		        <p id="price-${tmp.num }">가격: ${tmp.price }</p>
+		        <p id="amount-${tmp.num }">수량: </p>
+		        <p id="addr-${tmp.num }">주소:</p>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -114,14 +114,14 @@
 	let btns=document.querySelectorAll(".purchaseBtn");
 	for(let i=0; i<btns.length; i++){
 		btns[i].addEventListener("click",function(){
-			
+			const num=this.getAttribute("data-num");
 			ajaxPromise("${pageContext.request.contextPath}/api/users/info.do")
 			.then(function(response){
 				return response.json();
 			})
 			.then(function(data){
 				console.log(data);
-				document.querySelector("#addr").innerText="주소:"+data.UsersDto.address;
+				document.querySelector("#addr-"+num).innerText="주소:"+data.UsersDto.address;
 			});
 			
 		})
