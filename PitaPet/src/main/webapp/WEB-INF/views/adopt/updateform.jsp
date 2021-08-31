@@ -24,12 +24,7 @@
 	         	<label for="image">이미지</label>
 	         	<!--  
 				<input type="hidden" name="orgImage" id="orgImage" value="${dto.imagePath }" />-->
-				
 	         	<input type="file" name="image" id="image" accept=".jpg, .jpeg, .png, .JPG, .JPEG"/>
-	         	
-	      		<!-- 1(업로드 했던 파일), 2(새로 업로드하는 파일) 
-	      			2의 값이 null 이 아니면 1 표시 
-	      		-->
 	      	</div>
 	      	<div>
 	         	<label for="breed">품종</label>

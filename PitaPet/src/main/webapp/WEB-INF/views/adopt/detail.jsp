@@ -61,7 +61,7 @@
          <c:choose>
          	<c:when test="${dto.prevNum ne 0 }">
          		<li class="page-item mr-3">
-               		<a class="page-link" href="${pageContext.request.contextPath}/adopt/detail.do?num=${dto.prevNum}&shelterName=${name}">&larr; Prev</a>
+               		<a class="page-link" href="${pageContext.request.contextPath}/adopt/detail.do?num=${dto.prevNum}&shelterName=${shelterName}">&larr; Prev</a>
             	</li>
          	</c:when>
          	<c:otherwise>
@@ -73,7 +73,7 @@
          <c:choose>
          	<c:when test="${dto.nextNum ne 0 }">
          		<li class="page-item">
-               		<a class="page-link" href="${pageContext.request.contextPath}/adopt/detail.do?num=${dto.nextNum}&shelterName=${name}">Next &rarr;</a>
+               		<a class="page-link" href="${pageContext.request.contextPath}/adopt/detail.do?num=${dto.nextNum}&shelterName=${shelterName}">Next &rarr;</a>
             	</li>
          	</c:when>
          	<c:otherwise>
