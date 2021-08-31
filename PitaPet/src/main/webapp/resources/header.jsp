@@ -23,7 +23,7 @@
          </a>
          <ul class="menu-wrap">
              <li class="menu-list"><a href="${pageContext.request.contextPath}/list.do">입양절차알아보기</a></li>
-             <li class="menu-list"><a href="${pageContext.request.contextPath}/list.do">입양하기</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/adopt/list.do">입양하기</a></li>
              <li class="menu-list"><a href="${pageContext.request.contextPath}/review/list.do">입양후기</a></li>
              <li class="menu-list"><a href="${pageContext.request.contextPath}/list.do">후원하기</a></li>
          </ul>

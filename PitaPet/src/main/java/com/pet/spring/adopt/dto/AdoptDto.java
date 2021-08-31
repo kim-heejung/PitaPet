@@ -27,13 +27,14 @@ public class AdoptDto {
 	private int cnt;
 	private String id;
 	private String liked;
+	private String orgImageName;
 	
 	public AdoptDto() {}
 
 	public AdoptDto(int num, String writer, String title, String breed, String petName, String petAge, String petGender,
 			String vaccination, String neutralization, String findDate, String caption, String imagePath,
 			String regdate, int viewCount, int startRowNum, int endRowNum, int prevNum, int nextNum,
-			MultipartFile image, String name, int cnt, String id, String liked) {
+			MultipartFile image, String name, int cnt, String id, String liked, String orgImageName) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -58,6 +59,7 @@ public class AdoptDto {
 		this.cnt = cnt;
 		this.id = id;
 		this.liked = liked;
+		this.orgImageName = orgImageName;
 	}
 
 	public int getNum() {
@@ -242,6 +244,14 @@ public class AdoptDto {
 
 	public void setLiked(String liked) {
 		this.liked = liked;
+	}
+
+	public String getOrgImageName() {
+		return orgImageName;
+	}
+
+	public void setOrgImageName(String orgImageName) {
+		this.orgImageName = orgImageName;
 	}
 	
 }

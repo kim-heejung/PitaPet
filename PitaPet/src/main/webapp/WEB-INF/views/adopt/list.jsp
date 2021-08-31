@@ -89,12 +89,12 @@
             				<c:when test="${not empty likeCountList }">
             					<c:forEach var="like" items="${likeCountList }">
             						<c:if test="${like.num eq tmp.num }">
-            							${like.cnt}
+            							<span style="color:red;">${like.cnt}</span>
             						</c:if>
             					</c:forEach>
             				</c:when>
             				<c:otherwise>
-            					<span>${tmp.cnt }</span>
+            					<span style="color:red;">${tmp.cnt }</span>
             				</c:otherwise>
             			</c:choose>
             		</p>	

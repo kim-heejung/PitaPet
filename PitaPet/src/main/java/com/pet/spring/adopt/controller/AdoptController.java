@@ -92,6 +92,14 @@ public class AdoptController {
 	}*/
 	
 	
+	@RequestMapping("/api/adopt/paging")
+	@ResponseBody
+	public Map<String, Object> getListPaging(@RequestParam int pageNum, AdoptDto dto){
+		
+		return service.getListPaging(pageNum, dto);
+	}
+	
+	
 	@RequestMapping("api/adopt/detail")
 	@ResponseBody
 	public AdoptDto detail(HttpServletRequest request) {
