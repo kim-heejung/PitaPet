@@ -16,8 +16,8 @@
 </head>
 <body>
 <div id="loginform">
-	<div class="container">
-		<h1 v-bind:id="loginformId">로그인 폼</h1>
+	<div class="container card login" v-if="!registerActive" v-bind:class="{ error: emptyFields }">
+		<h1>로그인 폼</h1>
 		<form action="${pageContext.request.contextPath}/users/login.do" method="post">
 			<c:choose>
 				<c:when test="${ empty param.url2 }">
@@ -29,13 +29,13 @@
 			</c:choose>
 			<div class="idForm">
 				<label for="id">아이디</label>
-				<input type="text" name="id" id="id"/>
+				<input class="form-control" v-model="idLogin" type="text" name="id" id="id"/>
 			</div>
 			<div class="pwdForm">
 				<label for="pwd">비밀번호</label>
-				<input type="password" name="pwd" id="pwd"/>
+				<input class="form-control" v-model="pwdLogin" type="password" name="pwd" id="pwd"/>
 			</div>
-			<button class="btn btn-primary" v-on:click="login" type="submit">로그인</button>
+			<button class="btn btn-primary" @click="doLogin" type="submit">로그인</button>
 		</form>
 		<!-- 네이버 로그인 창으로 이동 --> 
 		<a href="${Nurl}">
@@ -56,13 +56,18 @@ let loginform = new Vue({
 	el:"#loginform",
 	data(){
 		return{
-			loginformId:'로그인 폼',
+			emailLogin: "",
+		    passwordLogin: "",
+		    emptyFields: false
 		}
 	},
 	methods:{
-	    login(){
-	    	id:"id",
-	    	pwd:"pwd"
+		doLogin() {
+	         if (this.emailLogin === "" || this.passwordLogin === "") {
+	            this.emptyFields = true;
+	         } else {
+	            alert("You are now logged in");
+	         }
 	    }
 });
 </script>

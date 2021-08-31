@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>views/users/info.jsp</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <style>
    #profileImage{
       width: 50px;
