@@ -42,22 +42,48 @@
 				</div>
 			</div>		
 		
-	
-		<div class="modal fade" id="exampleModal-${tmp.num }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<!-- 구매하기 Modal 폼 -->
+		<div class="modal fade" id="exampleModal-${tmp.num }" tabindex="-1">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">제품이름</h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        <h5 class="modal-title">Pit a Pet</h5>
 		      </div>
 		      <div class="modal-body">
-		        <p id="price-${tmp.num }">가격: ${tmp.price }</p>
-		        <p id="amount-${tmp.num }">수량: </p>
-		        <p id="addr-${tmp.num }">주소:</p>
+		      	<form action="${pageContext.request.contextPath}/shop/buy.do?num=${tmp.num}" id="purchaseForm" method="post">
+		      	  <div class="mb-3">
+		      	   <label for="product" class="col-form-label fw-bold">상품명</label>
+		      	   <input type="text" class="form-control" name="product" value="${tmp.name }" readonly />
+		      	  </div> 
+		      	  <div class="mb-3">
+		      	   <label for="name" class="col-form-label">주문자</label>
+		      	   <input type="text" class="form-control" name="name" value="${dto.name }" />
+		      	  </div> 
+		      	  <div class="mb-3">
+		      	   <label for="phoneNum" class="col-form-label">휴대전화</label>
+		      	   <input type="tel" class="form-control" name="phoneNum" value="${dto.phoneNumber }" />
+		      	  </div>
+		    	  <div class="mb-3">
+		      	   <label for="email" class="col-form-label">이메일</label>
+		      	   <input type="email" class="form-control" name="email" value="${dto.email }" />
+		      	  </div>
+		     	  <div class="mb-3">
+		      	   <label for="addr" class="col-form-label">주소</label>
+		      	   <input type="text" class="form-control" name="addr" value="${dto.address }" />
+		      	  </div>
+		      	  <div class="mb-3">
+		      	   <label for="amount" class="col-form-label">수량</label>
+		      	   <input type="text" class="form-control" name="amount" value="1" />
+		      	  </div>  
+		   		  <div class="mb-3">
+		      	   <label for="price" class="col-form-label">가격</label>
+		      	   <input type="text" class="form-control" name="price" value="${tmp.price }" readonly />
+		      	  </div>	     	    	    	  
+		       	</form> 
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
+		      	<button type="submit" class="btn btn-primary" id="buyNowBtn">바로 구매하기</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>		        
 		      </div>
 		    </div>
 		  </div>
@@ -126,6 +152,10 @@
 			
 		})
 	}
+
+	document.querySelector("#buyNowBtn").addEventListener("click", function(){
+		document.querySelector("#purchaseForm").submit();
+	});
 	
 </script>
 </body>
