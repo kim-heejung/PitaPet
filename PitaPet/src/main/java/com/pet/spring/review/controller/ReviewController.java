@@ -27,7 +27,7 @@ public class ReviewController {
    @RequestMapping("/api/review/paging")
    @ResponseBody
    public Map<String, Object> paging(@RequestParam int pageNum){
-	   final int PAGE_ROW_COUNT=3;
+	   final int PAGE_ROW_COUNT=8;
 	   final int PAGE_DISPLAY_COUNT=5;
 	      
 	   //하단 시작 페이지 번호
