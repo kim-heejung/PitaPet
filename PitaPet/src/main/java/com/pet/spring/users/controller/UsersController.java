@@ -146,8 +146,9 @@ public class UsersController {
 		String id=(String)session.getAttribute("id");
 		
 		map.put("UsersDto", dao.getData(id));
-		map.put("ShelterDto", sDao.getData(id));
-		
+		if(dao.getData(id).getGroupNum()==1) {
+			map.put("ShelterDto", sDao.getData(id));
+		};
 		return map;
 	}
 	

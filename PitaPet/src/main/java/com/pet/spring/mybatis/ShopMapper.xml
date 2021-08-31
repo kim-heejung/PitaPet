@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop">
+	<select id="getList" resultType="shopDto" parameterType="shopDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM as rnum
+			FROM
+				(SELECT num,name,price,remainCount,imgPath,category
+				FROM shop
+				<choose>
+					<when test="category != null">
+				    	WHERE category LIKE '%'||#{category}||'%'  
+				    </when>
+				</choose>
+				ORDER BY num DESC) result1)
+		<![CDATA[
+				WHERE rnum >= #{startRowNum} AND rnum<= #{endRowNum}
+			]]>
+	</select>
+	<select id="getCount" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM shop
+	</select>
+	<insert id="insert" parameterType="shopDto">
+		INSERT INTO shop
+		(num,name,category,price,remainCount,imgPath)
+		VALUES(shop_seq.NEXTVAL,#{name},#{category},#{price},#{remainCount},#{imgPath})
+	</insert>
+	<update id="minusCount" parameterType="int">
+		UPDATE shop
+		SET remainCount=remainCount-1
+		WHERE num=#{num}
+	</update>
+	<select id="getPrice" parameterType="int" resultType="int">
+		SELECT price
+		FROM shop
+		WHERE num=#{num}
+	</select>
+	<insert id="addOrder" parameterType="orderDto">
+		INSERT INTO client_order
+		(num, id, code, addr)
+		VALUES(client_order_seq.NEXTVAL, #{id}, #{code}, #{addr})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

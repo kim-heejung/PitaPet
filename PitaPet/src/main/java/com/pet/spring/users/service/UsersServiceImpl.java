@@ -134,8 +134,9 @@ public class UsersServiceImpl implements UsersService{
 	@Override
 	public void deleteUser(HttpSession session, ModelAndView mView) {
 		String id=(String)session.getAttribute("id");
+		int groupNum=dao.getData(id).getGroupNum();
 		dao.deleteUser(id);
-		if(dao.getData(id).getGroupNum()==1) {
+		if(groupNum==1) {
 			sDao.deleteShelter(id);
 		}
 
