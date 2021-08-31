@@ -1,15 +1,42 @@
 @charset "UTF-8";
 
-
+.board-wrap{
+	min-height:1400px;
+}
 .img-wrapper{
-     height: 550px;
-     transition: transform 0.3s ease-out;
+	position:relative;
+    height: 400px;
+    overflow:hidden
+ }
+ .img-wrapper::before{
+ 	content:"";
+ 	width:100%;
+ 	height:100%;
+ 	top:0;
+ 	left:0;
+ 	position:absolute;
+ 	opacity:0.35;
+    background-image:url(/spring/resources/images/logo_txt.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index:0;
  }
  
- .img-wrapper:hover{
-    transform: scale(1.05);
- }
- 
+  .img-wrapper:hover::after{
+  	content:"";
+  	position:absolute;
+  	top:0;
+  	left:0;
+  	width:100%;
+  	height:100%;
+  	z-index:1;
+  	background:rgba(255,255,255,0.3);
+  	transition: background 0.3s ease-out;
+  }
+  .card{
+  	border:0;
+  }
  .card .card-text{
     display:block;
     white-space : nowrap;
@@ -18,15 +45,21 @@
  }
  
  .img-wrapper img{
+ 	position:relative;
+ 	z-index:1;
    width: 100%;
    height: 100%;
    object-fit: contain;   
+   transform: scale(1);
+   transition: transform 0.3s ease-out;
  }
- 
+.img-wrapper:hover img{
+    transform: scale(1.05);
+ }
  .pagination>ul{
- 		display:flex;
- 		align-items:center;
- 		justify-content:center;
+	display:flex;
+	align-items:center;
+	justify-content:center;
  }
  
  

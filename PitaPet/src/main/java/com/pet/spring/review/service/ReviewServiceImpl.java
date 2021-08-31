@@ -267,7 +267,7 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public List<ReviewDto> getList2(HttpServletRequest request) {
-	    final int PAGE_ROW_COUNT=3;
+	    final int PAGE_ROW_COUNT=8;
 	    final int PAGE_DISPLAY_COUNT=5;
 	      
 

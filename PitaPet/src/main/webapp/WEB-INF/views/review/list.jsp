@@ -4,21 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
-<jsp:include page="/resources/resource.jsp"></jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
+	<meta charset="UTF-8">
+	<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+	<jsp:include page="/resources/resource.jsp"></jsp:include>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 </head>
 <body>
-<div id="reviewPage">
+<div id="reviewPage" >
 	<jsp:include page="/resources/header.jsp"></jsp:include>
-    <router-view></router-view>
+	<div class="board-wrap">
+		<page-category :name="'입양후기'"></page-category>
+    	<router-view></router-view>
+    </div>
 	<footer-component></footer-component>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <script>
 	const base_url="http://localhost:8888/spring";
@@ -27,7 +31,7 @@
 			<div class="container">
 				<a href="${pageContext.request.contextPath}/review/private/insertform.do" class="btn btn-primary">추가하기</a><br/>
 			    <div class="row">
-			     	<div v-for="(tmp, index) in reviewList" v-bind:key="tmp.num" class="col-2 col-md-5 col-lg-4">
+			     	<div v-for="(tmp, index) in reviewList" v-bind:key="tmp.num" class="col-6 col-md-4 col-lg-3">
 			     		<div class="card mb-3">
 			     			<router-link :to="{name:'detail', query:{num: tmp.num}}">
 			     				<div class="img-wrapper">
