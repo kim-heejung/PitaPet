@@ -99,7 +99,7 @@ div.tab.btn.btn-primary {
 					 <button class="btn btn-primary" type="submit">가입</button>
 				</form>
 	      </div>
-	      
+
 	      <div id="tab2" data-tab-content class="items">
 			<h2>보호소회원 회원가입 폼</h2>
 			<form action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm2">
@@ -119,16 +119,19 @@ div.tab.btn.btn-primary {
 					<label class="control-label" for="pwd">비밀번호 확인</label>
 					<input class="form-control" type="password" name="pwd2" id="shelter_pwd2"/>
 				</div>
+				<br />
 				<div>
 					<label class="control-label" for="name">보호소 이름</label>
 					<input class="form-control" type="text" name="name" id="shelter_name"/>
 				</div>
+				<br />
 				<div>
 					<label class="control-label" for="serialNum">고유번호</label>
 					<input class="form-control" type="text" name="serialNum" id="serialNum"/>
 					<small class="form-text text-muted">000-00-00000 형식으로 입력하세요</small>
 					<div class="invalid-feedback">고유번호를 확인하세요.</div>
 				</div>
+				<br />
 				<div>
 					<label class="control-label" for="address">보호소 위치</label>
 					<input class="form-control" type="text" name="address" id="shelter_address" />
@@ -147,12 +150,12 @@ div.tab.btn.btn-primary {
 				<input type="hidden" name="groupNum" value="1" />
 				<button class="btn btn-primary" type="submit">가입</button>
 			</form>
-			</div>
+      </div>
+
+      
 	</div>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 	const tabs = document.querySelectorAll("[data-tab-target]");
 	const tabcon = document.querySelectorAll("[data-tab-content]");
@@ -341,4 +344,4 @@ div.tab.btn.btn-primary {
 	   });
 </script>
 </body>
-</html>
+</html> 
