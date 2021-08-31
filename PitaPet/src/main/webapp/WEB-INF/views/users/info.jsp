@@ -97,7 +97,7 @@
 			      </tr>
 			      <tr>
 			         <th>비밀번호</th>
-			         <td><a class="btn btn-sm btn-outline-success" href="pwd_updateform">수정하기</a></td>
+			         <td><a class="btn btn-sm btn-outline-success" href="${pageContext.request.contextPath}/users/pwd_updateform.do">수정하기</a></td>
 			      </tr>
 			      <tr>
 			      	<th>고유번호</th>
@@ -128,10 +128,13 @@
 			</c:otherwise>
 		</c:choose>
 	   
-	   <a class="btn btn-primary" href="updateform">개인 정보 수정</a>
+	   <a class="btn btn-primary" :href="updateform">개인 정보 수정</a>
 	   <a class="btn btn-danger" href="javascript:deleteConfirm()">탈퇴</a>
 	</div>
 </div>
+<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 	//탈퇴확인
 	function deleteConfirm(){
@@ -141,7 +144,7 @@
 		}
 	}
 	
-	new Vue({
+	let info =new Vue({
 		el:"#info",
 		data(){
 			return{

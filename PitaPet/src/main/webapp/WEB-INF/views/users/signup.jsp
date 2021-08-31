@@ -14,8 +14,8 @@
 	<div class="container">
 		<c:choose>
 			<c:when test=${empty param.id }>
-			 	<a href="${pageContext.request.contextPath}/users/info.do">${param.id }</a>님 가입 되었습니다.
-	   			<a href="${pageContext.request.contextPath}/users/loginform.do">로그인 하러가기</a>
+			 	<a :href="info">${param.id }</a>님 가입 되었습니다.
+	   			<a :href="loginform">로그인 하러가기</a>
 			</c:when>
 		</c:choose>
 	</div>
@@ -30,7 +30,8 @@
       el: "#signup",
       data() {
     	  return{
-    		 	 cpath: "${pageContext.request.contextPath}",
+    		 	 info:"${pageContext.request.contextPath}/users/info.do",
+    		 	loginform:"${pageContext.request.contextPath}/users/loginform.do"
     	  }
       }
    });
