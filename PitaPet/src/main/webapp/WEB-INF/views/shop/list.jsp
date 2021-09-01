@@ -50,11 +50,19 @@
 		        <h5 class="modal-title">Pit a Pet</h5>
 		      </div>
 		      <div class="modal-body">
-		      	<form action="${pageContext.request.contextPath}/shop/buy.do?num=${tmp.num}" id="purchaseForm" method="post">
+		      	<form action="${pageContext.request.contextPath}/shop/buy.do?num=${tmp.num}" id="purchaseForm-${tmp.num }" method="post">
 		      	  <div class="mb-3">
 		      	   <label for="product" class="col-form-label fw-bold">상품명</label>
 		      	   <input type="text" class="form-control" name="product" value="${tmp.name }" readonly />
-		      	  </div> 
+		      	  </div>
+		      	  <div class="mb-3">
+		      	   <label for="amount" class="col-form-label">수량</label>
+		      	   <input type="text" class="form-control" name="amount" value="1" />
+		      	  </div>  
+		   		  <div class="mb-3">
+		      	   <label for="price" class="col-form-label">가격</label>
+		      	   <input type="text" class="form-control" name="price" value="${tmp.price }" readonly />
+		      	  </div>	 
 		      	  <div class="mb-3">
 		      	   <label for="name" class="col-form-label">주문자</label>
 		      	   <input type="text" class="form-control" name="name" value="${dto.name }" />
@@ -70,19 +78,11 @@
 		     	  <div class="mb-3">
 		      	   <label for="addr" class="col-form-label">주소</label>
 		      	   <input type="text" class="form-control" name="addr" value="${dto.address }" />
-		      	  </div>
-		      	  <div class="mb-3">
-		      	   <label for="amount" class="col-form-label">수량</label>
-		      	   <input type="text" class="form-control" name="amount" value="1" />
-		      	  </div>  
-		   		  <div class="mb-3">
-		      	   <label for="price" class="col-form-label">가격</label>
-		      	   <input type="text" class="form-control" name="price" value="${tmp.price }" readonly />
-		      	  </div>	     	    	    	  
+		      	  </div>     	    	    	  
 		       	</form> 
 		      </div>
 		      <div class="modal-footer">
-		      	<button type="submit" class="btn btn-primary" id="buyNowBtn">바로 구매하기</button>
+		      	<button type="submit" class="btn btn-primary buyNowBtn" data-num="${tmp.num}">바로 구매하기</button>
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>		        
 		      </div>
 		    </div>
@@ -152,11 +152,15 @@
 			
 		})
 	}
-
-	document.querySelector("#buyNowBtn").addEventListener("click", function(){
-		document.querySelector("#purchaseForm").submit();
-	});
 	
+	let buyNowBtns=document.querySelectorAll(".buyNowBtn");
+	for(let i=0; i<buyNowBtns.length; i++){
+		buyNowBtns[i].addEventListener("click", function(){
+			const num=this.getAttribute("data-num");
+			document.querySelector("#purchaseForm-"+num).submit();
+		});
+	}
+
 </script>
 </body>
 </html>
