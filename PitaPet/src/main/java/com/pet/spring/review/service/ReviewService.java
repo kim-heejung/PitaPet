@@ -1,6 +1,7 @@
 package com.pet.spring.review.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,4 +23,6 @@ public interface ReviewService {
 	public void deleteComment(HttpServletRequest request);
 	public void moreCommentList(HttpServletRequest request);
 	
+	//댓글 페이징
+	public Map<String, Object> commentPaging(HttpServletRequest request);
 }
