@@ -85,6 +85,7 @@ div.tab.btn.btn-primary {
 					<div>
 						<label class="control-label" for="address">주소</label>
 						<input class="form-control" type="text" name="address" id="users_address" />
+						<a class="btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
 					</div>
 					<br />
 					<div>
@@ -168,6 +169,17 @@ div.tab.btn.btn-primary {
 	    target.classList.add("active");
 	  });
 	});
+	
+	//주소 팝업
+	function openAddrPop(url, name){
+	    let options = 'top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no, scrollbars=yes';
+	    window.open(url, name, options);
+	}
+	
+	function jusoCallBack(roadFullAddr){
+			 // 2017년 2월 제공항목이 추가되었습니다. 원하시는 항목을 추가하여 사용하시면 됩니다.
+			 document.querySelector("#users_address").value = roadFullAddr;
+	}
 	
 	let isIdValid=false;
 	let isUsersPwdValid=false;

@@ -143,6 +143,19 @@ public class UsersServiceImpl implements UsersService{
 		session.removeAttribute("id");
 		mView.addObject("id", id);
 	}
+
+	@Override
+	public void addrPop(ModelAndView mView,HttpServletRequest request) {
+		
+		String inputYn = request.getParameter("inputYn"); 
+		String roadFullAddr = request.getParameter("roadFullAddr"); 
+		
+		
+		if(inputYn!=null) {
+			mView.addObject("inputYn", inputYn);
+			mView.addObject("roadFullAddr", roadFullAddr);
+		}
+	}
 	
 	
 }
