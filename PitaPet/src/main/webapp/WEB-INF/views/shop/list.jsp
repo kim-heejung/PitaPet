@@ -65,19 +65,19 @@
 		      	  </div>	 
 		      	  <div class="mb-3">
 		      	   <label for="name" class="col-form-label">주문자</label>
-		      	   <input type="text" class="form-control" name="name" value="${dto.name }" />
+		      	   <input type="text" class="form-control" name="name" id="name-${tmp.num }"/>
 		      	  </div> 
 		      	  <div class="mb-3">
 		      	   <label for="phoneNum" class="col-form-label">휴대전화</label>
-		      	   <input type="tel" class="form-control" name="phoneNum" value="${dto.phoneNumber }" />
+		      	   <input type="tel" class="form-control" name="phoneNum" id="phone-${tmp.num }"/>
 		      	  </div>
 		    	  <div class="mb-3">
 		      	   <label for="email" class="col-form-label">이메일</label>
-		      	   <input type="email" class="form-control" name="email" value="${dto.email }" />
+		      	   <input type="email" class="form-control" name="email" id="email-${tmp.num }"/>
 		      	  </div>
 		     	  <div class="mb-3">
 		      	   <label for="addr" class="col-form-label">주소</label>
-		      	   <input type="text" class="form-control" name="addr" value="${dto.address }" />
+		      	   <input type="text" class="form-control" name="addr" id="addr-${tmp.num }"/>
 		      	  </div>     	    	    	  
 		       	</form> 
 		      </div>
@@ -141,14 +141,24 @@
 	for(let i=0; i<btns.length; i++){
 		btns[i].addEventListener("click",function(){
 			const num=this.getAttribute("data-num");
-			ajaxPromise("${pageContext.request.contextPath}/api/users/info.do")
-			.then(function(response){
-				return response.json();
-			})
-			.then(function(data){
-				console.log(data);
-				document.querySelector("#addr-"+num).innerText="주소:"+data.UsersDto.address;
-			});
+			if(${empty id}){
+				alert("로그인이 필요합니다");
+				location.href="${pageContext.request.contextPath}/users/loginform.do?url=${pageContext.request.contextPath}/shop/list.do";
+			}else{
+				
+				ajaxPromise("${pageContext.request.contextPath}/api/users/info.do")
+				.then(function(response){
+					return response.json();
+				})
+				.then(function(data){
+					document.querySelector("#addr-"+num).value=data.UsersDto.address;
+					document.querySelector("#name-"+num).value=data.UsersDto.name;
+					document.querySelector("#email-"+num).value=data.UsersDto.email;
+					document.querySelector("#phone-"+num).value=data.UsersDto.phoneNumber;
+				});
+			}
+			
+			
 			
 		})
 	}
