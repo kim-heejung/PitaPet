@@ -1,6 +1,7 @@
 package com.pet.spring.shelter.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,8 @@ import com.pet.spring.shelter.dto.ShelterDto;
 public class ShlterServiceImpl implements ShelterService{
 	@Autowired
 	private ShelterDao dao;
+	
+	
 	
 	@Override
 	public void addShelter(ShelterDto dto) {
@@ -50,6 +53,12 @@ public class ShlterServiceImpl implements ShelterService{
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("isExist",dao.isExist(inputNum));
 		return map;
+	}
+
+	@Override
+	public void getList(ModelAndView mView) {
+		List<ShelterDto> list=dao.getList();
+		mView.addObject("list", list);
 	}
 
 }

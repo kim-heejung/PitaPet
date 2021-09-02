@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pet.spring.shelter.dto.ShelterDto;
 
 public interface ShelterService {
+	public void getList(ModelAndView mView);
 	public void addShelter(ShelterDto dto);
 	public void getInfo(HttpSession session, ModelAndView mView);
 	public void updateShelter(HttpSession session,ShelterDto dto);

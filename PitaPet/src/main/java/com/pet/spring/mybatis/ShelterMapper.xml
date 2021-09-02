@@ -3,8 +3,8 @@
 <mapper namespace="shelter">
 	<insert id="insert" parameterType="shelterDto">
 		INSERT INTO shelter
-		(serialNum,id,name,phoneNumber,email,address,regdate)
-		VALUES(#{serialNum},#{id},#{name},#{phoneNumber},#{email},#{address},SYSDATE)
+		(num,serialNum,id,name,phoneNumber,email,address,regdate,longitude,latitude )
+		VALUES(shelter_seq.NEXTVAL,#{serialNum},#{id},#{name},#{phoneNumber},#{email},#{address},SYSDATE,#{longitude},#{latitude})
 	</insert>
 	<update id="updateInfo" parameterType="shelterDto">
 		UPDATE shelter
@@ -12,7 +12,7 @@
 		WHERE id=#{id}
 	</update>
 	<select id="getData" parameterType="string" resultType="shelterDto">
-		SELECT id,name,serialNum,email,phoneNumber,address,TO_CHAR(regdate,'YYYY-MM-DD')AS regdate
+		SELECT id,name,serialNum,email,phoneNumber,address,TO_CHAR(regdate,'YYYY-MM-DD')AS regdate,longitude,latitude
 		FROM shelter
 		WHERE id=#{id}
 	</select>
@@ -24,5 +24,9 @@
 		SELECT serialNum
 		FROM shelter
 		WHERE serialNum=#{num}
+	</select>
+	<select id="getList" resultType="shelterDto">
+		SELECT num,name,email,phoneNumber,address,serialNum,longitude,latitude
+		FROM shelter
 	</select>
 </mapper>

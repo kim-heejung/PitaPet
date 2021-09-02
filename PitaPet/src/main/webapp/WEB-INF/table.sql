@@ -37,14 +37,19 @@ CREATE TABLE petusers(
 );
 
 CREATE TABLE shelter(
+	num NUMBER 
 	serialNum VARCHAR2(100) PRIMARY KEY, --고유번호
    id VARCHAR2(100), --usersid
 	name VARCHAR2(100), --보호소이름
    phoneNumber VARCHAR2(100),--연락처
    email VARCHAR2(100),
    address VARCHAR2(100),
-   regdate DATE
+   regdate DATE,
+   longitude VARCHAR2(100), --위도 경도
+	latitude VARCHAR2(100)
 );
+create sequence shelter_seq
+
 
 CREATE TABLE board_adopt(
    num NUMBER PRIMARY KEY, --seq! 

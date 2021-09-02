@@ -147,13 +147,17 @@ public class UsersServiceImpl implements UsersService{
 	@Override
 	public void addrPop(ModelAndView mView,HttpServletRequest request) {
 		
-		String inputYn = request.getParameter("inputYn"); 
-		String roadFullAddr = request.getParameter("roadFullAddr"); 
+		String inputYn = (String)request.getParameter("inputYn"); 
+		String roadFullAddr = (String)request.getParameter("roadFullAddr"); 
+		String entX = (String)request.getParameter("entX"); 
+		String entY = (String)request.getParameter("entY"); 
 		
 		
 		if(inputYn!=null) {
 			mView.addObject("inputYn", inputYn);
 			mView.addObject("roadFullAddr", roadFullAddr);
+			mView.addObject("entX", entX);
+			mView.addObject("entY", entY);
 		}
 	}
 	
