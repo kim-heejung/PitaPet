@@ -23,7 +23,46 @@ public class ReviewController {
    @Autowired private ReviewService service;
    @Autowired private ReviewDao dao;
    
-   //Gallery 하단 페이징 처리에 필요한 데이터 리턴하는 메소드 (Vue)
+   
+   // (Vue) 댓글 목록
+   @RequestMapping("/api/review/ajax_comment_list")
+   public String ajaxCommentList(HttpServletRequest request) {
+      return "api/review/ajax_comment_list";
+   }
+   
+   // (Vue) 댓글 페이징
+   @RequestMapping("/api/review/commentPaging")
+   public Map<String, Object> commentPaging(HttpServletRequest request){
+	   return service.commentPaging(request);
+   }
+   
+   // (Vue) 댓글 추가, 수정, 삭제
+   @RequestMapping("/api/review/comment_insert")
+	public String commentInsert(HttpServletRequest request, @RequestParam int ref_group) {
+		service.saveComment(request);
+		return "redirect:/api/review/detail.do?num="+ref_group;
+	}
+   
+   @RequestMapping("/api/review/comment_update")
+   @ResponseBody
+   public Map<String, Object> commentUpdate(ReviewCommentDto dto){
+      service.updateComment(dto);
+      Map<String, Object> map=new HashMap<String, Object>();
+      map.put("isSuccess", true);
+      return map;
+   }
+   
+   @RequestMapping("/api/review/comment_delete")
+   @ResponseBody
+   public Map<String, Object> commentDelete(HttpServletRequest request){
+      service.deleteComment(request);
+      Map<String, Object> map=new HashMap<String, Object>();
+      map.put("isSuccess", true);
+      return map;
+   }
+   
+   
+   // (Vue) 게시글 하단 페이징 처리에 필요한 데이터 리턴하는 메소드
    @RequestMapping("/api/review/paging")
    @ResponseBody
    public Map<String, Object> paging(@RequestParam int pageNum){
@@ -55,14 +94,14 @@ public class ReviewController {
 	   
    }
    
-   //게시글 목록을 json으로 응답 (Vue)
+   // (Vue) 게시글 목록을 json으로 응답
    @RequestMapping("/api/review/list")
    @ResponseBody
    public List<ReviewDto> getList2(HttpServletRequest request){
 	   return service.getList2(request);
    }
    
-   //게시글 하나의 정보를 json 으로 응답 (Vue)
+   // (Vue) 게시글 하나의 정보를 json 으로 응답
    @RequestMapping("/api/review/detail")
    @ResponseBody
    public ReviewDto detail(@RequestParam int num) {
@@ -111,38 +150,6 @@ public class ReviewController {
    public String delete(HttpServletRequest request, @RequestParam int num) {
       service.deleteContent(num, request);
       return "redirect:/review/list.do";
-   }
-   
-   //댓글 목록
-   @RequestMapping("/review/ajax_comment_list")
-   public String ajaxCommentList(HttpServletRequest request) {
-      service.moreCommentList(request);
-      return "review/ajax_comment_list";
-   }
-   
-   //댓글 (추가, 수정, 삭제)
-   @RequestMapping("/review/private/comment_insert")
-	public String commentInsert(HttpServletRequest request, @RequestParam int ref_group) {
-		service.saveComment(request);
-		return "redirect:/review/detail.do?num="+ref_group;
-	}
-   
-   @RequestMapping("/review/private/comment_update")
-   @ResponseBody
-   public Map<String, Object> commentUpdate(ReviewCommentDto dto){
-      service.updateComment(dto);
-      Map<String, Object> map=new HashMap<String, Object>();
-      map.put("isSuccess", true);
-      return map;
-   }
-   
-   @RequestMapping("/review/private/comment_delete")
-   @ResponseBody
-   public Map<String, Object> commentDelete(HttpServletRequest request){
-      service.deleteComment(request);
-      Map<String, Object> map=new HashMap<String, Object>();
-      map.put("isSuccess", true);
-      return map;
    }
 
 }
