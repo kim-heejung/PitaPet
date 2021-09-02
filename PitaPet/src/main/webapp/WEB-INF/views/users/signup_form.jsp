@@ -136,6 +136,7 @@ div.tab.btn.btn-primary {
 				<div>
 					<label class="control-label" for="address">보호소 위치</label>
 					<input class="form-control" type="text" name="address" id="shelter_address" />
+					<a class="btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
 				</div>
 				<br />
 				<div>
@@ -179,6 +180,7 @@ div.tab.btn.btn-primary {
 	function jusoCallBack(roadFullAddr){
 			 // 2017년 2월 제공항목이 추가되었습니다. 원하시는 항목을 추가하여 사용하시면 됩니다.
 			 document.querySelector("#users_address").value = roadFullAddr;
+			 document.querySelector("#shelter_address").value = roadFullAddr;
 	}
 	
 	let isIdValid=false;
