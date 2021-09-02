@@ -27,7 +27,6 @@ public class ShopController {
 	@RequestMapping("/shop/list")
 	public ModelAndView getList(ModelAndView mView,HttpServletRequest request) {
 		service.getList(mView, request);
-		service.dbInfo(mView, request);
 		mView.setViewName("shop/list");
 		return mView;
 	}
