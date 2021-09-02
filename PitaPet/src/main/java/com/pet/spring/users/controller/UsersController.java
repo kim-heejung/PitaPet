@@ -53,6 +53,7 @@ public class UsersController {
 	/* NaverLoginBO */ 
 	private NaverLoginBO naverLoginBO; 
 	private String apiResult = null; 
+	
 	@Autowired 
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) { 
 		this.naverLoginBO = naverLoginBO;
@@ -135,7 +136,12 @@ public class UsersController {
 		return "users/naver_login"; 
 	}
 	
-
+	@RequestMapping("/users/addr")
+	public ModelAndView addrForm(ModelAndView mView, HttpServletRequest request) {
+		service.addrPop(mView,request);
+		mView.setViewName("users/addrForm");
+		return mView;
+	}
 
 
 	
