@@ -1,5 +1,7 @@
 package com.pet.spring.shelter.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,6 +13,8 @@ public class ShelterDaoImpl implements ShelterDao{
 	
 	@Autowired
 	private SqlSession session;
+	
+	
 	
 	@Override
 	public void insert(ShelterDto dto) {
@@ -42,6 +46,12 @@ public class ShelterDaoImpl implements ShelterDao{
 		}else {
 			return true;
 		}
+	}
+
+	@Override
+	public List<ShelterDto> getList() {
+		
+		return session.selectList("shelter.getList");
 	}
 
 }

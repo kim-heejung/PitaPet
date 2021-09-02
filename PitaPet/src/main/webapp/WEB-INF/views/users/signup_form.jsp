@@ -137,6 +137,8 @@ div.tab.btn.btn-primary {
 					<label class="control-label" for="address">보호소 위치</label>
 					<input class="form-control" type="text" name="address" id="shelter_address" />
 					<a class="btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
+					<input type="hidden" name="longitude" id="longitude"/> <!-- 위도 / 경도 -->
+					<input type="hidden" name="latitude" id="latitude"/> 
 				</div>
 				<br />
 				<div>
@@ -158,6 +160,7 @@ div.tab.btn.btn-primary {
 	</div>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.2/proj4.js" type="text/javascript"></script>
 <script>
 	const tabs = document.querySelectorAll("[data-tab-target]");
 	const tabcon = document.querySelectorAll("[data-tab-content]");
@@ -177,10 +180,27 @@ div.tab.btn.btn-primary {
 	    window.open(url, name, options);
 	}
 	
-	function jusoCallBack(roadFullAddr){
-			 // 2017년 2월 제공항목이 추가되었습니다. 원하시는 항목을 추가하여 사용하시면 됩니다.
+	function jusoCallBack(roadFullAddr,entX,entY){
+			console.log(roadFullAddr,entX,entY);
 			 document.querySelector("#users_address").value = roadFullAddr;
 			 document.querySelector("#shelter_address").value = roadFullAddr;
+			 
+			 console.log(entX,entY);
+			 
+			 let coord_X = Math.round(entX * 1000000) / 1000000;
+			 let coord_Y = Math.round(entY * 1000000) / 1000000;
+			 let point = [coord_X, coord_Y];
+
+			 proj4.defs["EPSG:5179"] = "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs";//제공되는 좌표
+
+			 let grs80 = proj4.Proj(proj4.defs["EPSG:5179"])
+			 let wgs84 = proj4.Proj(proj4.defs["EPSG:4326"]); //경위도
+
+			 let p = proj4.toPoint(point);
+			 p = proj4.transform(grs80, wgs84, p);
+			   
+			 document.querySelector("#longitude").value = p.y;
+			 document.querySelector("#latitude").value = p.x;
 	}
 	
 	let isIdValid=false;
