@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div class="container">
-		<a href="${pageContext.request.contextPath}/reserve/insertform.do">글쓰기</a>
+		<a href="${pageContext.request.contextPath}/reserve/private/insertform.do">글쓰기</a>
 		<h1>상담 예약</h1>
 		<p>핏어펫(Pit a Pet) 방문예약은 인터넷으로 가능합니다. 핏어펫(Pit a Pet)은 모든 문의사항을 친절하게
 			상담해 드리고 있습니다.</p>
@@ -39,12 +39,46 @@
 					<tr>
 						<td>${tmp.num }</td>
 						<td>${tmp.shelterName }</td>
-						<td><a
-							href="${pageContext.request.contextPath}/reserve/detail.do?num=${tmp.num }">${tmp.title }</a></td>
+						<td>
+							<c:choose>
+								<c:when test="${id eq tmp.id }">
+									<a href="${pageContext.request.contextPath}/reserve/detail.do?pageNum=${pageNum }&num=${tmp.num }">
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${tmp.scope eq 'private' }">
+											<a href="${pageContext.request.contextPath}/reserve/detailcheckform.do?num=${tmp.num }">
+										</c:when>
+										<c:otherwise>
+											<a href="${pageContext.request.contextPath}/reserve/detail.do?pageNum=${pageNum }&num=${tmp.num }">
+										</c:otherwise>
+									</c:choose>
+									
+								</c:otherwise>
+							</c:choose>
+								${tmp.title }
+								
+									<c:forEach var="count" items="${allCount }">
+										<c:if test="${tmp.num eq count.ref_group }">
+											<span>(${count.cnt })</span>
+										</c:if>
+									</c:forEach>
+								
+							</a>
+						</td>
 						<td>${tmp.writer }</td>
 						<td>${tmp.viewCount }</td>
 						<td>${tmp.regdate }</td>
-						<td>예약완료 여부</td>
+						<td>
+							<c:choose>
+								<c:when test="${tmp.checked eq 'yes' }">
+									예약 확인
+								</c:when>
+								<c:otherwise>
+									예약 대기중
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

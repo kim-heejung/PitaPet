@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reserveComment">
+	
+	<select id="getList" parameterType="reserveCommentDto" resultType="reserveCommentDto">
+      SELECT *
+      FROM
+         (SELECT result1.*, ROWNUM AS rnum
+         FROM
+            (SELECT r.num, writer, content, target_id, ref_group,
+               comment_group, deleted, r.regdate
+            FROM board_reserve_comment r
+            INNER JOIN shelter s
+            ON writer=id
+            WHERE ref_group=#{ref_group}
+            ORDER BY comment_group ASC, r.num ASC) result1)
+      WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+   </select>
+   
+   <update id="delete" parameterType="int">
+      UPDATE board_reserve_comment
+      SET deleted='yes'
+      WHERE num=#{num}
+   </update>
+   
+   <insert id="insert" parameterType="reserveCommentDto">
+      INSERT INTO board_reserve_comment
+      (num, writer, content, target_id, ref_group, comment_group, regdate)
+      VALUES(#{num}, #{writer}, #{content}, #{target_id}, #{ref_group},
+         #{comment_group}, SYSDATE)
+   </insert>
+   
+   <select id="getSequence" resultType="int">
+      SELECT board_reserve_comment_seq.NEXTVAL
+      FROM DUAL
+   </select>
+   
+   <update id="update" parameterType="reserveCommentDto">
+      UPDATE board_reserve_comment
+      SET content=#{content}
+      WHERE num=#{num}
+   </update>
+   
+   <select id="getData" parameterType="int" resultType="reserveCommentDto">
+      SELECT num,writer,content,ref_group,comment_group,deleted,regdate
+      FROM board_reserve_comment
+      WHERE num=#{num}
+   </select>
+   
+   <select id="getCount" parameterType="int" resultType="int">
+      SELECT NVL(MAX(ROWNUM), 0)
+      FROM board_reserve_comment
+      WHERE ref_group=#{ref_group}
+   </select>
+   
+   <select id="getAllCount" resultType="reserveCommentDto">
+   	  SELECT ref_group, count(ref_group) AS cnt
+	  FROM board_reserve_comment
+	  GROUP BY ref_group
+   </select>
+   
+</mapper>

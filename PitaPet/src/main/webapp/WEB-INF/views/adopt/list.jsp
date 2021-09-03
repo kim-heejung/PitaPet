@@ -46,7 +46,7 @@
 <body>
 <div class="container">
    	<h1>입양하기 게시판</h1>
-   	<a href="${pageContext.request.contextPath}/adopt/insertform.do">새글 작성</a><br/>
+   	<a href="${pageContext.request.contextPath}/adopt/private/insertform.do">새글 작성</a><br/>
    	<form action="list.do" method="get">
    		<select name="shelterName" id="shelter" onchange="formChange(this.form)">
    			<option value="선택하기">선택하기</option>

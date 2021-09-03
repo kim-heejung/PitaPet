@@ -131,7 +131,7 @@ public class AdoptController {
 	}
 	
 	
-	@RequestMapping("/adopt/insertform")
+	@RequestMapping("/adopt/private/insertform")
 	public String authInsertForm() {
 
 		return "adopt/insertform";
@@ -145,7 +145,7 @@ public class AdoptController {
 	}
 	
 	
-	@RequestMapping("/adopt/updateform")
+	@RequestMapping("/adopt/private/updateform")
 	public String testUpdateform(HttpServletRequest request) {
 
 		service.updateDetail(request);

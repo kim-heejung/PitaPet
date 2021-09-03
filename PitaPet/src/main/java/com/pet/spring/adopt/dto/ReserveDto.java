@@ -15,12 +15,16 @@ public class ReserveDto {
 	private int viewCount;
 	private int startRowNum;
 	private int endRowNum;
+	private String checked;
+	private String scope;
+	private String pwd;
+	private String id;
 	
 	public ReserveDto() {}
 
 	public ReserveDto(int num, String shelterName, String title, String writer, String reservedDate,
 			String reservedTime, String name, String phoneNumber, String content, String regdate, int viewCount,
-			int startRowNum, int endRowNum) {
+			int startRowNum, int endRowNum, String checked, String scope, String pwd, String id) {
 		super();
 		this.num = num;
 		this.shelterName = shelterName;
@@ -35,6 +39,10 @@ public class ReserveDto {
 		this.viewCount = viewCount;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
+		this.checked = checked;
+		this.scope = scope;
+		this.pwd = pwd;
+		this.id = id;
 	}
 
 	public int getNum() {
@@ -139,6 +147,38 @@ public class ReserveDto {
 
 	public void setEndRowNum(int endRowNum) {
 		this.endRowNum = endRowNum;
+	}
+
+	public String getChecked() {
+		return checked;
+	}
+
+	public void setChecked(String checked) {
+		this.checked = checked;
+	}
+
+	public String getScope() {
+		return scope;
+	}
+
+	public void setScope(String scope) {
+		this.scope = scope;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

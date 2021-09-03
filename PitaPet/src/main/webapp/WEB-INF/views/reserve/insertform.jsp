@@ -16,6 +16,15 @@
 	         	<input type="text" name="title" id="title"/>
 	      	</div>
 	      	<div>
+	         	<label for="scope">공개 여부</label>
+	         	<label><input type="checkbox" name="scope" id="scope" value="공개글"/>공개글</label>
+	         	<label><input type="checkbox" name="scope" id="scope" value="비밀글"/>비밀글</label>
+	      	</div>
+	      	<div>
+	         	<label for="pwd">비밀번호</label>
+	         	<input type="text" name="pwd" id="pwd"/>
+	      	</div>
+	      	<div>
 	      		<label for="shelterName">지점</label>
 	      		<select name="shelterName" id="shelterName">
 		   			<option value="지점 선택">지점 선택</option>
