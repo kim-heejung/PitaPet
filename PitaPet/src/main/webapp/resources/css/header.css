@@ -38,6 +38,7 @@
 }
 /* footer */
 .footer{
+	width:100%;
     background:#232323; 
     color:#aaa; 
     padding:80px 0;

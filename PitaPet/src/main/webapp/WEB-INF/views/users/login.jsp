@@ -7,25 +7,25 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/login.jsp</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 </head>
 <body>
 <div id="login">
 	<div class="container">
 		<h1>알림</h1>
-		<c:choose>
-			<c:when test="${not empty sessionScope.id }">
-				<p>
-					<strong>${sessionScope.id }</strong>님 로그인 되었습니다.
-					<a href="${requestScope.url }">확인</a>
-				</p>
-			</c:when>
-			<c:otherwise>
-				<p>
-					아이디 혹은 비밀번호가 틀립니다
-					<a href="loginform.do?url=${encodedUrl }">다시 시도</a>
-				</p>
-			</c:otherwise>
-		</c:choose>
+		<div v-if="${not empty sessionScope.id }">
+			<p>
+				<strong>${sessionScope.id }</strong>님 로그인 되었습니다.
+				<a :href="host">확인</a>
+			</p>
+		</div>
+		<div v-else>
+			<p>
+				아이디 혹은 비밀번호가 틀립니다
+				<a href="loginform.do?url=${encodedUrl }">다시 시도</a>
+			</p>
+		</div>		
 	</div>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
@@ -36,7 +36,7 @@ let login = new Vue({
 	el:"#login",
 	data(){
 		return{
-			
+			host:"http://localhost:8888/spring/"
 		}
 	}
 });

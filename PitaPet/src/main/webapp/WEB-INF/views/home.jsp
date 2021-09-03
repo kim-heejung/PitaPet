@@ -12,12 +12,11 @@
 <a href="${pageContext.request.contextPath}/review/list.do">입양후기 게시판</a>
 <a href="${pageContext.request.contextPath}/shop/list.do">쇼핑하기 </a>
 <a href="${pageContext.request.contextPath}/reserve/list.do">상담 예약</a>
-
-
 <a href="javascript:" onclick="userAccess()">후원하기 게시판</a>
-
+<a href="${pageContext.request.contextPath}/shelter/list.do">보호소 보기</a>
 
 <div id="home">
+	<a v-on:click.prevent="userAccess()" href="">후원하기 게시판</a>
 	<jsp:include page="/resources/header.jsp"></jsp:include>
 	<slider-component :cpath="cpath"></slider-component>
 	<intro-component></intro-component>
@@ -25,7 +24,6 @@
 	<family-component></family-component>
 	<footer-component></footer-component>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/slider.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/intro.js"></script>
@@ -37,17 +35,19 @@
 		el:"#home",
 		data:{
 			cpath: "${pageContext.request.contextPath}",
+			id: "${sessionScope.id}"
+		},
+		methods:{
+			userAccess(){
+				console.log(this.id);
+				if(this.id == ""){
+					alert("pit a pet(핏어펫) 회원만 접근할 수 있는 페이지 입니다.");
+				}else{
+					location.href="${pageContext.request.contextPath}/donation/main.do";
+				}
+			}
 		}
 	});
-</script>
- <script type="text/javascript">
-	function userAccess(){
-		if(${empty sessionScope.id }){
-			alert("pit a pet(핏어펫) 회원만 접근할 수 있는 페이지 입니다.");
-		}else{
-			location.href="${pageContext.request.contextPath}/donation/main.do";
-		}
-	}
 </script>
 </body>
 </html>

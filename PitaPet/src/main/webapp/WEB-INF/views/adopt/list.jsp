@@ -5,47 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
-<%-- bootstrap 읽어오기 --%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
-<style>
-   /* card 이미지 부모요소의 높이 지정 */
-   .img-wrapper{
-      height: 250px;
-      /* transform 을 적용할대 0.3s 동안 순차적으로 적용하기 */
-      transition: transform 0.3s ease-out;
-   }
-   /* .img-wrapper 에 마우스가 hover 되었을때 적용할 css */
-   .img-wrapper:hover{
-      /* 원본 크기의 1.1 배로 확대 시키기*/
-      transform: scale(1.05);
-   }
-   
-   .card .card-text{
-      /* 한줄만 text 가 나오고  한줄 넘는 길이에 대해서는 ... 처리 하는 css */
-      display:block;
-      white-space : nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-   }
-   	.img-wrapper img{
-	   	width: 100%;
-	   	height: 100%;
-	   	/* fill | contain | cover | scale-down | none(default) */
-	   	/*	
-	   		cover - 부모의 크기에 맞게 키운 후, 자른다. 비율은 일정하게 증가한다. 
-	   		contain - 안잘린다. 대신 빈 공간이 남을 수 있다.
-	   		fill - 부모의 크기에 딱 맞게, 비율 관계 없이 맞춘다.(이미지가 일그러질 수 있다.)
-	   		scale-down - 가로, 세로 중에 큰 것을 부모의 크기에 맞춘 상태까지만 커지거나 작아지고, 비율은 일정하다.
-	   	*/
-		object-fit: contain;	
-   	}
-</style>
+	<meta charset="UTF-8">
+	<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+	<%-- bootstrap 읽어오기 --%>
+	<jsp:include page="/resources/resource.jsp"></jsp:include>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 </head>
 <body>
-<div class="container">
+<div id="adoptList">
    	<h1>입양하기 게시판</h1>
+    <jsp:include page="/resources/header.jsp"></jsp:include>
+    <div class="board-wrap">
+    <page-category :name="'입양하기'"></page-category>
+    <div class="container">
    	<a href="${pageContext.request.contextPath}/adopt/private/insertform.do">새글 작성</a><br/>
    	<form action="list.do" method="get">
    		<select name="shelterName" id="shelter" onchange="formChange(this.form)">
@@ -117,36 +89,49 @@
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+					<c:choose>
+						<c:when test="${i eq pageNum }">
+							<li class="page-item active">
+	                  			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${shelterName}">${i }</a>
+	               			</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+	                  			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${shelterName}">${i}</a>
+	               			</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 				<c:choose>
-					<c:when test="${i eq pageNum }">
-						<li class="page-item active">
-                  			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${shelterName}">${i }</a>
-               			</li>
+					<c:when test="${endPageNum lt totalPageCount }">
+						<li class="page-item">
+	               			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${endPageNum + 1}&shelterName=${shelterName}">Next</a>
+	            		</li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item">
-                  			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${i}&shelterName=${shelterName}">${i}</a>
-               			</li>
+						<li class="page-item disabled">
+	               			<a class="page-link" href="javascript:">Next</a>
+	            		</li>
 					</c:otherwise>
 				</c:choose>
-			</c:forEach>
-			<c:choose>
-				<c:when test="${endPageNum lt totalPageCount }">
-					<li class="page-item">
-               			<a class="page-link" href="${pageContext.request.contextPath}/adopt/list.do?pageNum=${endPageNum + 1}&shelterName=${shelterName}">Next</a>
-            		</li>
-				</c:when>
-				<c:otherwise>
-					<li class="page-item disabled">
-               			<a class="page-link" href="javascript:">Next</a>
-            		</li>
-				</c:otherwise>
-			</c:choose>
-      	</ul>
-   </nav>
-   <script>
-	function formChange(obj)
-	{
+	      	</ul>
+	   </nav>
+	   </div>
+	</div>
+	<footer-component></footer-component>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
+<script>
+  new Vue({
+      el : "#adoptList"
+  });
+  
+	function formChange(obj){
 		//select box 선택 시 JSP페이지로 데이터를 전달
 		
 		//※obj 변수에는 form 객체가 저장되어 있다.
@@ -156,8 +141,8 @@
 		//『폼객체.submit();』 함수의 호출을 통해
 		//form 객체의 데이터를 서버로 전송하는 것이 가능하다.	
 	}
-   </script>   
-</div>
+</script>   
+
 </body>
 </html>
 

@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.page-category{
+	position:relative;
+	background:#fafafa; 
+	border-top:1px solid #ddd; 
+	text-align:center;
+	margin-bottom:6rem;
+}
+.page-category .img-area{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-image:url('http://localhost:8888/spring/resources/images/category01.jpg'); 
+	background-position:40% 50%;
+	background-size:cover;
+}
+.page-category.adopt-review .img-area{
+	background-image:url('http://localhost:8888/spring/resources/images/category02.jpg'); 
+}
+.page-category .img-area::after{
+	content:"";
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:rgba(0, 0, 0, 0.35);
+}
+.page-category .txt-area{
+	color:#fff;
+	padding:6rem 0 4rem; position:relative;
+}
+.page-category .txt-area h1{
+	font-weight:500; font-size:2.8rem; font-family:'Cormorant Garamond', 'Nanum Myeongjo';
+	
+}
+.page-category .txt-area p{
+	color:#ddd; font-size:1rem; font-weight:300; margin-top:1rem; font-family:'Noto Sans KR', sans-serif"
+	
+}
+.breadcrumb-item>a{
+	color:rgba(255,255,255,0.6);
+}
+.breadcrumb-item + .breadcrumb-item::before{
+	color:#fff !important;
+}
+.breadcrumb-item.active{
+	color:#fff !important;
+}

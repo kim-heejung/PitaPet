@@ -57,7 +57,8 @@
 					</div>
 					<div>
 						<label for="address">주소</label>
-						<input type="text" id="address" value="${dto.address }" name="address"/>
+						<input type="text" id="address_users" value="${dto.address }" name="address"/>
+						<a class="btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
 					</div>
 					<div>
 					<label class="control-label" for="household">가구원</label>
@@ -91,14 +92,14 @@
 				<form action="${pageContext.request.contextPath}/users/update.do" method="post">
 					
 					<input type="hidden" name="profile" value="${empty dto.profile? '': 'dto.profile'}"/>
-					<input type="hidden" name="groupNum" value="0" />
+					<input type="hidden" name="groupNum" value="1" />
 					<div>
 						<label for="id">아이디</label>
 						<input type="text" id="id" value="${id }" disabled/>
 					</div>
 					<div>
 						<label for="name">보호소 이름</label>
-						<input type="text" id="id" value="${sDto.name }" disabled/>
+						<input type="text" id="id" value="${dto.name }" name="name" disabled/>
 					</div>
 					<div>
 						<label for="email">이메일</label>
@@ -110,7 +111,8 @@
 					</div>
 					<div>
 						<label for="address">주소</label>
-						<input type="text" id="address" value="${dto.address }" name="address"/>
+						<input type="text" id="address_shelter" value="${dto.address }" name="address"/>
+						<a class="btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
 					</div>
 					<div>
 				</div>
@@ -127,6 +129,21 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+	//주소 팝업
+	function openAddrPop(url, name){
+	    let options = 'top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no, scrollbars=yes';
+	    window.open(url, name, options);
+	}
+	
+	function jusoCallBack(roadFullAddr,entX,entY){
+		console.log(roadFullAddr,entX,entY);
+		if(${dto.groupNum eq 0}){
+			document.querySelector("#address_users").value = roadFullAddr;
+		}else{
+			document.querySelector("#address_shelter").value = roadFullAddr;
+		}
+	}
+
 	//프로필 이미지 javascript
 	document.querySelector("#profileLink").addEventListener("click", function(){
 		// input type="file" 을 강제 클릭 시킨다. 

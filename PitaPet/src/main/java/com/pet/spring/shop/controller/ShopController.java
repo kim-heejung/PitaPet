@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pet.spring.shop.dto.ShopDto;
 import com.pet.spring.shop.service.ShopService;
+import com.pet.spring.users.dto.UsersDto;
 
 @Controller
 public class ShopController {
@@ -47,5 +49,10 @@ public class ShopController {
 		return mView;
 	}
 	
+	@RequestMapping("/shop/buy")
+	public String buy(HttpServletRequest request, UsersDto dto) {
+		service.buy(request, dto);
+		return "shop/buy";
+	} 
 
 }

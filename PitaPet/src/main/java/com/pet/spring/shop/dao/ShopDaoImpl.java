@@ -31,6 +31,16 @@ public class ShopDaoImpl implements ShopDao{
 		// TODO Auto-generated method stub
 		return session.selectOne("shop.getCount");
 	}
+
+	@Override
+	public void minusCount(int num) {
+		session.update("shop.minusCount", num);
+	}
+
+	@Override
+	public int getPrice(int num) {
+		return session.selectOne("shop.getPrice", num);
+	}
 	
 	
 	
