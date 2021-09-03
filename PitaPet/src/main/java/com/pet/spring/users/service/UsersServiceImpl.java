@@ -121,12 +121,18 @@ public class UsersServiceImpl implements UsersService{
 	
 	@Transactional
 	@Override
-	public void updateUser(HttpSession session, UsersDto dto,ShelterDto sDto) {
+	public void updateUser(HttpSession session, UsersDto dto) {
 		String id=(String)session.getAttribute("id");
 		dto.setId(id);
 		dao.updateInfo(dto);
 		if(dto.getGroupNum()==1) {
-			sDao.updateInfo(sDto);
+			ShelterDto sdto=new ShelterDto();
+			sdto.setId(id);
+			sdto.setAddress(dto.getAddress());
+			sdto.setEmail(dto.getEmail());
+			sdto.setPhoneNumber(dto.getPhoneNumber());
+			
+			sDao.updateInfo(sdto);
 		}
 	}
 	

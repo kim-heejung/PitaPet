@@ -232,8 +232,8 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value="/users/update",method=RequestMethod.POST)
-	public ModelAndView authUpdate(HttpSession session,ModelAndView mView,UsersDto dto,HttpServletRequest request,ShelterDto sDto) {
-		service.updateUser(session, dto,sDto);
+	public ModelAndView authUpdate(HttpSession session,ModelAndView mView,UsersDto dto,HttpServletRequest request) {
+		service.updateUser(session, dto);
 		mView.setViewName("redirect:/users/info.do");
 		return mView;
 	}
