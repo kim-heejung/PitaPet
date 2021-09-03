@@ -2,14 +2,23 @@
 
 /* meun */
 #header{
-    height:120px;
+    height:106px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight:400;
 }
 .top{
-    height:44px;
+    height:40px;
     border-bottom:1px solid #ddd;
+    display:flex;
+    align-items:center;
+}
+.top a{
+	font-size:0.9rem;
+	color:#777;
+	margin-left:10px;
 }
 .nav-bar{
-    height:76px;
+    height:66px;
     display:flex; 
     align-items:center; 
     justify-content: space-between;
