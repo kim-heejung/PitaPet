@@ -7,9 +7,10 @@
 		FROM
 			(SELECT result1.*, ROWNUM AS rnum
 			FROM
-				(SELECT num, shelterName, title, writer, viewCount, regdate
-				FROM reserve
-				ORDER BY num DESC) result1)
+				(SELECT r.num, shelterName, title, writer, viewCount, r.regdate, checked, scope, id
+				FROM reserve r INNER JOIN shelter s
+				ON shelterName = s.name
+				ORDER BY r.num DESC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 
@@ -20,14 +21,15 @@
 	
 	<insert id="insert" parameterType="reserveDto">
 		INSERT INTO reserve
-		(num, title, writer, shelterName, reservedDate, reservedTime, name, phoneNumber, regDate)
-		VALUES(reserve_seq.NEXTVAL, #{title}, #{writer}, #{shelterName}, #{reservedDate}, #{reservedTime}, 
-		#{name}, #{phoneNumber}, SYSDATE)
+		(num, title, scope, pwd, writer, shelterName, reservedDate, reservedTime, name, phoneNumber, content,
+		regDate)
+		VALUES(reserve_seq.NEXTVAL, #{title}, #{scope}, #{pwd}, #{writer}, #{shelterName}, #{reservedDate}, 
+		#{reservedTime}, #{name}, #{phoneNumber}, #{content}, SYSDATE)
 	</insert>
 
 	<select id="getData" parameterType="int" resultType="reserveDto">
 		SELECT num, shelterName, title, writer, viewCount, regdate, reservedDate, reservedTime, 
-		name, phoneNumber, content
+		name, phoneNumber, content, checked
 		FROM reserve
 		WHERE num = #{num}
 	</select>
@@ -49,5 +51,28 @@
 		DELETE FROM reserve
 		WHERE num=#{num}
 	</delete>
+	
+	<select id="getCheckedList" resultType="shelterDto">
+		SELECT id, name
+		FROM shelter
+	</select>
+	
+	<update id="getCheckedY" parameterType="int">
+		UPDATE reserve
+		SET checked='yes'
+		WHERE num=#{num}
+	</update>
+	
+	<update id="getCheckedN" parameterType="int">
+		UPDATE reserve
+		SET checked='no'
+		WHERE num=#{num}
+	</update>
+	
+	<select id="getDetailPwd" parameterType="int" resultType="reserveDto">
+		SELECT pwd
+		FROM reserve
+		WHERE num=#{num}
+	</select>
 	
 </mapper>

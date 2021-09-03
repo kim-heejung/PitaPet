@@ -10,6 +10,7 @@
  		<typeAlias type="com.pet.spring.adopt.dto.AdoptDto" alias="adoptDto"/>
  		<typeAlias type="com.pet.spring.adopt.dto.AdoptLikeDto" alias="adoptLikeDto"/>
  		<typeAlias type="com.pet.spring.adopt.dto.ReserveDto" alias="reserveDto"/>
+ 		<typeAlias type="com.pet.spring.adopt.dto.ReserveCommentDto" alias="reserveCommentDto"/>
  		<typeAlias type="com.pet.spring.shelter.dto.ShelterDto" alias="shelterDto"/>
  		<typeAlias type="com.pet.spring.shop.dto.ShopDto" alias="shopDto"/>
  		<typeAlias type="com.pet.spring.shop.dto.OrderDto" alias="orderDto"/>
@@ -21,6 +22,7 @@
  		<mapper resource="com/pet/spring/mybatis/AdoptMapper.xml"/>
  		<mapper resource="com/pet/spring/mybatis/AdoptLikeMapper.xml"/>
  		<mapper resource="com/pet/spring/mybatis/ReserveMapper.xml"/>
+ 		<mapper resource="com/pet/spring/mybatis/ReserveCommentMapper.xml"/>
  		<mapper resource="com/pet/spring/mybatis/ShelterMapper.xml"/>
  		<mapper resource="com/pet/spring/mybatis/ShopMapper.xml"/>
   </mappers>

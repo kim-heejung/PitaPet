@@ -3,6 +3,7 @@ package com.pet.spring.adopt.dao;
 import java.util.List;
 
 import com.pet.spring.adopt.dto.ReserveDto;
+import com.pet.spring.shelter.dto.ShelterDto;
 
 public interface ReserveDao {
 
@@ -13,5 +14,10 @@ public interface ReserveDao {
 	public void addViewCount(int num);
 	public void update(ReserveDto dto);
 	public void delete(int num);
+	//예약확인 관련
+	public List<ShelterDto> getCheckedList();
+	public void getCheckedY(int num);
+	public void getCheckedN(int num);
+	public ReserveDto getDetailPwd(int num);
 	
 }

@@ -51,7 +51,7 @@
             <a href="">목록보기</a>
          </li>
          <c:if test="${dto.writer eq id }">
-	         <li><a href="${pageContext.request.contextPath}/adopt/updateform.do?num=${dto.num }">수정</a></li>
+	         <li><a href="${pageContext.request.contextPath}/adopt/private/updateform.do?num=${dto.num }">수정</a></li>
 	         <li><a href="${pageContext.request.contextPath}/api/adopt/delete.do?num=${dto.num }">삭제</a></li>
 	     </c:if>
       </ul>
@@ -85,7 +85,7 @@
       </ul>
    </nav> 
    
-   <button><a href="${pageContext.request.contextPath}/reserve/list.do">상담 예약</a></button>     
+   <button><a href="${pageContext.request.contextPath}/reserve/private/insertform.do">상담 예약</a></button>     
 </div>
 </body>
 </html>

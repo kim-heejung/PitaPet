@@ -58,10 +58,10 @@
 	<select id="getData" parameterType="adoptDto" resultType="adoptDto">
 		SELECT *
 		FROM
-			(SELECT num, name, title, viewCount, writer, breed, petName, petAge, petGender, 
+			(SELECT a.num, name, title, viewCount, writer, breed, petName, petAge, petGender, 
 			vaccination, neutralization, findDate, caption, orgImageName, imagePath, a.regdate,   
-			LAG(num, 1, 0) OVER (ORDER BY num DESC) AS prevNum,
-			LEAD(num, 1, 0) OVER (ORDER BY num DESC) AS nextNum
+			LAG(a.num, 1, 0) OVER (ORDER BY a.num DESC) AS prevNum,
+			LEAD(a.num, 1, 0) OVER (ORDER BY a.num DESC) AS nextNum
 			FROM board_adopt a INNER JOIN shelter
 			ON writer = id
 			<include refid="selectShelter"/>
