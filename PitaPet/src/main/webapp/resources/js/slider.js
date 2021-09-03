@@ -127,7 +127,7 @@ Vue.component("slider-component", {
                 {
                     headlineFirstLine: "Pit a Pet를 통해 68,725마리의",
                     headlineSecondLine: "유기동물이 가족을 찾았습니다",
-                    sublineFirstLine: "사지 않고 입양하는 문화를 만듭니",
+                    sublineFirstLine: "사지 않고 입양하는 문화를 만듭니다",
                     sublineSecondLine: "good pet",
                     circlelineFirstLine: "Adopt Animals, Adopt Family",
                     slideBtnTxt:"입양하는 문화",
@@ -138,10 +138,10 @@ Vue.component("slider-component", {
                 {
                     headlineFirstLine: "Pit a Pet",
                     headlineSecondLine: "입양 후기를 만나보세요",
-                    sublineFirstLine: "사지 않고 입양하는 문화를 만듭니",
+                    sublineFirstLine: "사지 않고 입양하는 문화를 만듭니다",
                     sublineSecondLine: "good pet",
                     circlelineFirstLine: "Adopt Animals, Adopt Family",
-                    slideBtnTxt:"입양하는 문화",
+                    slideBtnTxt:"입양후기",
                     bgImg: "/resources/images/main-slide03.jpg",
                     bgColor: "#aaa",
                     rectImg: "/resources/images/main-slide03.jpg"
