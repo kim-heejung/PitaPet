@@ -1,6 +1,7 @@
 package com.pet.spring.shelter.dto;
 
 public class ShelterDto {
+	private int num;
 	private String serialNum;
 	private String id;
 	private String name;
@@ -8,12 +9,16 @@ public class ShelterDto {
 	private String phoneNumber;
 	private String address;
 	private String regdate;
+	private String longitude;
+	private String latitude;
 	
 	public ShelterDto() {}
 
-	public ShelterDto(String serialNum, String id, String name, String email, String phoneNumber, String address,
-			String regdate) {
+
+	public ShelterDto(int num, String serialNum, String id, String name, String email, String phoneNumber,
+			String address, String regdate, String longitude, String latitude) {
 		super();
+		this.num = num;
 		this.serialNum = serialNum;
 		this.id = id;
 		this.name = name;
@@ -21,7 +26,10 @@ public class ShelterDto {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.regdate = regdate;
+		this.longitude = longitude;
+		this.latitude = latitude;
 	}
+
 
 	public String getSerialNum() {
 		return serialNum;
@@ -77,6 +85,40 @@ public class ShelterDto {
 
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+
+
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+
+	public int getNum() {
+		return num;
+	}
+
+
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	

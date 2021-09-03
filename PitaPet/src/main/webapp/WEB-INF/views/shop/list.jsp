@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class="container">
+
    <h1>상품 목록 입니다.</h1>
    <c:if test="${id eq 'admin'}">
       <a href="${pageContext.request.contextPath}/shop/insertForm.do">상품 추가하기</a>
@@ -68,19 +69,19 @@
                  </div>
                  <div class="mb-3">
                   <label for="name" class="col-form-label">주문자</label>
-                  	<input type="text" class="form-control" name="name" value="${dto.name }" />
+                  	<input type="text" class="form-control" name="name" />
                  </div> 
                  <div class="mb-3">
                   <label for="phoneNum" class="col-form-label">휴대전화</label>
-                  	<input type="tel" class="form-control" name="phoneNum" value="${dto.phoneNumber }" />
+                  	<input type="tel" class="form-control" name="phoneNum"  />
                  </div>
                <div class="mb-3">
                   <label for="email" class="col-form-label">이메일</label>
-                  	<input type="email" class="form-control" name="email" value="${dto.email }" />
+                  	<input type="email" class="form-control" name="email" />
                  </div>
                 <div class="mb-3">
                   <label for="addr" class="col-form-label">주소</label>
-                  	<input type="text" class="form-control" name="addr" value="${dto.address }" />
+                  	<input type="text" class="form-control" name="addr" />
                  </div>                        
                 </form> 
             </div>
@@ -135,6 +136,7 @@
                </li>
          </c:otherwise>
       </c:choose>
+
       </ul>
    </nav>   
 </div>
@@ -142,29 +144,40 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script>
-   let btns=document.querySelectorAll(".purchaseBtn");
-   for(let i=0; i<btns.length; i++){
-      btns[i].addEventListener("click",function(){
-         const num=this.getAttribute("data-num");
-         ajaxPromise("${pageContext.request.contextPath}/api/users/info.do")
-         .then(function(response){
-            return response.json();
-         })
-         .then(function(data){
-            console.log(data);
-            document.querySelector("#addr-"+num).innerText="주소:"+data.UsersDto.address;
-         });
-         
-      })
-   }
-   
-   let buyNowBtns=document.querySelectorAll(".buyNowBtn");
-   for(let i=0; i<buyNowBtns.length; i++){
-      buyNowBtns[i].addEventListener("click", function(){
-         const num=this.getAttribute("data-num");
-         document.querySelector("#purchaseForm-"+num).submit();
-      });
-   }
+
+	let btns=document.querySelectorAll(".purchaseBtn");
+	for(let i=0; i<btns.length; i++){
+		btns[i].addEventListener("click",function(){
+			const num=this.getAttribute("data-num");
+			if(${empty id}){
+				alert("로그인이 필요합니다");
+				location.href="${pageContext.request.contextPath}/users/loginform.do?url=${pageContext.request.contextPath}/shop/list.do";
+			}else{
+				
+				ajaxPromise("${pageContext.request.contextPath}/api/users/info.do")
+				.then(function(response){
+					return response.json();
+				})
+				.then(function(data){
+					document.querySelector("#addr-"+num).value=data.UsersDto.address;
+					document.querySelector("#name-"+num).value=data.UsersDto.name;
+					document.querySelector("#email-"+num).value=data.UsersDto.email;
+					document.querySelector("#phone-"+num).value=data.UsersDto.phoneNumber;
+				});
+			}
+			
+			
+			
+		})
+	}
+	
+	let buyNowBtns=document.querySelectorAll(".buyNowBtn");
+	for(let i=0; i<buyNowBtns.length; i++){
+		buyNowBtns[i].addEventListener("click", function(){
+			const num=this.getAttribute("data-num");
+			document.querySelector("#purchaseForm-"+num).submit();
+		});
+	}
 
   
    let count = 1;

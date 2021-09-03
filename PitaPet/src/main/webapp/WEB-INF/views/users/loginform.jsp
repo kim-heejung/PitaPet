@@ -248,7 +248,7 @@ input:valid ~ label {
             	<img width="100" class="logo" src="${pageContext.request.contextPath}/resources/images/logo.png" alt="Logo" />
         	</div>
         
-			<div v-if="${ empty param.url2 }">
+			<div v-if="${ empty param.url }">
 				<input type="hidden" name="url" value="${pageContext.request.contextPath}/"/>
 			</div>
 			<div v-else>
