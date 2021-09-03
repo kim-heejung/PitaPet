@@ -69,19 +69,19 @@
                  </div>
                  <div class="mb-3">
                   <label for="name" class="col-form-label">주문자</label>
-                  	<input type="text" class="form-control" name="name" />
+                  	<input type="text" class="form-control" name="name" id="name-${tmp.num }" />
                  </div> 
                  <div class="mb-3">
                   <label for="phoneNum" class="col-form-label">휴대전화</label>
-                  	<input type="tel" class="form-control" name="phoneNum"  />
+                  	<input type="tel" class="form-control" name="phoneNum" id="phone-${tmp.num }" />
                  </div>
                <div class="mb-3">
                   <label for="email" class="col-form-label">이메일</label>
-                  	<input type="email" class="form-control" name="email" />
+                  	<input type="email" class="form-control" name="email" id="email-${tmp.num }"/>
                  </div>
                 <div class="mb-3">
                   <label for="addr" class="col-form-label">주소</label>
-                  	<input type="text" class="form-control" name="addr" />
+                  	<input type="text" class="form-control" name="addr" id="addr-${tmp.num }"/>
                  </div>                        
                 </form> 
             </div>
