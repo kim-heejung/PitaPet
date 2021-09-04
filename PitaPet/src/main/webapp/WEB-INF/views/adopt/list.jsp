@@ -48,10 +48,10 @@
 				         	<c:otherwise>
 				         		<c:choose>
 				         			<c:when test="${tmp.liked eq 'yes' }">
-				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/api/adoptlike/unlike.do?num=${dto.num }">♥</a></p>
+				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/api/adoptlike/unlike.do?num=${tmp.num }">♥</a></p>
 				         			</c:when>
 				         			<c:otherwise>
-				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/adoptlike/like.do?num=${dto.num }">♡</a></p>
+				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/adoptlike/like.do?num=${tmp.num }">♡</a></p>
 				         			</c:otherwise>
 				         		</c:choose>
 				         	</c:otherwise>

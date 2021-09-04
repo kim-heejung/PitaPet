@@ -24,21 +24,29 @@ public class AdoptLikeController {
 	@Autowired
 	private AdoptLikeService service;
 	
-	
+	@RequestMapping("/api/adoptlike/insert")
+	@ResponseBody
+	public Map<String, Object> insert(HttpServletRequest request){
+		
+		return service.insert(request);
+	}
+	//테스트용-후에 삭제될 부분
 	@RequestMapping("/adoptlike/like")
-	public String insert(HttpServletRequest request) {
+	public String testInsert(HttpServletRequest request) {
 		
 		String id=(String)request.getSession().getAttribute("id");
 		int isExist=service.isExist(request);
 		
 		if(isExist < 1) {
-			service.insert(request);
+			service.testInsert(request);
 		}else {
 			service.updateY(request);
 		}
 		
 		return "redirect:/adopt/list.do";
 	}
+
+  
 	@RequestMapping("/api/adoptlike/like")
 	@ResponseBody
 	public Map<String, Object> updateY(HttpServletRequest request){
