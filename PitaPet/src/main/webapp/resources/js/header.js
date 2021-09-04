@@ -36,8 +36,12 @@ Vue.component("header-component", {
     		  logo: "/resources/images/logo.png",
               routes:[
                   {
-                      menu: "입양절차알아보기",
+                      menu: "입양절차 소개",
                       path: "/adopt/procedure.do"
+                  },
+                  {
+                      menu: "상담예약",
+                      path: "/reserve/list.do"
                   },
                   {
                 	  menu: "입양하기",
@@ -52,7 +56,11 @@ Vue.component("header-component", {
                 	  path: "/shop/list.do"
                   },
                   {
-                	  menu: "후원하기",
+                	  menu: "보호소위치",
+                      path: "/shelter/list.do"
+                  },
+                  {
+                	  menu: "핏어팻후원",
                       path: "/donation/main.do"
                   }
               ],
@@ -60,7 +68,7 @@ Vue.component("header-component", {
       },
       methods:{
 		userAccess(index){
-			if(index == 4 && this.id == ""){
+			if(index == 6 && this.id == ""){
 				alert("pit a pet(핏어펫) 회원만 접근할 수 있는 페이지 입니다.");
 			}else{
 				location.href= this.cpath + this.routes[index].path;
