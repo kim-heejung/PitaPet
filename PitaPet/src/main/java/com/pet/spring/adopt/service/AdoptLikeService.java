@@ -12,7 +12,9 @@ import com.pet.spring.adopt.dto.AdoptLikeDto;
 
 public interface AdoptLikeService {
 	
-	public void insert(HttpServletRequest request);
+	public Map<String, Object> insert(HttpServletRequest request);
+	public void testInsert(HttpServletRequest request);
+	
 	
 	public Map<String, Object> updateY(HttpServletRequest request);
 	//좋아요 클릭 시 (liked가 yes 일 때)

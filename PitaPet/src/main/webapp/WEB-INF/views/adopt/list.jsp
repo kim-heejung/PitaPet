@@ -13,8 +13,7 @@
 </head>
 <body>
 <div id="adoptList">
-   	<h1>입양하기 게시판</h1>
-    <jsp:include page="/resources/header.jsp"></jsp:include>
+   	<jsp:include page="/resources/header.jsp"></jsp:include>
     <div class="board-wrap">
     <page-category :name="'입양하기'"></page-category>
     <div class="container">
@@ -49,10 +48,10 @@
 				         	<c:otherwise>
 				         		<c:choose>
 				         			<c:when test="${tmp.liked eq 'yes' }">
-				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/api/adoptlike/unlike.do?num=${dto.num }">♥</a></p>
+				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/api/adoptlike/unlike.do?num=${tmp.num }">♥</a></p>
 				         			</c:when>
 				         			<c:otherwise>
-				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/adoptlike/like.do?num=${dto.num }">♡</a></p>
+				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/adoptlike/like.do?num=${tmp.num }">♡</a></p>
 				         			</c:otherwise>
 				         		</c:choose>
 				         	</c:otherwise>

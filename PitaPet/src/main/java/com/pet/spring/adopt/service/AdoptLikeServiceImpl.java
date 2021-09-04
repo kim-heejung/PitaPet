@@ -22,7 +22,27 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 	
 	
 	@Override
-	public void insert(HttpServletRequest request) {
+	public Map<String, Object> insert(HttpServletRequest request) {
+		
+		AdoptLikeDto dto=new AdoptLikeDto();
+		
+		int num=Integer.parseInt(request.getParameter("num"));
+		String id=(String)request.getSession().getAttribute("id");	
+		
+		dto.setNum(num);
+		dto.setId(id);
+		
+		dao.insert(dto);
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("isSuccess", true);
+		
+		return map; 
+		
+	}
+	//테스트용-후에 삭제될 부분
+	@Override
+	public void testInsert(HttpServletRequest request) {
 		
 		AdoptLikeDto dto=new AdoptLikeDto();
 		
