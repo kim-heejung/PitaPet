@@ -26,6 +26,7 @@
              <li class="menu-list"><a href="${pageContext.request.contextPath}/adopt/list.do">입양하기</a></li>
              <li class="menu-list"><a href="${pageContext.request.contextPath}/review/list.do">입양후기</a></li>
              <li class="menu-list"><a href="${pageContext.request.contextPath}/shop/list.do">쇼핑하기 </a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/shop/list.do">후원하기 </a></li>
          </ul>
      </nav>
 </header>

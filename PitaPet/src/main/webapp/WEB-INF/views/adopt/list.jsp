@@ -13,11 +13,11 @@
 </head>
 <body>
 <div id="adoptList">
-   	<jsp:include page="/resources/header.jsp"></jsp:include>
+   	<header-component :cpath="cpath" :id="id"></header-component>
     <div class="board-wrap">
     <page-category :name="'입양하기'"></page-category>
     <div class="container">
-   	<a href="${pageContext.request.contextPath}/adopt/private/insertform.do">새글 작성</a><br/>
+   	<a href="${pageContext.request.contextPath}/adopt/private/insertform.do" class="btn btn-primary">새글 작성</a><br/>
    	<form action="list.do" method="get">
    		<select name="shelterName" id="shelter" onchange="formChange(this.form)">
    			<option value="선택하기">선택하기</option>
@@ -126,9 +126,14 @@
 <script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <script>
+ const base_url="http://localhost:8888/spring";
   new Vue({
-      el : "#adoptList"
-  });
+      el : "#adoptList",
+      data:{
+		cpath: "${pageContext.request.contextPath}",
+		id: "${sessionScope.id}",
+	   }
+    });
   
 	function formChange(obj){
 		//select box 선택 시 JSP페이지로 데이터를 전달

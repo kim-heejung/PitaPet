@@ -3,13 +3,11 @@ Vue.component("family-component", {
 	     <div id="AdoptFamily" class="container">
 	        <div class="tit-area">
 	            <h1 class="main-tit">Adopt animals, Adopt Family</h1>
-	            <p class="main-txt">
-	                사랑스러운 아이들이 기다리고있어요♥ 가족이 되어주세요
-	            </p>
+	            <p class="main-txt">사랑스러운 아이들이 기다리고있어요♥ 가족이 되어주세요</p>
 	        </div>
-	        <div class="grid-wrap">
-	            <family-component-gallery class="grid-left" :family="newAdoptAnimals"></family-component-gallery>
-	            <family-component-gallery class="grid-right" :family="adoptAnimals"></family-component-gallery>
+	        <div class="grid-wrap row">
+	            <family-component-gallery class="grid-left col-12 col-md-4" :family="newAdoptAnimals" :type="1"></family-component-gallery>
+	            <family-component-gallery class="grid-right row col-12 col-md-8" :family="adoptAnimals" :type="2"></family-component-gallery>
 	        </div>
 	    </div>
       `,
@@ -156,7 +154,10 @@ Vue.component("family-component", {
 Vue.component("family-component-gallery", {
     template:`
 	      <ul>
-            <li class="gallery-wrap" v-for="(adopt, index) in family" :key="index">
+            <li class="gallery-wrap col-12" 
+            	:class="[type == 1 ? 'col-md-12' : 'col-md-6 col-xl-4']"
+            	v-for="(adopt, index) in family" 
+            	:key="index">
                 <div class="gallery-thumb"
                     v-bind:style="{'background-image': 'url(' + adopt.adoptThumbnail + ')'}"></div>
                 <div class="txt-wrap">
@@ -175,7 +176,7 @@ Vue.component("family-component-gallery", {
             </li> 
         </ul>
     `,
-    props:["family"]
+    props:["family", "type"]
 });
 
 

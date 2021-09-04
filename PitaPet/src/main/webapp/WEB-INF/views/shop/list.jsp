@@ -58,14 +58,14 @@
                  </div>
                   <div class="mb-3">
                    <label for="count" class="col-form-label fw-bold">수량</label>
-                   	<a href="#" onclick="plus()"><img src="${pageContext.request.contextPath}/resources/images/Caret-Up.svg" width="22" height="22"></a>
-                    <input type="text" name="count" id="count" value="1" style="width:25px;" />
-                    <a href="#" onclick="minus()"><img src="${pageContext.request.contextPath}/resources/images/Caret-Down.svg" width="22" height="22"></a>
+                   	<a href="javascript:" class="plusCount" data-num="${tmp.num}"><img src="${pageContext.request.contextPath}/resources/images/Caret-Up.svg" width="22" height="22"></a>
+                    <input type="text" name="count" id="count-${tmp.num }" value="1" style="width:25px;" />
+                    <a href="javascript:" class="minusCount" data-num="${tmp.num}"><img src="${pageContext.request.contextPath}/resources/images/Caret-Down.svg" width="22" height="22"></a>
                  </div>
                  <div class="mb-3">
                	  <label for="price" class="col-form-label fw-bold">가격</label>
-                  	<input type="hidden" class="form-control" name="price" id="total_count" value=${tmp.price } />
-                  	<input type="text" class="form-control" value=${tmp.price } id="total_count_price" readonly />                 
+                  	<input type="hidden" class="form-control" name="price" id="total_count-${tmp.num }" value=${tmp.price } />
+                  	<input type="text" class="form-control" value=${tmp.price } id="total_count_price-${tmp.num }" readonly />                 
                  </div>
                  <div class="mb-3">
                   <label for="name" class="col-form-label">주문자</label>
@@ -171,6 +171,7 @@
 		})
 	}
 	
+	
 	let buyNowBtns=document.querySelectorAll(".buyNowBtn");
 	for(let i=0; i<buyNowBtns.length; i++){
 		buyNowBtns[i].addEventListener("click", function(){
@@ -181,24 +182,37 @@
 
   
    let count = 1;
-   let countEl = document.getElementById("count");   
-   let total_count = document.getElementById("total_count"); 
-   let total_count_price = document.getElementById("total_count_price"); 
-
+ 
+   let plusCount=document.querySelectorAll(".plusCount");
+   for(let i=0; i<plusCount.length; i++){
+	   plusCount[i].addEventListener("click", function(){
+		   const num=this.getAttribute("data-num");
+		   let countEl = document.querySelector("#count-"+num);
+		   let total_count = document.querySelector("#total_count-"+num);
+		   let total_count_price = document.querySelector("#total_count_price-"+num);
+		   
+		   count++;
+		   countEl.value = count;
+		   total_count_price.value = total_count.value * countEl.value; 
+	   });
+   }
    
-   function plus(){
-   	count++;
-   	countEl.value = count;
-   	total_count_price.value = total_count.value * countEl.value; 
+   let minusCount=document.querySelectorAll(".minusCount");
+   for(let i=0; i<minusCount.length; i++){
+	   minusCount[i].addEventListener("click", function(){
+		   const num=this.getAttribute("data-num");
+		   let countEl = document.querySelector("#count-"+num);
+		   let total_count = document.querySelector("#total_count-"+num);
+		   let total_count_price = document.querySelector("#total_count_price-"+num);
+		   
+			if(count > 1){
+				count--;
+				countEl.value = count;
+				total_count_price.value = total_count_price.value - total_count.value;
+			}
+	   });
    }
-
-   function minus(){  
-     if (count > 1) {
-   		count--;
-       	countEl.value = count;
-     		total_count_price.value = total_count_price.value - total_count.value;  
-     	}  
-   }
+   
    
 </script>
 </body>
