@@ -8,13 +8,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 </head>
 <body>
-
-<a href="${pageContext.request.contextPath}/review/list.do">입양후기 게시판</a>
-<a href="${pageContext.request.contextPath}/shop/list.do">쇼핑하기 </a>
-<a href="${pageContext.request.contextPath}/reserve/list.do">상담 예약</a>
-<a href="javascript:" onclick="userAccess()">후원하기 게시판</a>
-<a href="${pageContext.request.contextPath}/shelter/list.do">보호소 보기</a>
-
 <div id="home">
 	<header-component :cpath="cpath" :id="id"></header-component>
 	<slider-component :cpath="cpath"></slider-component>
