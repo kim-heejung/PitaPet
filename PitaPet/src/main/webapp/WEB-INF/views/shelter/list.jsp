@@ -11,21 +11,37 @@
 	<h1>보호소 둘러보기</h1>
 		<table>
 			<thead>
-				<th>이름</th>
-				<th>주소</th>
-				<th>연락처</th>
+				<tr>
+					<th>이름</th>
+					<th>주소</th>
+					<th>위치 보기</th>
+					<th>연락처</th>
+					<th>이메일</th>
+				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="tmp" items="${list}">
 					<tr>
-						<td>${tmp.name }</td>
-						<p id="name-${tmp.num }" style="display:none">${tmp.name }</p>
+						<td>
+							<p id="name-${tmp.num }">${tmp.name }</p>
+						</td>
 						<td> 
-							<input type="button" onclick="searchMap(this)" data-num="${tmp.num }" value="${tmp.address }"/>
-							<p id="addr-${tmp.num }" style="display:none">${tmp.address }</p>
+							<p id="addr-${tmp.num }">${tmp.address }</p>
 							<div id="map-${tmp.num }" name="map" style="display:none; width:100%; height:350px;"></div>
 						</td>
-						<td>${tmp.phoneNumber }</td>
+						<td>
+							<a href="#" onClick="searchMap(this);" data-num="${tmp.num }">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+									 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+								</svg>
+							</a>
+						</td>
+						<td>
+							 <a href="tel:${tmp.phoneNumber }">${tmp.phoneNumber }</a>
+						</td>
+						<td>
+							<a href="mailto:${tmp.email }">${tmp.email }</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
