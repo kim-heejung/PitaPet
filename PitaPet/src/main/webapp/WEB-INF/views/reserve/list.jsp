@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 <style>
 	.board-wrap{
-		border:1px solid green;
 		text-align:center;
 	}
 	
