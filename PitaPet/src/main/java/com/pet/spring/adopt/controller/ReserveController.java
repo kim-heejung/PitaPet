@@ -25,6 +25,7 @@ public class ReserveController {
 	@Autowired
 	private ReserveService service;
    
+	
     
 	@RequestMapping("api/reserve/list")
 	@ResponseBody
@@ -82,13 +83,19 @@ public class ReserveController {
 		
 		return "reserve/detailcheck";
 	}
-	
 
 	@RequestMapping("/reserve/detailcheck")
 	@ResponseBody
 	public Map<String, Object> detailCheck (@RequestParam int num, @RequestParam java.lang.String pwd) {
 
 		return service.detailCheck(num, pwd);
+	}
+	
+	@RequestMapping("/api/reserve/addViewCount")
+	@ResponseBody
+	public Map<String, Object> addViewCount(@RequestParam int num){
+		
+		return service.addViewCount(num);
 	}
   
 	@RequestMapping("/api/reserve/detail")
@@ -102,6 +109,9 @@ public class ReserveController {
 	@RequestMapping("/reserve/detail")
 	public String testDtail(HttpServletRequest request) {
 
+		int num=Integer.parseInt(request.getParameter("num"));
+		service.addViewCount(num);
+		
 		ReserveDto dto = service.getDetail(request);
 		request.setAttribute("dto", dto);
 		

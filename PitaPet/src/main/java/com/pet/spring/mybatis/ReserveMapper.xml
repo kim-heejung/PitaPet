@@ -7,7 +7,8 @@
 		FROM
 			(SELECT result1.*, ROWNUM AS rnum
 			FROM
-				(SELECT r.num, shelterName, title, writer, viewCount, r.regdate, checked, scope, id
+				(SELECT r.num, shelterName, title, writer, viewCount, 
+				TO_CHAR(r.regdate,'YYYY.MM.DD') regdate, checked, scope, id
 				FROM reserve r INNER JOIN shelter s
 				ON shelterName = s.name
 				ORDER BY r.num DESC) result1)
