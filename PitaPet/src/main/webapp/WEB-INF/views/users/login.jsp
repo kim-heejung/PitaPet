@@ -13,24 +13,25 @@
 <body>
 <div id="login">
 	<div class="container">
-		<h1>알림</h1>
-		<div v-if="${not empty sessionScope.id }">
+		<div variant="success" v-if="${not empty sessionScope.id }">
 			<p>
 				<strong>${sessionScope.id }</strong>님 로그인 되었습니다.
 				<a :href="host">확인</a>
 			</p>
 		</div>
-		<div v-else>
+		<div variant="error" v-else> 
 			<p>
 				아이디 혹은 비밀번호가 틀립니다
 				<a href="loginform.do?url=${encodedUrl }">다시 시도</a>
-			</p>
+			</p>	
 		</div>		
 	</div>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 let login = new Vue({
 	el:"#login",
@@ -40,6 +41,23 @@ let login = new Vue({
 		}
 	}
 });
+	if(success){
+		Swal.fire({
+			  position: 'top-50 start-50',
+			  icon: 'success',
+			  title: 'Welcome pit-a-pet!',
+			  timer: 1500
+		});
+	}else{
+		Swal.fire({
+			  position: 'top-50 start-50',
+			  icon: 'error',
+			  title: 'Please check your ID or Password',
+			  timer: 1500
+		});	  
+	};
+
 </script>
+
 </body>
 </html>
