@@ -1,6 +1,5 @@
 package com.pet.spring.adopt.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,14 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.pet.spring.adopt.dto.AdoptDto;
 import com.pet.spring.adopt.dto.AdoptLikeDto;
-import com.pet.spring.adopt.dto.ReserveDto;
 import com.pet.spring.adopt.service.AdoptLikeService;
 import com.pet.spring.adopt.service.AdoptService;
-import com.pet.spring.adopt.service.ReserveService;
 
 @Controller
 public class AdoptController {
@@ -32,10 +28,12 @@ public class AdoptController {
 	private AdoptLikeService adoptLikeService;
 	
 	
+	
 	@RequestMapping("/adopt/procedure")
 	public String adoptionProcedure() {
 		return "adopt/procedure";
 	}
+	
 	
 	@RequestMapping("/api/adopt/list")
 	@ResponseBody
@@ -47,46 +45,13 @@ public class AdoptController {
 	@RequestMapping("/adopt/list")
 	public String testGetList(HttpServletRequest request, HttpSession session
 		) {
-
+		
+		service.testGetList(request);
+		
 		String id=(String)session.getAttribute("id");
-		
-		if(id == null) {
-			service.testGetList(request);
-		}else {
-			
-			request.setAttribute("idCheck", id);
-			
-			service.testGetIdList(request);
-			adoptLikeService.testGetYCountList(request);
-		}
-		
-		//service.testGetList(request);
-
-		
-
-		/*
-		String id=(String)session.getAttribute("id");
-		if(!id.equals("")) {
-			
-		}
-		*/
-		
-		//adoptLikeService.testIdYList(session);
-		//List<AdoptLikeDto> list=adoptLikeService.getIdYList(session);
-		//request.setAttribute("idYList", list);
-		
-		//AdoptLikeDto dto=adoptLikeService.getData(request);
-		//request.setAttribute("idYdata", dto);
-		
+		request.setAttribute("idCheck", id);
 
 		return "adopt/list";
-	}
-	
-	@RequestMapping("/api/adopt/idlist")
-	@ResponseBody
-	public List<AdoptDto> getIdList(HttpServletRequest request) {
-		
-		return service.getIdList(request);
 	}
 	
 	@RequestMapping("/api/adopt/paging")
@@ -96,6 +61,13 @@ public class AdoptController {
 		return service.getListPaging(pageNum, dto);
 	}
 	
+	
+	@RequestMapping("api/adopt/addviewcount")
+	@ResponseBody
+	public Map<String, Object> addViewCount(@RequestParam int num){
+		
+		return service.addViewCount(num);
+	}
 	
 	@RequestMapping("api/adopt/detail")
 	@ResponseBody
@@ -115,6 +87,9 @@ public class AdoptController {
 			AdoptLikeDto dto2=adoptLikeService.getData(request);
 			request.setAttribute("like", dto2);
 		}
+		
+		//조회수
+		service.addViewCount(num);
 		
 		AdoptDto dto = service.getDetail(request);
 		int count=adoptLikeService.getTestCount(num);
@@ -152,7 +127,6 @@ public class AdoptController {
 		
 		return "adopt/updateform";
 	}
-	
 	
 	@RequestMapping("/api/adopt/update")
 	@ResponseBody

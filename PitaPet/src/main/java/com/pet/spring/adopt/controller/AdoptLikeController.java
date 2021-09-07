@@ -24,6 +24,14 @@ public class AdoptLikeController {
 	@Autowired
 	private AdoptLikeService service;
 	
+	
+	@RequestMapping("/api/adoptlike/isexist")
+	@ResponseBody
+	public int isExist(HttpServletRequest request){
+		
+		return service.isExist(request);
+	}
+	
 	@RequestMapping("/api/adoptlike/insert")
 	@ResponseBody
 	public Map<String, Object> insert(HttpServletRequest request){
