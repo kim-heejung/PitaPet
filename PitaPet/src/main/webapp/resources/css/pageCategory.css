@@ -20,6 +20,10 @@
 .page-category.adopt-review .img-area{
 	background-image:url('http://localhost:8888/spring/resources/images/category02.jpg'); 
 }
+.page-category.shop .img-area{
+	background-image:url('http://localhost:8888/spring/resources/images/category04.jpg');
+	background-position:25% 35%;
+}
 .page-category .img-area::after{
 	content:"";
 	position:absolute;
