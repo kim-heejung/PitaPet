@@ -26,6 +26,7 @@ public class ReserveServiceImpl implements ReserveService {
 	@Autowired
 	private ReserveCommentDao commentDao;
 
+	
    
 	@Override
 	public List<ReserveDto> getList(HttpServletRequest request) {
@@ -63,7 +64,7 @@ public class ReserveServiceImpl implements ReserveService {
 	public List<ReserveDto> testGetList(HttpServletRequest request) {
 
 		//한 페이지에 몇개씩 표시할 것인지
-		final int PAGE_ROW_COUNT = 5;
+		final int PAGE_ROW_COUNT = 8;
 		//하단 페이지를 몇개씩 표시할 것인지
 		final int PAGE_DISPLAY_COUNT = 5;
 
@@ -162,12 +163,22 @@ public class ReserveServiceImpl implements ReserveService {
   
 
 	@Override
+	public Map<String, Object> addViewCount(int num) {
+		
+		dao.addViewCount(num);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("isSuccess", true);
+		
+		return map;
+	}
+	
+	@Override
 	public ReserveDto getDetail(HttpServletRequest request) {
 
 		//자세히 보여줄 글번호를 읽어온다.
 		int num = Integer.parseInt(request.getParameter("num"));
-		//조회수 올리기
-		dao.addViewCount(num);
+		
 		ReserveDto dto = dao.getData(num);
 
 		return dto;
@@ -458,5 +469,6 @@ public class ReserveServiceImpl implements ReserveService {
 		
 		return map;
 	}
+	
 
 }

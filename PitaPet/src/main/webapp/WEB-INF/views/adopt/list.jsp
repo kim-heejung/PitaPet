@@ -40,35 +40,7 @@
                		<p class="card-text">by <strong>${tmp.writer}</strong></p>
                		<p class="card-text">${tmp.viewCount}</p>
                		<p><small>${tmp.regdate}</small></p>
-            		<p style="color:red;">
-            			<c:choose>
-				        	<c:when test="${empty idCheck }">
-				         		<p style="color:red;">♡</p>	
-				         	</c:when>
-				         	<c:otherwise>
-				         		<c:choose>
-				         			<c:when test="${tmp.liked eq 'yes' }">
-				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/api/adoptlike/unlike.do?num=${tmp.num }">♥</a></p>
-				         			</c:when>
-				         			<c:otherwise>
-				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/adoptlike/like.do?num=${tmp.num }">♡</a></p>
-				         			</c:otherwise>
-				         		</c:choose>
-				         	</c:otherwise>
-				        </c:choose>
-            			<c:choose>
-            				<c:when test="${not empty likeCountList }">
-            					<c:forEach var="like" items="${likeCountList }">
-            						<c:if test="${like.num eq tmp.num }">
-            							<span style="color:red;">${like.cnt}</span>
-            						</c:if>
-            					</c:forEach>
-            				</c:when>
-            				<c:otherwise>
-            					<span style="color:red;">${tmp.cnt }</span>
-            				</c:otherwise>
-            			</c:choose>
-            		</p>	
+               		${tmp.id }	
          		</div>
       		</div>
 		</c:forEach>
