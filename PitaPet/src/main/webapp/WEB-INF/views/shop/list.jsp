@@ -5,17 +5,72 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
-	<!-- JavaScript Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-	<jsp:include page="/resources/resource.jsp"></jsp:include>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
+<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+<style>
+.shopBtn {
+	border: none;
+	display: inline;
+	padding: 8px;
+	background-color: #a369e0;
+	border-radius: 4px;
+	color: white;
+	opacity: 0.8;
+}
+.shopBtn2 {
+	border: none;
+	display: inline;
+	padding: 8px;
+	background-color: grey;
+	border-radius: 4px;
+	color: white;
+	opacity: 0.6;
+}
+
+
+#shopCategory {
+  text-align:center;
+}
+.list {
+  display:inline-block;
+}
+p {
+	color: #aaa;
+	margin-bottom: 10px;
+}
+p:hover {
+	color: #fff
+}
+span {
+	position: relative;
+	font-weight: bold;
+	color: #fff;
+}
+span::after {
+	content: '';
+	display: block;
+	width: 0;
+	height: 5px;
+	position: absolute;
+	left: 0;
+	bottom: 0px;
+	background: rgba(200, 125, 220, .6);
+}
+p:hover span::after {
+	width: 100%;
+	transition: width .3s;
+}	
+Resources1× 0.5× 0.25×Rerun
+</style>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<jsp:include page="/resources/resource.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 </head>
 <body>
 <div id="itemList">
 	<header-component :cpath="cpath" :id="id"></header-component>
 	<div class="board-wrap">
-	<page-category :name="'핏어팻몰'"></page-category>
+	<page-category class="shop" :name="'핏어팻몰'"></page-category>
 	<div class="container">
 	   <c:if test="${id eq 'admin'}">
 	      <a  class="float-end mb-2 btn btn-light btn-sm" href="${pageContext.request.contextPath}/shop/insertForm.do">
@@ -26,12 +81,11 @@
 			</svg>
 		  </a>
 	   </c:if>
-	   <br />
-	   <p class="text-center mb-4">
-	   		<a class="btn" href="${pageContext.request.contextPath}/shop/list.do?category=food">사료</a> | 
-		   	<a class="btn" href="${pageContext.request.contextPath}/shop/list.do?category=snack">간식</a> |
-		   	<a class="btn" href="${pageContext.request.contextPath}/shop/list.do?category=toy">장난감</a> 
-	   </p>
+	   <div class="shopCategory">
+	   		<p class="list"><span class="btn" onclick="location.href='${pageContext.request.contextPath}/shop/list.do?category=food'">사료</span></p> 
+		   	<p class="list"><span class="btn" onclick="location.href='${pageContext.request.contextPath}/shop/list.do?category=snack'">간식</span></p>
+		   	<p class="list"><span class="btn" onclick="location.href='${pageContext.request.contextPath}/shop/list.do?category=toy'">장난감</span></p>	   
+	   </div>
 	   <div class="row">
 	      <c:forEach var="tmp" items="${list }">
 	         <div class="col-3">
@@ -49,7 +103,7 @@
 	                     가격 : <strong>${tmp.price }</strong>원 <br/>
 	                     재고 : <strong>${tmp.remainCount }</strong>개
 	                  </p>
-	          <button type="button" class="btn btn-primary purchaseBtn" data-bs-toggle="modal" data-bs-target="#exampleModal-${tmp.num}" data-num="${tmp.num}">
+	          <button type="button" class="shopBtn purchaseBtn" data-bs-toggle="modal" data-bs-target="#exampleModal-${tmp.num}" data-num="${tmp.num}">
 	                    구입하기
 	          </button>
 	               </div>
@@ -99,8 +153,8 @@
 	                </form> 
 	            </div>
 	            <div class="modal-footer">
-	               <button type="submit" class="btn btn-primary buyNowBtn" data-num="${tmp.num}">바로 구매하기</button>
-	              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>              
+	               <button type="submit" class="shopBtn buyNowBtn" data-num="${tmp.num}">바로 구매하기</button>
+	              <button type="button" class="shopBtn2" data-bs-dismiss="modal">닫기</button>              
 	            </div>
 	          </div>
 	        </div>
