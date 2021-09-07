@@ -5,12 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/shelter/list.jsp</title>
+	<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+	<%-- bootstrap 읽어오기 --%>
+	<jsp:include page="/resources/resource.jsp"></jsp:include>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 </head>
 <body>
-	<h1>보호소 둘러보기</h1>
-		<table>
-			<thead>
+<div id="shelterList">
+	<header-component :cpath="cpath" :id="id"></header-component>
+	<div class="board-wrap">
+	<page-category :name="'보호소위치'"></page-category>
+	<div class="container">
+		<table class="table">
+			<thead class="table-light">
 				<tr>
 					<th>이름</th>
 					<th>주소</th>
@@ -46,8 +53,27 @@
 				</c:forEach>
 			</tbody>
 		</table>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9167c13c297a00aaa16ef127e6ac76c&libraries=services"></script><script>
-
+	</div>
+	</div>
+	<footer-component></footer-component>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9167c13c297a00aaa16ef127e6ac76c&libraries=services"></script>
+<script>
+	const base_url="http://localhost:8888/spring";
+	new Vue({
+	    el : "#shelterList",
+	    data:{
+			cpath: "${pageContext.request.contextPath}",
+			id: "${sessionScope.id}",
+		   }
+	  });
+	
 	function searchMap(e){
 		const num=e.getAttribute("data-num");
 		let addr=document.querySelector("#addr-"+num).innerText;
@@ -84,9 +110,6 @@
 		});    
 		
 	}
-	
-	 
-	
 </script>
 </body>
 </html>
