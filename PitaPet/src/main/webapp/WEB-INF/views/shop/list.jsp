@@ -124,15 +124,15 @@ Resources1× 0.5× 0.25×Rerun
 	                  	<input type="text" class="form-control" name="product" value="${tmp.name }" readonly />
 	                 </div>
 	                  <div class="mb-3">
-	                   <label for="count" class="col-form-label fw-bold">수량</label>
-	                   	<a href="javascript:" class="plusCount" data-num="${tmp.num}"><img src="${pageContext.request.contextPath}/resources/images/Caret-Up.svg" width="22" height="22"></a>
-	                    <input type="text" name="count" id="count-${tmp.num }" value="1" style="width:25px;" />
-	                    <a href="javascript:" class="minusCount" data-num="${tmp.num}"><img src="${pageContext.request.contextPath}/resources/images/Caret-Down.svg" width="22" height="22"></a>
+	                   <label for="amount" class="col-form-label fw-bold">수량</label>
+	                   	<a href="javascript:" class="plusAmount" data-num="${tmp.num}"><img src="${pageContext.request.contextPath}/resources/images/Caret-Up.svg" width="22" height="22"></a>
+	                    <input type="text" name="amount" id="amount-${tmp.num }" value="1" style="width:25px;" />
+	                    <a href="javascript:" class="minusAmount" data-num="${tmp.num}"><img src="${pageContext.request.contextPath}/resources/images/Caret-Down.svg" width="22" height="22"></a>
 	                 </div>
 	                 <div class="mb-3">
 	               	  <label for="price" class="col-form-label fw-bold">가격</label>
-	                  	<input type="hidden" class="form-control" name="price" id="total_count-${tmp.num }" value=${tmp.price } />
-	                  	<input type="text" class="form-control" value=${tmp.price } id="total_count_price-${tmp.num }" readonly />                 
+	                  	<input type="hidden" class="form-control" name="price" id="total_amount-${tmp.num }" value=${tmp.price } />
+	                  	<input type="text" class="form-control" value=${tmp.price } id="total_amount_price-${tmp.num }" readonly />                 
 	                 </div>
 	                 <div class="mb-3">
 	                  <label for="name" class="col-form-label">주문자</label>
@@ -264,34 +264,35 @@ Resources1× 0.5× 0.25×Rerun
 	}
 
   
-   let count = 1;
+   let amount = 1;
  
-   let plusCount=document.querySelectorAll(".plusCount");
-   for(let i=0; i<plusCount.length; i++){
-	   plusCount[i].addEventListener("click", function(){
+   let plusAmount=document.querySelectorAll(".plusAmount");
+   for(let i=0; i<plusAmount.length; i++){
+	   plusAmount[i].addEventListener("click", function(){
 		   const num=this.getAttribute("data-num");
-		   let countEl = document.querySelector("#count-"+num);
-		   let total_count = document.querySelector("#total_count-"+num);
-		   let total_count_price = document.querySelector("#total_count_price-"+num);
+		   let amountEl = document.querySelector("#amount-"+num);
+		   let total_amount = document.querySelector("#total_amount-"+num);
+		   let total_amount_price = document.querySelector("#total_amount_price-"+num);
 		   
-		   count++;
-		   countEl.value = count;
-		   total_count_price.value = total_count.value * countEl.value; 
+		   amount++;
+		   amountEl.value = amount;
+		   total_amount_price.value = total_amount.value * amountEl.value;
+		   total_amount.value = total_amount_price.value;
 	   });
    }
    
-   let minusCount=document.querySelectorAll(".minusCount");
-   for(let i=0; i<minusCount.length; i++){
-	   minusCount[i].addEventListener("click", function(){
+   let minusAmount=document.querySelectorAll(".minusAmount");
+   for(let i=0; i<minusAmount.length; i++){
+	   minusAmount[i].addEventListener("click", function(){
 		   const num=this.getAttribute("data-num");
-		   let countEl = document.querySelector("#count-"+num);
-		   let total_count = document.querySelector("#total_count-"+num);
-		   let total_count_price = document.querySelector("#total_count_price-"+num);
+		   let amountEl = document.querySelector("#amount-"+num);
+		   let total_amount = document.querySelector("#total_amount-"+num);
+		   let total_amount_price = document.querySelector("#total_amount_price-"+num);
 		   
-			if(count > 1){
-				count--;
-				countEl.value = count;
-				total_count_price.value = total_count_price.value - total_count.value;
+			if(amount > 1){
+				amount--;
+				amountEl.value = amount;
+				total_amount_price.value = total_amount_price.value - total_amount.value;
 			}
 	   });
    }
