@@ -69,8 +69,8 @@ Resources1× 0.5× 0.25×Rerun
 <body>
 <div id="itemList">
 	<header-component :cpath="cpath" :id="id"></header-component>
-	<div class="board-wrap">
 	<page-category class="shop" :name="'핏어팻몰'"></page-category>
+	<div class="board-wrap">
 	<div class="container">
 	   <c:if test="${id eq 'admin'}">
 	      <a  class="float-end mb-2 btn btn-light btn-sm" href="${pageContext.request.contextPath}/shop/insertForm.do">
@@ -82,15 +82,17 @@ Resources1× 0.5× 0.25×Rerun
 		  </a>
 	   </c:if>
 	   <div class="shopCategory">
-	   		<p class="list"><span class="btn" onclick="location.href='${pageContext.request.contextPath}/shop/list.do?category=food'">사료</span></p> 
-		   	<p class="list"><span class="btn" onclick="location.href='${pageContext.request.contextPath}/shop/list.do?category=snack'">간식</span></p>
-		   	<p class="list"><span class="btn" onclick="location.href='${pageContext.request.contextPath}/shop/list.do?category=toy'">장난감</span></p>	   
+	   		<p class="list"><span class="btn fw-bold" onclick="location.href='${pageContext.request.contextPath}/shop/list.do'">Whole Item(전체상품)</span></p>&nbsp&nbsp
+	   		<p class="list"><span class="btn fw-bold" onclick="location.href='${pageContext.request.contextPath}/shop/list.do?category=food'">Dry Food(사료)</span></p>&nbsp&nbsp
+		   	<p class="list"><span class="btn fw-bold" onclick="location.href='${pageContext.request.contextPath}/shop/list.do?category=snack'">Snack(간식)</span></p>&nbsp&nbsp
+		   	<p class="list"><span class="btn fw-bold" onclick="location.href='${pageContext.request.contextPath}/shop/list.do?category=toy'">Toy(장난감)</span></p>	  
 	   </div>
+	   <br /><br /><br />
 	   <div class="row">
 	      <c:forEach var="tmp" items="${list }">
-	         <div class="col-3">
+	         <div class="col-3" style="height: 35rem;">
 	            <div class="card">
-	               <img class="card-img-top" src="${pageContext.request.contextPath}${tmp.imgPath}"/>
+	               <img class="img-wrapper card-img-top" src="${pageContext.request.contextPath}${tmp.imgPath}"/>
 	               <div class="card-body">
 	                  <h5 class="card-title">${tmp.name }
 	                     <c:choose>
@@ -162,8 +164,8 @@ Resources1× 0.5× 0.25×Rerun
 	   
 	   </c:forEach>
 	   </div>
-	   
 	   <nav>
+	   <br /><br /><br />
 	   <ul class="pagination justify-content-center">
 	      <c:choose>
 	         <c:when test="${startPageNum ne 1 }">
@@ -207,8 +209,8 @@ Resources1× 0.5× 0.25×Rerun
 	      </ul>
 	   </nav>   
 	</div>
-	<footer-component></footer-component>
 </div>
+<footer-component></footer-component>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
