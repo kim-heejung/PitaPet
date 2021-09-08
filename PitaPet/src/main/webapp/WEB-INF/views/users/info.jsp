@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>views/users/info.jsp</title>
+<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <style>
+.btn-pwd-left{ color:#FFD52B ; }
 body{
   background-color:#31394D;
 }
@@ -407,7 +408,7 @@ box-shadow: 10px 10px 44px 15px rgba(0,0,0,0.14);
      		</div>		
 		</div>
 		
-		<div class="grid-7 element-animation">
+		<div v-else class="grid-7 element-animation">
 			 <h1 class="title-2">보호소 회원 정보</h1>
 			 <div class="card color-card-2">
 				 <div v-if="${empty dto.profile}">
