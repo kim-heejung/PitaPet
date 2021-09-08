@@ -6,12 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/donation/main.jsp</title>
-
-<!-- Bootstrap css -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+	<jsp:include page="/resources/resource.jsp"></jsp:include>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 </head>
 <body>
+<jsp:include page="/resources/header.jsp"></jsp:include>
+	<div class="board-wrap">
+		<page-category class="adopt-review" :name="'입양후기'"></page-category>
+    	<router-view></router-view>
+    </div>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donaModalBtn">후원하기</button>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkModalBtn">후원내역 확인하기</button>
 
