@@ -132,15 +132,14 @@ public class ShopServiceImpl implements ShopService{
 		
 		UsersDto user=usersDao.getData(id);
 		String addr=user.getAddress();
-		
-		dao.minusCount(amount);
-		
+				
 		OrderDto dto2=new OrderDto();
 		dto2.setId(id);
 		dto2.setCode(num);
 		dto2.setAddr(addr);
 		dto2.setAmount(amount);
-
+		
+		dao.minusCount(dto2);
 		orderDao.addOrder(dto2);
 	}
 

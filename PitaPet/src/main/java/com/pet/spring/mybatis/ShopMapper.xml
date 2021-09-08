@@ -27,7 +27,7 @@
 		(num,name,category,price,remainCount,imgPath)
 		VALUES(shop_seq.NEXTVAL,#{name},#{category},#{price},#{remainCount},#{imgPath})
 	</insert>
-	<update id="minusCount" parameterType="int">
+	<update id="minusCount" parameterType="orderDto">
 		UPDATE shop
 		SET remainCount=remainCount-#{amount}
 		WHERE num=#{code}
