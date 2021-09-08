@@ -128,16 +128,18 @@ public class ShopServiceImpl implements ShopService{
 	public void buy(HttpServletRequest request, UsersDto dto) {
 		String id=(String)request.getSession().getAttribute("id");
 		int num=Integer.parseInt(request.getParameter("num"));
+		int amount=Integer.parseInt(request.getParameter("amount"));
 		
 		UsersDto user=usersDao.getData(id);
 		String addr=user.getAddress();
 		
-		dao.minusCount(num);
+		dao.minusCount(amount);
 		
 		OrderDto dto2=new OrderDto();
 		dto2.setId(id);
 		dto2.setCode(num);
 		dto2.setAddr(addr);
+		dto2.setAmount(amount);
 
 		orderDao.addOrder(dto2);
 	}

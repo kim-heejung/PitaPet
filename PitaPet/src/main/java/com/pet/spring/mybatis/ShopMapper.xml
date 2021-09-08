@@ -29,8 +29,8 @@
 	</insert>
 	<update id="minusCount" parameterType="int">
 		UPDATE shop
-		SET remainCount=remainCount-1
-		WHERE num=#{num}
+		SET remainCount=remainCount-#{amount}
+		WHERE num=#{code}
 	</update>
 	<select id="getPrice" parameterType="int" resultType="int">
 		SELECT price
