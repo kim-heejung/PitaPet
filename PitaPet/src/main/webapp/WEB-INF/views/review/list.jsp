@@ -11,9 +11,9 @@
 </head>
 <body>
 <div id="reviewPage" >
-	<jsp:include page="/resources/header.jsp"></jsp:include>
+	<header-component :cpath="cpath" :id="id"></header-component>
 	<div class="board-wrap">
-		<page-category class="adopt-review" :name="'입양후기'"></page-category>
+		<page-category class="adopt-review" :cpath="cpath" :index="1"></page-category>
     	<router-view></router-view>
     </div>
 	<footer-component></footer-component>
@@ -187,6 +187,7 @@
         data(){
         	return{
         		id: "${sessionScope.id}",
+        		cpath: "${pageContext.request.contextPath}",
         		query:null,
         		reviewDetail: {},
         	}
@@ -236,7 +237,10 @@
         routes
     });
 	let reviewPage = new Vue({
-        router
+        router,
+        data:{
+        	cpath: "${pageContext.request.contextPath}",
+        }
     }).$mount("#reviewPage");
 
 </script>

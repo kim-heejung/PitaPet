@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div id="reviewInsert">
-		<jsp:include page="/resources/header.jsp"></jsp:include>
+		<header-component :cpath="cpath" :id="id"></header-component>
 		<div class="board-wrap">
 			<page-category class="adopt-review" :name="'입양후기'"></page-category>
 			<div class="container">
@@ -42,7 +42,11 @@
 <script src="${pageContext.request.contextPath }/SmartEditor/js/HuskyEZCreator.js"></script>
 <script>
 	new Vue({
-	    el : "#reviewInsert"
+	    el : "#reviewInsert",
+	    data:{
+	    	cpath: "${pageContext.request.contextPath}",
+			id: "${sessionScope.id}"
+	    }
 	});
 
 

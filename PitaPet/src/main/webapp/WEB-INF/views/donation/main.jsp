@@ -11,7 +11,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 </head>
 <body>
-<jsp:include page="/resources/header.jsp"></jsp:include>
+<div id="donation">
+	<header-component :cpath="cpath" :id="id"></header-component>
 	<div class="board-wrap">
 		<page-category class="adopt-review" :name="'입양후기'"></page-category>
     	<router-view></router-view>
@@ -113,14 +114,27 @@
     src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
   />
 </a>
+<footer-component></footer-component>
+</div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+	let donation = new Vue({
+		el:"#donation",
+		data:{
+			cpath: "${pageContext.request.contextPath}",
+			id: "${sessionScope.id}"
+		},
+	});
+
+
 
    document.querySelector("#submitBtn").addEventListener("click", function(){
       document.querySelector("#modalForm").submit();

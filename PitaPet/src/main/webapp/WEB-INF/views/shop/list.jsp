@@ -69,7 +69,7 @@ Resources1× 0.5× 0.25×Rerun
 <body>
 <div id="itemList">
 	<header-component :cpath="cpath" :id="id"></header-component>
-	<page-category class="shop" :name="'핏어팻몰'"></page-category>
+	<page-category class="shop" :cpath="cpath" :index="2"></page-category>
 	<div class="board-wrap">
 	<div class="container">
 	   <c:if test="${id eq 'admin'}">

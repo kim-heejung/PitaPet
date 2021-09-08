@@ -14,7 +14,7 @@ Vue.component("header-component", {
 		            </div>
 		        </div>
 		        <nav class="nav-bar container">
-		            <a href="" class="logo">
+		            <a :href="cpath" class="logo">
 		                <img :src="cpath + logo">
 		                <span>Pit a Pet</span>
 		            </a>

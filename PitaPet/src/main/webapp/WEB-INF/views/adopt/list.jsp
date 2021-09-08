@@ -18,7 +18,7 @@
 <div id="adoptList">
       <header-component :cpath="cpath" :id="id"></header-component>
     <div class="board-wrap">
-	    <page-category :name="'입양하기'"></page-category>
+	    <page-category :cpath="cpath" :index="0"></page-category>
 	    <div class="container">
 		   	<a href="${pageContext.request.contextPath}/adopt/private/insertform.do" class="btn btn-primary">새글 작성</a><br/>
 	   		<select v-model="selected" name="shelterName" id="shelter" @change="optionSelect">

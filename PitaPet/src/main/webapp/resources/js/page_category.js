@@ -1,23 +1,46 @@
 Vue.component("page-category", {
     template:`
 	     <div class="page-category">
-	     	<div class="img-area"></div>
+	     	<div class="img-area" :style="{'background-image': 'url(' + cpath + page[index].pageBg + ')'}"></div>
 			<div class="txt-area container">
-				<h1>{{name}}</h1>
-				<p>
-					보호동물의 가족이 되어준 분들입니다<br>
-					홈페이지 소식은 입양 후 7-10일 정도 소요가 될 수 있습니다
-				</p>
+				<h1>{{page[index].pageTit}}</h1>
+				<p v-html="page[index].pageTxt"></p>
 				<nav aria-label="breadcrumb" style="position:absolute; top:20px; right:0;">
 				  <ol class="breadcrumb">
 				    <li class="breadcrumb-item"><a href="/spring/home.do">Home</a></li>
-				    <li class="breadcrumb-item active" aria-current="page">{{name}}</li>
+				    <li class="breadcrumb-item active" aria-current="page">{{page[index].pageTit}}</li>
 				  </ol>
 				</nav>
 			</div>
 		</div>
     `,
-	props:["name"],
+	props:["cpath", "index"],
+	data(){
+		return{
+			page:[
+				{
+					pageTit:"입양하기",
+					pageTxt:"보호동물의 가족이 되어준 분들입니다<br>홈페이지 소식은 입양 후 7-10일 정도 소요가 될 수 있습니다",
+					pageBg:"/resources/images/category01.jpg",
+				},
+				{
+					pageTit:"입양후기",
+					pageTxt:"보호동물의 가족이 되어준 분들입니다<br>홈페이지 소식은 입양 후 7-10일 정도 소요가 될 수 있습니다",
+					pageBg:"/resources/images/category02.jpg",
+				},
+				{
+					pageTit:"핏어팻몰",
+					pageTxt:"입양 전 준비부터,<br>입양 후 케어까지 핏어팻 몰과 함께하세요",
+					pageBg:"/resources/images/category04.jpg",
+				},
+				{
+					pageTit:"보호소위치",
+					pageTxt:"보호소 위치 문구는 'pit a pet'과 함께하는 보호소입니다<br>방문예약은 전화나 예약게시판을 이용해주세요",
+					pageBg:"/resources/images/category05.jpg",
+				},
+			]
+		}
+	}
 });
 
 

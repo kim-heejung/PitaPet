@@ -14,7 +14,7 @@
 <div id="shelterList">
 	<header-component :cpath="cpath" :id="id"></header-component>
 	<div class="board-wrap">
-	<page-category class="shelter" :name="'보호소위치'"></page-category>
+	<page-category class="shelter" :cpath="cpath" :index="3"></page-category>
 	<div class="container">
 		<table class="table">
 			<thead class="table-light">

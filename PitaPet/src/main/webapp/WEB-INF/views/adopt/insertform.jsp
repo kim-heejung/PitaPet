@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div id="adoptInsert">
-		<jsp:include page="/resources/header.jsp"></jsp:include>
+		<header-component :cpath="cpath" :id="id"></header-component>
 		<div class="board-wrap">
 			<page-category :name="'입양하기'"></page-category>
 			<div class="container">
@@ -71,7 +71,11 @@
 <script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <script>
   new Vue({
-      el : "#adoptInsert"
+      el : "#adoptInsert",
+      data:{
+			cpath: "${pageContext.request.contextPath}",
+			id: "${sessionScope.id}"
+		},
   });
 </script>
 </html>
