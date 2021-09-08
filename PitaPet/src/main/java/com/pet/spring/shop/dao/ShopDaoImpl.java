@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pet.spring.shop.dto.OrderDto;
 import com.pet.spring.shop.dto.ShopDto;
 
 @Repository
@@ -33,15 +34,13 @@ public class ShopDaoImpl implements ShopDao{
 	}
 
 	@Override
-	public void minusCount(int num) {
-		session.update("shop.minusCount", num);
+	public void minusCount(OrderDto dto) {
+		session.update("shop.minusCount", dto);	
 	}
 
 	@Override
 	public int getPrice(int num) {
 		return session.selectOne("shop.getPrice", num);
-	}
-	
-	
+	}	
 	
 }

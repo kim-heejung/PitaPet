@@ -276,7 +276,8 @@ Resources1× 0.5× 0.25×Rerun
 		   
 		   amount++;
 		   amountEl.value = amount;
-		   total_amount_price.value = total_amount.value * amountEl.value; 
+		   total_amount_price.value = total_amount.value * amountEl.value;
+		   total_amount.value = total_amount_price.value;
 	   });
    }
    
