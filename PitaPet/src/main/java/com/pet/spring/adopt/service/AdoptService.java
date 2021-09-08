@@ -12,14 +12,10 @@ import com.pet.spring.adopt.dto.AdoptDto;
 import com.pet.spring.adopt.dto.ReserveDto;
 
 public interface AdoptService {
-
-	public List<AdoptDto> getList(HttpServletRequest request);
-	//테스트용-후에 삭제될 부분
-	public void testGetList(HttpServletRequest request);
-	public List<AdoptDto> getIdList(HttpServletRequest request);
-	//테스트용-후에 삭제될 부분
-	public void testGetIdList(HttpServletRequest request);
 	
+	public List<AdoptDto> getList(HttpServletRequest request);
+    //테스트용-후에 삭제될 부분
+    public void testGetList(HttpServletRequest request);
 	public Map<String, Object> getListPaging(int pageNum, AdoptDto dto);
 	public AdoptDto getDetail(HttpServletRequest request);
 	public AdoptDto updateDetail(HttpServletRequest request);

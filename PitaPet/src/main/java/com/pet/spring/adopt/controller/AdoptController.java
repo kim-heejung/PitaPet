@@ -38,57 +38,25 @@ public class AdoptController {
 	}
 	
 	@RequestMapping("/api/adopt/list")
-	@ResponseBody
-	public List<AdoptDto> getList(HttpServletRequest request) {
-		
-		return service.getList(request);
-	}
-	//테스트용-후에 삭제될 부분
-	@RequestMapping("/adopt/list")
-	public String testGetList(HttpServletRequest request, HttpSession session
-		) {
+    @ResponseBody
+    public List<AdoptDto> getList(HttpServletRequest request) {
+      
+       return service.getList(request);
+    }
+   
+   
+    //테스트용-후에 삭제될 부분
+    @RequestMapping("/adopt/list")
+    public String testGetList(HttpServletRequest request, HttpSession session
+      ) {
+      
+      service.testGetList(request);
+      
+      String id=(String)session.getAttribute("id");
+      request.setAttribute("idCheck", id);
 
-		String id=(String)session.getAttribute("id");
-		
-		if(id == null) {
-			service.testGetList(request);
-		}else {
-			
-			request.setAttribute("idCheck", id);
-			
-			service.testGetIdList(request);
-			adoptLikeService.testGetYCountList(request);
-		}
-		
-		//service.testGetList(request);
-
-		
-
-		/*
-		String id=(String)session.getAttribute("id");
-		if(!id.equals("")) {
-			
-		}
-		*/
-		
-		//adoptLikeService.testIdYList(session);
-		//List<AdoptLikeDto> list=adoptLikeService.getIdYList(session);
-		//request.setAttribute("idYList", list);
-		
-		//AdoptLikeDto dto=adoptLikeService.getData(request);
-		//request.setAttribute("idYdata", dto);
-		
-
-		return "adopt/list";
-	}
-	
-	@RequestMapping("/api/adopt/idlist")
-	@ResponseBody
-	public List<AdoptDto> getIdList(HttpServletRequest request) {
-		
-		return service.getIdList(request);
-	}
-	
+      return "adopt/list";
+    }
 	@RequestMapping("/api/adopt/paging")
 	@ResponseBody
 	public Map<String, Object> getListPaging(@RequestParam int pageNum, AdoptDto dto){
