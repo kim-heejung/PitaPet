@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="adoptList">
-   	<header-component :cpath="cpath" :id="id"></header-component>
+      <header-component :cpath="cpath" :id="id"></header-component>
     <div class="board-wrap">
 	    <page-category :name="'입양하기'"></page-category>
 	    <div class="container">
@@ -80,6 +80,7 @@
 	   </div>
 	</div>
 	<footer-component></footer-component>
+    
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
@@ -238,11 +239,20 @@
 		   this.makeList();
 		}
     });
+   function formChange(obj){
+      //select box 선택 시 JSP페이지로 데이터를 전달
+      
+      //※obj 변수에는 form 객체가 저장되어 있다.
+      //필요에 따라 전송하기 전에 검증 절차를 추가하는 것이 가능하다.
+      
+      obj.submit(); //obj자체가 form이다.
+      //『폼객체.submit();』 함수의 호출을 통해
+      //form 객체의 데이터를 서버로 전송하는 것이 가능하다.   
+   }
 </script>   
 
 </body>
 </html>
-
 
 
 

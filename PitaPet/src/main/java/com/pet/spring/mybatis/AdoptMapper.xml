@@ -10,30 +10,16 @@
 		</choose>
 	</sql>
 	<select id="getList" parameterType="adoptDto" resultType="adoptDto">
-      SELECT *
-      FROM
-         (SELECT result2.*, ROWNUM AS rnum
-         FROM
-            (SELECT likeNum, cnt, result1.id, liked, a.num, name, imagePath, title, writer, viewCount, a.regdate
-            FROM
-               (SELECT likeNum, cnt, id, liked
-               FROM
-                  (SELECT num AS likeNum, COUNT(num) AS cnt
-                  FROM adoptlike 
-                  WHERE liked ='yes'
-                  GROUP BY num)
-               RIGHT OUTER JOIN adoptlike l
-               ON likeNum = l.num
-               <if test="id != null">
-                  WHERE id = #{id}
-               </if>
-               ) result1
-            RIGHT OUTER JOIN board_adopt a ON likeNum = a.num
-            INNER JOIN shelter s ON writer=s.id
-           <include refid="selectShelter"/>
-            ORDER BY a.num DESC) result2)
-      WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
-   </select>
+		SELECT *
+		FROM
+			(SELECT result2.*, ROWNUM AS rnum
+			FROM 
+				(SELECT a.num, name, title, writer, viewCount, a.regdate
+				FROM board_adopt a INNER JOIN shelter ON writer = id
+				<include refid="selectShelter"/>
+				ORDER BY num DESC) result2)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
 	<select id="getCount" parameterType="adoptDto" resultType="int">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM board_adopt INNER JOIN shelter

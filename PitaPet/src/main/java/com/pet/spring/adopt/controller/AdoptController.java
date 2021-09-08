@@ -1,6 +1,5 @@
 package com.pet.spring.adopt.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,14 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.pet.spring.adopt.dto.AdoptDto;
 import com.pet.spring.adopt.dto.AdoptLikeDto;
-import com.pet.spring.adopt.dto.ReserveDto;
 import com.pet.spring.adopt.service.AdoptLikeService;
 import com.pet.spring.adopt.service.AdoptService;
-import com.pet.spring.adopt.service.ReserveService;
 
 @Controller
 public class AdoptController {
@@ -32,31 +28,32 @@ public class AdoptController {
 	private AdoptLikeService adoptLikeService;
 	
 	
+	
 	@RequestMapping("/adopt/procedure")
 	public String adoptionProcedure() {
 		return "adopt/procedure";
 	}
 	
+	
 	@RequestMapping("/api/adopt/list")
-    @ResponseBody
-    public List<AdoptDto> getList(HttpServletRequest request) {
-      
-       return service.getList(request);
-    }
-   
-   
-    //테스트용-후에 삭제될 부분
-    @RequestMapping("/adopt/list")
-    public String testGetList(HttpServletRequest request, HttpSession session
-      ) {
-      
-      service.testGetList(request);
-      
-      String id=(String)session.getAttribute("id");
-      request.setAttribute("idCheck", id);
+	@ResponseBody
+	public List<AdoptDto> getList(HttpServletRequest request) {
+		
+		return service.getList(request);
+	}
+	//테스트용-후에 삭제될 부분
+	@RequestMapping("/adopt/list")
+	public String testGetList(HttpServletRequest request, HttpSession session
+		) {
+		
+		service.testGetList(request);
+		
+		String id=(String)session.getAttribute("id");
+		request.setAttribute("idCheck", id);
 
-      return "adopt/list";
-    }
+		return "adopt/list";
+	}
+  
 	@RequestMapping("/api/adopt/paging")
 	@ResponseBody
 	public Map<String, Object> getListPaging(@RequestParam int pageNum, AdoptDto dto){
@@ -64,6 +61,13 @@ public class AdoptController {
 		return service.getListPaging(pageNum, dto);
 	}
 	
+	
+	@RequestMapping("api/adopt/addviewcount")
+	@ResponseBody
+	public Map<String, Object> addViewCount(@RequestParam int num){
+		
+		return service.addViewCount(num);
+	}
 	
 	@RequestMapping("api/adopt/detail")
 	@ResponseBody
@@ -83,6 +87,9 @@ public class AdoptController {
 			AdoptLikeDto dto2=adoptLikeService.getData(request);
 			request.setAttribute("like", dto2);
 		}
+		
+		//조회수
+		service.addViewCount(num);
 		
 		AdoptDto dto = service.getDetail(request);
 		int count=adoptLikeService.getTestCount(num);
@@ -120,7 +127,6 @@ public class AdoptController {
 		
 		return "adopt/updateform";
 	}
-	
 	
 	@RequestMapping("/api/adopt/update")
 	@ResponseBody
