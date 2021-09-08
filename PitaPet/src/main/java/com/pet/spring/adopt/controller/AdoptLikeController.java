@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,13 +27,12 @@ public class AdoptLikeController {
 	
 	
 	@RequestMapping("/api/adoptlike/isexist")
-	@ResponseBody
-	public int isExist(HttpServletRequest request){
-		
-		return service.isExist(request);
-	}
+    @ResponseBody
+    public int isExist(HttpServletRequest request){
+       return service.isExist(request);
+    }
 	
-	@RequestMapping("/api/adoptlike/insert")
+	@RequestMapping(value="/api/adoptlike/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> insert(HttpServletRequest request){
 		
@@ -55,7 +55,7 @@ public class AdoptLikeController {
 	}
 
   
-	@RequestMapping("/api/adoptlike/like")
+	@RequestMapping(value="/api/adoptlike/like", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateY(HttpServletRequest request){
 		
@@ -67,7 +67,7 @@ public class AdoptLikeController {
 		return map;
 	}
 	
-	@RequestMapping("/api/adoptlike/unlike")
+	@RequestMapping(value="/api/adoptlike/unlike", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateN(HttpServletRequest request){
 		

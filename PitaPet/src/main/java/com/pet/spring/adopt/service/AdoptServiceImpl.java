@@ -22,7 +22,6 @@ public class AdoptServiceImpl implements AdoptService {
 	private AdoptDao dao;
 	
 	
-	
 	@Override
 	public List<AdoptDto> getList(HttpServletRequest request) {
 		
@@ -201,7 +200,6 @@ public class AdoptServiceImpl implements AdoptService {
 		
 		return map;
 	}
-	
 	@Override
 	public AdoptDto getDetail(HttpServletRequest request) {
 		
@@ -239,7 +237,6 @@ public class AdoptServiceImpl implements AdoptService {
 		
 		return data;
 	}
-	
 	
 	@Override
 	public Map<String, Object> insert(AdoptDto dto, HttpServletRequest request) {

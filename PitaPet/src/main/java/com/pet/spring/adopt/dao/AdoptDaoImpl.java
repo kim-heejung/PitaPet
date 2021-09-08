@@ -16,10 +16,10 @@ public class AdoptDaoImpl implements AdoptDao {
 	
 	
 	@Override
-	public List<AdoptDto> getList(AdoptDto dto) {
-		return session.selectList("adopt.getList", dto);
-	}
-	
+    public List<AdoptDto> getList(AdoptDto dto) {
+        return session.selectList("adopt.getList", dto);
+    }
+
 	@Override
 	public int getCount(AdoptDto dto) {
 		return session.selectOne("adopt.getCount", dto);
