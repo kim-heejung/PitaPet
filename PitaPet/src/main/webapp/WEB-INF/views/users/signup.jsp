@@ -5,9 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/signup.jsp</title>
+<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <jsp:include page="/resources/resource.jsp"></jsp:include>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 </head>
 <body>
 <div id="signup">
