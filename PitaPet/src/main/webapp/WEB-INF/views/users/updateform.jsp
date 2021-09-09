@@ -5,7 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/updateform.jsp</title>
+<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<jsp:include page="/resources/resource.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <style>
    /* 프로필 이미지를 작은 원형으로 만든다 */
    #profileImage{
@@ -13,111 +19,178 @@
       height: 50px;
       border: 1px solid #cecece;
       border-radius: 50%;
+      margin-left:180px;
    }
    #imageForm{
    	  display:none;
    }
+   #updateform{
+ 	 background-image: linear-gradient(90deg, rgb(106, 33, 223), rgb(209, 51, 230));
+	}
+	.container {
+	  vertical-align: middle;
+	  text-align: center;
+	}
+	.content {
+	  display: inline-block;
+	  text-align: left;
+	  background-color: whitesmoke;
+	  border-radius: .7em;
+	  padding: 3rem 3rem 3rem;
+	}
+	button {
+	margin-top:50px;
+	 margin: 0;
+  	padding: 0;
+	}
+	button.btn.btn-primary{
+		margin:30px;
+	}
+	div.tab.btn.btn-primary {
+	height: 40px;
+	}
+	.btn {
+	  border: none;
+	  font-weight: bold;
+	  width: 22.5rem;
+	  background-image: linear-gradient(90deg, rgb(209, 51, 230), rgb(106, 33, 223), rgb(9, 204, 204));
+	  border-radius: 2rem;
+	  height: 2.5rem;
+	  color: whitesmoke;
+	}
+	.form-title {
+  		margin-bottom:15px;
+  		text-align: center;
+  		font-weight: bold;
+	}
+	.addr-btn{
+		margin:30px;
+	}
 </style>
 
 </head>
 <body>
 <div id="updateform">
+	<jsp:include page="/resources/header.jsp"></jsp:include>
+	<slider-component :cpath="cpath"></slider-component>
+	<intro-component></intro-component>
+	<review-component></review-component>
+	<family-component></family-component>
+	<footer-component></footer-component>
 	<div class="container">
 		<c:choose>
 			<c:when test="${dto.groupNum eq 0}">
-				<h1>가입 정보 수정 폼입니다</h1>
-				<a id="profileLink" href="javascript:">
-					<c:choose>
-						<c:when test="${empty dto.profile }">
-							<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-							  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-							  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-							</svg>
-						</c:when>
-						<c:otherwise>
-							<img id="profileImage" src="${pageContext.request.contextPath}${dto.profile}" alt="" />
-						</c:otherwise>
-					</c:choose>
-				</a>
-				<form action="${pageContext.request.contextPath}/users/update.do" method="post">
-					
-					<input type="hidden" name="profile" value="${empty dto.profile? '': 'dto.profile'}"/>
-					<input type="hidden" name="groupNum" value="0" />
-					<div>
-						<label for="id">아이디</label>
-						<input type="text" id="id" value="${id }" disabled/>
+				<form class="content" action="${pageContext.request.contextPath}/users/update.do" method="post">
+					<h1 class="form-title">일반 회원 정보 수정</h1>
+						<div>
+							<a id="profileLink" href="javascript:">
+								<c:choose>
+									<c:when test="${empty dto.profile }">
+										<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+										  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+										  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+										</svg>
+									</c:when>
+									<c:otherwise>
+										<img id="profileImage" src="${pageContext.request.contextPath}${dto.profile}" alt="" />
+									</c:otherwise>
+								</c:choose>
+							</a>
+						</div>
+						
+						<div>
+							<input type="hidden" name="profile" value="${empty dto.profile? '': 'dto.profile'}"/>
+						</div>
+						
+						<div>
+							<input type="hidden" name="groupNum" value="0" />
+						</div>
+						<br />
+						<div>
+							<label class="control-label" for="id">아이디</label>
+							<input class="form-control" type="text" id="id" value="${id }" disabled/>
+						</div>
+						<br />
+						<div>
+							<label class="control-label" for="email">이메일</label>
+							<input class="form-control" type="text" id="email" value="${dto.email }" name="email"/>
+						</div>
+						<br />
+						<div>
+							<label class="control-label" for="phoneNumber">폰번호</label>
+							<input class="form-control" type="text" id="phoneNumber" value="${dto.phoneNumber }" name="phoneNumber"/>
+						</div>
+						<br />
+						<div>
+							<label class="control-label" for="address">주소</label>
+							<input class="form-control" type="text" id="address_users" value="${dto.address }" name="address"/>
+							<a class="addr-btn btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
+						</div>
+						
+						<div>
+						<label class="control-label" for="household">가구원</label>
+						<select class="form-select" name="household" id="household">
+							<option value="one" ${dto.household eq "one" ? "selected" : "" }>1명</option>
+							<option value="two" ${dto.household eq "two" ? "selected" : "" }>2명</option>
+							<option value="three" ${dto.household eq "three" ? "selected" : "" }>3명이상</option>
+						</select>
 					</div>
-					<div>
-						<label for="email">이메일</label>
-						<input type="text" id="email" value="${dto.email }" name="email"/>
-					</div>
-					<div>
-						<label for="phoneNumber">폰번호</label>
-						<input type="text" id="phoneNumber" value="${dto.phoneNumber }" name="phoneNumber"/>
-					</div>
-					<div>
-						<label for="address">주소</label>
-						<input type="text" id="address_users" value="${dto.address }" name="address"/>
-						<a class="btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
-					</div>
-					<div>
-					<label class="control-label" for="household">가구원</label>
-					<select name="household" id="household">
-						<option value="one" ${dto.household eq "one" ? "selected" : "" }>1명</option>
-						<option value="two" ${dto.household eq "two" ? "selected" : "" }>2명</option>
-						<option value="three" ${dto.household eq "three" ? "selected" : "" }>3명이상</option>
-					</select>
-				</div>
-					<button type="submit">수정 반영</button>
+						<button class="btn btn-primary" type="submit">수정 반영</button>
 				</form>
 				<form action="${pageContext.request.contextPath}/users/ajax_profile_upload.do" method="post" id="imageForm" enctype="multipart/form-data">
 					<input type="file" name="image" id="image" accept=".jpg, .jpeg, .png, .JPG, .JPEG, .gif"/>
 				</form>
 			</c:when>
+			
+			
 			<c:otherwise>
-				<h1>(보호소회원)가입 정보 수정 폼입니다</h1>
-				<a id="profileLink" href="javascript:">
-					<c:choose>
-						<c:when test="${empty dto.profile }">
-							<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-							  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-							  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-							</svg>
-						</c:when>
-						<c:otherwise>
-							<img id="profileImage" src="${pageContext.request.contextPath}${dto.profile}" alt="" />
-						</c:otherwise>
-					</c:choose>
-				</a>
-				<form action="${pageContext.request.contextPath}/users/update.do" method="post">
-					
-					<input type="hidden" name="profile" value="${empty dto.profile? '': 'dto.profile'}"/>
-					<input type="hidden" name="groupNum" value="1" />
-					<div>
-						<label for="id">아이디</label>
-						<input type="text" id="id" value="${id }" disabled/>
+				<form class="content"action="${pageContext.request.contextPath}/users/update.do" method="post">
+					<h1>보호소 회원 정보 수정</h1>
+						<a id="profileLink" href="javascript:">
+							<c:choose>
+								<c:when test="${empty dto.profile }">
+									<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+									  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+									  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+									</svg>
+								</c:when>
+								<c:otherwise>
+									<img id="profileImage" src="${pageContext.request.contextPath}${dto.profile}" alt="" />
+								</c:otherwise>
+							</c:choose>
+						</a>
+						<input type="hidden" name="profile" value="${empty dto.profile? '': 'dto.profile'}"/>
+						<input type="hidden" name="groupNum" value="1" />
+						<div>
+							<label class="control-label" for="id">아이디</label>
+							<input class="form-control" type="text" id="id" value="${id }" disabled/>
+						</div>
+						<br />
+						<div>
+							<label class="control-label" for="name">보호소 이름</label>
+							<input class="form-control" type="text" id="id" value="${dto.name }" name="name" disabled/>
+						</div>
+						<br />
+						<div>
+							<label class="control-label" for="email">이메일</label>
+							<input class="form-control" type="text" id="email" value="${dto.email }" name="email"/>
+						</div>
+						<br />
+						<div>
+							<label class="control-label" for="phoneNumber">폰번호</label>
+							<input class="form-control" type="text" id="phoneNumber" value="${dto.phoneNumber }" name="phoneNumber"/>
+						</div>
+						<br />
+						<div>
+							<label class="control-label" for="address">주소</label>
+							<input class="form-control" type="text" id="address_shelter" value="${dto.address }" name="address"/>
+							<a class="addr-btn btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
+						</div>
+						<div>
 					</div>
-					<div>
-						<label for="name">보호소 이름</label>
-						<input type="text" id="id" value="${dto.name }" name="name" disabled/>
-					</div>
-					<div>
-						<label for="email">이메일</label>
-						<input type="text" id="email" value="${dto.email }" name="email"/>
-					</div>
-					<div>
-						<label for="phoneNumber">폰번호</label>
-						<input type="text" id="phoneNumber" value="${dto.phoneNumber }" name="phoneNumber"/>
-					</div>
-					<div>
-						<label for="address">주소</label>
-						<input type="text" id="address_shelter" value="${dto.address }" name="address"/>
-						<a class="btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
-					</div>
-					<div>
-				</div>
-					<button type="submit">수정 반영</button>
+						<button class="btn btn-primary" type="submit">수정 반영</button>
 				</form>
+				
 				<form action="${pageContext.request.contextPath}/users/ajax_profile_upload.do" method="post" id="imageForm" enctype="multipart/form-data">
 					<input type="file" name="image" id="image" accept=".jpg, .jpeg, .png, .JPG, .JPEG, .gif"/>
 				</form>
