@@ -98,9 +98,6 @@ hr{
 }
 
 *{
-  font-family:Roboto;
-  -webkit-box-sizing: border-box; 
-  -moz-box-sizing: border-box; 
   box-sizing: border-box;
 }
 .top{
@@ -209,7 +206,7 @@ hr{
 
 /*cards*/
 body {
-  background: #e2e1e0;
+  background-image: linear-gradient(90deg, rgb(106, 33, 223), rgb(209, 51, 230));
   text-align: center;
 }
 

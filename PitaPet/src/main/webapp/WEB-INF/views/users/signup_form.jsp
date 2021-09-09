@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<jsp:include page="/resources/resource.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <style>
@@ -81,6 +85,12 @@ div.tab.btn.btn-primary {
 </head>
 <body>
 <div id="signup_form">
+	<jsp:include page="/resources/header.jsp"></jsp:include>
+	<slider-component :cpath="cpath"></slider-component>
+	<intro-component></intro-component>
+	<review-component></review-component>
+	<family-component></family-component>
+	<footer-component></footer-component>
 	<div class="container">
 	     <div class="tabs">
 	     	<div class="tab" data-tab-target="#tab1">
