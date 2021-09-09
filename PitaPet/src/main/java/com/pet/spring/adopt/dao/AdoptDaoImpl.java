@@ -49,5 +49,16 @@ public class AdoptDaoImpl implements AdoptDao {
 	public void delete(int num) {
 		session.update("adopt.delete", num);
 	}
+
+	//생일 메인 노출
+	@Override
+	public AdoptDto mainBirthData() {
+		return session.selectOne("adopt.mainBirthData");
+	}
+
+	@Override
+	public List<AdoptDto> mainBirthList() {
+		return session.selectList("adopt.mainBirthList");
+	}
 	
 }

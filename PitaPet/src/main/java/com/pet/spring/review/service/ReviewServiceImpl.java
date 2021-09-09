@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pet.spring.adopt.dto.AdoptDto;
 import com.pet.spring.review.dao.ReviewCommentDao;
 import com.pet.spring.review.dao.ReviewDao;
 import com.pet.spring.review.dto.ReviewCommentDto;
@@ -23,6 +24,7 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public void getList(HttpServletRequest request) {
+		
 		//한 페이지에 몇개씩 표시할 것인지
 	    final int PAGE_ROW_COUNT=3;
 	    //하단 페이지를 몇개씩 표시할 것인지
@@ -43,10 +45,22 @@ public class ReviewServiceImpl implements ReviewService{
 	    //보여줄 페이지의 끝 ROWNUM
 	    int endRowNum=pageNum*PAGE_ROW_COUNT;
 	    
-	    ////ReviewDto 객체에 startRowNum 과 endRowNum 을 담는다.
+	    String animalType = request.getParameter("animalType");
+	    
+		if (animalType == null) {
+			animalType = "";
+		}
+
+		//ReviewDto 객체에 startRowNum 과 endRowNum 을 담는다.
 	    ReviewDto dto=new ReviewDto();
 	    dto.setStartRowNum(startRowNum);
 	    dto.setEndRowNum(endRowNum);
+
+		if (!animalType.equals("")) {
+			if (!animalType.equals("선택하기")) {
+				dto.setAnimalType(animalType);
+			}
+		}
 	    
 	    //글 목록 얻어오기
 	    List<ReviewDto> list=reviewDao.getList(dto);
@@ -57,7 +71,7 @@ public class ReviewServiceImpl implements ReviewService{
 	    int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
 	    
 	    //전체글의 갯수
-	    int totalRow=reviewDao.getCount();
+	    int totalRow=reviewDao.getCount(dto);
 	    	      
 	    //전체 페이지의 갯수
 	    int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
@@ -65,7 +79,7 @@ public class ReviewServiceImpl implements ReviewService{
 	    if(endPageNum > totalPageCount){
 	       endPageNum=totalPageCount; //보정해 준다.
 	    }
-	    
+		
 	    //view page 에서 필요한 값을 request 에 담아준다.
 	    request.setAttribute("pageNum", pageNum);
 	    request.setAttribute("startPageNum", startPageNum);
@@ -279,14 +293,27 @@ public class ReviewServiceImpl implements ReviewService{
 	    if(strPageNum != null){
 	       pageNum=Integer.parseInt(strPageNum);
 	    }
-	      
+	    
 	    
 	    int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
 	    int endRowNum=pageNum*PAGE_ROW_COUNT;
 	    
+	    String animalType = request.getParameter("animalType");
+	    
+	    if (animalType == null) {
+			animalType = "";
+		}
+
+		//ReviewDto 객체에 startRowNum 과 endRowNum 을 담는다.
 	    ReviewDto dto=new ReviewDto();
 	    dto.setStartRowNum(startRowNum);
 	    dto.setEndRowNum(endRowNum);
+
+		if (!animalType.equals("")) {
+			if (!animalType.equals("선택하기")) {
+				dto.setAnimalType(animalType);
+			}
+		}
 	    	    
 	    List<ReviewDto> list=reviewDao.getList(dto);
 	    

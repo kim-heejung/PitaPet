@@ -3,11 +3,9 @@
 <mapper namespace="adopt">
   
 	<sql id="selectShelter">
-		<choose>
-			<when test="name != null">
-				WHERE name = #{name}
-			</when>
-		</choose>
+		<if test="name != null">
+			WHERE name = #{name}
+		</if>
 	</sql>
 	
 	<select id="getList" parameterType="adoptDto" resultType="adoptDto">
@@ -15,7 +13,8 @@
 		FROM
 			(SELECT result2.*, ROWNUM AS rnum
 			FROM 
-				(SELECT a.num, name, title, writer, viewCount, a.regdate
+				(SELECT a.num, name, title, writer, viewCount,
+				TO_CHAR(a.regdate,'YYYY.MM.DD') regdate
 				FROM board_adopt a INNER JOIN shelter ON writer = id
 				<include refid="selectShelter"/>
 				ORDER BY num DESC) result2)
@@ -33,7 +32,8 @@
 		SELECT *
 		FROM
 			(SELECT a.num, name, title, viewCount, writer, breed, petName, petAge, petGender, 
-			vaccination, neutralization, findDate, caption, orgImageName, imagePath, a.regdate,   
+			vaccination, neutralization, findDate, caption, orgImageName, imagePath,
+			TO_CHAR(a.regdate,'YYYY.MM.DD') regdate,  
 			LAG(a.num, 1, 0) OVER (ORDER BY a.num DESC) AS prevNum,
 			LEAD(a.num, 1, 0) OVER (ORDER BY a.num DESC) AS nextNum
 			FROM board_adopt a INNER JOIN shelter
@@ -69,5 +69,29 @@
 		DELETE FROM board_adopt
 		WHERE num=#{num}
 	</delete>
+	
+	<select id="mainBirthData" resultType="adoptDto">
+		SELECT *
+		FROM
+			(SELECT result2.*, ROWNUM AS rnum
+			FROM 
+				(SELECT a.num, name, title, breed, petName, petAge, petGender, 
+				TO_CHAR(a.regdate,'YYYY.MM.DD') AS regdate
+				FROM board_adopt a INNER JOIN shelter ON writer = id
+				ORDER BY a.regdate DESC) result2)
+		WHERE rnum = 1
+	</select>
 
+	<select id="mainBirthList" resultType="adoptDto">
+		SELECT *
+		FROM
+			(SELECT result2.*, ROWNUM AS rnum
+			FROM 
+				(SELECT a.num, name, title, breed, petName, petAge, petGender, 
+				TO_CHAR(a.regdate,'YYYY.MM.DD') AS regdate
+				FROM board_adopt a INNER JOIN shelter ON writer = id
+				ORDER BY a.regdate DESC) result2)
+		WHERE rnum BETWEEN 2 AND 12
+	</select>
+	
 </mapper>

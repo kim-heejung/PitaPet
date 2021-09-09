@@ -13,19 +13,13 @@
 		text-align:center;
 	}
 	
-	.container{
-		/*border:1px solid blue;*/
-		
-		
-	}
-	#boaContainer{
-		/*
-		width:84%;
-		margin:auto;
-		*/
+	
+	.reserveContent{
+		margin-bottom:30px;
 	}
 	
 	
+	/*
 	#mainTitle>span{
 		display:block;
     	margin-bottom: 14px;
@@ -37,60 +31,67 @@
     	font-size: 1rem;
 		color: #483834;
 	}
+	*/
 	
 	
-	
-	table{
+	.reserveBoard{
 		width: 100%;
 	    margin-top: 10px;
 	    border-top: 2px solid #bb9b6a;
 	}
 	
-	tbody{
+	
+	.newContent{
+		display:block;
+		text-align:left;
+		margin-bottom:26px;
+		
 	}
-	tr{
+	.newContentLink{
+		display:inline;
+		padding:10px;
+		background-color:#bb9b6a;
+		border-radius:4px;
+		color:white;
+		font-size:1rem;
+	}
+	
+	
+	.boardRow{
 		border-bottom:1px solid #dadada;
 	}
-	th{
+	.boardHeader{
 		padding:16px 0;
 	}
-	td{
+	.boardColumn{
 		padding:12px 0;
 	}
 	
-	
-	#boaTitle{
+	.contentTitle{
 		text-align:left; padding-left:40px;
 	}
-	#boaTitle>a{
+	.contentTitleLink{
 		display:inline;
 	}
 	
-	
-	#comenCount{
+	.commentCount{
 		margin-left:px;
 		color:red;
 	}
 	
-	
-	#reCheck{
+	.reserveCheck{
 		display:inline;
-		padding:6px;
-		background-color:blue;
-		border-radius:6px;
-		font-size:0.8rem;
-		color:white;
+		font-weight:bold;
+		color:red;
 	}
-	#reChecking{
+	.reserveChecking{
 		display:inline;
-		padding:6px;
-		background-color:red;
-		border-radius:6px;
-		font-size:0.8rem;
-		color:white;
+		font-weight:bold;
+		color:#948780;
 	}
 	
-
+	
+	/*
 	ul{
 		display:flex;
 		list-style:none;
@@ -98,95 +99,84 @@
 	ul>li{
 		margin-left:5px;
 	}
-	
-	#new{
-		display:block;
-		/*text-align:right;*/
-		margin-top:30px;
-		
-	}
-	#new>a{
-		display:inline;
-		padding:8px;
-		background-color:gray;
-		border-radius:4px;
-		color:white;
-	}
+	*/
 </style>
 </head>
 <body>
 <div id="reserveList">
 	<header-component :cpath="cpath" :id="id"></header-component>
 	<div class="board-wrap">
+		<page-category class="reserve" :name="'상담예약'"></page-category>
 		<div class="container">
-			<div id="boaContainer">
+			<div>
+				<!--  
 				<h1 id="mainTitle">
 					<span>상담 예약</span>
 					핏어펫(Pit a Pet) 방문예약은 인터넷으로 가능합니다. 핏어펫(Pit a Pet)은 모든 문의사항을 친절하게
 					상담해 드리고 있습니다.
-					<p id="new">
-						<a href="${pageContext.request.contextPath}/reserve/private/insertform.do">예약하기</a>
-					</p>
 				</h1>
-				
-				<div>
-					<table>
+				-->
+				<div class="reserveContent">
+					<p class="newContent">
+						<a class="newContentLink" href="${pageContext.request.contextPath}/reserve/private/insertform.do">예약하기</a>
+					</p>
+					<table class="reserveBoard">
 						<thead>
-							<tr>
-								<th>글번호</th>
-								<th>지점</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>등록일</th>
-								<th>조회수</th>
-								<th>예약 확인</th>
+							<tr class="boardRow">
+								<th class="boardHeader">글번호</th>
+								<th class="boardHeader">지점</th>
+								<th class="boardHeader">제목</th>
+								<th class="boardHeader">작성자</th>
+								<th class="boardHeader">등록일</th>
+								<th class="boardHeader">조회수</th>
+								<th class="boardHeader">예약 확인</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="tmp" items="${list }">
-								<tr>
-									<td>${tmp.num }</td>
-									<td>${tmp.shelterName }</td>
-									<td id="boaTitle">
+								<tr class="boardRow">
+									<td class="boardColumn">${tmp.num }</td>
+									<td class="boardColumn">${tmp.shelterName }</td>
+									<td class="boardColumn contentTitle">
 										<c:choose>
 											<c:when test="${id eq tmp.id }">
-												<a href="${pageContext.request.contextPath}/reserve/detail.do?pageNum=${pageNum }&num=${tmp.num }">
+												<a class="contentTitleLink" href="${pageContext.request.contextPath}/reserve/detail.do?pageNum=${pageNum }&num=${tmp.num }">
 													${tmp.title }
 												</a>
 											</c:when>
 											<c:otherwise>
 												<c:choose>
 													<c:when test="${tmp.scope eq 'private' }">
-														<a href="${pageContext.request.contextPath}/reserve/detailcheckform.do?num=${tmp.num }">
+														<a class="contentTitleLink" href="${pageContext.request.contextPath}/reserve/detailcheckform.do?num=${tmp.num }">
 															${tmp.title }
 														</a>
 													</c:when>
 													<c:otherwise>
-														<a href="${pageContext.request.contextPath}/reserve/detail.do?pageNum=${pageNum }&num=${tmp.num }">
+														<a class="contentTitleLink" href="${pageContext.request.contextPath}/reserve/detail.do?pageNum=${pageNum }&num=${tmp.num }">
 															${tmp.title }
 														</a>
 													</c:otherwise>
 												</c:choose>
 											</c:otherwise>
 										</c:choose>
-										<span style="">
+										<span>
 											<c:forEach var="count" items="${allCount }">
 												<c:if test="${tmp.num eq count.ref_group }">
-													<span id="comenCount">(${count.cnt })</span>
+													<span class="commentCount">(${count.cnt })</span>
 												</c:if>
 											</c:forEach>
 										</span>	
 									</td>
-									<td>${tmp.writer }</td>
-									<td>${tmp.regdate }</td>
-									<td>${tmp.viewCount }</td>
-									<td>
+									<td class="boardColumn">${tmp.writer }</td>
+									<td class="boardColumn">${tmp.regdate }</td>
+									<td class="boardColumn">${tmp.viewCount }</td>
+									<td class="boardColumn">
 										<c:choose>
 											<c:when test="${tmp.checked eq 'yes' }">
-												<p id="reCheck">예약 확인</p>
+												<p class="reserveCheck">예약 확인</p>
 											</c:when>
 											<c:otherwise>
-												<p id="reChecking">예약 대기</p>
+												<p class="reserveChecking">예약 대기</p>
 											</c:otherwise>
 										</c:choose>
 									</td>
@@ -245,6 +235,7 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <script>
 	const base_url="http://localhost:8888/spring";

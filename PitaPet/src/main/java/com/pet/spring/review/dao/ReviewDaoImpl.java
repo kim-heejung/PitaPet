@@ -18,8 +18,8 @@ public class ReviewDaoImpl implements ReviewDao{
 	}
 
 	@Override
-	public int getCount() {
-		return session.selectOne("review.getCount");
+	public int getCount(ReviewDto dto) {
+		return session.selectOne("review.getCount", dto);
 	}
 
 	@Override

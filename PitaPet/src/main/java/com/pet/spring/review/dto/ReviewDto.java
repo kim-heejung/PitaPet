@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ReviewDto {
 	private int num;
+	private String animalType; //강아지 고양이 구분 카테고리
 	private String writer;
 	private String title;
 	private String img; //이미지 경로
@@ -18,10 +19,11 @@ public class ReviewDto {
 	
 	public ReviewDto() {}
 
-	public ReviewDto(int num, String writer, String title, String img, MultipartFile imgFile, String content,
-			int viewCount, String regdate, int startRowNum, int endRowNum, int prevNum, int nextNum) {
+	public ReviewDto(int num, String animalType, String writer, String title, String img, MultipartFile imgFile,
+			String content, int viewCount, String regdate, int startRowNum, int endRowNum, int prevNum, int nextNum) {
 		super();
 		this.num = num;
+		this.animalType = animalType;
 		this.writer = writer;
 		this.title = title;
 		this.img = img;
@@ -41,6 +43,14 @@ public class ReviewDto {
 
 	public void setNum(int num) {
 		this.num = num;
+	}
+
+	public String getAnimalType() {
+		return animalType;
+	}
+
+	public void setAnimalType(String animalType) {
+		this.animalType = animalType;
 	}
 
 	public String getWriter() {

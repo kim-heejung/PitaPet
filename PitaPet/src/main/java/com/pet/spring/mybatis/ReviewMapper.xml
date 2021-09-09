@@ -2,41 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
 
+	<sql id="animalType">
+		<if test="animalType != null">
+			WHERE animalType = #{animalType}
+		</if>
+	</sql>
+
 	<select id="getList" parameterType="reviewDto" resultType="reviewDto">
 		SELECT *
 	      FROM
 	         (SELECT result1.*, ROWNUM AS rnum
 	         FROM
-	            (SELECT num,writer,title,img,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD') AS regdate
+	            (SELECT num,animalType,writer,title,img,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD') AS regdate
 	            FROM board_review
+	            <include refid="animalType"/>
 	            ORDER BY num DESC) result1)
 		 WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 
-	<select id="getCount" resultType="int">
+	<select id="getCount" parameterType="reviewDto" resultType="int">
 		SELECT NVL(MAX(ROWNUM), 0)
     	FROM board_review
+    	<include refid="animalType"/>
 	</select>
 	
-	<select id="getData" parameterType="int" resultType="reviewDto">
+	<select id="getData" parameterType="reviewDto" resultType="reviewDto">
 		SELECT result1.*
       	FROM
-        	(SELECT num,writer,title,img,content,viewCount,
+        	(SELECT num,animalType,writer,title,img,content,viewCount,
             	TO_CHAR(regdate,'YYYY.MM.DD HH:MI') AS regdate,
             	LAG(num,1,0) OVER (ORDER BY num DESC) AS prevNum,
             	LEAD(num,1,0) OVER (ORDER BY num DESC) AS nextNum
-         	FROM board_review) result1
+         	FROM board_review
+         	<include refid="animalType"/>) result1
       	WHERE num=#{num}
 	</select>
 	
 	<select id="getData2" parameterType="reviewDto" resultType="reviewDto">
 		SELECT result1.*
     	FROM
-         	(SELECT num,writer,title,img,content,viewCount,
+         	(SELECT num,animalType,writer,title,img,content,viewCount,
             	TO_CHAR(regdate,'YYYY.MM.DD HH:MI') AS regdate,
             	LAG(num,1,0) OVER (ORDER BY num DESC) AS prevNum,
             	LEAD(num,1,0) OVER (ORDER BY num DESC) AS nextNum
-         	FROM board_review) result1
+         	FROM board_review
+         	<include refid="animalType"/>) result1
       	WHERE num=#{num}
 	</select>
 	

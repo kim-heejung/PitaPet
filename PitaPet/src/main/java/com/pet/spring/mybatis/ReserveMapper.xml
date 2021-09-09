@@ -29,8 +29,9 @@
 	</insert>
 
 	<select id="getData" parameterType="int" resultType="reserveDto">
-		SELECT num, shelterName, title, writer, viewCount, regdate, reservedDate, reservedTime, 
-		name, phoneNumber, content, checked
+		SELECT num, shelterName, title, writer, viewCount, 
+		TO_CHAR(regdate,'YYYY.MM.DD') regdate, reservedDate, reservedTime, 
+		name, phoneNumber, content, checked, scope
 		FROM reserve
 		WHERE num = #{num}
 	</select>
@@ -43,7 +44,7 @@
 	
 	<update id="update" parameterType="reserveDto">
 		UPDATE reserve
-		SET shelterName=#{shelterName}, title=#{title}, reservedDate=#{reservedDate}, reservedTime=#{reservedTime},
+		SET scope=#{scope}, pwd=#{pwd}, shelterName=#{shelterName}, title=#{title}, reservedDate=#{reservedDate}, reservedTime=#{reservedTime},
 		name=#{name}, phoneNumber=#{phoneNumber}, content=#{content}
 		WHERE num=#{num}
 	</update>
