@@ -4,29 +4,80 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/users/pwd_updateform.jsp</title>
+<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<jsp:include page="/resources/resource.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<style>
+	#pwd_updateform{
+ 	 background-image: linear-gradient(90deg, rgb(106, 33, 223), rgb(209, 51, 230));
+		height:800px;
+	}
+	.container {
+	  vertical-align: middle;
+	  text-align: center;
+	}
+	.content {
+	  width: 400px;
+	  display: inline-block;
+	  text-align: left;
+	  background-color: whitesmoke;
+	  border-radius: .7em;
+	  padding: 3rem 3rem 3rem;
+	}
+	button {
+		margin-top:50px;
+		margin: 0;
+  		padding: 0;
+	}
+	
+	div.tab.btn.btn-primary {
+	height: 40px;
+	}
+	.btn {
+	  border: none;
+	  font-weight: bold;
+	  background-image: linear-gradient(90deg, rgb(209, 51, 230), rgb(106, 33, 223), rgb(9, 204, 204));
+	  border-radius: 2rem;
+	  height: 2.5rem;
+	  color: whitesmoke;
+	}
+	h1{
+		margin-bottom:30px;
+	}
+</style>
 </head>
 <body>
 <div id="pwd_updateform">
+	<jsp:include page="/resources/header.jsp"></jsp:include>
+	<slider-component :cpath="cpath"></slider-component>
+	<intro-component></intro-component>
+	<review-component></review-component>
+	<family-component></family-component>
+	<footer-component></footer-component>
 	<div class="container">
-		<h1>비밀 번호 수정 폼</h1>
-		<form action="${pageContext.request.contextPath}/users/pwd_update.do" method="post" id="myForm">
+		<form class="content" action="${pageContext.request.contextPath}/users/pwd_update.do" method="post" id="myForm">
+			<h1>비밀 번호 수정 폼</h1>
 			<div>
-				<label for="pwd">기존 비밀 번호 </label>
-				<input type="password" name="pwd"/>
+				<label class="control-label" for="pwd">기존 비밀 번호 </label>
+				<input class="form-control" type="password" name="pwd"/>
 			</div>
+			<br />
 			<div>
-				<label for="newPwd">새 비밀번호</label>
-				<input type="password" name="newPwd" id="newPwd"/>
+				<label class="control-label" for="newPwd">새 비밀번호</label>
+				<input class="form-control" type="password" name="newPwd" id="newPwd"/>
 			</div>
+			<br />
 			<div>
-				<label for="newPwd2">새 비밀번호 확인</label>
-				<input type="password" id="newPwd2"/>
+				<label class="control-label" for="newPwd2">새 비밀번호 확인</label>
+				<input class="form-control" type="password" id="newPwd2"/>
 			</div>
-			<button type="submit">수정하기</button>
-			<button type="reset">취소</button>
+			<br />
+			<button class="btn btn-primary" type="submit">수정하기</button>
+			<button class="btn btn-primary" type="reset">취소</button>
 		</form>
 	</div>
 </div>

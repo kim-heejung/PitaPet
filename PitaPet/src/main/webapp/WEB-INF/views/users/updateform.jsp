@@ -39,9 +39,9 @@
 	  padding: 3rem 3rem 3rem;
 	}
 	button {
-	margin-top:50px;
-	 margin: 0;
-  	padding: 0;
+		margin-top:50px;
+		margin: 0;
+  		padding: 0;
 	}
 	button.btn.btn-primary{
 		margin:30px;
