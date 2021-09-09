@@ -54,7 +54,7 @@ public class AdoptController {
 
 		return "adopt/list";
 	}
-	
+  
 	@RequestMapping("/api/adopt/paging")
 	@ResponseBody
 	public Map<String, Object> getListPaging(HttpServletRequest request){

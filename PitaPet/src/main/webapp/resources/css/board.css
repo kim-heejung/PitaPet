@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
+
+@keyframes rotateAni{
+   0%{
+      transform: rotate(0deg);
+   }
+   100%{
+      transform: rotate(360deg);
+   }
+}
+   
+   
 .board-wrap{
 	min-height:1200px;
 	padding-bottom:100px;
@@ -143,14 +154,7 @@
       animation: rotateAni 1s ease-out infinite;
    }
    
-   @keyframes rotateAni{
-      0%{
-         transform: rotate(0deg);
-      }
-      100%{
-         transform: rotate(360deg);
-      }
-   }
+   
    
    
    #content{

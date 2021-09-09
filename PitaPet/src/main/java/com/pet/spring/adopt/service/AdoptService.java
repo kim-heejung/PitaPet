@@ -13,7 +13,7 @@ import com.pet.spring.adopt.dto.AdoptDto;
 import com.pet.spring.adopt.dto.ReserveDto;
 
 public interface AdoptService {
-
+	
 	public List<AdoptDto> getList(HttpServletRequest request);
 	//테스트용-후에 삭제될 부분
 	public void testGetList(HttpServletRequest request);

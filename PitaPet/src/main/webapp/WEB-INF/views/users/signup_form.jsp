@@ -5,7 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/views/users/signup_form.jsp</title>
+<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<jsp:include page="/resources/resource.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <style>
@@ -27,24 +31,79 @@ div.tab.btn.btn-primary {
 .items.active {
   display: inline-block;
 }
+
+#signup_form{
+  background-image: linear-gradient(90deg, rgb(106, 33, 223), rgb(209, 51, 230));
+}
+.container {
+  vertical-align: middle;
+  text-align: center;
+}
+.form-title {
+  margin-bottom:15px;
+  text-align: center;
+  font-weight: bold;
+}
+.content {
+  display: inline-block;
+  text-align: left;
+  background-color: whitesmoke;
+  border-radius: .7em;
+  padding: 3rem 3rem 3rem;
+}
+.tabs{
+	padding-top:20px;
+}
+.btn {
+  border: none;
+  font-weight: bold;
+  width: 22.5rem;
+  background-image: linear-gradient(90deg, rgb(209, 51, 230), rgb(106, 33, 223), rgb(9, 204, 204));
+  border-radius: 2rem;
+  height: 2.5rem;
+  color: whitesmoke;
+}
+.tab{
+	border-radius: 0.2rem;
+	display:inline-block;
+	width: 16rem;
+	height: 2.5rem;
+	border:1px solid #fff;
+}
+.tab p {
+	margin-top:8px;
+	color:#fff;
+}
+.addr-btn{
+	margin:30px;
+}
+.tab:hover{ 
+	cursor:pointer;
+	
+ }
 </style>
 </head>
 <body>
 <div id="signup_form">
+	<jsp:include page="/resources/header.jsp"></jsp:include>
+	<slider-component :cpath="cpath"></slider-component>
+	<intro-component></intro-component>
+	<review-component></review-component>
+	<family-component></family-component>
+	<footer-component></footer-component>
 	<div class="container">
-	      <h1>회원가입하기 폼</h1>
 	     <div class="tabs">
-	     	<div class="tab btn btn-primary" data-tab-target="#tab1">
+	     	<div class="tab" data-tab-target="#tab1">
 	         	<p>일반회원</p>
 	       	</div>
-		     <div class="tab btn btn-primary" data-tab-target="#tab2">
+		     <div class="tab" data-tab-target="#tab2">
 		        <p>보호소</p>
 		     </div>
 		  </div>
 	     <br />
 	      <div id="tab1" data-tab-content class="items active">
-	        <h2>일반회원 회원가입 폼</h2>
-	        	<form action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm">
+	        	<form class="content" action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm">
+	        		<h1 class="form-title">일반회원 회원가입 폼</h1>
 					<div>
 						<label class="control-label" for="id">아이디</label>
 						<input class="form-control id" type="text" name="id" id="users_id"/>
@@ -82,12 +141,13 @@ div.tab.btn.btn-primary {
 						<input class="form-control email" type="text" name="email" id="users_email"/>
 						<div class="invalid-feedback">이메일 형식을 확인 하세요.</div>
 					</div>
+					<br />
 					<div>
 						<label class="control-label" for="address">주소</label>
 						<input class="form-control" type="text" name="address" id="users_address" />
-						<a class="btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
+						<a class="addr-btn btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
 					</div>
-					<br />
+		
 					<div>
 						<label class="control-label" for="household">가구원</label>
 						<select class="form-select" name="household" id="household">
@@ -102,8 +162,8 @@ div.tab.btn.btn-primary {
 	      </div>
 
 	      <div id="tab2" data-tab-content class="items">
-			<h2>보호소회원 회원가입 폼</h2>
-			<form action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm2">
+			<form class="content" action="${pageContext.request.contextPath}/users/signup.do" method="post" id="myForm2">
+			<h1 class="form-title">보호소회원 회원가입 폼</h1>
 				<div>
 					<label class="control-label" for="id">아이디</label>
 					<input class="form-control id" type="text" name="id" id="shelter_id"/>
@@ -136,11 +196,11 @@ div.tab.btn.btn-primary {
 				<div>
 					<label class="control-label" for="address">보호소 위치</label>
 					<input class="form-control" type="text" name="address" id="shelter_address" />
-					<a class="btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
+					<a class="addr-btn btn btn-primary btn-sm" href="javascript:openAddrPop('${pageContext.request.contextPath}/users/addr.do', 'popup');">주소 검색</a>
 					<input type="hidden" name="longitude" id="longitude"/> <!-- 위도 / 경도 -->
 					<input type="hidden" name="latitude" id="latitude"/> 
 				</div>
-				<br />
+	
 				<div>
 					<label class="control-label" for="phoneNumber">연락처</label>
 					<input class="form-control" type="tel" name="phoneNumber" id="shelter_phoneNumber"/>

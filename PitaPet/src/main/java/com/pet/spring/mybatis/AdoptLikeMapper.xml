@@ -11,6 +11,7 @@
 			GROUP BY num) result1
 		RIGHT OUTER JOIN board_adopt a
 		ON likeNum = a.num
+		ORDER BY a.num DESC
 	</select>
 	
 	<insert id="insert" parameterType="adoptLikeDto">

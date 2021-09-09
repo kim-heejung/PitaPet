@@ -18,7 +18,12 @@
 	background-size:cover;
 }
 .page-category.adopt-review .img-area{
-	background-image:url('http://localhost:8888/spring/resources/images/category02.jpg'); 
+}
+.page-category.shop .img-area{
+	background-position:25% 35%;
+}
+.page-category.shelter .img-area{
+	background-position:30% 40%;
 }
 .page-category.reserve .img-area{
 	background-image:url('http://localhost:8888/spring/resources/images/reserve-category.jpg'); 

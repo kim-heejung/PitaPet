@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/loginform.jsp</title>
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <jsp:include page="/resources/resource.jsp"></jsp:include>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <style>
@@ -118,7 +118,7 @@ input:valid ~ label {
     content: '';
     height: 2px;
     width: 0;
-    bottom: 1px;
+    top:-5px;
     position: absolute;
     background: rgba(255, 255, 255, 0.7);
     transition: 0.2s ease all;
@@ -193,14 +193,13 @@ input:valid ~ label {
     position: relative;
 }
 .span-input {
-    margin-left: 10px;
     position: relative;
     top: -5px;
 }
 .giris-yap-buton{
     background: linear-gradient(-135deg, rgb(63, 81, 181), rgb(233, 30, 99));
     background: -webkit-linear-gradient(-135deg, rgb(63, 81, 181), rgb(233, 30, 99));
-    width: 570px;
+    width: 625px;
     height: 48px;
     display: block;
     font-weight: 100;
@@ -257,7 +256,7 @@ input:valid ~ label {
 			
 			<div class="group">
 				<div class="idForm">
-					<input required class="form-control span-input" v-model="idLogin" type="text" name="id" id="id"/>
+					<input required class="span-input" v-model="idLogin" type="text" name="id" id="id"/>
 					<span class="highlight"></span>
            			<span class="bar"></span>
 					<label for="id"><i class="material-icons input-ikon"></i><span class="span-input">아이디를 입력하세요.</span></label>
@@ -266,7 +265,7 @@ input:valid ~ label {
    
    			<div class="group">
    				<div class="pwdForm">
-		            <input required type="password" class="form-control span-input" name="pwd" id="pwd" >
+		            <input required type="password" class="span-input" name="pwd" id="pwd" />
 		            <span class="highlight"></span>
 		            <span class="bar"></span>
 		            <label for="pwd"><i class="material-icons input-sifre-ikon"></i><span class="span-input">비밀번호를 입력하세요.</span></label>

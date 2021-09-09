@@ -210,7 +210,7 @@
 #slide-time{
   position:absolute;
   top:20%;
-  left:12%;
+  left:calc(6vw + 10vh);
   z-index:100;
   display:flex;
   align-items:baseline;
@@ -358,7 +358,7 @@
   margin-top: 5rem;
   position: absolute;
   top: 40%;
-  left: calc(1vw + (.7) * 20vh);
+  left: calc(6vw + 10vh);
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
@@ -457,7 +457,7 @@
 }
 .slide-rect {
   height: 58vh;
-  width: 66vh;
+  width: 46vw;
   position: absolute;
   top: 12vh;
   right: 0;
@@ -1086,6 +1086,9 @@
 	}
 }
 @media (min-width: 1200px) {
+	.slide-content-text{
+		font-size:3.4rem;
+	}
 	#AdoptReview{
         background-position: 16rem -2rem;
     	background-size: 90%;
@@ -1097,5 +1100,3 @@
     	background-size: 88%;
 	}
 }
-
-
