@@ -44,43 +44,21 @@ public class AdoptServiceImpl implements AdoptService {
 		int startRowNum = 1 + (pageNum - 1) * PAGE_ROW_COUNT;
 		//보여줄 페이지의 끝 ROWNUM
 		int endRowNum = pageNum * PAGE_ROW_COUNT;
-
-		String shelterName = request.getParameter("shelterName"); // 만일 키워드가 넘어오지 않는다면
+		
+		String shelterName = request.getParameter("shelterName");
+		
 		if (shelterName == null) {
-			//조건에 빈 문자열을 넣어준다
-			//클라이언트 웹브라우저에 출력할때 "null"을 출력되지 않게 하기 위해서
 			shelterName = "";
 		}
-
+		
 		AdoptDto dto = new AdoptDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
-
-		if (!shelterName.equals("")) {
+	    
+		if(!shelterName.equals("")) {
 			if (!shelterName.equals("선택하기")) {
 				dto.setName(shelterName);
 			}
-		}
-		
-		String id=(String)request.getSession().getAttribute("id");
-	
-		if(id != null) {
-			dto.setId(id);
-			
-		}
-
-		//하단 시작 페이지 번호
-		int startPageNum = 1 + ((pageNum - 1) / PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;
-		//하단 끝 페이지 번호
-		int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
-
-		//전체 row 의 갯수
-		int totalRow = dao.getCount(dto);
-		//전체 페이지의 갯수 구하기
-		int totalPageCount = (int) Math.ceil(totalRow / (double) PAGE_ROW_COUNT);
-		//끝 페이지 번호가 이미 전체 페이지 갯수보다 크게 계산되었다면 잘못된 값이다.
-		if (endPageNum > totalPageCount) {
-			endPageNum = totalPageCount; //보정해 준다.
 		}
 
 		List<AdoptDto> list = dao.getList(dto);
@@ -110,28 +88,21 @@ public class AdoptServiceImpl implements AdoptService {
 		int startRowNum = 1 + (pageNum - 1) * PAGE_ROW_COUNT;
 		//보여줄 페이지의 끝 ROWNUM
 		int endRowNum = pageNum * PAGE_ROW_COUNT;
-
-		String shelterName = request.getParameter("shelterName"); // 만일 키워드가 넘어오지 않는다면
+		
+		String shelterName = request.getParameter("shelterName");
+		
 		if (shelterName == null) {
-			//조건에 빈 문자열을 넣어준다
-			//클라이언트 웹브라우저에 출력할때 "null"을 출력되지 않게 하기 위해서
 			shelterName = "";
 		}
-
+		
 		AdoptDto dto = new AdoptDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
-
-		if (!shelterName.equals("")) {
+	    
+		if(!shelterName.equals("")) {
 			if (!shelterName.equals("선택하기")) {
 				dto.setName(shelterName);
 			}
-		}
-		
-		String id=(String)request.getSession().getAttribute("id");
-		
-		if(id != null) {
-			dto.setId(id);
 		}
 
 		//하단 시작 페이지 번호
@@ -160,7 +131,10 @@ public class AdoptServiceImpl implements AdoptService {
 	}
 	
 	@Override
-	public Map<String, Object> getListPaging(int pageNum, AdoptDto dto) {
+	public Map<String, Object> getListPaging(HttpServletRequest request) {
+		
+		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+		String shelterName=(String)request.getParameter("shelterName");
 		
 		//한 페이지에 몇개씩 표시할 것인지
 		final int PAGE_ROW_COUNT = 8;
@@ -171,7 +145,19 @@ public class AdoptServiceImpl implements AdoptService {
 		int startPageNum = 1 + ((pageNum - 1) / PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;
 		//하단 끝 페이지 번호
 		int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
-
+		
+		if (shelterName == null) {
+			shelterName = "";
+		}
+		
+		AdoptDto dto = new AdoptDto();
+	    
+		if(!shelterName.equals("")) {
+			if (!shelterName.equals("선택하기")) {
+				dto.setName(shelterName);
+			}
+		}
+		
 		//전체 row 의 갯수
 		int totalRow = dao.getCount(dto);
 		//전체 페이지의 갯수 구하기
@@ -206,18 +192,46 @@ public class AdoptServiceImpl implements AdoptService {
 		int num=Integer.parseInt(request.getParameter("num"));
 		String shelterName = request.getParameter("shelterName");
 		
+		if (shelterName == null) {
+			shelterName = "";
+		}
+		
 		AdoptDto dto=new AdoptDto();
 		dto.setNum(num);
 		
-		if (!shelterName.equals("")) {
-			if(!shelterName.equals("선택하기")) {
+		if(!shelterName.equals("")) {
+			if (!shelterName.equals("선택하기")) {
 				dto.setName(shelterName);
 			}
 		}
 		
 		AdoptDto dto2 = dao.getData(dto);
 		
-		request.setAttribute("sheltername", shelterName);
+		return dto2;
+	}
+	//테스트용
+	@Override
+	public AdoptDto testGetDetail(HttpServletRequest request) {
+		
+		int num=Integer.parseInt(request.getParameter("num"));
+		String shelterName = request.getParameter("shelterName");
+		
+		if (shelterName == null) {
+			shelterName = "";
+		}
+		
+		AdoptDto dto=new AdoptDto();
+		dto.setNum(num);
+		
+		if(!shelterName.equals("")) {
+			if (!shelterName.equals("선택하기")) {
+				dto.setName(shelterName);
+			}
+		}
+		
+		AdoptDto dto2 = dao.getData(dto);
+		
+		request.setAttribute("shelterName", shelterName);
 		
 		return dto2;
 	}
@@ -345,6 +359,20 @@ public class AdoptServiceImpl implements AdoptService {
 		map.put("isSuccess", true);
 
 		return map;
+	}
+	
+	
+	//생일 메인 노출
+	@Override
+	public AdoptDto mainBirthData() {
+
+		return dao.mainBirthData();
+	}
+	
+	@Override
+	public List<AdoptDto> mainBirthList() {
+		
+		return dao.mainBirthList();
 	}
 
 

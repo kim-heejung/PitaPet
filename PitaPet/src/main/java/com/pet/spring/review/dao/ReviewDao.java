@@ -8,7 +8,7 @@ public interface ReviewDao {
 	//게시글 목록
 	public List<ReviewDto> getList(ReviewDto dto);
 	//모든 게시글의 갯수
-	public int getCount();
+	public int getCount(ReviewDto dto);
 	//한개의 게시글 정보
 	public ReviewDto getData(int num);
 	public ReviewDto getData(ReviewDto dto);

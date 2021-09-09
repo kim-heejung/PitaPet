@@ -9,15 +9,16 @@
 <jsp:include page="/resources/resource.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 <style>
-	#reserveUpdate>div{
+	.board-wrap{
 		text-align:center;
 	}
 	
-	#reserveUpdate>div>div{
+	.container{
 		width:100%;
 	}
 	
 	
+	/*
 	#mainTitle{
 		padding:100px 0;
     	font-size: 1rem;
@@ -29,20 +30,32 @@
 		font-size:2.8rem;
 		font-weight:bold;
 	}
+	*/
 	
 	
-	#updateForm>div{
+	.updateFormList{
 		text-align:left;
-		margin:14px 0;
+		margin:20px 0;
 	}
-	#updateForm>div>label{
+	.updateFormLabel{
 		display:block;
 		margin-bottom:4px;
+		font-size:1.2rem;
+	}
+	
+	.scopeCheckbox{
+		display:flex;
+	}
+	.scopeLabel{
+		margin-right:14px;
+	}
+	.scopeInput{
+		margin-right:4px;
 	}
 	
 	.widthPull{
 		width:100%;
-		padding:6px;
+		padding:10px;
 		border:1px solid #ced4da;;
 		border-radius:8px;
 	}
@@ -50,10 +63,11 @@
 	#updateForm>button{
 		border:0;
 		border-radius:6px;
-		padding:8px 10px;
-		margin:0 4px;
-		background-color:blue;
+		padding:10px 12px;
+		margin:6px 8px 0 8px;
+		background-color:#bb9b6a;
 		color:white;
+		font-size:1.1rem;
 	}
 </style>
 </head>
@@ -61,16 +75,36 @@
 <div id="reserveUpdate">
 	<header-component :cpath="cpath" :id="id"></header-component>
 	<div class="board-wrap">
+		<page-category class="reserve" :name="'상담예약'"></page-category>
 		<div class="container">
+			<!--  
 			<h1 id="mainTitle">
 				<span>상담 예약</span>
 				핏어펫(Pit a Pet) 방문예약은 인터넷으로 가능합니다. 핏어펫(Pit a Pet)은 모든 문의사항을 친절하게
 				상담해 드리고 있습니다.
 			</h1>
+			-->
 			<form id="updateForm" action="${pageContext.request.contextPath}/api/reserve/update.do" method="post">
 				<input type="hidden" name="num" value="${dto.num}"/>
-				<div>
-					<label for="shelterName">지점</label> 
+				<div class="updateFormList">
+			    	<label class="updateFormLabel" for="scope">공개 여부</label>
+			        <div class="scopeCheckbox">
+			        	<label class="insertFormLabel scopeLabel">
+			        		<input class="scopeInput" type="radio" name="scope" 
+			        		id="scope" value="public" ${dto.scope eq 'public' ? "checked" : "" }>공개글
+			        	</label>
+			         	<label class="insertFormLabel scopeLabel">
+			         		<input class="scopeInput" type="radio" name="scope" 
+			         		id="scope" value="private" ${dto.scope eq 'private' ? "checked" : "" }/>비밀글
+			         	</label>
+			        </div>
+			    </div>
+			    <div class="updateFormList">
+			    	<label class="updateFormLabel" for="pwd">비밀번호</label>
+			        <input class="widthPull" type="password" name="pwd" id="pwd"/>
+			    </div>
+				<div class="updateFormList">
+					<label class="updateFormLabel" for="shelterName">지점</label> 
 					<select class="widthPull" name="shelterName" id="shelterName">
 						<option value="지점 선택">지점 선택</option>
 						<option value="서울" ${dto.shelterName eq "서울" ? "selected" : ""}>서울</option>
@@ -78,12 +112,12 @@
 						<option value="부산" ${dto.shelterName eq "부산" ? "selected" : ""}>부산</option>
 					</select>
 				</div>
-				<div>
-					<label for="title">제목</label> 
+				<div class="updateFormList">
+					<label class="updateFormLabel" for="title">제목</label> 
 					<input class="widthPull" type="text" name="title" id="title" value="${dto.title}"/>
 				</div>
-				<div>
-					<label for="reservedDate">날짜</label> 
+				<div class="updateFormList">
+					<label class="updateFormLabel" for="reservedDate">날짜</label> 
 					<select class="widthPull" name="reservedDate" id="reservedDate">
 						<option value="날짜 선택">날짜 선택</option>
 						<option value="9월 1일" ${dto.reservedDate eq "9월 1일" ? "selected" : ""}>9월 1일</option>
@@ -93,8 +127,8 @@
 						<option value="9월 7일" ${dto.reservedDate eq "9월 7일" ? "selected" : ""}>9월 7일</option>
 					</select>
 				</div>
-				<div>
-					<label for="reservedTime">시간</label> 
+				<div class="updateFormList">
+					<label class="updateFormLabel" for="reservedTime">시간</label> 
 					<select class="widthPull" name="reservedTime" id="reservedTime">
 						<option value="시간 선택">시간 선택</option>
 						<option value="10:00" ${dto.reservedTime eq "10:00" ? "selected" : ""}>10:00</option>
@@ -104,20 +138,20 @@
 						<option value="15:00" ${dto.reservedTime eq "15:00" ? "selected" : ""}>15:00</option>
 					</select>
 				</div>
-				<div>
-					<label for="name">이름</label> 
+				<div class="updateFormList">
+					<label class="updateFormLabel" for="name">이름</label> 
 					<input class="widthPull" type="text" name="name" id="name" value="${dto.name}"/>
 				</div>
-				<div>
-					<label for="phoneNumber">연락처</label> 
+				<div class="updateFormList">
+					<label class="iupdateFormLabel" for="phoneNumber">연락처</label> 
 					<input class="widthPull" type="text" name="phoneNumber" id="phoneNumber" value="${dto.phoneNumber}"/>
 				</div>
-				<div>
-					<label for="title">내용</label>
+				<div class="updateFormList">
+					<label class="updateFormLabel" for="title">내용</label>
 					<textarea class="widthPull" name="content" id="" cols="30" rows="10">${dto.content }</textarea>
 				</div>
-				<button type="reset">최소</button>
-				<button type="submit">등록</button>
+				<button class="updateButton" type="reset">최소</button>
+				<button class="updateButton" type="submit">등록</button>
 			</form>
 		</div>
 	</div>
@@ -126,6 +160,7 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <script>
 	const base_url="http://localhost:8888/spring";

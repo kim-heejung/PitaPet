@@ -41,13 +41,14 @@ public class AdoptController {
 		
 		return service.getList(request);
 	}
-	//테스트용-후에 삭제될 부분
+	//테스트용
 	@RequestMapping("/adopt/list")
 	public String testGetList(HttpServletRequest request, HttpSession session
 		) {
 		
 		service.testGetList(request);
 		
+		//로그인 여부 확인용
 		String id=(String)session.getAttribute("id");
 		request.setAttribute("idCheck", id);
 
@@ -56,9 +57,9 @@ public class AdoptController {
   
 	@RequestMapping("/api/adopt/paging")
 	@ResponseBody
-	public Map<String, Object> getListPaging(@RequestParam int pageNum, AdoptDto dto){
+	public Map<String, Object> getListPaging(HttpServletRequest request){
 		
-		return service.getListPaging(pageNum, dto);
+		return service.getListPaging(request);
 	}
 	
 	
@@ -75,7 +76,7 @@ public class AdoptController {
 		
 		return service.getDetail(request);
 	}
-	//테스트용-후에 삭제될 부분
+	//테스트용
 	@RequestMapping(value = "adopt/detail", method = RequestMethod.GET)
 	public String testDetail(@RequestParam int num, HttpServletRequest request) {
 
@@ -91,17 +92,12 @@ public class AdoptController {
 		//조회수
 		service.addViewCount(num);
 		
-		AdoptDto dto = service.getDetail(request);
+		AdoptDto dto = service.testGetDetail(request);
 		int count=adoptLikeService.getTestCount(num);
 		
-		// List<ReserveDto> list=reserveService.testGetList(request, num);
-
 		request.setAttribute("dto", dto);
 		request.setAttribute("count", count);
-		// request.setAttribute("list", list);
-
-		// 둘중에 하나라도 값이 없으면 오류남.
-
+		
 		return "adopt/detail";
 	}
 	
@@ -141,6 +137,22 @@ public class AdoptController {
 	public Map<String, Object> authDelete(@RequestParam int num) {
 
 		return service.delete(num);
+	}
+	
+	
+	//생일 메인 노출
+	@RequestMapping("/api/adopt/birthdata")
+	@ResponseBody
+	public AdoptDto mainBirthData() {
+		
+		return service.mainBirthData();
+	}
+	
+	@RequestMapping("/api/adopt/birthlist")
+	@ResponseBody
+	public List<AdoptDto> mainBirthList() {
+		
+		return service.mainBirthList();
 	}
 	
 }

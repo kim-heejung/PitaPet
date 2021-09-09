@@ -12,5 +12,8 @@ public interface AdoptDao {
 	public void insert(AdoptDto dto);
 	public void update(AdoptDto dto);
 	public void delete(int num);
+	//생일 메인 노출
+	public AdoptDto mainBirthData();
+	public List<AdoptDto> mainBirthList();
 	
 }
