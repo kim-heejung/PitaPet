@@ -27,8 +27,9 @@ public class ReviewController {
    
    // (Vue) 댓글 목록
    @RequestMapping("/api/review/ajax_comment_list")
-   public String ajaxCommentList(HttpServletRequest request) {
-      return "api/review/ajax_comment_list";
+   @ResponseBody
+   public List<ReviewCommentDto> ajaxCommentList(HttpServletRequest request) {
+      return service.moreCommentList(request);
    }
    
    // (Vue) 댓글 페이징
@@ -38,10 +39,13 @@ public class ReviewController {
    }
    
    // (Vue) 댓글 추가, 수정, 삭제
-   @RequestMapping("/api/review/comment_insert")
-	public String commentInsert(HttpServletRequest request, @RequestParam int ref_group) {
-		service.saveComment(request);
-		return "redirect:/api/review/detail.do?num="+ref_group;
+   @RequestMapping(value ="/api/review/comment_insert", method = RequestMethod.POST)
+   @ResponseBody
+	public Map<String, Object> commentInsert(HttpServletRequest request, @RequestParam int ref_group) {
+	   service.saveComment(request);   
+	   Map<String, Object> map=new HashMap<String, Object>();
+      map.put("isSuccess", true);
+      return map;
 	}
    
    @RequestMapping("/api/review/comment_update")
@@ -53,7 +57,7 @@ public class ReviewController {
       return map;
    }
    
-   @RequestMapping("/api/review/comment_delete")
+   @RequestMapping(value ="/api/review/comment_delete", method = RequestMethod.POST)
    @ResponseBody
    public Map<String, Object> commentDelete(HttpServletRequest request){
       service.deleteComment(request);

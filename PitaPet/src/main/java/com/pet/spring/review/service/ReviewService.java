@@ -18,10 +18,10 @@ public interface ReviewService {
 	public void updateContent(ReviewDto dto);
 	public void deleteContent(int num, HttpServletRequest request);
 	//댓글
-	public void saveComment(HttpServletRequest request);
+	public Map<String, Object> saveComment(HttpServletRequest request);
 	public void updateComment(ReviewCommentDto dto);
 	public void deleteComment(HttpServletRequest request);
-	public void moreCommentList(HttpServletRequest request);
+	public List<ReviewCommentDto> moreCommentList(HttpServletRequest request);
 	
 	//댓글 페이징
 	public Map<String, Object> commentPaging(HttpServletRequest request);

@@ -194,7 +194,7 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void saveComment(HttpServletRequest request) {
+	public Map<String, Object> saveComment(HttpServletRequest request) {
 		//폼 전송되는 파라미터 추출
 		int ref_group=Integer.parseInt(request.getParameter("ref_group"));
 		String target_nick=request.getParameter("target_nick");
@@ -227,6 +227,10 @@ public class ReviewServiceImpl implements ReviewService{
 		//댓글정보를 DB에 저장하기
 		reviewCommentDao.insert(dto);
 		
+		Map<String, Object> map=new HashMap<>();
+		map.put("isSuccess", true);
+		
+		return map; 
 	}
 
 	@Override
@@ -239,11 +243,10 @@ public class ReviewServiceImpl implements ReviewService{
 	public void deleteComment(HttpServletRequest request) {
 		int num=Integer.parseInt(request.getParameter("num"));
 		reviewCommentDao.delete(num);
-		
 	}
 
 	@Override
-	public void moreCommentList(HttpServletRequest request) {
+	public List<ReviewCommentDto> moreCommentList(HttpServletRequest request) {
 		//로그인된 아이디
 		String id=(String)request.getSession().getAttribute("id");
 		//ajax 요청 파라미터로 넘어오는 댓글의 페이지 번호를 읽어낸다
@@ -278,7 +281,9 @@ public class ReviewServiceImpl implements ReviewService{
 		//view page 에서 필요한 값 request 에 담아주기
 		request.setAttribute("pageNum", pageNum); //댓글의 페이지번호
 		request.setAttribute("num", num); //원글의 글번호
-		request.setAttribute("commentList", commentList);			
+		request.setAttribute("commentList", commentList);
+		
+		return commentList;
 	}
 
 	@Override
