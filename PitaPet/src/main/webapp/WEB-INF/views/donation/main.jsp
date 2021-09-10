@@ -188,7 +188,7 @@
          <button type="button" class="btn btn-2 btn-sep icon-cart" data-bs-toggle="modal" data-bs-target="#donaModalBtn">후원하기</button>
          <button type="button" class="btn btn-3 btn-sep icon-info" data-bs-toggle="modal" data-bs-target="#checkModalBtn">후원내역 확인하기</button>
          <!-- 공유하기 api -->
-         <button type="button" class="btn btn-4 btn-sep icon-send" id="create-kakao-link-btn" href="javascript:;">카카오페이 </button>
+         <button type="button" class="btn btn-4 btn-sep icon-send" id="create-kakao-link-btn" href="javascript:;">공유하기 </button>
       </div>
 	</div>   
 
