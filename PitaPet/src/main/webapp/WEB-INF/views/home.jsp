@@ -17,6 +17,7 @@
 	<footer-component></footer-component>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/slider.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/intro.js"></script>
