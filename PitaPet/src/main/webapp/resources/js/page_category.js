@@ -42,7 +42,12 @@ Vue.component("page-category", {
                pageTit:"핏어팻후원",
                pageTxt:"가족들을 기다리는 보호동물들을 위한<br>마음을 전달해보세요",
                pageBg:"/resources/images/category06.jpg",
-            }
+            },
+            {
+                pageTit:"상담예약",
+                pageTxt:"핏어펫(Pit a Pet) 방문예약은 인터넷으로 가능합니다. 핏어펫(Pit a Pet)은<br>모든 문의사항을 친절하게 상담해 드리고 있습니다.",
+                pageBg:"/resources/images/category06.jpg",
+             }
          ]
       }
    }

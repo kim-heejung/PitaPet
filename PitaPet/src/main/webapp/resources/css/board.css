@@ -257,7 +257,59 @@ pre {
 
 
 
-
+.board-wrap{
+	text-align:center;
+}
+.reserveContent{
+	margin-bottom:30px;
+}
+.reserveBoard{
+	width: 100%;
+    margin-top: 10px;
+    border-top: 2px solid #bb9b6a;
+}
+.newContent{
+	display:block;
+	text-align:left;
+	margin-bottom:26px;
+}
+.newContentLink{
+	display:inline;
+	padding:10px;
+	background-color:#bb9b6a;
+	border-radius:4px;
+	color:white;
+	font-size:1rem;
+}
+.boardRow{
+	border-bottom:1px solid #dadada;
+}
+.boardHeader{
+	padding:16px 0;
+}
+.boardColumn{
+	padding:12px 0;
+}
+.contentTitle{
+	text-align:left; padding-left:40px;
+}
+.contentTitleLink{
+	display:inline;
+}
+.commentCount{
+	margin-left:px;
+	color:red;
+}
+.reserveCheck{
+	display:inline;
+	font-weight:bold;
+	color:red;
+}
+.reserveChecking{
+	display:inline;
+	font-weight:bold;
+	color:#948780;
+}
 
 
 
