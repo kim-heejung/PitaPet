@@ -33,7 +33,7 @@
       FROM DUAL
    </select>
    
-   <insert id="insert" parameterType="reviewCommentDto">
+   <insert id="insert" parameterType="reviewCommentDto" >
    INSERT INTO board_review_comment
 	(num, id, content, target_nick, ref_group, comment_group, regdate)
 	VALUES(#{num}, #{id}, #{content}, #{target_nick}, #{ref_group}, #{comment_group}, SYSDATE)

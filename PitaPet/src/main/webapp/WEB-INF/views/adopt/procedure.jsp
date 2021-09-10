@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div id="procedure">
-		<jsp:include page="/resources/header.jsp"></jsp:include>
+		<header-component :cpath="cpath" :id="id"></header-component>
 		<procedure-visual></procedure-visual>
 		<div id="scroll-bg">
 			<div class="bg" 
@@ -72,6 +72,7 @@
 				graphicElems: [],
 				stepElems: [],
 				cpath: "${pageContext.request.contextPath}",
+				id: "${sessionScope.id}",
 				content:[
 					{
 						allFilter:"grayscale(0.1) saturate(0.9)",

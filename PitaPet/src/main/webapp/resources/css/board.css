@@ -17,7 +17,7 @@
 }
 .img-wrapper{
 	position:relative;
-    height: 400px;
+    height: 360px;
     overflow:hidden
  }
  .img-wrapper::before{
@@ -48,20 +48,46 @@
   }
   .card{
   	border:0;
+  	margin-bottom:3rem;
   }
- .card .card-text{
+  .card-body{
+  	padding: 2rem 1rem;
+  }
+.card-regdate{
+ 	margin-bottom:10px;
+ 	font-family: 'Lato', sans-serif;
+ 	font-size:0.8rem;
+ 	color:#aaa;
+ }
+  .card .card-tit{
+ 	font-family: 'Noto Sans KR', sans-serif;
     display:block;
-    white-space : nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    font-size: 1.2rem;
+    height: 3.3rem;
  }
- 
+ .card .card-txt{
+ 	font-family: 'Noto Sans KR', sans-serif;
+    display:block;
+    color:#777;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-top:24px;
+    font-size: 0.9rem;
+    height:2.9rem;
+ }
+ .card .card-txt *{
+ 	font-family: 'Noto Sans KR', sans-serif;
+ 	font-size:1rem;
+ 	color:#777;
+ 	text-align:left;
+ }
  .img-wrapper img{
  	position:relative;
  	z-index:1;
-   width: 100%;
    height: 100%;
-   object-fit: contain;   
+   object-fit: cover;   
    transform: scale(1);
    transition: transform 0.3s ease-out;
  }
@@ -73,90 +99,175 @@
 	align-items:center;
 	justify-content:center;
  }
- 
- 
- .content{
-      border: 1px dotted gray;
-   }
-   
-   /* 댓글 프로필 이미지를 작은 원형으로 만든다. */
-   .profile-image{
-      width: 50px;
-      height: 50px;
-      border: 1px solid #cecece;
-      border-radius: 50%;
-   }
-   /* ul 요소의 기본 스타일 제거 */
-   .comments ul{
-      padding: 0;
-      margin: 0;
-      list-style-type: none;
-   }
-   .comments dt{
-      margin-top: 5px;
-   }
-   .comments dd{
-      margin-left: 50px;
-   }
-   .comment-form textarea, .comment-form button{
-      float: left;
-   }
-   .comments li{
-      clear: left;
-   }
-   .comments ul li{
-      border-top: 1px solid #888;
-   }
-   .comment-form textarea{
-      width: 84%;
-      height: 100px;
-   }
-   .comment-form button{
-      width: 14%;
-      height: 100px;
-   }
-   /* 댓글에 댓글을 다는 폼과 수정폼은 일단 숨긴다. */
-   .comments .comment-form{
-      display: none;
-   }
-   /* .reply_icon 을 li 요소를 기준으로 배치 하기 */
-   .comments li{
-      position: relative;
-   }
-   .comments .reply-icon{
-      position: absolute;
-      top: 1em;
-      left: 1em;
-      color: red;
-   }
-   pre {
-     display: block;
-     padding: 9.5px;
-     margin: 0 0 10px;
-     font-size: 13px;
-     line-height: 1.42857143;
-     color: #333333;
-     word-break: break-all;
-     word-wrap: break-word;
-     background-color: #f5f5f5;
-     border: 1px solid #ccc;
-     border-radius: 4px;
-   }   
-   
-   .loader{
-      /* 로딩 이미지를 가운데 정렬하기 위해 */
-      text-align: center;
-      /* 일단 숨겨 놓기 */
-      display: none;
-   }   
-   
-   .loader svg{
-      animation: rotateAni 1s ease-out infinite;
-   }
-   
-   
-   
-   
-   #content{
-		height: 500px;
-	}
+/* 댓글 프로필 이미지를 작은 원형으로 만든다. */
+.profile-image{
+   width: 50px;
+   height: 50px;
+   border: 1px solid #cecece;
+   border-radius: 50%;
+}
+/* ul 요소의 기본 스타일 제거 */
+.comments ul{
+   padding: 0;
+   margin: 0;
+   list-style-type: none;
+}
+.comments dt{
+   margin-top: 5px;
+}
+.comments dd{
+   margin-left: 50px;
+}
+.comment-form textarea, .comment-form button{
+   float: left;
+}
+.comments li{
+   clear: left;
+}
+.comments ul li{
+   border-top: 1px solid #888;
+}
+.comment-form textarea{
+   width: 84%;
+   height: 100px;
+}
+.comment-form button{
+   width: 14%;
+   height: 100px;
+}
+/* 댓글에 댓글을 다는 폼과 수정폼은 일단 숨긴다. */
+.comments .comment-form{
+   display: none;
+}
+/* .reply_icon 을 li 요소를 기준으로 배치 하기 */
+.comments li{
+   position: relative;
+}
+.comments .reply-icon{
+   position: absolute;
+   top: 1em;
+   left: 1em;
+   color: red;
+}
+pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}   
+.loader{
+   /* 로딩 이미지를 가운데 정렬하기 위해 */
+	text-align: center;
+	/* 일단 숨겨 놓기 */
+    display: none;
+}   
+.loader svg{
+	animation: rotateAni 1s ease-out infinite;
+}
+#content{
+	height: 500px;
+}
+
+
+/* 디테일 페이지 */
+.detail-wrap{
+	font-family: 'Noto Sans KR', sans-serif;
+	max-width:1020px;
+	background:#fff;
+	margin:0 auto;
+}
+.detail_tit{
+	font-size:2rem;
+}
+.detail_content{
+	padding-top:2rem;
+	margin-top:2rem;
+	border-top:1px solid #ddd;
+}
+.detail_content *{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.detail_info{
+	margin-top:2rem;
+	margin-bottom:1rem;
+}
+.detail_info>span{
+	position:relative;
+	margin-right:12px;
+}
+.detail_info>span::after{
+    content: "";
+    position: absolute;
+    top: 6px;
+    right: -6px;
+    width: 2px;
+    height: 14px;
+    background: #ddd;
+}
+.detail_info>span:last-of-type::after{
+	display:none;
+}
+.detail-bottom{
+	padding-top:2rem;
+	margin-top:2rem;
+	border-top:1px solid #ddd;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.detail-bottom>li{
+	margin:0 0.4rem;
+}
+.btn{
+	border:1px solid #ddd;
+	background:#fff;
+	color:#222;
+}
+.btn-s{
+	font-size:0.9rem;
+	padding:0.6rem 1.4rem;
+}	
+.btn-m{
+	font-size:1rem;
+	padding:1.2rem 2rem;
+}
+.btn-l{
+	font-size:1rem;
+	padding:1.6rem 2.4rem;
+}
+.movePage-wrap{
+	margin-top:60px;
+	display:flex;
+	align-items:center;
+}
+.movePage-wrap>li{
+	flex:1;
+	text-align:center;
+}
+.movePage-wrap>li>a{
+	padding:1.2rem 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
