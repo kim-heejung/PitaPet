@@ -106,7 +106,7 @@
 				<div class="updateFormList">
 					<label class="updateFormLabel" for="shelterName">지점</label> 
 					<select class="widthPull" name="shelterName" id="shelterName">
-						<option value="지점 선택">지점 선택</option>
+						<option value="">지점 선택</option>
 						<option value="서울" ${dto.shelterName eq "서울" ? "selected" : ""}>서울</option>
 						<option value="인천" ${dto.shelterName eq "인천" ? "selected" : ""}>인천</option>
 						<option value="부산" ${dto.shelterName eq "부산" ? "selected" : ""}>부산</option>
@@ -119,7 +119,7 @@
 				<div class="updateFormList">
 					<label class="updateFormLabel" for="reservedDate">날짜</label> 
 					<select class="widthPull" name="reservedDate" id="reservedDate">
-						<option value="날짜 선택">날짜 선택</option>
+						<option value="">날짜 선택</option>
 						<option value="9월 1일" ${dto.reservedDate eq "9월 1일" ? "selected" : ""}>9월 1일</option>
 						<option value="9월 2일" ${dto.reservedDate eq "9월 2일" ? "selected" : ""}>9월 2일</option>
 						<option value="9월 3일" ${dto.reservedDate eq "9월 3일" ? "selected" : ""}>9월 3일</option>
@@ -130,7 +130,7 @@
 				<div class="updateFormList">
 					<label class="updateFormLabel" for="reservedTime">시간</label> 
 					<select class="widthPull" name="reservedTime" id="reservedTime">
-						<option value="시간 선택">시간 선택</option>
+						<option value="">시간 선택</option>
 						<option value="10:00" ${dto.reservedTime eq "10:00" ? "selected" : ""}>10:00</option>
 						<option value="11:00" ${dto.reservedTime eq "11:00" ? "selected" : ""}>11:00</option>
 						<option value="13:00" ${dto.reservedTime eq "13:00" ? "selected" : ""}>13:00</option>

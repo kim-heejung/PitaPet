@@ -17,6 +17,14 @@
 			   	<h1>이미지 업로드 폼</h1>
 			   	<form action="${pageContext.request.contextPath}/api/adopt/insert.do" method="post" enctype="multipart/form-data">
 			      	<div>
+			      		<label>동물 분류</label>
+			      		<select name="animalType" id="animalType">
+			      			<option value="">선택</option>
+				   			<option value="dog">dog</option>
+				   			<option value="cat">cat</option>
+						</select>
+			      	</div>
+			      	<div>
 			         	<label for="title">제목</label>
 			         	<input type="text" name="title" id="title"/>
 			      	</div>

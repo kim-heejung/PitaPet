@@ -185,5 +185,12 @@ public class ReviewController {
       service.deleteContent(num, request);
       return "redirect:/review/list.do";
    }
+   
+   //메인 노출
+   @RequestMapping("/api/review/mainlist")
+   @ResponseBody
+   public List<ReviewDto> mainList(HttpServletRequest request){
+	   return service.mainList(request);
+   }
 
 }
