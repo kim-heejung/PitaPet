@@ -84,7 +84,7 @@ public class ReserveController {
 		return "reserve/detailcheck";
 	}
 
-	@RequestMapping("/reserve/detailcheck")
+	@RequestMapping("/api/reserve/detailcheck")
 	@ResponseBody
 	public Map<String, Object> detailCheck (@RequestParam int num, @RequestParam java.lang.String pwd) {
 

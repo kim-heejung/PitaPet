@@ -27,7 +27,7 @@
 		   	<ul class="row">
 		   		<li v-for="(tmp, index) in adoptList" class="col-6 col-md-4 col-lg-3" :key="index">
 		   			<div class="card mb-3">
-		   				<a href="${pageContext.request.contextPath}/adopt/detail.do?num=${tmp.num}&shelterName=${shelterName}">
+		   				<a href="${pageContext.request.contextPath}/adopt/detail.do?num=${tmp.num}">
 		               		<div class="img-wrapper">
 		                  		<img class="card-img-top" :src="cpath + tmp.imagePath" />
 		               		</div>

@@ -100,7 +100,7 @@
 			      	<div class="insertFormList">
 			      		<label class="insertFormLabel" for="shelterName">지점</label>
 			      		<select class="widthPull" name="shelterName" id="shelterName">
-				   			<option value="지점 선택">지점 선택</option>
+				   			<option value="">지점 선택</option>
 				   			<option value="서울">서울</option>
 				   			<option value="인천">인천</option>
 				   			<option value="부산">부산</option>
@@ -113,7 +113,7 @@
 			      	<div class="insertFormList">
 			      		<label class="insertFormLabel" for="reservedDate">날짜</label>
 			      		<select class="widthPull" name="reservedDate" id="reservedDate">
-				   			<option value="날짜 선택">날짜 선택</option>
+				   			<option value="">날짜 선택</option>
 				   			<option value="9월 1일">9월 1일</option>
 				   			<option value="9월 2일">9월 2일</option>
 				   			<option value="9월 3일">9월 3일</option>
@@ -124,7 +124,7 @@
 			      	<div class="insertFormList">
 			         	<label class="insertFormLabel" for="reservedTime">시간</label>
 			         	<select class="widthPull" name="reservedTime" id="reservedTime">
-				   			<option value="시간 선택">시간 선택</option>
+				   			<option value="">시간 선택</option>
 				   			<option value="10:00">10:00</option>
 				   			<option value="11:00">11:00</option>
 				   			<option value="13:00">13:00</option>

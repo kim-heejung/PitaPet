@@ -45,20 +45,18 @@ public class AdoptServiceImpl implements AdoptService {
 		//보여줄 페이지의 끝 ROWNUM
 		int endRowNum = pageNum * PAGE_ROW_COUNT;
 		
-		String shelterName = request.getParameter("shelterName");
+		String animalType = request.getParameter("animalType");
 		
-		if (shelterName == null) {
-			shelterName = "";
+		if (animalType == null) {
+			animalType = "";
 		}
 		
 		AdoptDto dto = new AdoptDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
 	    
-		if(!shelterName.equals("")) {
-			if (!shelterName.equals("선택하기")) {
-				dto.setName(shelterName);
-			}
+		if(!animalType.equals("")) {
+			dto.setAnimalType(animalType);
 		}
 
 		List<AdoptDto> list = dao.getList(dto);
@@ -89,20 +87,18 @@ public class AdoptServiceImpl implements AdoptService {
 		//보여줄 페이지의 끝 ROWNUM
 		int endRowNum = pageNum * PAGE_ROW_COUNT;
 		
-		String shelterName = request.getParameter("shelterName");
+		String animalType = request.getParameter("animalType");
 		
-		if (shelterName == null) {
-			shelterName = "";
+		if (animalType == null) {
+			animalType = "";
 		}
 		
 		AdoptDto dto = new AdoptDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
 	    
-		if(!shelterName.equals("")) {
-			if (!shelterName.equals("선택하기")) {
-				dto.setName(shelterName);
-			}
+		if(!animalType.equals("")) {
+			dto.setAnimalType(animalType);
 		}
 
 		//하단 시작 페이지 번호
@@ -126,7 +122,7 @@ public class AdoptServiceImpl implements AdoptService {
 		request.setAttribute("endPageNum", endPageNum); // 끝 페이지 번호
 		request.setAttribute("pageNum", pageNum); // 현재 페이지 번호
 		request.setAttribute("totalPageCount", totalPageCount); // 모든 페이지 count
-		request.setAttribute("shelterName", shelterName);
+		request.setAttribute("animalType", animalType);
 
 	}
 	
@@ -134,7 +130,7 @@ public class AdoptServiceImpl implements AdoptService {
 	public Map<String, Object> getListPaging(HttpServletRequest request) {
 		
 		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
-		String shelterName=(String)request.getParameter("shelterName");
+		String animalType=(String)request.getParameter("animalType");
 		
 		//한 페이지에 몇개씩 표시할 것인지
 		final int PAGE_ROW_COUNT = 8;
@@ -146,16 +142,14 @@ public class AdoptServiceImpl implements AdoptService {
 		//하단 끝 페이지 번호
 		int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
 		
-		if (shelterName == null) {
-			shelterName = "";
+		if (animalType == null) {
+			animalType = "";
 		}
 		
 		AdoptDto dto = new AdoptDto();
 	    
-		if(!shelterName.equals("")) {
-			if (!shelterName.equals("선택하기")) {
-				dto.setName(shelterName);
-			}
+		if(!animalType.equals("")) {
+			dto.setAnimalType(animalType);
 		}
 		
 		//전체 row 의 갯수
@@ -186,23 +180,22 @@ public class AdoptServiceImpl implements AdoptService {
 		
 		return map;
 	}
+	
 	@Override
 	public AdoptDto getDetail(HttpServletRequest request) {
 		
 		int num=Integer.parseInt(request.getParameter("num"));
-		String shelterName = request.getParameter("shelterName");
+		String animalType = request.getParameter("animalType");
 		
-		if (shelterName == null) {
-			shelterName = "";
+		if (animalType == null) {
+			animalType = "";
 		}
 		
 		AdoptDto dto=new AdoptDto();
 		dto.setNum(num);
 		
-		if(!shelterName.equals("")) {
-			if (!shelterName.equals("선택하기")) {
-				dto.setName(shelterName);
-			}
+		if(!animalType.equals("")) {
+			dto.setAnimalType(animalType);
 		}
 		
 		AdoptDto dto2 = dao.getData(dto);
@@ -214,24 +207,22 @@ public class AdoptServiceImpl implements AdoptService {
 	public AdoptDto testGetDetail(HttpServletRequest request) {
 		
 		int num=Integer.parseInt(request.getParameter("num"));
-		String shelterName = request.getParameter("shelterName");
+		String animalType = request.getParameter("animalType");
 		
-		if (shelterName == null) {
-			shelterName = "";
+		if (animalType == null) {
+			animalType = "";
 		}
 		
 		AdoptDto dto=new AdoptDto();
 		dto.setNum(num);
 		
-		if(!shelterName.equals("")) {
-			if (!shelterName.equals("선택하기")) {
-				dto.setName(shelterName);
-			}
+		if(!animalType.equals("")) {
+			dto.setAnimalType(animalType);
 		}
 		
 		AdoptDto dto2 = dao.getData(dto);
 		
-		request.setAttribute("shelterName", shelterName);
+		request.setAttribute("animalType", animalType);
 		
 		return dto2;
 	}

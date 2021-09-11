@@ -52,4 +52,10 @@ public class ReviewDaoImpl implements ReviewDao{
 		session.delete("review.delete", num);
 	}
 
+	//메인 노출
+	@Override
+	public List<ReviewDto> mainList(ReviewDto dto) {
+		return session.selectList("review.mainList", dto);
+	}
+
 }
