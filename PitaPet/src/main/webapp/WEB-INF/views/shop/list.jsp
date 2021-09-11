@@ -155,7 +155,7 @@ Resources1× 0.5× 0.25×Rerun
 	                </form> 
 	            </div>
 	            <div class="modal-footer">
-	               <button type="submit" class="shopBtn buyNowBtn" data-num="${tmp.num}">바로 구매하기</button>
+	               <button type="submit" class="shopBtn buyNowBtn" data-num="${tmp.num}">바로 구입하기</button>
 	              <button type="button" class="shopBtn2" data-bs-dismiss="modal">닫기</button>              
 	            </div>
 	          </div>

@@ -8,7 +8,7 @@ import com.pet.spring.shop.dto.ShopDto;
 public interface ShopDao {
 	public void insert(ShopDto dto);
 	public List<ShopDto> getList(ShopDto dto);
-	public int getCount();
+	public int getCount(ShopDto dto);
 	public void minusCount(OrderDto dto);
 	public int getPrice(int num);
 }

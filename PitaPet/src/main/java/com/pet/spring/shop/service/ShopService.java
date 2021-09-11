@@ -1,5 +1,6 @@
 package com.pet.spring.shop.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,4 +17,7 @@ public interface ShopService {
 	public Map<String, Object> uploadAjaxImage(ShopDto dto, HttpServletRequest request);
 	public void dbInfo(ModelAndView mView, HttpServletRequest request);
 	public void buy(HttpServletRequest request, UsersDto dto);
+	
+	public List<ShopDto> getList2(HttpServletRequest request);
+	public Map<String, Object> getListPaging(HttpServletRequest request);
 }

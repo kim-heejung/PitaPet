@@ -28,9 +28,9 @@ public class ShopDaoImpl implements ShopDao{
 	}
 
 	@Override
-	public int getCount() {
+	public int getCount(ShopDto dto) {
 		// TODO Auto-generated method stub
-		return session.selectOne("shop.getCount");
+		return session.selectOne("shop.getCount", dto);
 	}
 
 	@Override
