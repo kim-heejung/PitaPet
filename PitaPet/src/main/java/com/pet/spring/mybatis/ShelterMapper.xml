@@ -28,5 +28,6 @@
 	<select id="getList" resultType="shelterDto">
 		SELECT num,name,email,phoneNumber,address,serialNum,longitude,latitude
 		FROM shelter
+		ORDER BY num DESC
 	</select>
 </mapper>

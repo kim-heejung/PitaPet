@@ -135,6 +135,12 @@
 	      <textarea name="content">${empty id ? '댓글 작성을 위해 로그인이 필요 합니다.' : '' }</textarea>
 	      <button type="submit">등록</button>
 	   </form>
+	   
+	   
+	   
+	   
+	   
+	   
 	</div>
 	<div style="margin-top:500px;"></div>
 	<footer-component></footer-component>

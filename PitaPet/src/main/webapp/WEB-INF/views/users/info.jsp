@@ -6,22 +6,27 @@
 <head>
 <meta charset="UTF-8">
 <title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<jsp:include page="/resources/resource.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <style>
-.btn-pwd-left{ color:#FFD52B ; }
+.grid{
+	margin-top:30px;
+}
+#btn-pwd-left, #btn-pwd-right{ 
+	color:#dc3545;
+	}
 body{
   background-color:#31394D;
 }
-.color-card{
-  background:#31394D;
-}
-
-.color-card-2{
+.color-card-2,.color-card{
   background:#FDFEFF;
 }
 .title{
-  color:#31394D;
+  color:#fff;
   font-family: roboto;
   weight:300;
 }
@@ -64,6 +69,9 @@ ul {
 .job-title, .p-content{
 	flex:1;
 	width: 45%;
+}
+.p-content{
+	color:#000;
 }
 .i-l{
   float:left;
@@ -116,9 +124,6 @@ hr{
 }
 .color-d{
   background: linear-gradient(to bottom right, #6452E9, #639FF9);
-}
-.id_left{
-  color:#ffffff;
 }
 .btn{
   border:none;
@@ -342,12 +347,18 @@ box-shadow: 10px 10px 44px 15px rgba(0,0,0,0.14);
 </head>
 <body>
 <div id="info">
+	<jsp:include page="/resources/header.jsp"></jsp:include>
+	<slider-component :cpath="cpath"></slider-component>
+	<intro-component></intro-component>
+	<review-component></review-component>
+	<family-component></family-component>
+	<footer-component></footer-component>
 	<div class="container">
-		<div class="grid-7 element-animation" v-if="${dto.groupNum eq 0}">
+		<div class="grid element-animation" v-if="${dto.groupNum eq 0}">
 			<h1 class="title">일반 회원 정보</h1>
 			<div class="card color-card">
 				 <div v-if="${empty dto.profile}">
-				 	<svg style="color:#fff" id="profileImage" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="profile bi bi-person-circle" viewBox="0 0 16 16">
+				 	<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="profile bi bi-person-circle" viewBox="0 0 16 16">
 					  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
 					  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 					</svg>
@@ -360,7 +371,7 @@ box-shadow: 10px 10px 44px 15px rgba(0,0,0,0.14);
 			 	
 			 	<div class="desc top">
 			 		<p class="job-title"> 비밀번호</p>
-       				<a class="p-content btn-pwd-left" :href="pwd_updateform">수정하기</a>
+       				<a id="btn-pwd-left" class="p-content" :href="pwd_updateform">수정하기</a>
      			</div>
      			
      			
@@ -405,7 +416,7 @@ box-shadow: 10px 10px 44px 15px rgba(0,0,0,0.14);
      		</div>		
 		</div>
 		
-		<div v-else class="grid-7 element-animation">
+		<div v-else class="grid element-animation">
 			 <h1 class="title-2">보호소 회원 정보</h1>
 			 <div class="card color-card-2">
 				 <div v-if="${empty dto.profile}">
@@ -422,7 +433,7 @@ box-shadow: 10px 10px 44px 15px rgba(0,0,0,0.14);
 			 	
 			 	<div class="desc top">
 			 		<p class="job-title"> 비밀번호</p>
-       				<a class="p-content btn-pwd-right" :href="pwd_updateform">수정하기</a>
+       				<a id="btn-pwd-right" class="p-content " :href="pwd_updateform">수정하기</a>
      			</div>
      			
      			<div class="desc top">
