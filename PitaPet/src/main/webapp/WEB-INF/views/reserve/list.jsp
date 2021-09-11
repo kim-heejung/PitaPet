@@ -56,25 +56,7 @@
 					</tbody>
 				</table>
 			</div>
-			<nav class="pagination justify-content-center">
-				<ul>
-					<li class="page-item" v-if="startPageNum != 1">
-						<a v-on:click.prevent="movePage(startPageNum-1)" class="page-link" href="">Prev</a>
-					</li>
-					<li class="page-item disabled" v-else>
-			            <a class="page-link" href="javascript:">Prev</a>
-			        </li>
-			        <li v-for="i in pageNums" class="page-item" v-bind:class="{active: i == pageNum}">
-		            	<a v-on:click.prevent="movePage(i)" class="page-link" href="">{{ i }}</a>
-			        </li>
-			        <li class="page-item" v-if="endPageNum < totalPageCount">
-						<a v-on:click.prevent="movePage(endPageNum+1)" class="page-link" :href="cpath + '/reserve/list.do?pageNum=${endPageNum + 1}'">Next</a>
-		            </li>
-			        <li class="page-item disabled" v-else>
-		                <a class="page-link" href="javascript:">Next</a>
-			        </li>
-				</ul>
-			</nav>
+			<pagination-component :name="pagination" @page="setPageNum"></pagination-component>
 		</div>
 	</div>
 	<footer-component></footer-component>
@@ -83,6 +65,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/pagination.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <script>
 	const base_url="http://localhost:8888/spring";
@@ -94,21 +77,10 @@
 			reserveList:[],
 			allCount:[],
 			pageNum:1,
-			startPageNum:1,
-			endPageNum:5,
-			totalPageCount:0
-		},
-		computed:{
-			pageNums(){
-				const nums = [];
-				for(i = this.startPageNum; i<=this.endPageNum; i++){
-					nums.push(i);
-				}
-				return nums;
-			}
+			pagination:"http://localhost:8888/spring/api/reserve/paging.do",
 		},
 		methods:{
-			reserveData(){
+			makeList(){
 				const self = this;
 				axios.get(base_url + "/api/reserve/list.do",{
  					params:{
@@ -121,23 +93,11 @@
  						self.reserveList = response.data;
  					}
  				});
- 				axios.get(base_url + "/api/reserve/paging.do",{
- 					params:{
-						pageNum:this.pageNum
-					}
-				})
-				.then(function(response){
-					console.log(response);
-					if(response.status == 200){
-						self.startPageNum = response.data.startPageNum;
-						self.endPageNum = response.data.endPageNum;
-						self.totalPageCount = response.data.totalPageCount;
-					}
-				})
-				.catch(function(error){
-					console.log(error);
-				});
 			},
+			setPageNum(pageNum){
+			   this.pageNum = pageNum;
+			   this.makeList();
+		   },
 			listAllCount(){
 				const self = this;
 				axios.get(base_url + "/api/reserve/listallcount.do")
@@ -147,16 +107,10 @@
  						self.allCount = response.data;
  					}
  				})
-			},
-			movePage(pageNum){
-				console.log(pageNum);
-				//현재 페이지를 수정하고
-				this.pageNum = pageNum;
-				this.reserveData();  
 			}
 		},
 		created(){
-			this.reserveData();
+			this.makeList();
 			this.listAllCount();
 		}
 	  });	
