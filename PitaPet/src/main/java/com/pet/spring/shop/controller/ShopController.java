@@ -1,6 +1,7 @@
 package com.pet.spring.shop.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,20 @@ public class ShopController {
 	
 	@Autowired
 	private ShopService service;
+	
+	
+	@RequestMapping("/api/shop/paging")
+	@ResponseBody
+	public Map<String, Object> getListPaging(HttpServletRequest request){
+		return service.getListPaging(request);
+	}
+	
+	
+	@RequestMapping("/api/shop/list")
+	@ResponseBody
+	public List<ShopDto> getList2(HttpServletRequest request){
+		return service.getList2(request);
+	}
 	
 	@RequestMapping("/shop/list")
 	public ModelAndView getList(ModelAndView mView,HttpServletRequest request) {

@@ -63,7 +63,7 @@ public class ShopServiceImpl implements ShopService{
 
 	    int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
 
-	    int totalRow = dao.getCount();
+	    int totalRow = dao.getCount(dto);
 
 	    int totalPageCount = (int)Math.ceil(totalRow / (double)PAGE_ROW_COUNT);
 	    if(endPageNum > totalPageCount){
@@ -143,5 +143,65 @@ public class ShopServiceImpl implements ShopService{
 		orderDao.addOrder(dto2);
 	}
 
+	@Override
+	public List<ShopDto> getList2(HttpServletRequest request) {
+		final int PAGE_ROW_COUNT=8;
+	    final int PAGE_DISPLAY_COUNT=5;
+	    
+	    int pageNum=1;
+	    String strPageNum=request.getParameter("pageNum");
+
+	    if(strPageNum != null){
+	       pageNum=Integer.parseInt(strPageNum);
+	    }
+	    	    
+	    int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
+	    int endRowNum=pageNum*PAGE_ROW_COUNT;
+	    
+	    String category=request.getParameter("category");
+	    
+	    ShopDto dto=new ShopDto();
+	    dto.setStartRowNum(startRowNum);
+	    dto.setEndRowNum(endRowNum);
+	    if(category!=null){
+			dto.setCategory(category);
+		}
+	    
+	    List<ShopDto> list = dao.getList(dto);
+	    
+		return list;
+	}
+
+	@Override
+	public Map<String, Object> getListPaging(HttpServletRequest request) {
+		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+		String category=request.getParameter("category");
+		
+		final int PAGE_ROW_COUNT=8;
+		final int PAGE_DISPLAY_COUNT=5;
+		      
+		int startPageNum = 1 + ((pageNum - 1) / PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;
+		int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
+		
+		if (category == null) {
+			category = "";
+		}
+		
+		ShopDto dto=new ShopDto();
+
+		int totalRow=dao.getCount(dto);
+		int totalPageCount = (int) Math.ceil(totalRow / (double) PAGE_ROW_COUNT);
+		   
+		if(endPageNum > totalPageCount){
+		         endPageNum = totalPageCount; 
+		}
+		   
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("startPageNum", startPageNum);
+		map.put("endPageNum", endPageNum);
+		map.put("totalPageCount", totalPageCount);
+		   
+		return map;
+	}
 
 }

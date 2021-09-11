@@ -18,7 +18,7 @@
 				WHERE rnum >= #{startRowNum} AND rnum<= #{endRowNum}
 			]]>
 	</select>
-	<select id="getCount" resultType="int">
+	<select id="getCount" resultType="int" parameterType="shopDto">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM shop
 	</select>
