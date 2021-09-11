@@ -48,7 +48,7 @@ public class ReviewController {
       return map;
 	}
    
-   @RequestMapping("/api/review/comment_update")
+   @RequestMapping(value="/api/review/comment_update", method = RequestMethod.POST)
    @ResponseBody
    public Map<String, Object> commentUpdate(ReviewCommentDto dto){
       service.updateComment(dto);
@@ -188,6 +188,13 @@ public class ReviewController {
    public String delete(HttpServletRequest request, @RequestParam int num) {
       service.deleteContent(num, request);
       return "redirect:/review/list.do";
+   }
+   
+   //메인 노출
+   @RequestMapping("/api/review/mainlist")
+   @ResponseBody
+   public List<ReviewDto> mainList(HttpServletRequest request){
+	   return service.mainList(request);
    }
 
 }

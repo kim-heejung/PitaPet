@@ -12,6 +12,7 @@
 <body>
 <div id="reserveList">
 	<header-component :cpath="cpath" :id="id"></header-component>
+	<page-category class="reserve" :name="'상담예약'"></page-category>
 	<div class="board-wrap">
 		<page-category class="reserve" :cpath="cpath" :index="5"></page-category>
 		<div class="container">

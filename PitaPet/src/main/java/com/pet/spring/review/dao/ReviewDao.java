@@ -20,6 +20,7 @@ public interface ReviewDao {
 	public void update(ReviewDto dto);
 	//게시글(삭제)
 	public void delete(int num);
-	
+	//메인 노출
+	public List<ReviewDto> mainList(ReviewDto dto);
 
 }

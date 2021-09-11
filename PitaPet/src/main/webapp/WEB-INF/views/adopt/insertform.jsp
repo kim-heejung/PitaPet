@@ -15,6 +15,14 @@
 			<page-category :cpath="cpath" :index="0"></page-category>
 			<div class="container">
 			   	<form action="${pageContext.request.contextPath}/api/adopt/insert.do" method="post" enctype="multipart/form-data">
+			      	<div>
+			      		<label>동물 분류</label>
+			      		<select name="animalType" id="animalType">
+			      			<option value="">선택</option>
+				   			<option value="dog">dog</option>
+				   			<option value="cat">cat</option>
+						</select>
+			      	</div>
 			      	<div class="mb-3">
 			         	<label class="form-label" for="title" >제목</label>
 			         	<input class="form-control" type="text" name="title" id="title"/>

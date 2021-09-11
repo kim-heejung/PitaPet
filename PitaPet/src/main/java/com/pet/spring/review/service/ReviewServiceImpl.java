@@ -57,9 +57,7 @@ public class ReviewServiceImpl implements ReviewService{
 	    dto.setEndRowNum(endRowNum);
 
 		if (!animalType.equals("")) {
-			if (!animalType.equals("선택하기")) {
-				dto.setAnimalType(animalType);
-			}
+			dto.setAnimalType(animalType);
 		}
 	    
 	    //글 목록 얻어오기
@@ -141,10 +139,24 @@ public class ReviewServiceImpl implements ReviewService{
 	public void getData(HttpServletRequest request) {
 		//수정할 글 번호
 		int num=Integer.parseInt(request.getParameter("num"));
+		String animalType = request.getParameter("animalType");
+		
+		if (animalType == null) {
+			animalType = "";
+		}
+		
+		ReviewDto dto=new ReviewDto();
+		dto.setNum(num);
+		
+		if(!animalType.equals("")) {
+			dto.setAnimalType(animalType);
+		}
+		
 		//수정할 글의 정보를 얻어와서
-		ReviewDto dto=reviewDao.getData(num);
+		ReviewDto dto2=reviewDao.getData(dto);
 		//request에 담아준다.
-		request.setAttribute("dto", dto);
+		request.setAttribute("dto", dto2);
+		
 	}
 
 	@Override
@@ -315,9 +327,7 @@ public class ReviewServiceImpl implements ReviewService{
 	    dto.setEndRowNum(endRowNum);
 
 		if (!animalType.equals("")) {
-			if (!animalType.equals("선택하기")) {
-				dto.setAnimalType(animalType);
-			}
+			dto.setAnimalType(animalType);
 		}
 	    	    
 	    List<ReviewDto> list=reviewDao.getList(dto);
@@ -365,6 +375,26 @@ public class ReviewServiceImpl implements ReviewService{
 		map.put("commentList", commentList);
 		
 		return map;
+	}
+
+	//메인 노출
+	@Override
+	public List<ReviewDto> mainList(HttpServletRequest request) {
+		
+		String animalType = request.getParameter("animalType");
+	    
+		if (animalType == null) {
+			animalType = "";
+		}
+
+		//ReviewDto 객체에 startRowNum 과 endRowNum 을 담는다.
+	    ReviewDto dto=new ReviewDto();
+		dto.setAnimalType(animalType);
+	    
+	    //글 목록 얻어오기
+	    List<ReviewDto> list=reviewDao.mainList(dto);
+		
+		return list;
 	}
 
 }

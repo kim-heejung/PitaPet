@@ -26,15 +26,14 @@
     	<include refid="animalType"/>
 	</select>
 	
-	<select id="getData" parameterType="reviewDto" resultType="reviewDto">
+	<select id="getData" parameterType="int" resultType="reviewDto">
 		SELECT result1.*
       	FROM
         	(SELECT num,animalType,writer,title,img,content,viewCount,
             	TO_CHAR(regdate,'YYYY.MM.DD HH:MI') AS regdate,
             	LAG(num,1,0) OVER (ORDER BY num DESC) AS prevNum,
             	LEAD(num,1,0) OVER (ORDER BY num DESC) AS nextNum
-         	FROM board_review
-         	<include refid="animalType"/>) result1
+         	FROM board_review) result1
       	WHERE num=#{num}
 	</select>
 	
@@ -58,13 +57,13 @@
 	
 	<insert id="insert" parameterType="reviewDto">
 		INSERT INTO board_review
-		(num,writer,title,img,content,viewCount,regdate)
-		VALUES(board_review_seq.NEXTVAL, #{writer}, #{title}, #{img}, #{content}, #{viewCount}, SYSDATE)
+		(num,animalType,writer,title,img,content,viewCount,regdate)
+		VALUES(board_review_seq.NEXTVAL, #{animalType}, #{writer}, #{title}, #{img}, #{content}, #{viewCount}, SYSDATE)
 	</insert>
 	
 	<update id="update" parameterType="reviewDto">
 		UPDATE board_review
-		SET title=#{title}, content=#{content}
+		SET animalType=#{animalType}, title=#{title}, content=#{content}
 		WHERE num=#{num}	
 	</update>
 	
@@ -72,4 +71,16 @@
 		DELETE FROM board_review
 		WHERE num=#{num}
 	</delete>
+	
+	<select id="mainList" parameterType="reviewDto" resultType="reviewDto">
+		SELECT *
+	      FROM
+	         (SELECT result1.*, ROWNUM AS rnum
+	         FROM
+	            (SELECT num,animalType,writer,title,img,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD') AS regdate
+	            FROM board_review
+	            WHERE animalType = #{animalType}
+	            ORDER BY num DESC) result1)
+		 WHERE rnum BETWEEN 1 AND 8
+	</select>
 </mapper>

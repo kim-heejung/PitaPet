@@ -16,10 +16,17 @@
 	   	<form action="${pageContext.request.contextPath}/api/adopt/update.do" method="post" enctype="multipart/form-data">
 	      	<input type="hidden" name="num" value="${dto.num}"/>
 	      	<div>
+				<label>동물 분류</label>
+			    <select name="animalType" id="animalType">
+			    	<option value="">선택</option>
+				   	<option value="dog" ${dto.animalType eq 'dog' ? "selected" : "" }>dog</option>
+				   	<option value="cat" ${dto.animalType eq 'cat' ? "selected" : "" }>cat</option>
+				</select>
+			</div>
+	      	<div>
 	         	<label for="title">제목</label>
 	         	<input type="text" name="title" id="title" value="${dto.title}"/>
 	      	</div>
-	      	
 	        <div>
 	         	<label for="image">이미지</label>
 	         	<!--  

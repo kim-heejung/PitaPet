@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class AdoptDto {
 	
 	private int num;
+	private String animalType;
 	private String writer;
 	private String title;
 	private String breed;
@@ -31,12 +32,13 @@ public class AdoptDto {
 	
 	public AdoptDto() {}
 
-	public AdoptDto(int num, String writer, String title, String breed, String petName, String petAge, String petGender,
-			String vaccination, String neutralization, String findDate, String caption, String imagePath,
-			String regdate, int viewCount, int startRowNum, int endRowNum, int prevNum, int nextNum,
+	public AdoptDto(int num, String animalType, String writer, String title, String breed, String petName,
+			String petAge, String petGender, String vaccination, String neutralization, String findDate, String caption,
+			String imagePath, String regdate, int viewCount, int startRowNum, int endRowNum, int prevNum, int nextNum,
 			MultipartFile image, String name, int cnt, String id, String liked, String orgImageName) {
 		super();
 		this.num = num;
+		this.animalType = animalType;
 		this.writer = writer;
 		this.title = title;
 		this.breed = breed;
@@ -68,6 +70,14 @@ public class AdoptDto {
 
 	public void setNum(int num) {
 		this.num = num;
+	}
+
+	public String getAnimalType() {
+		return animalType;
+	}
+
+	public void setAnimalType(String animalType) {
+		this.animalType = animalType;
 	}
 
 	public String getWriter() {

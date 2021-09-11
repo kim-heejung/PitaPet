@@ -22,7 +22,8 @@ public interface ReviewService {
 	public void updateComment(ReviewCommentDto dto);
 	public void deleteComment(HttpServletRequest request);
 	public List<ReviewCommentDto> moreCommentList(HttpServletRequest request);
-	
 	//댓글 페이징
 	public Map<String, Object> commentPaging(HttpServletRequest request);
+	//메인 노출
+	public List<ReviewDto> mainList(HttpServletRequest request);
 }

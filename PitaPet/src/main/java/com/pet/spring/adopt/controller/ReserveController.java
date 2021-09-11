@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -84,7 +85,7 @@ public class ReserveController {
 		return "reserve/detailcheck";
 	}
 
-	@RequestMapping("/reserve/detailcheck")
+	@RequestMapping("/api/reserve/detailcheck")
 	@ResponseBody
 	public Map<String, Object> detailCheck (@RequestParam int num, @RequestParam java.lang.String pwd) {
 
@@ -159,7 +160,7 @@ public class ReserveController {
 	
 	
 	//댓글 저장
-	@RequestMapping("/api/reserve/commentinsert")
+	@RequestMapping(value = "/api/reserve/commentinsert", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> authCommentInsert(HttpServletRequest request) {
 
@@ -176,7 +177,7 @@ public class ReserveController {
 	
 	
 	//댓글 수정
-	@RequestMapping("api/reserve/commentupdate")
+	@RequestMapping(value = "api/reserve/commentupdate", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> authCommentUpdate(ReserveCommentDto dto, HttpServletRequest request) {
 
@@ -185,7 +186,7 @@ public class ReserveController {
 
 	
 	//댓글 삭제
-	@RequestMapping("/api/reserve/commentdelete")
+	@RequestMapping(value = "/api/reserve/commentdelete", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> authCommentDelete(HttpServletRequest request) {
 

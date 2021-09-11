@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adopt">
   
-	<sql id="selectShelter">
-		<if test="name != null">
-			WHERE name = #{name}
+	<sql id="adoptAnimalType">
+		<if test="animalType != null">
+			WHERE animalType = #{animalType}
 		</if>
 	</sql>
 	<select id="getList" parameterType="adoptDto" resultType="adoptDto">
@@ -12,10 +12,10 @@
 		FROM
 			(SELECT result2.*, ROWNUM AS rnum
 			FROM 
-				(SELECT a.num, name, title, writer, viewCount,
+				(SELECT a.num, animalType, imagePath, name, title, writer, viewCount,
 				TO_CHAR(a.regdate,'YYYY.MM.DD') regdate
 				FROM board_adopt a INNER JOIN shelter ON writer = id
-				<include refid="selectShelter"/>
+				<include refid="adoptAnimalType"/>
 				ORDER BY num DESC) result2)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
@@ -23,20 +23,20 @@
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM board_adopt INNER JOIN shelter
 		ON writer = id
-		<include refid="selectShelter"/>
+		<include refid="adoptAnimalType"/>
 	</select>
 	
 	<select id="getData" parameterType="adoptDto" resultType="adoptDto">
 		SELECT *
 		FROM
-			(SELECT a.num, name, title, viewCount, writer, breed, petName, petAge, petGender, 
+			(SELECT a.num, animalType, name, title, viewCount, writer, imagePath, breed, petName, petAge, petGender, 
 			vaccination, neutralization, findDate, caption, orgImageName, imagePath,
 			TO_CHAR(a.regdate,'YYYY.MM.DD') regdate,  
 			LAG(a.num, 1, 0) OVER (ORDER BY a.num DESC) AS prevNum,
 			LEAD(a.num, 1, 0) OVER (ORDER BY a.num DESC) AS nextNum
 			FROM board_adopt a INNER JOIN shelter
 			ON writer = id
-			<include refid="selectShelter"/>
+			<include refid="adoptAnimalType"/>
 			)
 		WHERE num = #{num}
 	</select>
@@ -49,15 +49,15 @@
 	
 	<insert id="insert" parameterType="adoptDto">
 		INSERT INTO board_adopt
-		(num, title, writer, breed, petName, petAge, petGender, vaccination, 
+		(num, animalType, title, writer, breed, petName, petAge, petGender, vaccination, 
 		neutralization, findDate, caption, orgImageName, imagePath, regdate)
-		VALUES(board_adopt_seq.NEXTVAL, #{title}, #{writer}, #{breed}, #{petName}, #{petAge}, #{petGender}, #{vaccination}, 
+		VALUES(board_adopt_seq.NEXTVAL, #{animalType}, #{title}, #{writer}, #{breed}, #{petName}, #{petAge}, #{petGender}, #{vaccination}, 
 		#{neutralization}, #{findDate}, #{caption}, #{orgImageName}, #{imagePath}, SYSDATE)
 	</insert>
 
 	<update id="update" parameterType="adoptDto">
 		UPDATE board_adopt
-		SET title=#{title}, breed=#{breed}, petName=#{petName}, petAge=#{petAge}, petGender=#{petGender}, 
+		SET title=#{title}, animalType=#{animalType}, breed=#{breed}, petName=#{petName}, petAge=#{petAge}, petGender=#{petGender}, 
 		vaccination=#{vaccination}, neutralization=#{neutralization}, findDate=#{findDate}, 
 		caption=#{caption}, imagePath=#{imagePath}, orgImageName=#{orgImageName}
 		WHERE num=#{num}
@@ -73,7 +73,7 @@
 		FROM
 			(SELECT result2.*, ROWNUM AS rnum
 			FROM 
-				(SELECT a.num, name, title, breed, petName, petAge, petGender, 
+				(SELECT a.num, name, title, imagePath, breed, petName, petAge, petGender, 
 				TO_CHAR(a.regdate,'YYYY.MM.DD') AS regdate
 				FROM board_adopt a INNER JOIN shelter ON writer = id
 				ORDER BY a.regdate DESC) result2)
@@ -85,7 +85,7 @@
 		FROM
 			(SELECT result2.*, ROWNUM AS rnum
 			FROM 
-				(SELECT a.num, name, title, breed, petName, petAge, petGender, 
+				(SELECT a.num, name, title, imagePath, breed, petName, petAge, petGender, 
 				TO_CHAR(a.regdate,'YYYY.MM.DD') AS regdate
 				FROM board_adopt a INNER JOIN shelter ON writer = id
 				ORDER BY a.regdate DESC) result2)
