@@ -7,11 +7,12 @@ Vue.component("family-component", {
 	            <p class="main-txt">사랑스러운 아이들이 기다리고있어요♥ 가족이 되어주세요</p>
 	        </div>
 	        <div class="grid-wrap row">
-	            <family-component-gallery class="grid-left col-12 col-md-4" :family="newAdoptAnimals" :type="1"></family-component-gallery>
+	            <family-component-gallery class="grid-left col-12 col-md-4"  :family="newAdoptAnimals" :type="1"></family-component-gallery>
 	            <family-component-gallery class="grid-right row col-12 col-md-8" :family="adoptAnimals" :type="2"></family-component-gallery>
 	        </div>
 	    </div>
       `,
+      props:["cpath"],
       data(){
     	  return{
     		  newAdoptAnimals:[],
@@ -53,7 +54,7 @@ Vue.component("family-component-gallery", {
             	:class="[type == 1 ? 'col-md-12' : 'col-md-6 col-xl-4']"
             	v-for="(adopt, index) in family" 
             	:key="index">
-                <div class="gallery-thumb"></div>
+                <div class="gallery-thumb" :style="{'background-image': 'url(http://localhost:8888/spring/' + adopt.imagePath + ')'}"></div>
                 <div class="txt-wrap">
                     <slot></slot>
                     <p>
@@ -70,7 +71,12 @@ Vue.component("family-component-gallery", {
             </li> 
         </ul>
     `,
-    props:["family", "type"]
+    props:["family", "type"],
+    data(){
+    	return{
+    		
+    	}
+    }
 });
 
 
