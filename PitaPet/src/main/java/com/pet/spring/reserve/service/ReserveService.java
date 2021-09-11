@@ -1,4 +1,4 @@
-package com.pet.spring.adopt.service;
+package com.pet.spring.reserve.service;
 
 import java.util.List;
 import java.util.Map;
@@ -6,8 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.pet.spring.adopt.dto.ReserveCommentDto;
-import com.pet.spring.adopt.dto.ReserveDto;
+import com.pet.spring.reserve.dto.ReserveCommentDto;
+import com.pet.spring.reserve.dto.ReserveDto;
 import com.pet.spring.shelter.dto.ShelterDto;
 
 public interface ReserveService {

@@ -74,8 +74,9 @@
 <body>
 <div id="reserveDetailCheck">
 	<header-component :cpath="cpath" :id="id"></header-component>
+	<page-category class="reserve" :name="'상담예약'"></page-category>
 	<div class="board-wrap">
-		<page-category class="reserve" :name="'상담예약'"></page-category>
+		<page-category class="reserve" :cpath="cpath" :index="5"></page-category>
 		<div class="container">
 			<!--  
 			<h1 id="mainTitle">
@@ -95,7 +96,7 @@
 					<label class="pwdCheckFormLabel" for="pwd">비밀번호</label>
 					<input class="widthPull" type="password" name="pwd" id="pwd"/>
 				</div>
-				<a class="pwdCheckButton reservListBtn"href="">목록보기</a>
+				<a class="pwdCheckButton reservListBtn" href="${pageContext.request.contextPath}/reserve/list.do">목록보기</a>
 				<button class="pwdCheckButton reserveSubmitBtn" type="submit">확인</button>
 			</form>
 		</div>

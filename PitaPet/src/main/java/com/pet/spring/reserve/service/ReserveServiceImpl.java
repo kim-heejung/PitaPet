@@ -1,4 +1,4 @@
-package com.pet.spring.adopt.service;
+package com.pet.spring.reserve.service;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -11,11 +11,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pet.spring.adopt.dao.ReserveCommentDao;
-import com.pet.spring.adopt.dao.ReserveDao;
 import com.pet.spring.adopt.dto.AdoptDto;
-import com.pet.spring.adopt.dto.ReserveCommentDto;
-import com.pet.spring.adopt.dto.ReserveDto;
+import com.pet.spring.reserve.dao.ReserveCommentDao;
+import com.pet.spring.reserve.dao.ReserveDao;
+import com.pet.spring.reserve.dto.ReserveCommentDto;
+import com.pet.spring.reserve.dto.ReserveDto;
 import com.pet.spring.shelter.dto.ShelterDto;
 
 @Service

@@ -30,7 +30,7 @@
 		SELECT *
 		FROM
 			(SELECT a.num, animalType, name, title, viewCount, writer, imagePath, breed, petName, petAge, petGender, 
-			vaccination, neutralization, findDate, caption, orgImageName, imagePath,
+			vaccination, neutralization, findDate, caption, orgImageName,
 			TO_CHAR(a.regdate,'YYYY.MM.DD') regdate,  
 			LAG(a.num, 1, 0) OVER (ORDER BY a.num DESC) AS prevNum,
 			LEAD(a.num, 1, 0) OVER (ORDER BY a.num DESC) AS nextNum

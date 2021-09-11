@@ -3,21 +3,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
-	<jsp:include page="/resources/resource.jsp"></jsp:include>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
+<meta charset="UTF-8">
+<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+<jsp:include page="/resources/resource.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
+<style>
+	.insertForm{
+		text-align:left;
+	}	
+	.insertFormList{
+		padding-bottom:12px;
+	}
+	
+	.formBtn{
+		text-align:center;
+		margin-top:36px;
+	}
+	.formBtnList{
+		margin:0 4px;
+	}
+</style>
 </head>
 <body>
 	<div id="reviewInsert">
 		<header-component :cpath="cpath" :id="id"></header-component>
 		<div class="board-wrap">
-			<page-category class="adopt-review" :name="'입양후기'"></page-category>
+			<page-category class="adopt-review" :cpath="cpath" :index="1"></page-category>
 			<div class="container">
-				<form action="insert.do" method="post" id="insertForm" enctype="multipart/form-data">
-					<div>
-			      		<label>동물 분류</label>
-			      		<select name="animalType" id="animalType">
+				<form class="insertForm" action="insert.do" method="post" id="insertForm" enctype="multipart/form-data">
+					<div class="insertFormList">
+			      		<label class="form-label">동물 분류</label>
+			      		<select class="form-select" name="animalType" id="animalType">
 			      			<option value="">선택</option>
 				   			<option value="dog">dog</option>
 				   			<option value="cat">cat</option>
@@ -36,7 +52,10 @@
 				        <input class="form-control" type="file" name="imgFile" id="imgFile"
 				            accept=".jpg, .jpeg, .png, .JPG, .JPEG"/>
 				    </div>
-					<button class="btn btn-primary" type="submit">저장</button>
+					<div class="formBtn">
+			      		<button class="btn btn-primary formBtnList" type="reset">취소</button>
+			      		<button class="btn btn-primary formBtnList" type="submit">등록</button>
+			      	</div>
 				</form>
 			</div>
 		</div>

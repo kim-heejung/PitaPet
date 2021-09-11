@@ -1,8 +1,8 @@
-package com.pet.spring.adopt.dao;
+package com.pet.spring.reserve.dao;
 
 import java.util.List;
 
-import com.pet.spring.adopt.dto.ReserveCommentDto;
+import com.pet.spring.reserve.dto.ReserveCommentDto;
 
 
 public interface ReserveCommentDao {

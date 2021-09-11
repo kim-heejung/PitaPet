@@ -9,8 +9,8 @@
  		<typeAlias type="com.pet.spring.review.dto.ReviewCommentDto" alias="reviewCommentDto"/>
  		<typeAlias type="com.pet.spring.adopt.dto.AdoptDto" alias="adoptDto"/>
  		<typeAlias type="com.pet.spring.adopt.dto.AdoptLikeDto" alias="adoptLikeDto"/>
- 		<typeAlias type="com.pet.spring.adopt.dto.ReserveDto" alias="reserveDto"/>
- 		<typeAlias type="com.pet.spring.adopt.dto.ReserveCommentDto" alias="reserveCommentDto"/>
+ 		<typeAlias type="com.pet.spring.reserve.dto.ReserveDto" alias="reserveDto"/>
+ 		<typeAlias type="com.pet.spring.reserve.dto.ReserveCommentDto" alias="reserveCommentDto"/>
  		<typeAlias type="com.pet.spring.shelter.dto.ShelterDto" alias="shelterDto"/>
  		<typeAlias type="com.pet.spring.shop.dto.ShopDto" alias="shopDto"/>
  		<typeAlias type="com.pet.spring.shop.dto.OrderDto" alias="orderDto"/>
