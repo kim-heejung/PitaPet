@@ -13,7 +13,7 @@
 	<slider-component :cpath="cpath"></slider-component>
 	<intro-component></intro-component>
 	<review-component></review-component>
-	<family-component></family-component>
+	<family-component :cpath="cpath"></family-component>
 	<footer-component></footer-component>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
