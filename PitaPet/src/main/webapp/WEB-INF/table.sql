@@ -29,7 +29,7 @@ CREATE TABLE petusers(
    phoneNumber VARCHAR2(100),
    birth VARCHAR2(100),
    email VARCHAR2(100),
-   address VARCHAR2(100),
+   address VARCHAR2(150),
    household VARCHAR2(100),
    profile VARCHAR2(100),
 	donation NUMBER,
@@ -43,7 +43,7 @@ CREATE TABLE shelter(
 	name VARCHAR2(100), --보호소이름
    phoneNumber VARCHAR2(100),--연락처
    email VARCHAR2(100),
-   address VARCHAR2(100),
+   address VARCHAR2(150),
    regdate DATE,
    longitude VARCHAR2(100), --위도 경도
 	latitude VARCHAR2(100)

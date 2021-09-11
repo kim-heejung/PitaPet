@@ -3,10 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
-	<jsp:include page="/resources/resource.jsp"></jsp:include>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
+<meta charset="UTF-8">
+<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
+<jsp:include page="/resources/resource.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
+<style>
+	.insertForm{
+		text-align:left;
+	}	
+	.insertFormList{
+		padding-bottom:6px;
+	}
+	
+	.formBtn{
+		text-align:center;
+		margin-top:32px;
+	}
+	.formBtnList{
+		margin:0 4px;
+	}
+</style>
 </head>
 <body>
 	<div id="adoptInsert">
@@ -14,10 +30,10 @@
 		<div class="board-wrap">
 			<page-category :cpath="cpath" :index="0"></page-category>
 			<div class="container">
-			   	<form action="${pageContext.request.contextPath}/api/adopt/insert.do" method="post" enctype="multipart/form-data">
-			      	<div>
-			      		<label>동물 분류</label>
-			      		<select name="animalType" id="animalType">
+			   	<form class="insertForm" action="${pageContext.request.contextPath}/api/adopt/insert.do" method="post" enctype="multipart/form-data">
+			      	<div class="mb-3 insertFormList">
+			      		<label class="form-label">동물 분류</label>
+			      		<select class="form-select" name="animalType" id="animalType">
 			      			<option value="">선택</option>
 				   			<option value="dog">dog</option>
 				   			<option value="cat">cat</option>
@@ -64,8 +80,10 @@
 			         	<label class="form-label" for="caption">설명</label>
 						<textarea class="form-control" type="text" name="caption" id="caption"/></textarea>
 			      	</div>
-			      	<button class="btn btn-primary" type="reset">취소</button>
-			      	<button class="btn btn-primary" type="submit">등록</button>
+			      	<div class="formBtn">
+			      		<button class="btn btn-primary formBtnList" type="reset">취소</button>
+			      		<button class="btn btn-primary formBtnList" type="submit">등록</button>
+			      	</div>
 			   	</form>
 			</div>
 		</div>

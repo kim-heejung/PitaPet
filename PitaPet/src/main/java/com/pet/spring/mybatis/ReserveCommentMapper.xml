@@ -8,7 +8,7 @@
          (SELECT result1.*, ROWNUM AS rnum
          FROM
             (SELECT r.num, writer, content, target_id, ref_group,
-               comment_group, deleted, r.regdate
+               comment_group, deleted, TO_CHAR(r.regdate,'YYYY.MM.DD') regdate
             FROM board_reserve_comment r
             INNER JOIN shelter s
             ON writer=id
@@ -42,7 +42,8 @@
    </update>
    
    <select id="getData" parameterType="int" resultType="reserveCommentDto">
-      SELECT num,writer,content,ref_group,comment_group,deleted,regdate
+      SELECT num, writer, content, ref_group, comment_group, deleted,
+      TO_CHAR(regdate,'YYYY.MM.DD') regdate
       FROM board_reserve_comment
       WHERE num=#{num}
    </select>
