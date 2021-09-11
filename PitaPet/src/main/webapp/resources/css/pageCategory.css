@@ -26,7 +26,7 @@
 	background-position:30% 40%;
 }
 .page-category.reserve .img-area{
-	background-image:url('http://localhost:8888/spring/resources/images/category06.jpg'); 
+	background-image:url('http://localhost:8888/spring/resources/images/reserve-category.jpg'); 
 }
 .page-category .img-area::after{
 	content:"";
