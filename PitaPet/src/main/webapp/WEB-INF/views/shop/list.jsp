@@ -25,8 +25,6 @@
 	color: white;
 	opacity: 0.6;
 }
-
-
 #shopCategory {
   text-align:center;
 }

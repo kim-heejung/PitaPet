@@ -12,9 +12,8 @@
 	<div id="adoptInsert">
 		<header-component :cpath="cpath" :id="id"></header-component>
 		<div class="board-wrap">
-			<page-category :name="'입양하기'"></page-category>
+			<page-category :cpath="cpath" :index="0"></page-category>
 			<div class="container">
-			   	<h1>이미지 업로드 폼</h1>
 			   	<form action="${pageContext.request.contextPath}/api/adopt/insert.do" method="post" enctype="multipart/form-data">
 			      	<div>
 			      		<label>동물 분류</label>
@@ -24,49 +23,49 @@
 				   			<option value="cat">cat</option>
 						</select>
 			      	</div>
-			      	<div>
-			         	<label for="title">제목</label>
-			         	<input type="text" name="title" id="title"/>
+			      	<div class="mb-3">
+			         	<label class="form-label" for="title" >제목</label>
+			         	<input class="form-control" type="text" name="title" id="title"/>
 			      	</div>
-			      	<div>
-			         	<label for="image">이미지</label>
-			         	<input type="file" name="image" id="image"
+			      	<div class="mb-3">
+			         	<label class="form-label" for="image">이미지</label>
+			         	<input class="form-control" type="file" name="image" id="image"
 			            	accept=".jpg, .jpeg, .png, .JPG, .JPEG"/>
 			      	</div>
-			      	<div>
-			         	<label for="breed">품종</label>
-			         	<input type="text" name="breed" id="breed"/>
+			      	<div class="mb-3">
+			         	<label class="form-label" for="breed">품종</label>
+			         	<input class="form-control" type="text" name="breed" id="breed"/>
 			      	</div>
-			      	<div>
-			         	<label for="petName">이름</label>
-			         	<input type="text" name="petName" id="petName"/>
+			      	<div class="mb-3">
+			         	<label class="form-label" for="petName">이름</label>
+			         	<input class="form-control" type="text" name="petName" id="petName"/>
 			      	</div>
-			      	<div>
-			         	<label for="petAge">나이</label>
-			         	<input type="text" name="petAge" id="petAge"/>
+			      	<div class="mb-3">
+			         	<label class="form-label" for="petAge">나이</label>
+			         	<input class="form-control" type="text" name="petAge" id="petAge"/>
 			      	</div>
-			      	<div>
-			         	<label for="petGender">성별</label>
-			         	<input type="text" name="petGender" id="petGender"/>
+			      	<div class="mb-3">
+			         	<label class="form-label" for="petGender">성별</label>
+			         	<input class="form-control" type="text" name="petGender" id="petGender"/>
 			      	</div>
-			      	<div>
-			         	<label for="vaccination">예방 접종</label>
-			         	<input type="text" name="vaccination" id="vaccination"/>
+			      	<div class="mb-3">
+			         	<label class="form-label" for="vaccination">예방 접종</label>
+			         	<input class="form-control" type="text" name="vaccination" id="vaccination"/>
 			      	</div>
-			      	<div>
-			         	<label for="neutralization">중성화</label>
-			         	<input type="text" name="neutralization" id="neutralization"/>
+			      	<div class="mb-3">
+			         	<label class="form-label" for="neutralization">중성화</label>
+			         	<input class="form-control" type="text" name="neutralization" id="neutralization"/>
 			      	</div>
-			      	<div>
-			         	<label for="findDate">맡겨진 날짜</label>
-			         	<input type="text" name="findDate" id="findDate"/>
+			      	<div class="mb-3">
+			         	<label class="form-label" for="findDate">맡겨진 날짜</label>
+			         	<input class="form-control" type="text" name="findDate" id="findDate"/>
 			      	</div>
-			      	<div>
-			         	<label for="caption">설명</label>
-						<textarea type="text" name="caption" id="caption"/></textarea>
+			      	<div class="mb-3">
+			         	<label class="form-label" for="caption">설명</label>
+						<textarea class="form-control" type="text" name="caption" id="caption"/></textarea>
 			      	</div>
-			      	<button type="reset">취소</button>
-			      	<button type="submit">등록</button>
+			      	<button class="btn btn-primary" type="reset">취소</button>
+			      	<button class="btn btn-primary" type="submit">등록</button>
 			   	</form>
 			</div>
 		</div>
