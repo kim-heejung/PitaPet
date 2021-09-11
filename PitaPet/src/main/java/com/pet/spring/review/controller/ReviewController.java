@@ -48,7 +48,7 @@ public class ReviewController {
       return map;
 	}
    
-   @RequestMapping("/api/review/comment_update")
+   @RequestMapping(value="/api/review/comment_update", method = RequestMethod.POST)
    @ResponseBody
    public Map<String, Object> commentUpdate(ReviewCommentDto dto){
       service.updateComment(dto);
