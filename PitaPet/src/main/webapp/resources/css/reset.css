@@ -48,6 +48,7 @@ a{
 }
 a:hover{
 	color:#222;
+	cursor:pointer;
 }
 *,
 *:before,
