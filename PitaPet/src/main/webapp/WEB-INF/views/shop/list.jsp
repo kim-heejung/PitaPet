@@ -87,7 +87,7 @@ Resources1× 0.5× 0.25×Rerun
              <div>Pit a Pet</div>
          </a>
          <ul class="menu-wrap">
-             <li class="menu-list"><a href="${pageContext.request.contextPath}/adopt/procedure.do">입양절차알아보기</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/adopt/procedure.do">입양절차 소개</a></li>
              <li class="menu-list"><a href="${pageContext.request.contextPath}/reserve/list.do">상담예약</a></li>
              <li class="menu-list"><a href="${pageContext.request.contextPath}/adopt/list.do">입양하기</a></li>
              <li class="menu-list"><a href="${pageContext.request.contextPath}/review/list.do">입양후기</a></li>
