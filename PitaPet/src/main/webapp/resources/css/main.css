@@ -772,39 +772,6 @@
     background:#222;
     color:#fff;
 }
-.tab-btn{
-    margin-top:40px;
-    display:flex;
-    align-items:center;
-    justify-content: center;
-    text-align:center;
-}
-.tab-btn button{
-    position:relative;
-    height:60px;
-    border:0;
-    background:0;
-    font-size:2.2rem;
-    font-weight:600;
-    color:#777;
-    margin-left:20px;
-    cursor: pointer;
-}
-.tab-btn button:first-of-type{
-    margin-left:0;
-}
-.tab-btn button.active{
-    color:#222;
-}
-.tab-btn button.active::before{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:10px;
-    width:100%;
-    height:3px;
-    background:#aaa;
-}
 #AdoptReview .gallery_wrap,
 #AdoptReview .gallery_wrap .gallery_list{
     list-style:none;

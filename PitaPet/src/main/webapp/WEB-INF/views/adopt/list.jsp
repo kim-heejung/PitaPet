@@ -7,62 +7,48 @@
 <head>
 	<meta charset="UTF-8">
 	<title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
-	<%-- bootstrap 읽어오기 --%>
 	<jsp:include page="/resources/resource.jsp"></jsp:include>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
-	<style>
-		a:hover{ cursor:pointer; }
-	</style>
 </head>
 <body>
 <div id="adoptList">
-      <header-component :cpath="cpath" :id="id"></header-component>
+    <header-component :cpath="cpath" :id="id"></header-component>
     <div class="board-wrap">
 	    <page-category :cpath="cpath" :index="0"></page-category>
 	    <div class="container">
-		   	<a href="${pageContext.request.contextPath}/adopt/private/insertform.do" class="btn btn-primary">새글 작성</a><br/>
-	   		<select v-model="selected" name="shelterName" id="shelter" @change="optionSelect">
-	   			<option v-for="option in options" v-bind:value="option.value">{{ option.text }}</option>
-			</select>
-		   	<ul class="row">
-		   		<li v-for="(tmp, index) in adoptList" class="col-6 col-md-4 col-lg-3" :key="index">
-		   			<div class="card mb-3">
-		   				<a href="${pageContext.request.contextPath}/adopt/detail.do?num=${tmp.num}">
-		               		<div class="img-wrapper">
-		                  		<img class="card-img-top" :src="cpath + tmp.imagePath" />
-		               		</div>
-		           		</a>
-		           		<ul>
-		           			<li class="card-text">
-			           			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-								  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-								</svg>
-								<span>{{tmp.name}}</span>
-							</li>
-		           			<li class="card-text">{{tmp.title}}</li>
-		           			<!--  <li class="card-text">by <strong>{{tmp.writer}}</strong></li> -->
-		           			<li class="card-text">{{tmp.viewCount}}</li>
-		           			<li class="card-text">{{tmp.regdate}}</li>
-		           			<li class="card-text" >
-		           				<div v-if="id == ''">
-		           					<a v-on:click.prevent="message('로그인 후 이용 가능합니다')" href="">♥</a>
-		          					<span>{{tmp.cnt}}</span>
-		           				</div>
-		           				<div v-else>
-		           					<a v-if="tmp.liked == 'yes'" v-on:click.prevent="unlikeClick(tmp.num)" href="">♥</a>
-			          				<a v-else v-on:click.prevent="isFirstLike(tmp.num)" href="">♡</a>
-			          				<span>{{tmp.cnt}}</span>
-		           				</div>
-		           			</li>
-		           		</ul>
-		   			</div>
-		   		</li>
-		   	</ul>
-		   	<pagination-component :name="pagination" @page="setPageNum"></pagination-component>
+		 	<div class="tab-btn">
+                <button v-for="(tab, index) in tabs" 
+                    :key="index"
+                    :class="{active: currentTab == index}"
+                    @click="currentTab = index">{{tab}}</button>
+            </div>
+		   	<div class="row tab-content">
+		   		<div v-show="currentTab==0">
+			   		<div class="sub-tab-btn">
+			 			<a v-for="option in options"
+			 				 :class="{on : selected == option.value}" 
+			 				 href="" 
+			 				 @click.prevent="filteredListDog(option.value, option.text)">{{ option.text }}</a>
+		 			</div>
+		   			<adopt-list :cpath="cpath" :adopt-animal="adoptDog"></adopt-list>
+		   			<pagination-component :name="paginationDog" @page="setPageNum"></pagination-component>
+		   		</div>
+		   		<div v-show="currentTab==1">
+			   		<div class="sub-tab-btn">
+			 			<a v-for="option in options"
+			 				 :class="{on : selected == option.value}" 
+			 				 href="" 
+			 				 @click.prevent="filteredListCat(option.value, option.text)">{{ option.text }}</a>
+			 		</div>
+		   			<adopt-list :cpath="cpath" :adopt-animal="adoptCat"></adopt-list>
+		   			<pagination-component :name="paginationCat" @page="setPageNum"></pagination-component>
+		   		</div>
+		   	</div>
+		   	<a :href="cpath + '/adopt/private/insertform.do'" class="btn btn-primary">새글 작성</a>
+		   	
 	   </div>
 	</div>
 	<footer-component></footer-component>
-    
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
@@ -73,38 +59,136 @@
 <script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <script>
   const base_url="http://localhost:8888/spring";
+  
+  
+  Vue.component("adopt-list", {
+	  template:`
+	  	<ul class="row">
+		  <li v-for="(tmp, index) in adoptAnimal" class="col-6 col-md-4 col-lg-3" :key="index">
+	 			<div class="card mb-3">
+	 				<a :href="cpath + '/adopt/detail.do?num=' + tmp.num">
+	             		<div class="img-wrapper">
+	                		<img class="card-img-top" :src="cpath + tmp.imagePath" />
+	             		</div>
+	         		</a>
+	         		<ul>
+	         			<li class="card-text">
+		           			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+							  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+							</svg>
+							<span>{{tmp.name}}</span>
+						</li>
+	         			<li class="card-text">{{tmp.title}}</li>
+	         			<li class="card-text">{{tmp.viewCount}}</li>
+	         			<li class="card-text">{{tmp.regdate}}</li>
+	         		</ul>
+	 			</div>
+	 		</li>
+ 		</ul>
+	  `,
+	  props:["cpath", "adoptAnimal"]
+  });
+  
+
+  
   new Vue({
       el : "#adoptList",
       data:{
 		cpath: "${pageContext.request.contextPath}",
 		id: "${sessionScope.id}",
+		currentTab:0,
+		tabs:["Dog", "Cat"],
+		adoptDog:[],
+		adoptCat:[],
 		selected: 'all',
 		options: [
 			  { text: '전체', value: 'all' },
 		      { text: '서울', value: 'seoul' },
 		      { text: '인천', value: 'incheon' },
-		      { text: '부산', value: 'busan' }
+		      { text: '부산', value: 'busan' },
+		      { text: '에이콘임시보호소', value: 'acorn' }
 		],
-		adoptList: [],
 		pageNum:1,
-		pagination:"http://localhost:8888/spring/api/adopt/paging.do",
+		paginationDog:"http://localhost:8888/spring/api/adopt/paging.do?pageNum=1&animalType=dog",
+		paginationCat:"http://localhost:8888/spring/api/adopt/paging.do?pageNum=1&animalType=cat",
 	   },
 	   methods:{
+		   filteredListDog(value, area) {
+			   this.selected = value;
+			   const self = this;
+			   axios.get(base_url + "/api/adopt/list.do",{
+				   params:{ 
+					   pageNum:this.pageNum,
+					   animalType:'dog'
+				   }
+			   })
+				.then(function(response){
+					if(response.status == 200){
+						let filters = response.data;
+						self.adoptDog = filters.filter(item => area == "전체" ? true : item.name == area);
+						self.$nextTick(function() {
+							self.paginationDog = "http://localhost:8888/spring/api/adopt/paging.do?pageNum=1&animalType=dog";
+					    })
+						
+					}
+				})
+				.catch(function(error){
+					console.log(error);
+				});
+		   },
+		   filteredListCat(value, area) {
+			   this.selected = value;
+			   const self = this;
+			   axios.get(base_url + "/api/adopt/list.do",{
+				   params:{ 
+					   pageNum:this.pageNum,
+					   animalType:'cat'
+				   }
+			   })
+				.then(function(response){
+					if(response.status == 200){
+						let filters = response.data;
+						self.adoptCat = filters.filter(item => area == "전체" ? true : item.name == area);
+						self.pagination = "http://localhost:8888/spring/api/adopt/paging.do?pageNum=1&animalType=cat";
+					}
+				})
+				.catch(function(error){
+					console.log(error);
+				});
+		   },
 		   message(msg){
 			   alert(msg);
 		   },
-		   optionSelect(){
-			   this.makeList(this.selected); 
-		   },
-		   //로그인하지않았을때 리스트 출력할 메소드
-		   makeList(area){
+		   dogList(){
 			   const self = this;
-			   axios.get(base_url + "/api/adopt/list.do",{params:{
-					pageNum:this.pageNum
-				}})
+			   axios.get(base_url + "/api/adopt/list.do",{
+				   params:{ 
+					   pageNum:this.pageNum,
+					   animalType:'dog'
+				   }
+			   })
 				.then(function(response){
+					console.log(response);
 					if(response.status == 200){
-						self.adoptList = response.data;
+						self.adoptDog = response.data;
+					}
+				})
+				.catch(function(error){
+					console.log(error);
+				});
+		   },
+		   catList(){
+			   const self = this;
+			   axios.get(base_url + "/api/adopt/list.do",{
+				   params:{ 
+					   pageNum:this.pageNum,
+					   animalType:'cat'
+				   }
+			   })
+				.then(function(response){
+					console.log(response);
+					if(response.status == 200){
+						self.adoptCat = response.data;
 					}
 				})
 				.catch(function(error){
@@ -113,79 +197,16 @@
 		   },
 		   setPageNum(pageNum){
 			   this.pageNum = pageNum;
-			   this.makeList();
+			   this.dogList();
+			   this.catList();
 		   },
-		   unlikeClick(num){
-			   const self = this;
-			   axios({
-				   method: "post",
-				   url : base_url + "/api/adoptlike/unlike.do",
-				   params:{ num }
-			   })
-			   .then(function(response){ })
-				.catch(function(error){
-					console.log(error);
-				});
-			   this.makeList();
-		   },
-		   isFirstLike(num){
-			   const self = this;
-			   //0.처음 클릭한것인지 얻어온다
-			   axios.get(base_url + "/api/adoptlike/isexist.do", { params:{ num }} )
-				.then(function(response){
-					response.data == 1 ? self.updateLike(num) : self.insertLike(num);
-				})
-				.catch(function(error){
-					console.log(error);
-				});
-		   },
-		   insertLike(num){
-			 //1.처음 클릭하는건() insert시킨다
-			   const self = this;
-			   axios({
-				   method: "post",
-				   url : base_url + "/api/adoptlike/insert.do",
-				   params:{ num }
-			   })
-			   .then(function(response){
-				})
-				.catch(function(error){
-					console.log(error);
-				});
-			   this.makeList();  
-		   },
-		   updateLike(num){
-			 //2.두번째 클릭부터는 like한다
-			   const self = this;
-			   axios({
-				   method: "post",
-				   url : base_url + "/api/adoptlike/like.do",
-				   params:{ num }
-			   })
-			   .then(function(response){
-				})
-				.catch(function(error){
-					console.log(error);
-				});
-			   this.makeList();  
-		   }
 	   },
 	   created(){
-		   this.makeList();
+		   this.dogList();
+		   this.catList();
 		}
     });
-   function formChange(obj){
-      //select box 선택 시 JSP페이지로 데이터를 전달
-      
-      //※obj 변수에는 form 객체가 저장되어 있다.
-      //필요에 따라 전송하기 전에 검증 절차를 추가하는 것이 가능하다.
-      
-      obj.submit(); //obj자체가 form이다.
-      //『폼객체.submit();』 함수의 호출을 통해
-      //form 객체의 데이터를 서버로 전송하는 것이 가능하다.   
-   }
 </script>   
-
 </body>
 </html>
 
