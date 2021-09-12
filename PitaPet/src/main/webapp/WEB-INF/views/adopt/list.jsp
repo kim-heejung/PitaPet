@@ -16,36 +16,37 @@
     <div class="board-wrap">
 	    <page-category :cpath="cpath" :index="0"></page-category>
 	    <div class="container">
+	    	<div class="btn-wrap btn-right">
+		   		<a :href="cpath + '/adopt/private/insertform.do'" class="btn btn-s btn-black">새글 작성</a>
+		   	</div>
 		 	<div class="tab-btn">
-                <button v-for="(tab, index) in tabs" 
+                <button v-for="(tab, index) in tabs" style="margin-bottom:50px;"
                     :key="index"
                     :class="{active: currentTab == index}"
                     @click="currentTab = index">{{tab}}</button>
             </div>
 		   	<div class="row tab-content">
 		   		<div v-show="currentTab==0">
-			   		<div class="sub-tab-btn">
+			   		<!-- <div class="sub-tab-btn">
 			 			<a v-for="option in options"
 			 				 :class="{on : selected == option.value}" 
 			 				 href="" 
 			 				 @click.prevent="filteredListDog(option.value, option.text)">{{ option.text }}</a>
-		 			</div>
+		 			</div> -->
 		   			<adopt-list :cpath="cpath" :adopt-animal="adoptDog"></adopt-list>
 		   			<pagination-component :name="paginationDog" @page="setPageNum"></pagination-component>
 		   		</div>
 		   		<div v-show="currentTab==1">
-			   		<div class="sub-tab-btn">
+			   		<!--<div class="sub-tab-btn">
 			 			<a v-for="option in options"
 			 				 :class="{on : selected == option.value}" 
 			 				 href="" 
 			 				 @click.prevent="filteredListCat(option.value, option.text)">{{ option.text }}</a>
-			 		</div>
+			 		</div>-->
 		   			<adopt-list :cpath="cpath" :adopt-animal="adoptCat"></adopt-list>
 		   			<pagination-component :name="paginationCat" @page="setPageNum"></pagination-component>
 		   		</div>
 		   	</div>
-		   	<a :href="cpath + '/adopt/private/insertform.do'" class="btn btn-primary">새글 작성</a>
-		   	
 	   </div>
 	</div>
 	<footer-component></footer-component>
@@ -113,6 +114,7 @@
 		paginationCat:"http://localhost:8888/spring/api/adopt/paging.do?pageNum=1&animalType=cat",
 	   },
 	   methods:{
+		   /*
 		   filteredListDog(value, area) {
 			   this.selected = value;
 			   const self = this;
@@ -156,6 +158,7 @@
 					console.log(error);
 				});
 		   },
+		   */
 		   message(msg){
 			   alert(msg);
 		   },

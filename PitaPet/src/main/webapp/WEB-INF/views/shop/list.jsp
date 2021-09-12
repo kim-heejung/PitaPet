@@ -132,12 +132,12 @@ Resources1× 0.5× 0.25×Rerun
 	                     </c:choose>
 	                  </h5>
 	                  <div class="card-text">
-	                     가격 : <strong>${tmp.price }</strong>원 <br/>
-	                     재고 : <strong>${tmp.remainCount }</strong>개
+				                     가격 : <strong>${tmp.price }</strong>원 <br/>
+				                     재고 : <strong>${tmp.remainCount }</strong>개
 	                  </div>
-	          <button type="button" class="shopBtn purchaseBtn" data-bs-toggle="modal" data-bs-target="#exampleModal-${tmp.num}" data-num="${tmp.num}">
-	                    구입하기
-	          </button>
+			          <button type="button" class="shopBtn purchaseBtn" data-bs-toggle="modal" data-bs-target="#exampleModal-${tmp.num}" data-num="${tmp.num}">
+			                    구입하기
+			          </button>
 	               </div>
 	            </div>
 	         </div>      

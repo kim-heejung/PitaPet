@@ -70,8 +70,44 @@
     background: #fff;
     color: #222;
 }
-
-
+.btn-wrap.btn-left{
+	text-align:left;
+}
+.btn-wrap.btn-center{
+	text-align:center;
+}
+.btn-wrap.btn-right{
+	text-align:right;
+}
+.btn-wrap .btn{
+	border:1px solid #ddd;
+	background:#fff;
+	color:#222;
+	border-radius:0;
+	font-weight:400;
+	box-sizing:border-box;
+}
+.btn.btn-s{
+	font-size:0.9rem;
+	padding:0.6rem 1.4rem;
+}	
+.btn.btn-m{
+	font-size:1rem;
+	padding:0.6rem 2rem;
+}
+.btn.btn-l{
+	font-size:1rem;
+	padding:0.6rem 2.4rem;
+}
+.btn.btn-white{
+	color:#222;
+	border:1px solid #ddd;
+	background:#fff;
+}	
+.btn.btn-black{
+	color:#fff;
+	background:#222;
+}
 
 
 

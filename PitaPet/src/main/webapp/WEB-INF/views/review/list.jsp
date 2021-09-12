@@ -30,7 +30,9 @@
 	let reviewList = Vue.component("reviewList",{
 		template:`
 			<div class="container">
-				<a href="${pageContext.request.contextPath}/review/private/insertform.do" class="btn btn-primary">글쓰기</a><br/>
+				<div class="btn-wrap btn-right">
+					<a href="${pageContext.request.contextPath}/review/private/insertform.do" class="btn btn-s btn-black">후기 쓰기</a><br/>
+				</div>
 			    <div class="row">
 			     	<div v-for="(tmp, index) in reviewList" v-bind:key="tmp.num" class="col-6 col-md-4 col-lg-3">
 			     		<div class="card">
@@ -251,10 +253,10 @@
         				<div class="content" v-html="reviewDetail.content"></div>
         			</li>
         		</ul>
-			  	<ul class="detail-bottom">
-			      	 <li><a href="list.do" class="btn btn-s">목록보기</a></li>
-			         <li v-if="id == reviewDetail.writer"><a v-bind:href="'private/updateform.do?num=' + reviewDetail.num" class="btn btn-s">수정</a></li>
-			         <li v-if="id == reviewDetail.writer"><a v-bind:href="'private/delete.do?num=' + reviewDetail.num" class="btn btn-s">삭제</a></li>
+			  	<ul class="btn-wrap btn-center detail-bottom">
+			      	 <li><a href="list.do" class="btn btn-s btn-black">목록보기</a></li>
+			         <li v-if="id == reviewDetail.writer"><a v-bind:href="'private/updateform.do?num=' + reviewDetail.num" class="btn btn-s btn-white">수정</a></li>
+			         <li v-if="id == reviewDetail.writer"><a v-bind:href="'private/delete.do?num=' + reviewDetail.num" class="btn btn-s btn-white">삭제</a></li>
 			   </ul>
 			   <ul class="movePage-wrap">
 		   			<li v-if="reviewDetail.prevNum != 0">

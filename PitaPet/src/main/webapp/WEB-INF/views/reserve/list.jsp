@@ -17,7 +17,9 @@
 		<page-category class="reserve" :cpath="cpath" :index="5"></page-category>
 		<div class="container">
 			<div class="reserveContent">
-				<p class="newContent"> <a class="newContentLink" :href="cpath + '/reserve/private/insertform.do'">예약하기</a> </p>
+				<div class="btn-wrap btn-right">
+					<a :href="cpath + '/reserve/private/insertform.do'" class="btn btn-s btn-black">예약하기</a>
+				</div>
 				<table class="reserveBoard">
 					<thead>
 						<tr class="boardRow">
