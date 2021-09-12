@@ -54,7 +54,9 @@ Vue.component("family-component-gallery", {
             	:class="[type == 1 ? 'col-md-12' : 'col-md-6 col-xl-4']"
             	v-for="(adopt, index) in family" 
             	:key="index">
-                <div class="gallery-thumb" :style="{'background-image': 'url(http://localhost:8888/spring/' + adopt.imagePath + ')'}"></div>
+                <div class="gallery-thumb">
+                	<img :src="'http://localhost:8888/spring/' + adopt.imagePath">
+                </div>
                 <div class="txt-wrap">
                     <slot></slot>
                     <p>
