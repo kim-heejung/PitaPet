@@ -86,10 +86,12 @@ public class ReserveController {
 	}
 
 	@RequestMapping("/api/reserve/detailcheck")
-	@ResponseBody
-	public Map<String, Object> detailCheck (@RequestParam int num, @RequestParam java.lang.String pwd) {
+	//@ResponseBody
+	public String detailCheck (@RequestParam int num, @RequestParam java.lang.String pwd) {
 
-		return service.detailCheck(num, pwd);
+		service.detailCheck(num, pwd);
+		
+		return "redirect:/reserve/detail.do?pageNum="+1+"&num="+num;
 	}
 	
 	@RequestMapping("/api/reserve/addViewCount")

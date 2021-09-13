@@ -100,8 +100,8 @@
 					<input class="widthPull" type="password" name="pwd" id="pwd"/>
 				</div>
 				<div class=" btn-wrap btn-center">
-					<a class="pwdCheckButton reservListBtn btn btn-s btn-black" href="${pageContext.request.contextPath}/reserve/list.do">목록보기</a>
-					<a class="pwdCheckButton reserveSubmitBtn btn btn-s btn-white" type="submit">확인</a>
+					<button class="pwdCheckButton reservListBtn btn btn-s btn-black" href="${pageContext.request.contextPath}/reserve/list.do">목록보기</button>
+					<button class="pwdCheckButton reserveSubmitBtn btn btn-s btn-white" type="submit">확인</button>
 				</div>
 			</form>
 		</div>
