@@ -24,7 +24,6 @@ Vue.component("family-component", {
     		  const self = this;
     		  axios.get(base_url + "/api/adopt/birthdata.do")
  				.then(function(response){
- 					console.log(response.data);
  					if(response.status == 200){
  						self.newAdoptAnimals.push(response.data);
  					}
@@ -34,7 +33,6 @@ Vue.component("family-component", {
     		  const self = this;
     		  axios.get(base_url + "/api/adopt/birthlist.do")
  				.then(function(response){
- 					console.log(response.data);
  					if(response.status == 200){
  						self.adoptAnimals = response.data;
  					}
