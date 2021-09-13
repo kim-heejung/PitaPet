@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,6 +58,15 @@ public class ShopController {
 		return service.uploadAjaxImage(dto, request);
 	}
 	
+	//vue 용 insert
+	@RequestMapping(value = "api/shop/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> authApiInsert(ShopDto dto,HttpServletRequest request, ModelAndView mView) {
+		service.insert(dto);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("isSuccess", true);
+		return map;
+	}
 	@RequestMapping("/shop/insert")
 	public ModelAndView authInsert(ShopDto dto,HttpServletRequest request, ModelAndView mView) {
 		service.insert(dto);
@@ -64,6 +74,15 @@ public class ShopController {
 		return mView;
 	}
 	
+	//Vue 용 buy
+	@RequestMapping(value = "api/shop/buy", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> apiBuy(HttpServletRequest request, UsersDto dto) {
+		service.buy(request, dto);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("isSuccess", true);
+		return map;
+	}
 	@RequestMapping("/shop/buy")
 	public String buy(HttpServletRequest request, UsersDto dto) {
 		service.buy(request, dto);

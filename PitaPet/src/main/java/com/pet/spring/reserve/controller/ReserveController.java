@@ -98,7 +98,8 @@ public class ReserveController {
 		
 		return service.addViewCount(num);
 	}
-  
+	
+
 	@RequestMapping("/api/reserve/detail")
 	@ResponseBody
 	public ReserveDto dtail(HttpServletRequest request) {

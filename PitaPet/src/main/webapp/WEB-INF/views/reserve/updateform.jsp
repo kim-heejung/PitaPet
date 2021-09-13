@@ -46,6 +46,9 @@
 				   			<option value="위더스동물보호센터" ${dto.shelterName eq "위더스동물보호센터" ? "selected" : ""}>위더스동물보호센터</option>
 				   			<option value="하얀비둘기" ${dto.shelterName eq "하얀비둘기" ? "selected" : ""}>하얀비둘기</option>
 				   			<option value="제주동물보호센터" ${dto.shelterName eq "제주동물보호센터" ? "selected" : ""}>제주동물보호센터</option>
+							<option value="광주동물보호소" ${dto.shelterName eq "광주동물보호소" ? "selected" : ""}>광주동물보호소</option>
+				   			<option value="강릉시동물사랑센터" ${dto.shelterName eq "강릉시동물사랑센터" ? "selected" : ""}>강릉시동물사랑센터</option>
+				   			<option value="에이콘임시보호소" ${dto.shelterName eq "에이콘임시보호소" ? "selected" : ""}>에이콘임시보호소</option>
 						</select>
 			      	</div>
 			      	<div class="mb-3 insertFormList">

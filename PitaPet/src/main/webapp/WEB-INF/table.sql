@@ -51,39 +51,72 @@ CREATE TABLE shelter(
 create sequence shelter_seq
 
 
+--입양하기 게시판
 CREATE TABLE board_adopt(
-   num NUMBER PRIMARY KEY, --seq! 
-   writer VARCHAR2(100), --id
-	 petName VARCHAR2(100), --동물 이름
-	 petAge NUMBER, --추정 나이
-	 petGender VARCHAR2(100),
-	 breed VARCHAR2(100), --품종
-   vaccination VARCHAR2(100), --예방접종
-   Neutralization VARCHAR2(100), --중성화
-	 findDate VARCHAR2(100), --발견한 날짜
-   caption VARCHAR2(100), --설명
-   imagePath VARCHAR2(100), --업로드된 이미지의 경로 ex) /upload/xxx.jpg
-   regdate DATE
+	num NUMBER PRIMARY KEY, --seq! 
+   	writer VARCHAR2(100), --작성자(id)
+   	animalType CHAR(3),
+   	title VARCHAR2(100),
+   	imagePath VARCHAR2(100), --업로드된 이미지의 경로 ex) /upload/xxx.jpg
+	petName VARCHAR2(100), --동물 이름
+	petAge NUMBER, --추정 나이
+	petGender VARCHAR2(100),
+	breed VARCHAR2(100), --품종
+   	vaccination VARCHAR2(100), --예방접종
+   	Neutralization VARCHAR2(100), --중성화
+	findDate VARCHAR2(100), --발견한 날짜
+   	caption VARCHAR2(100), --설명
+   	viewCount NUMBER,
+   	regdate DATE  	
 );
 
 CREATE SEQUENCE board_adopt_seq;
 
-CREATE TABLE reserve(
-	num NUMBER, --adoptPet의 num과 같게
-	id VARCHAR2(100), --예약자 id
-	reservedDate DATE, --날짜
-	reservedTime VARCHAR2(100)--시간
-);
-
-CREATE TABLE bookmark(
+--좋아요 기능
+CREATE TABLE adoptLike(
     num NUMBER,
     id VARCHAR2(100),
-    bookmark CHAR(3) DEFAULT 'no'
+    liked CHAR(3) DEFAULT 'yes'
 );
+
+
+--상담예약 게시판
+CREATE TABLE reserve(
+	num NUMBER,
+	writer VARCHAR2(100), --작성자(id)
+	scope VARCHAR2(100), --비밀글 여부
+	pwd VARCHAR2(100), --비밀글 사용시 비밀번호
+	shelterName VARCHAR2(100),
+	title VARCHAR2(100),
+	reservedDate VARCHAR2(100), --예약 날짜
+	reservedTime VARCHAR2(100),--예약 시간
+	name VARCHAR2(100),
+	phoneNumber VARCHAR2(100),
+	content VARCHAR2(100),
+	viewCount NUMBER,
+	regdate DATE, --등록일
+	checked CHAR(3)--예약 확인용
+);
+
+--상담예약 게시판 댓글
+CREATE TABLE board_reserve_comment(
+   num NUMBER PRIMARY KEY, --댓글의 글번호
+   writer VARCHAR2(100), --댓글 작성자
+   content VARCHAR2(500), --댓글 내용
+   target_id VARCHAR2(100), --댓글의 대상자 아이디
+   ref_group NUMBER, -- 원글의 글번호
+   comment_group NUMBER,
+   deleted CHAR(3) DEFAULT 'no',
+   regdate DATE
+);
+
+CREATE SEQUENCE board_reserve_comment_seq;
+
 
 CREATE TABLE board_review(
 	num NUMBER PRIMARY KEY,
 	writer VARCHAR2(100) NOT NULL,
+	animalType CHAR(3),
 	title VARCHAR2(100) NOT NULL, 
 	img VARCHAR2(100),
 	content CLOB,
