@@ -7,8 +7,8 @@ Vue.component("family-component", {
 	            <p class="main-txt">사랑스러운 아이들이 기다리고있어요♥ 가족이 되어주세요</p>
 	        </div>
 	        <div class="grid-wrap row">
-	            <family-component-gallery class="grid-left col-12 col-md-4"  :family="newAdoptAnimals" :type="1"></family-component-gallery>
-	            <family-component-gallery class="grid-right row col-12 col-md-8" :family="adoptAnimals" :type="2"></family-component-gallery>
+	            <family-component-gallery class="grid-left col-12 col-md-4"  :cpath = "cpath" :family="newAdoptAnimals" :type="1"></family-component-gallery>
+	            <family-component-gallery class="grid-right row col-12 col-md-8" :cpath = "cpath" :family="adoptAnimals" :type="2"></family-component-gallery>
 	        </div>
 	    </div>
       `,
@@ -52,26 +52,28 @@ Vue.component("family-component-gallery", {
             	:class="[type == 1 ? 'col-md-12' : 'col-md-6 col-xl-4']"
             	v-for="(adopt, index) in family" 
             	:key="index">
-                <div class="gallery-thumb">
-                	<img :src="'http://localhost:8888/spring/' + adopt.imagePath">
-                </div>
-                <div class="txt-wrap">
-                    <slot></slot>
-                    <p>
-                    	<span v-if="type == 1" class="new-stemp">새가족</span>
-                        <span class="location-stemp">{{ adopt.name }}</span>
-                    </p>
-                    <p class="adopt-tit">{{ adopt.title }}</p>
-                    <ul class="adopt-txt">
-                        <li>품종 - {{ adopt.breed }}</li>
-                        <li>나이 - {{ adopt.petAge }}</li>
-                        <li>성별 - {{ adopt.petGender }}</li>
-                    </ul>
-                </div>
+            	<a :href="cpath + '/adopt/detail.do?num=' + adopt.num">
+	                <div class="gallery-thumb">
+	                	<img :src="cpath + adopt.imagePath">
+	                </div>
+	                <div class="txt-wrap">
+	                    <slot></slot>
+	                    <p>
+	                    	<span v-if="type == 1" class="new-stemp">새가족</span>
+	                        <span class="location-stemp">{{ adopt.name }}</span>
+	                    </p>
+	                    <p class="adopt-tit">{{ adopt.title }}</p>
+	                    <ul class="adopt-txt">
+	                        <li>품종 - {{ adopt.breed }}</li>
+	                        <li>나이 - {{ adopt.petAge }}</li>
+	                        <li>성별 - {{ adopt.petGender }}</li>
+	                    </ul>
+	                </div>
+                </a>
             </li> 
         </ul>
     `,
-    props:["family", "type"],
+    props:["cpath","family", "type"],
     data(){
     	return{
     		

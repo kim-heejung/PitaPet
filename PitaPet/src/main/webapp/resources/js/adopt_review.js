@@ -3,20 +3,22 @@ Vue.component("review-component-gallery", {
 	      <ul class="gallery_wrap row">
               <li v-for="(pet, index) in reviewAnimal" :key="index"
                   class="gallery_list col-6 col-xl-3">
-                  <img :src="'http://localhost:8888/spring/' + pet.img">
+                  <div class="gallery-thumnail">
+                  	<img :src="cpath + pet.img">
+              	  </div>
                   <div class="gallery-txt">
-                  	  <p class="gallery-type">분당야탑점</p>
+                  	  <p class="gallery-type">{{pet.animalType}}</p>
                       <h3 class="gallery-tit">{{pet.title}}</h3>
                       <p class="gallery-cont" v-html="trimHtml(pet.content)"></p>
-                      <a class="btn" href="">
-                      	more
+                      <a class="gallery-btn" :href="cpath + '/review/list.do#/detail?num=' + pet.num">
+                      	<span>more</span>
                       	<img src="https://www.shinsegae.com/resources/site/img/main/ico_hotnew_more.png">
                       </a>
                   </div>
               </li>
          </ul>
     `,
-    props:["reviewAnimal"],
+    props:["cpath", "reviewAnimal"],
     methods:{
     	trimHtml(string){
 			return string.replace(/(style=".+?")/gm, "").replace(/<(\/b|b)([^>]*)>/gi,"").replace(/<(\/img|img)([^>]*)>/gi,"").replace(/<(\/p|p)([^>]*)>/gi,"").replace(/&nbsp;/gi,"");
@@ -41,19 +43,20 @@ Vue.component("review-component", {
 			            </div>
 			            <div class="tab-content">
 			                <div v-show="currentTab==0">
-			                	<review-component-gallery :reviewAnimal="reviewDog" ></review-component-gallery>
+			                	<review-component-gallery :cpath="cpath" :reviewAnimal="reviewDog" ></review-component-gallery>
 		                	</div>
 			                <div v-show="currentTab==1">
-			                	<review-component-gallery :reviewAnimal="reviewCat" ></review-component-gallery>
+			                	<review-component-gallery :cpath="cpath" :reviewAnimal="reviewCat" ></review-component-gallery>
 		                	</div>
 			            </div>
 			        </div>
 			        <div class="btn-wrap">
-			            <a href="" class="view_btn">view more</a>
+			            <a :href="cpath + '/review/list.do#/'" class="view_btn">view more</a>
 			        </div>
 			  </div>
 		  </div>
     `,
+    props:["cpath"],
     data(){
   	  return{
   		currentTab:0,

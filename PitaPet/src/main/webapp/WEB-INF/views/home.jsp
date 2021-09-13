@@ -12,7 +12,7 @@
 	<header-component :cpath="cpath" :id="id"></header-component>
 	<slider-component :cpath="cpath"></slider-component>
 	<intro-component></intro-component>
-	<review-component></review-component>
+	<review-component :cpath="cpath"></review-component>
 	<family-component :cpath="cpath"></family-component>
 	<footer-component></footer-component>
 </div>
