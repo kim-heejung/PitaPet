@@ -5,42 +5,63 @@
 <head>
 <meta charset="UTF-8">
 <title>/views/review/private/updateform.jsp</title>
-<style>
-
-</style>
+<jsp:include page="/resources/resource.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 </head>
 <body>
-<div class="container">
-   <h1>글 수정 폼 입니다.</h1>
-   <form action="update.do" method="post">
-      <input type="hidden" name="num" value="${dto.num }" />
-      <div>
-	  	<label>동물 분류</label>
-		<select name="animalType" id="animalType">
-			<option value="">선택</option>
-			<option value="dog" ${dto.animalType eq 'dog' ? "selected" : "" }>dog</option>
-			<option value="cat" ${dto.animalType eq 'cat' ? "selected" : "" }>cat</option>
-		</select>
-	  </div>
-      <div>
-         <label for="writer">작성자</label>
-         <input type="text" id="writer" value="${dto.writer }" disabled/>
-      </div>
-      <div>
-         <label for="title">제목</label>
-         <input type="text" name="title" id="title" value="${dto.title }"/>
-      </div>
-      <div>
-         <label for="content">내용</label>
-         <textarea name="content" id="content">${dto.content }</textarea>
-      </div>
-      <button type="submit" onclick="submitContents(this);">수정확인</button>
-      <button type="reset">취소</button>
-   </form>
-</div>
+<div id="reviewInsert">
+		<header-component :cpath="cpath" :id="id"></header-component>
+		<div class="board-wrap form-wrap">
+			<page-category class="adopt-review" :cpath="cpath" :index="1"></page-category>
+			<div class="container">
+				<form class="updateForm" action="update.do" method="post" id="insertForm" enctype="multipart/form-data">
+					<input type="hidden" name="num" value="${dto.num }" />
+					<div class="updateFormList">
+			      		<label class="form-label">동물 분류</label>
+			      		<select class="form-select" name="animalType" id="animalType">
+			      			<option value="">선택</option>
+				   			<option value="dog" ${dto.animalType eq 'dog' ? "selected" : "" }>dog</option>
+				   			<option value="cat" ${dto.animalType eq 'cat' ? "selected" : "" }>cat</option>
+						</select>
+			      	</div>
+					<div class="mb-3">
+						<label class="form-label" for="title">제목</label>
+						<input class="form-control" type="text" name="title" id="title" value="${dto.title }"/>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="content">내용</label>
+						<textarea class="form-control" name="content" id="content">${dto.content }</textarea>
+					</div>
+					<div>
+				        <label class="form-label" for="imgFile">첨부 이미지</label>
+				        <input class="form-control" type="file" name="imgFile" id="imgFile"
+				            accept=".jpg, .jpeg, .png, .JPG, .JPEG"/>
+				    </div>
+					<div class="formBtn btn-wrap btn-center">
+			      		<button class="formBtnList btn btn-m btn-white" type="reset">취소</button>
+			      		<button class="formBtnList btn btn-m btn-black" type="submit">등록</button>
+			      	</div>
+				</form>
+			</div>
+		</div>
+		<footer-component></footer-component>
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <!-- SmartEditor 에서 필요한 javascript 로딩  -->
 <script src="${pageContext.request.contextPath }/SmartEditor/js/HuskyEZCreator.js"></script>
 <script>
+	new Vue({
+	    el : "#reviewInsert",
+	    data:{
+	    	cpath: "${pageContext.request.contextPath}",
+			id: "${sessionScope.id}"
+	    }
+	});
+
    var oEditors = [];
    
    //추가 글꼴 목록

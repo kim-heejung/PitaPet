@@ -1,4 +1,4 @@
-package com.pet.spring.adopt.dao;
+package com.pet.spring.reserve.dao;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pet.spring.adopt.dto.ReserveCommentDto;
+import com.pet.spring.reserve.dto.ReserveCommentDto;
 
 @Repository
 public class ReserveCommentDaoImpl implements ReserveCommentDao {

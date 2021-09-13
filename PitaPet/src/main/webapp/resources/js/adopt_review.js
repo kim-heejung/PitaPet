@@ -139,6 +139,23 @@ Vue.component("review-component", {
 	        },
 	     ]
   	  }
+    },
+    methods:{
+    	/*
+    	reviewDog(){
+  		  const self = this;
+  		  axios.get(base_url + "/api/adopt/birthlist.do")
+				.then(function(response){
+					console.log(response.data);
+					if(response.status == 200){
+						self.adoptAnimals = response.data;
+				}
+			})
+  	  	}
+  	  	*/
+    },
+    created(){
+    	
     }
 });
 

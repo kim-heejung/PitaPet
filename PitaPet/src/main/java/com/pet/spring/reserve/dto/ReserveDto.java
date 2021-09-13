@@ -1,4 +1,4 @@
-package com.pet.spring.adopt.dto;
+package com.pet.spring.reserve.dto;
 
 public class ReserveDto {
 	

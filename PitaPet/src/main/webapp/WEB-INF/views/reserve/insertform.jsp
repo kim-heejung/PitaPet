@@ -8,122 +8,58 @@
 <title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
 <jsp:include page="/resources/resource.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
-<style>
-	.board-wrap{
-		text-align:center;
-	}
-	
-	
-	.container{
-		width:100%;
-	}
-	
-	
-	/*
-	#mainTitle{
-		padding:100px 0;
-    	font-size: 1rem;
-		color: #483834;
-	}
-	#mainTitle>span{
-		display:block;
-    	margin-bottom: 14px;
-		font-size:2.8rem;
-		font-weight:bold;
-	}
-	*/
-	
-	
-	.insertFormList{
-		text-align:left;
-		margin:20px 0;
-	}
-	.insertFormLabel{
-		display:block;
-		margin-bottom:4px;
-		font-size:1.2rem;
-	}
-	
-	.scopeCheckbox{
-		display:flex;
-	}
-	.scopeLabel{
-		margin-right:14px;
-	}
-	.scopeInput{
-		margin-right:4px;
-	}
-	
-	.widthPull{
-		width:100%;
-		padding:8px;
-		border:1px solid #ced4da;;
-		border-radius:8px;
-	}
-	
-	.insertButton{
-		border:0;
-		border-radius:6px;
-		padding:10px 12px;
-		margin:6px 8px 0 8px;
-		background-color:#bb9b6a;
-		color:white;
-		font-size:1.1rem;
-	}
-</style>
 </head>
 <body>
 <div id="reserveInsert">
 	<header-component :cpath="cpath" :id="id"></header-component>
-	<div class="board-wrap">
-		<page-category class="reserve" :name="'상담예약'"></page-category>
+	<page-category class="reserve" :name="'상담예약'"></page-category>
+	<div class="board-wrap form-wrap">
+		<page-category class="reserve" :cpath="cpath" :index="5"></page-category>
 		<div class="container">
-		<!--  
-		<h1 id="mainTitle">
-			<span>상담 예약</span>
-			핏어펫(Pit a Pet) 방문예약은 인터넷으로 가능합니다. 핏어펫(Pit a Pet)은 모든 문의사항을 친절하게
-			상담해 드리고 있습니다.
-		</h1>
-		-->
 			<form id="insertForm" action="${pageContext.request.contextPath}/api/reserve/insert.do" method="post">
-			      	<div class="insertFormList">
-			         	<label class="insertFormLabel" for="scope">공개 여부</label>
-			         	<div class="scopeCheckbox">
-			         		<label class="insertFormLabel scopeLabel"><input class="scopeInput" type="radio" name="scope" id="scope" value="public"/>공개글</label>
-			         		<label class="insertFormLabel scopeLabel"><input class="scopeInput" type="radio" name="scope" id="scope" value="private"/>비밀글</label>
+			      	<div class="mb-3 insertFormList">
+			         	<label class="form-label" for="scope">공개 여부</label>
+			         	<div>
+			         		<label class="form-check-label insertFormLabel scopeLabel"><input class="form-check-input scopeInput" type="radio" name="scope" id="scope" value="public"/>공개글</label>
+			         		<label class="form-check-label insertFormLabel scopeLabel"><input class="form-check-input scopeInput" type="radio" name="scope" id="scope" value="private"/>비밀글</label>
 			         	</div>
 			      	</div>
-			      	<div class="insertFormList">
-			         	<label class="insertFormLabel" for="pwd">비밀번호</label>
-			         	<input class="widthPull" type="password" name="pwd" id="pwd"/>
+			      	<div class="mb-3 insertFormList">
+			         	<label class="form-label" for="pwd">비밀번호</label>
+			         	<input class="form-control" type="password" name="pwd" id="pwd"/>
 			      	</div>
-			      	<div class="insertFormList">
-			      		<label class="insertFormLabel" for="shelterName">지점</label>
-			      		<select class="widthPull" name="shelterName" id="shelterName">
-				   			<option value="">지점 선택</option>
-				   			<option value="서울">서울</option>
-				   			<option value="인천">인천</option>
-				   			<option value="부산">부산</option>
+			      	<div class="mb-3 insertFormList">
+			      		<label class="form-label" for="shelterName">보호소 선택</label>
+			      		<select class="form-select" name="shelterName" id="shelterName">
+				   			<option value="">보호소 선택</option>
+				   			<option value="강동리본센터">강동리본센터</option>
+				   			<option value="남양유기견보호센터">남양유기견보호센터</option>
+				   			<option value="위더스동물보호센터">위더스동물보호센터</option>
+				   			<option value="하얀비둘기">하얀비둘기</option>
+				   			<option value="제주동물보호센터">제주동물보호센터</option>
+				   			<option value="광주동물보호소">광주동물보호소</option>
+				   			<option value="강릉시동물사랑센터">강릉시동물사랑센터</option>
+				   			<option value="에이콘임시보호소">에이콘임시보호소</option>
 						</select>
 			      	</div>
-			      	<div class="insertFormList">
-			         	<label class="insertFormLabel" for="title">제목</label>
-			         	<input class="widthPull" type="text" name="title" id="title"/>
+			      	<div class="mb-3 insertFormList">
+			         	<label class="form-label" for="title">제목</label>
+			         	<input class="form-control" type="text" name="title" id="title"/>
 			      	</div>
-			      	<div class="insertFormList">
-			      		<label class="insertFormLabel" for="reservedDate">날짜</label>
-			      		<select class="widthPull" name="reservedDate" id="reservedDate">
+			      	<div class="mb-3 insertFormList">
+			      		<label class="form-label" for="reservedDate">날짜</label>
+			      		<select class="form-select" name="reservedDate" id="reservedDate">
 				   			<option value="">날짜 선택</option>
-				   			<option value="9월 1일">9월 1일</option>
-				   			<option value="9월 2일">9월 2일</option>
-				   			<option value="9월 3일">9월 3일</option>
-				   			<option value="9월 6일">9월 6일</option>
-				   			<option value="9월 7일">9월 7일</option>
+				   			<option value="9월 13일">9월 13일</option>
+				   			<option value="9월 14일">9월 14일</option>
+				   			<option value="9월 15일">9월 15일</option>
+				   			<option value="9월 16일">9월 16일</option>
+				   			<option value="9월 17일">9월 17일</option>
 						</select>
 			      	</div>
-			      	<div class="insertFormList">
-			         	<label class="insertFormLabel" for="reservedTime">시간</label>
-			         	<select class="widthPull" name="reservedTime" id="reservedTime">
+			      	<div class="mb-3 insertFormList">
+			         	<label class="form-label" for="reservedTime">시간</label>
+			         	<select class="form-select" name="reservedTime" id="reservedTime">
 				   			<option value="">시간 선택</option>
 				   			<option value="10:00">10:00</option>
 				   			<option value="11:00">11:00</option>
@@ -132,20 +68,22 @@
 				   			<option value="15:00">15:00</option>
 						</select>
 			      	</div>
-			      	<div class="insertFormList">
-			         	<label class="insertFormLabel" for="name">이름</label>
-			         	<input class="widthPull" type="text" name="name" id="name"/>
+			      	<div class="mb-3 insertFormList">
+			         	<label class="form-label" for="name">이름</label>
+			         	<input class="form-control" type="text" name="name" id="name"/>
 			      	</div>
-			      	<div class="insertFormList">
-			         	<label class="insertFormLabel" for="phoneNumber">연락처</label>
-			         	<input class="widthPull" type="text" name="phoneNumber" id="phoneNumber"/>
+			      	<div class="mb-3 insertFormList">
+			         	<label class="form-label" for="phoneNumber">연락처</label>
+			         	<input class="form-control" type="text" name="phoneNumber" id="phoneNumber"/>
 			      	</div>
-			      	<div class="insertFormList">
-			         	<label class="insertFormLabel" for="title">내용</label>
-			         	<textarea class="widthPull" name="content" id="" cols="30" rows="10"></textarea>
+			      	<div class="mb-3 insertFormList">
+			         	<label class="form-label" for="title">내용</label>
+			         	<textarea class="form-control" name="content" id="" cols="30" rows="10"></textarea>
 			      	</div>
-			      	<button class="insertButton" type="reset">최소</button>
-			      	<button class="insertButton submitButton" type="submit">등록</button>
+			      	<div class="formBtn btn-wrap btn-center">
+			      		<button class="formBtnList btn btn-m btn-white" type="reset">최소</button>
+			      		<button class="formBtnList btn btn-m btn-black" type="submit">등록</button>
+			      	</div>
 			</form>
 		</div>
 	</div>

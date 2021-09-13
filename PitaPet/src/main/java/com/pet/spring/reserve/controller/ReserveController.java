@@ -1,4 +1,4 @@
-package com.pet.spring.adopt.controller;
+package com.pet.spring.reserve.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pet.spring.adopt.dto.ReserveCommentDto;
-import com.pet.spring.adopt.dto.ReserveDto;
-import com.pet.spring.adopt.service.ReserveService;
+import com.pet.spring.reserve.dto.ReserveCommentDto;
+import com.pet.spring.reserve.dto.ReserveDto;
+import com.pet.spring.reserve.service.ReserveService;
 import com.pet.spring.shelter.dto.ShelterDto;
 
 @Controller
@@ -98,7 +98,8 @@ public class ReserveController {
 		
 		return service.addViewCount(num);
 	}
-  
+	
+
 	@RequestMapping("/api/reserve/detail")
 	@ResponseBody
 	public ReserveDto dtail(HttpServletRequest request) {
