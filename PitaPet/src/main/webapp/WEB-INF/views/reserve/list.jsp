@@ -17,7 +17,9 @@
 		<page-category class="reserve" :cpath="cpath" :index="5"></page-category>
 		<div class="container">
 			<div class="reserveContent">
-				<p class="newContent"> <a class="newContentLink" :href="cpath + '/reserve/private/insertform.do'">예약하기</a> </p>
+				<div class="btn-wrap btn-right">
+					<a :href="cpath + '/reserve/private/insertform.do'" class="btn btn-s btn-black">예약하기</a>
+				</div>
 				<table class="reserveBoard">
 					<thead>
 						<tr class="boardRow">
@@ -35,13 +37,13 @@
 							<td class="boardColumn">{{tmp.num}}</td>
 							<td class="boardColumn">{{tmp.shelterName }}</td>
 							<td class="boardColumn contentTitle">
-								<a v-if="id == tmp.id" class="contentTitleLink" :href="cpath + '/reserve/detail.do?pageNum=${pageNum }&num=${tmp.num }'">
+								<a v-if="id == tmp.id" class="contentTitleLink" :href="cpath + '/reserve/detail.do?pageNum=' + pageNum + '&num=' + tmp.num">
 									{{ tmp.title }}
 								</a>
-								<a v-if="id != tmp.id && tmp.scope == 'private'" class="contentTitleLink" :href="cpath + '/reserve/detailcheckform.do?num=${tmp.num }'">
+								<a v-if="id != tmp.id && tmp.scope == 'private'" class="contentTitleLink" :href="cpath + '/reserve/detailcheckform.do?num=' + tmp.num ">
 									{{tmp.title }}
 								</a>
-								<a v-if="id != tmp.id && tmp.scope != 'private'" class="contentTitleLink" :href="cpath + '/reserve/detail.do?pageNum=${pageNum }&num=${tmp.num }'">
+								<a v-if="id != tmp.id && tmp.scope != 'private'" class="contentTitleLink" :href="cpath + '/reserve/detail.do?pageNum=' + pageNum + '&num=' + tmp.num">
 									{{ tmp.title }}
 								</a>
 								<span v-for="(count, index) in allCount" v-if="tmp.num == count.ref_group"> ({{count.cnt }}) </span>

@@ -38,7 +38,6 @@
 		padding-bottom:120px;
 	}
 	
-	
 	.pwdCheckTitle{
 		font-weight:bold;
 	}
@@ -100,8 +99,10 @@
 					<label class="pwdCheckFormLabel" for="pwd">비밀번호</label>
 					<input class="widthPull" type="password" name="pwd" id="pwd"/>
 				</div>
-				<a class="pwdCheckButton reservListBtn" href="${pageContext.request.contextPath}/reserve/list.do">목록보기</a>
-				<button class="pwdCheckButton reserveSubmitBtn" type="submit">확인</button>
+				<div class=" btn-wrap btn-center">
+					<a class="pwdCheckButton reservListBtn btn btn-s btn-black" href="${pageContext.request.contextPath}/reserve/list.do">목록보기</a>
+					<a class="pwdCheckButton reserveSubmitBtn btn btn-s btn-white" type="submit">확인</a>
+				</div>
 			</form>
 		</div>
 	</div>

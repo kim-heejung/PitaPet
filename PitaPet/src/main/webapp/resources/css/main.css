@@ -772,39 +772,6 @@
     background:#222;
     color:#fff;
 }
-.tab-btn{
-    margin-top:40px;
-    display:flex;
-    align-items:center;
-    justify-content: center;
-    text-align:center;
-}
-.tab-btn button{
-    position:relative;
-    height:60px;
-    border:0;
-    background:0;
-    font-size:2.2rem;
-    font-weight:600;
-    color:#777;
-    margin-left:20px;
-    cursor: pointer;
-}
-.tab-btn button:first-of-type{
-    margin-left:0;
-}
-.tab-btn button.active{
-    color:#222;
-}
-.tab-btn button.active::before{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:10px;
-    width:100%;
-    height:3px;
-    background:#aaa;
-}
 #AdoptReview .gallery_wrap,
 #AdoptReview .gallery_wrap .gallery_list{
     list-style:none;
@@ -916,12 +883,23 @@
     top:30px;
 }
 #AdoptFamily .gallery-thumb{
-    background-position:center; 
-    background-size:cover; 
-    background-repeat:no-repat; 
     position:relative;
     margin-bottom:10px;
+    overflow:hidden;
 }
+#AdoptFamily .gallery-thumb:hover img{
+    transform: scale(1.05);
+    transition:1s;
+}
+#AdoptFamily .gallery-thumb>img{
+	height:100%;
+	position:relative;
+	z-index:1;
+	object-fit:cover;
+	 transform: scale(1);
+	 transition:1s;
+}
+
 #AdoptFamily .grid-left .gallery-thumb{
     height:400px; 
 }
@@ -939,6 +917,20 @@
     width: 100px;
     height: 140px;
 }
+#AdoptFamily .gallery-thumb::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    opacity: 0.35;
+    background-image: url(/spring/resources/images/logo_txt.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
 #AdoptFamily .location-stemp{
     padding:2px 6px; 
     filter: brightness(1.2);
@@ -953,7 +945,7 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 #AdoptFamily .txt-wrap{
-    padding:0 20px; 
+    padding:10px 0 20px; 
     text-align:center;
 }
 #AdoptFamily .adopt-tit{
@@ -962,6 +954,7 @@
     margin:10px 0 6px;
 }
 #AdoptFamily .adopt-txt{
+	padding:0;
      font-size:0.9rem; 
      color:#777; 
      font-family: 'Noto Sans KR', sans-serif;

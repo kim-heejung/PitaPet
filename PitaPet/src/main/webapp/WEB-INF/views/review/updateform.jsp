@@ -7,27 +7,11 @@
 <title>/views/review/private/updateform.jsp</title>
 <jsp:include page="/resources/resource.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
-<style>
-	.updateForm{
-		text-align:left;
-	}	
-	.updateFormList{
-		padding-bottom:12px;
-	}
-	
-	.formBtn{
-		text-align:center;
-		margin-top:36px;
-	}
-	.formBtnList{
-		margin:0 4px;
-	}
-</style>
 </head>
 <body>
 <div id="reviewInsert">
 		<header-component :cpath="cpath" :id="id"></header-component>
-		<div class="board-wrap">
+		<div class="board-wrap form-wrap">
 			<page-category class="adopt-review" :cpath="cpath" :index="1"></page-category>
 			<div class="container">
 				<form class="updateForm" action="update.do" method="post" id="insertForm" enctype="multipart/form-data">
@@ -53,9 +37,9 @@
 				        <input class="form-control" type="file" name="imgFile" id="imgFile"
 				            accept=".jpg, .jpeg, .png, .JPG, .JPEG"/>
 				    </div>
-					<div class="formBtn">
-			      		<button class="btn btn-primary formBtnList" type="reset">취소</button>
-			      		<button class="btn btn-primary formBtnList" type="submit">등록</button>
+					<div class="formBtn btn-wrap btn-center">
+			      		<button class="formBtnList btn btn-m btn-white" type="reset">취소</button>
+			      		<button class="formBtnList btn btn-m btn-black" type="submit">등록</button>
 			      	</div>
 				</form>
 			</div>

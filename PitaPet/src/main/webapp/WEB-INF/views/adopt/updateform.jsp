@@ -8,27 +8,11 @@
 <title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
 <jsp:include page="/resources/resource.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
-<style>
-	.updateForm{
-		text-align:left;
-	}	
-	.updateFormList{
-		padding-bottom:6px;
-	}
-	
-	.formBtn{
-		text-align:center;
-		margin-top:32px;
-	}
-	.formBtnList{
-		margin:0 4px;
-	}
-</style>
 </head>
 <body>
 	<div id="adoptUpdate">
 		<header-component :cpath="cpath" :id="id"></header-component>
-		<div class="board-wrap">
+		<div class="board-wrap form-wrap">
 			<page-category :cpath="cpath" :index="0"></page-category>
 			<div class="container">
 			   	<form class="updateForm" action="${pageContext.request.contextPath}/api/adopt/update.do" method="post" enctype="multipart/form-data">
@@ -82,9 +66,9 @@
 			         	<label class="form-label" for="caption">설명</label>
 						<textarea class="form-control" type="text" name="caption" id="caption"/>${dto.caption}</textarea>
 			      	</div>
-			      	<div class="formBtn">
-			      		<button class="btn btn-primary formBtnList" type="reset">취소</button>
-			      		<button class="btn btn-primary formBtnList" type="submit">등록</button>
+			      	<div class="formBtn btn-wrap btn-center">
+			      		<button class="formBtnList btn btn-m btn-white" type="reset">취소</button>
+			      		<button class="formBtnList btn btn-m btn-black" type="submit">등록</button>
 			      	</div>
 			   	</form>
 			</div>

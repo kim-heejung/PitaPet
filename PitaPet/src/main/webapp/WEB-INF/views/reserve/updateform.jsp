@@ -8,32 +8,12 @@
 <title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
 <jsp:include page="/resources/resource.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
-<style>
-	.insertFormList{
-		text-align:left;
-	}
-	
-	.scopeLabel{
-		margin-right:14px;
-	}
-	.scopeInput{
-		margin-right:4px;
-	}
-	
-	.formBtn{
-		text-align:center;
-		margin-top:32px;
-	}
-	.formBtnList{
-		margin:0 4px;
-	}
-</style>
 </head>
 <body>
 <div id="reserveUpdate">
 	<header-component :cpath="cpath" :id="id"></header-component>
 	<page-category class="reserve" :name="'상담예약'"></page-category>
-	<div class="board-wrap">
+	<div class="board-wrap form-wrap">
 		<page-category class="reserve" :cpath="cpath" :index="5"></page-category>
 		<div class="container">
 			<form id="insertForm" action="${pageContext.request.contextPath}/api/reserve/update.do" method="post">
@@ -109,9 +89,9 @@
 			         	<label class="form-label" for="title">내용</label>
 			         	<textarea class="form-control" name="content" id="" cols="30" rows="10">${dto.content }</textarea>
 			      	</div>
-			      	<div class="formBtn">
-			      		<button class="formBtnList btn btn-primary" type="reset">최소</button>
-			      		<button class="formBtnList btn btn-primary" type="submit">등록</button>
+			      	<div class="formBtn btn-wrap btn-center">
+			      		<button class="formBtnList btn btn-m btn-white" type="reset">최소</button>
+			      		<button class="formBtnList btn btn-m btn-black" type="submit">등록</button>
 			      	</div>
 			</form>
 		</div>

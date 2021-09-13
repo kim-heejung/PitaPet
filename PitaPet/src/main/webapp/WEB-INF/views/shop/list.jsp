@@ -65,6 +65,38 @@ Resources1× 0.5× 0.25×Rerun
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 </head>
 <body>
+<!-- resources/js/header.jsp 의 내용 하단첨부 -->
+<header id="header">
+     <div class="top">
+         <div class="container" style="display:flex; align-items:center; justify-content:flex-end;">
+         	<c:choose>
+				<c:when test="${empty sessionScope.id }">
+					<a href="${pageContext.request.contextPath}/users/loginform.do">로그인</a>
+					<a href="${pageContext.request.contextPath}/users/signup_form.do">회원가입</a>
+				</c:when>
+				<c:otherwise>
+					<a href="${pageContext.request.contextPath}/users/info.do">${sessionScope.id }</a> 로그인 중..
+					<a href="${pageContext.request.contextPath}/users/logout.do">로그아웃</a>
+				</c:otherwise>
+			</c:choose>
+         </div>
+     </div>
+     <nav class="nav-bar container">
+         <a href="${pageContext.request.contextPath}/home.do" class="logo">
+             <img src="${pageContext.request.contextPath}/resources/images/logo.png"/>
+             <div>Pit a Pet</div>
+         </a>
+         <ul class="menu-wrap">
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/adopt/procedure.do">입양절차 소개</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/reserve/list.do">상담예약</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/adopt/list.do">입양하기</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/review/list.do">입양후기</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/shop/list.do">핏어펫몰</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/shelter/list.do">보호소위치</a></li>
+             <li class="menu-list"><a href="${pageContext.request.contextPath}/donation/main.do">후원하기 </a></li>
+         </ul>
+     </nav>
+</header>
 <div id="itemList">
 	<header-component :cpath="cpath" :id="id"></header-component>
 	<page-category class="shop" :cpath="cpath" :index="2"></page-category>
@@ -99,13 +131,13 @@ Resources1× 0.5× 0.25×Rerun
 	                        <c:when test="${tmp.category eq 'toy' }"><span class="badge rounded-pill bg-info">장난감</span></c:when>
 	                     </c:choose>
 	                  </h5>
-	                  <p class="card-text">
-	                     가격 : <strong>${tmp.price }</strong>원 <br/>
-	                     재고 : <strong>${tmp.remainCount }</strong>개
-	                  </p>
-	          <button type="button" class="shopBtn purchaseBtn" data-bs-toggle="modal" data-bs-target="#exampleModal-${tmp.num}" data-num="${tmp.num}">
-	                    구입하기
-	          </button>
+	                  <div class="card-text">
+				                     가격 : <strong>${tmp.price }</strong>원 <br/>
+				                     재고 : <strong>${tmp.remainCount }</strong>개
+	                  </div>
+			          <button type="button" class="shopBtn purchaseBtn" data-bs-toggle="modal" data-bs-target="#exampleModal-${tmp.num}" data-num="${tmp.num}">
+			                    구입하기
+			          </button>
 	               </div>
 	            </div>
 	         </div>      
@@ -212,7 +244,6 @@ Resources1× 0.5× 0.25×Rerun
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

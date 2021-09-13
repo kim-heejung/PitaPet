@@ -18,6 +18,10 @@
 	min-height:1200px;
 	padding-bottom:100px;
 }
+.board-wrap.form-wrap .container{
+	max-width:900px;
+	margin:0 auto;
+}
 .img-wrapper{
 	position:relative;
     height: 360px;
@@ -177,7 +181,47 @@ pre {
 #content{
 	height: 500px;
 }
+.insertForm{
+		text-align:left;
+}	
+.insertFormList{
+	padding-bottom:6px;
+	text-align:left;
+}
+.scopeLabel{
+	margin-right:14px;
+}
+.scopeInput{
+	margin-right:4px;
+}
+.updateForm{
+	text-align:left;
+}	
+.updateFormList{
+	padding-bottom:6px;
+}
 
+.formBtn{
+	text-align:center;
+	margin-top:32px;
+}
+.formBtnList{
+	margin:0 4px;
+}
+.formBtn{
+	text-align:center;
+	margin-top:32px;
+}
+.formBtnList{
+	margin:0 4px;
+	}
+.formBtn{
+	text-align:center;
+	margin-top:32px;
+}
+.formBtnList{
+	margin:0 4px;
+}
 
 /* 디테일 페이지 */
 .detail-wrap{
@@ -228,23 +272,7 @@ pre {
 .detail-bottom>li{
 	margin:0 0.4rem;
 }
-.btn{
-	border:1px solid #ddd;
-	background:#fff;
-	color:#222;
-}
-.btn-s{
-	font-size:0.9rem;
-	padding:0.6rem 1.4rem;
-}	
-.btn-m{
-	font-size:1rem;
-	padding:1.2rem 2rem;
-}
-.btn-l{
-	font-size:1rem;
-	padding:1.6rem 2.4rem;
-}
+
 .movePage-wrap{
 	margin-top:60px;
 	display:flex;
@@ -257,9 +285,6 @@ pre {
 .movePage-wrap>li>a{
 	padding:1.2rem 0;
 }
-
-
-
 .board-wrap{
 	text-align:center;
 }
