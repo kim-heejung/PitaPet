@@ -133,7 +133,7 @@ public class UsersController {
 			service.addUser(dto, null);
 		}
 		
-		return "users/login"; 
+		return "users/naver_login"; 
 	}
 	
 	@RequestMapping("/users/addr")
