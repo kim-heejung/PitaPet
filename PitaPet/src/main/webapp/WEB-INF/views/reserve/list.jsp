@@ -37,13 +37,15 @@
 							<td class="boardColumn">{{tmp.num}}</td>
 							<td class="boardColumn">{{tmp.shelterName }}</td>
 							<td class="boardColumn contentTitle">
-								<a v-if="id == tmp.id" class="contentTitleLink" :href="cpath + '/reserve/detail.do?pageNum=' + pageNum + '&num=' + tmp.num">
+								<a v-if="id == tmp.id && tmp.scope == 'private'" class="contentTitleLink" :href="cpath + '/reserve/detail.do?pageNum=' + pageNum + '&num=' + tmp.num">
+									<img src="https://img0001.echosting.cafe24.com/front/type_b/image/common/icon_lock.gif" alt="" />
 									{{ tmp.title }}
 								</a>
 								<a v-if="id != tmp.id && tmp.scope == 'private'" class="contentTitleLink" :href="cpath + '/reserve/detailcheckform.do?num=' + tmp.num ">
+									<img src="https://img0001.echosting.cafe24.com/front/type_b/image/common/icon_lock.gif" alt="" />
 									{{tmp.title }}
 								</a>
-								<a v-if="id != tmp.id && tmp.scope != 'private'" class="contentTitleLink" :href="cpath + '/reserve/detail.do?pageNum=' + pageNum + '&num=' + tmp.num">
+								<a v-if="tmp.scope != 'private'" class="contentTitleLink" :href="cpath + '/reserve/detail.do?pageNum=' + pageNum + '&num=' + tmp.num">
 									{{ tmp.title }}
 								</a>
 								<span v-for="(count, index) in allCount" v-if="tmp.num == count.ref_group"> ({{count.cnt }}) </span>

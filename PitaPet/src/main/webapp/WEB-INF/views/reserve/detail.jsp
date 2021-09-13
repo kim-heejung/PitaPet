@@ -222,16 +222,16 @@
 		                        </svg>
 		                  </c:if>
 		                        <dl>
-		                           <dt>
-		                              <span>${tmp.writer }</span>
+		                           <dt style="display:flex;">
+		                              <span style="margin:0 6px;">${tmp.writer }</span>
 		                              <c:if test="${tmp.num ne tmp.comment_group }">
-		                                 @<i>${tmp.target_id }</i>
+		                                 @<i style="margin:0 6px;">${tmp.target_id }</i>
 		                              </c:if>
 		                              <span>${tmp.regdate }</span>
-		                              <a data-num="${tmp.num }" href="javascript:" class="reply-link">답글</a>
+		                              <a style="margin:0 2px 0 8px;" data-num="${tmp.num }" href="javascript:" class="reply-link">답글</a>
 		                              <c:if test="${ (id ne null) and (tmp.writer eq id) }">
-		                                 <a data-num="${tmp.num }" class="update-link" href="javascript:">수정</a>
-		                                 <a data-num="${tmp.num }" class="delete-link" href="${pageContext.request.contextPath}/api/reserve/commentdelete.do?num=${tmp.num}">삭제</a>
+		                                 <a style="margin:0 2px;" data-num="${tmp.num }" class="update-link" href="javascript:">수정</a>
+		                                 <a style="margin:0 2px;" data-num="${tmp.num }" class="delete-link" href="${pageContext.request.contextPath}/api/reserve/commentdelete.do?num=${tmp.num}">삭제</a>
 										 <!-- 쌤이 원래는 이런 방식으로 하셨습니다. 헷갈리실 까봐 남겨놓습니다. -->
 										 <!--<a data-num="${tmp.num }" class="delete-link" href="javascript:">삭제</a>-->
 		                              </c:if>
@@ -241,7 +241,7 @@
 		                           </dd>
 		                        </dl>
 		                        <!-- 대댓글 -->
-		                        <form id="reForm${tmp.num }" class="animate__animated comment-form re-insert-form" action="${pageContext.request.contextPath}/api/reserve/commentinsert.do" method="post">
+		                        <form style="display:none;" id="reForm${tmp.num }" class="animate__animated comment-form re-insert-form" action="${pageContext.request.contextPath}/api/reserve/commentinsert.do" method="post">
 		                           <input type="hidden" name="ref_group" value="${dto.num }"/>
 		                           <input type="hidden" name="target_id" value="${tmp.writer }"/>
 		                           <input type="hidden" name="comment_group" value="${tmp.comment_group }"/>
@@ -249,7 +249,7 @@
 		                           <button type="submit">등록</button>
 		                        </form>
 		                     <c:if test="${tmp.writer eq id }">
-		                        <form id="updateForm${tmp.num }" class="comment-form update-form" action="${pageContext.request.contextPath}/api/reserve/commentupdate.do" method="post">
+		                        <form style="display:none;" id="updateForm${tmp.num }" class="comment-form update-form" action="${pageContext.request.contextPath}/api/reserve/commentupdate.do" method="post">
 		                           <input type="hidden" name="num" value="${tmp.num }" />
 		                           <textarea name="content">${tmp.content }</textarea>
 		                           <button type="submit">수정</button>
