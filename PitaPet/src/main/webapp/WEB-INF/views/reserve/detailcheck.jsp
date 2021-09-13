@@ -16,7 +16,6 @@
 	
 	.container{
 		width:100%;
-		padding-bottom:120px;
 	}
 	
 	
@@ -33,6 +32,11 @@
 		font-weight:bold;
 	}
 	*/
+	
+	
+	.pwdCheckForm{
+		padding-bottom:120px;
+	}
 	
 	
 	.pwdCheckTitle{
@@ -91,7 +95,7 @@
 				<br /> 
 				비밀번호를 입력해주세요
 			</p>
-			<form id="pwdCheckForm" action="${pageContext.request.contextPath}/api/reserve/detailcheck.do?num=${num}" method="post">
+			<form class="pwdCheckForm" action="${pageContext.request.contextPath}/api/reserve/detailcheck.do?num=${num}" method="post">
 				<div class="pwdCheckFormList">
 					<label class="pwdCheckFormLabel" for="pwd">비밀번호</label>
 					<input class="widthPull" type="password" name="pwd" id="pwd"/>

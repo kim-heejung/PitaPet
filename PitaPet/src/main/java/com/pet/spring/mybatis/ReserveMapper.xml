@@ -17,7 +17,7 @@
 
 	<select id="getCount" resultType="int">
 		SELECT NVL(MAX(ROWNUM), 0)
-		FROM reserve
+		FROM reserve INNER JOIN shelter s ON shelterName = s.name
 	</select>
 	
 	<insert id="insert" parameterType="reserveDto">

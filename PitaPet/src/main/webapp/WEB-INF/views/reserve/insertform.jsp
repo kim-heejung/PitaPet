@@ -57,6 +57,9 @@
 				   			<option value="위더스동물보호센터">위더스동물보호센터</option>
 				   			<option value="하얀비둘기">하얀비둘기</option>
 				   			<option value="제주동물보호센터">제주동물보호센터</option>
+				   			<option value="광주동물보호소">광주동물보호소</option>
+				   			<option value="강릉시동물사랑센터">강릉시동물사랑센터</option>
+				   			<option value="에이콘임시보호소">에이콘임시보호소</option>
 						</select>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
