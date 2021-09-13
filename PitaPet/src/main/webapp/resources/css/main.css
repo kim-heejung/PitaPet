@@ -784,7 +784,7 @@
 }
 #AdoptReview .gallery_wrap .gallery_list{
     position:relative;
-    padding:20px;
+    padding:0;
     height:380px;
     margin-bottom:30px;
     background:#fff;
@@ -793,10 +793,12 @@
     filter: brightness(1.2) saturate(1.1);
     overflow:hidden;
 }
-#AdoptReview .gallery_wrap .gallery_list img{
+#AdoptReview .gallery_wrap .gallery-thumnail img{
 	width:100%;
 	display:block;
 	border:0;
+	z-index:1;
+	position:relative;
 }
 #AdoptReview .gallery_wrap .gallery_list::before{
     content: "";
@@ -835,21 +837,24 @@
     padding:20px 20px;
     font-family: 'Noto Sans KR', sans-serif;
     transition:1s;
-    z-index:1;
+    z-index:2;
 }
 #AdoptReview .gallery_wrap .gallery_list:hover::after{
-	display:block;
+	display:none;
 }
 #AdoptReview .gallery_wrap .gallery_list:hover .gallery-txt{
 	transition:1s;
 	bottom:0;
 }
-#AdoptReview .gallery-txt .btn{
+#AdoptReview .gallery-txt .gallery-btn{
 	padding:0;
     color:rgba(255, 255, 255, 0.7);
-    font-size:1.2rem;
+    font-size:1rem;
+    cursor:pointer;
+    z-index:10;
+    position:relative;
 }
-#AdoptReview .gallery-txt .btn:hover{
+#AdoptReview .gallery-txt .gallery-btn:hover{
     text-decoration: underline;
 }
 #AdoptReview .gallery-type{

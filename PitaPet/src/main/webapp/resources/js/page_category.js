@@ -20,7 +20,7 @@ Vue.component("page-category", {
          page:[
             {
                pageTit:"입양하기",
-               pageTxt:"보호동물의 가족이 되어준 분들입니다<br>홈페이지 소식은 입양 후 7-10일 정도 소요가 될 수 있습니다",
+               pageTxt:"사랑스러운 아이들의 가족이 되어주세요<br>한 생명의 세상의 달라질 거에요",
                pageBg:"/resources/images/category01.jpg",
             },
             {
@@ -35,7 +35,7 @@ Vue.component("page-category", {
             },
             {
                pageTit:"보호소위치",
-               pageTxt:"보호소 위치 문구는 'pit a pet'과 함께하는 보호소입니다<br>방문예약은 전화나 예약게시판을 이용해주세요",
+               pageTxt:"'pit a pet'과 함께하는 보호소입니다<br>방문예약은 전화나 예약게시판을 이용해주세요",
                pageBg:"/resources/images/category05.jpg",
             },
             {

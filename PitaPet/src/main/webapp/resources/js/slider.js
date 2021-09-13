@@ -224,7 +224,7 @@ Vue.component("slider-component", {
             this.updateSlide(this.currentSlide);
         },
         doSlideTime(){
-            if(!this.isPause) this.slideTimer = setTimeout(this.doSlide, 5000);
+            if(!this.isPause) this.slideTimer = setTimeout(this.doSlide, 100);
         },
         dontSlide(){
             clearInterval(this.slideInterval);
@@ -238,8 +238,8 @@ Vue.component("slider-component", {
     created(){
     	
         //자동슬라이드 시작!
-        //this.isPause = false;
-        //this.slideInterval = setInterval(this.doSlideTime, 5000);
+        this.isPause = false;
+        this.slideInterval = setInterval(this.doSlideTime, 5000);
         
     }
 });
