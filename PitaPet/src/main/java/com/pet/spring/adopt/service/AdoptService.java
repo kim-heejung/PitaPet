@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pet.spring.adopt.dto.AdoptDto;
-import com.pet.spring.adopt.dto.ReserveDto;
 
 public interface AdoptService {
 	
