@@ -92,7 +92,7 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 	}
 	
 	@Override
-	public Map<String, Object> updateN(HttpServletRequest request) {
+	public void updateN(HttpServletRequest request) {
 		
 		int num=Integer.parseInt(request.getParameter("num"));
 		String id=(String)request.getSession().getAttribute("id");
@@ -102,10 +102,6 @@ public class AdoptLikeServiceImpl implements AdoptLikeService {
 		dto.setId(id);
 		
 		dao.updateN(dto);
-		
-		Map<String, Object> map=new HashMap<>();
-		map.put("isSuccess", true);
-		return map;
 	}
 	
 	

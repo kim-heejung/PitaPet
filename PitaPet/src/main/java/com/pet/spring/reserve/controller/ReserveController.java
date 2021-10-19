@@ -56,9 +56,9 @@ public class ReserveController {
 	
 	@RequestMapping("/api/reserve/paging")
 	@ResponseBody
-	public Map<String, Object> getListPaging(@RequestParam int pageNum){
+	public Map<String, Object> getListPaging(HttpServletRequest request){
 		
-		return service.getListPaging(pageNum);
+		return service.getListPaging(request);
 	}
  
    
@@ -68,11 +68,12 @@ public class ReserveController {
 		return "reserve/insertform";
 	}
 	
-	@RequestMapping(value = "/api/reserve/insert")
-	@ResponseBody
-	public Map<String, Object> authInsert(ReserveDto dto, HttpServletRequest request) {
+	@RequestMapping("/api/reserve/insert")
+	public String authInsert(ReserveDto dto, HttpServletRequest request) {
 
-		return service.insert(dto, request);
+		service.insert(dto, request);
+		
+		return "redirect:/reserve/list.do";
 	}
 	
 	
@@ -80,18 +81,22 @@ public class ReserveController {
 	public String detailCheckForm (HttpServletRequest request) {
 
 		int num=(int)Integer.parseInt(request.getParameter("num"));
-		request.setAttribute("num", num);
+		//int pageNum=(int)Integer.parseInt(request.getParameter("pageNum")); 
 		
-		return "reserve/detailcheck";
+		request.setAttribute("num", num);
+		//request.setAttribute("pageNum", pageNum);
+		
+		return "reserve/detailcheckform";
 	}
 
 	@RequestMapping("/api/reserve/detailcheck")
 	//@ResponseBody
-	public String detailCheck (@RequestParam int num, @RequestParam java.lang.String pwd) {
+	public String detailCheck (@RequestParam int num, @RequestParam java.lang.String pwd,
+			HttpServletRequest request) {
 
-		service.detailCheck(num, pwd);
+		service.detailCheck(num, pwd, request);
 		
-		return "redirect:/reserve/detail.do?pageNum="+1+"&num="+num;
+		return "reserve/detailcheck";
 	}
 	
 	@RequestMapping("/api/reserve/addViewCount")
@@ -138,18 +143,21 @@ public class ReserveController {
 	}
 
 	@RequestMapping("/api/reserve/update")
-	@ResponseBody
-	public Map<String, Object> authUpdate(ReserveDto dto, HttpServletRequest request) {
+	public String authUpdate(ReserveDto dto, HttpServletRequest request,
+			@RequestParam int num) {
 
-		return service.update(dto);
+		service.update(dto);
+		
+		return "redirect:/reserve/detail.do?num="+num;
 	}
 	
 	
 	@RequestMapping("/api/reserve/delete")
-	@ResponseBody
-	public Map<String, Object> authDelete(@RequestParam int num) {
+	public String authDelete(@RequestParam int num) {
 
-		return service.delete(num);
+		service.delete(num);
+		
+		return "redirect:/reserve/list.do";
 	}	
 	
 	
@@ -171,31 +179,33 @@ public class ReserveController {
 	}
 	//테스트용-후에 삭제될 부분
 	@RequestMapping("/reserve/private/comment_insert")
-	public ModelAndView testCommentInsert(HttpServletRequest request, @RequestParam int ref_group) {
-
+	public String testCommentInsert(HttpServletRequest request, @RequestParam int ref_group) {
+		
 		service.testSaveComment(request);
 
-		return new ModelAndView("redirect:/reserve/detail.do?num=" + ref_group);
+		return "redirect:/reserve/detail.do?num=" + ref_group;
 	}
 	
 	
 	//댓글 수정
 	@RequestMapping(value = "api/reserve/commentupdate", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> authCommentUpdate(ReserveCommentDto dto, HttpServletRequest request) {
+	public String authCommentUpdate(ReserveCommentDto dto, HttpServletRequest request,
+			@RequestParam int ref_group) {
 
-		return service.updateComment(dto);
+		service.updateComment(dto);
+		
+		return "redirect:/reserve/detail.do?num="+ref_group;
 	}
 
 	
 	//댓글 삭제
-	@RequestMapping(value = "/api/reserve/commentdelete", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> authCommentDelete(HttpServletRequest request) {
+	@RequestMapping(value = "/api/reserve/commentdelete")
+	public String authCommentDelete(HttpServletRequest request, @RequestParam int ref_group) {
 
-		return service.deleteComment(request);
+		service.deleteComment(request);
+		
+		return "redirect:/reserve/detail.do?num="+ref_group;
 	}
-	
 	
 	//예약 확인
 	@RequestMapping("/api/reserve/checkedlist")

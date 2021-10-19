@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.pet.spring.adopt.dto.AdoptDto;
 import com.pet.spring.adopt.dto.AdoptLikeDto;
@@ -109,10 +110,11 @@ public class AdoptController {
 	}
 	
 	@RequestMapping("api/adopt/insert")
-	@ResponseBody
-	public Map<String, Object> authInsert(AdoptDto dto, HttpServletRequest request) {
+	public String authInsert(AdoptDto dto, HttpServletRequest request) {
 		
-		return service.insert(dto, request);
+		service.insert(dto, request);
+		
+		return "redirect:/adopt/list.do";
 	}
 	
 	
@@ -125,18 +127,21 @@ public class AdoptController {
 	}
 	
 	@RequestMapping("/api/adopt/update")
-	@ResponseBody
-	public Map<String, Object> authUpdate(AdoptDto dto, HttpServletRequest request) {
+	public String authUpdate(AdoptDto dto, HttpServletRequest request,
+			@RequestParam int num) {
 
-		return service.update(dto, request);
+		service.update(dto, request);
+		
+		return "redirect:/adopt/detail.do?num="+num;
 	}
 	
 	
 	@RequestMapping("/api/adopt/delete")
-	@ResponseBody
-	public Map<String, Object> authDelete(@RequestParam int num) {
+	public String authDelete(@RequestParam int num) {
 
-		return service.delete(num);
+		service.delete(num);
+		
+		return "redirect:/adopt/list.do";
 	}
 	
 	

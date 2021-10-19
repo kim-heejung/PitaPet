@@ -9,119 +9,22 @@
 <jsp:include page="/resources/resource.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 <style>
-	.board-wrap{
-		text-align:center;
-	}
 	
-	
-	.container{
-		width:100%;
-	}
-	
-	
-	/*
-	#mainTitle{
-		padding:100px 0;
-    	font-size: 1rem;
-		color: #483834;
-	}
-	#mainTitle>span{
-		display:block;
-    	margin-bottom: 14px;
-		font-size:2.8rem;
-		font-weight:bold;
-	}
-	*/
-	
-	
-	.pwdCheckForm{
-		padding-bottom:120px;
-	}
-	
-	.pwdCheckTitle{
-		font-weight:bold;
-	}
-	
-	
-	.pwdCheckFormList{
-		margin-bottom:16px;
-	}
-	.pwdCheckFormLabel{
-		margin-right:4px;
-	}
-	
-	.widthPull{
-		padding:6px;
-		border:1px solid #ced4da;
-	}
-	
-	.pwdCheckButton{
-		border-radius:6px;
-		padding:8px 10px;
-		margin:0 4px;
-		border-radius:6px;
-		background-color:#bb9b6a;
-		color:white;
-		font-size:1.1rem;
-	}
-	.reservListBtn{
-		display:inline;
-		padding:10px;
-	}
-	.reserveSubmitBtn{
-		border:0;
-		padding:8px 10px;
-	}
 </style>
 </head>
 <body>
-<div id="reserveDetailCheck">
-	<header-component :cpath="cpath" :id="id"></header-component>
-	<page-category class="reserve" :name="'상담예약'"></page-category>
-	<div class="board-wrap">
-		<page-category class="reserve" :cpath="cpath" :index="5"></page-category>
-		<div class="container">
-			<!--  
-			<h1 id="mainTitle">
-				<span>상담 예약</span>
-				핏어펫(Pit a Pet) 방문예약은 인터넷으로 가능합니다. 핏어펫(Pit a Pet)은 모든 문의사항을 친절하게
-				상담해 드리고 있습니다.
-			</h1>
-			-->
-			<h3 class="pwdCheckTitle">비밀글 보기</h3>
-			<p>
-				이 글은 비밀글 입니다.
-				<br /> 
-				비밀번호를 입력해주세요
-			</p>
-			<form class="pwdCheckForm" action="${pageContext.request.contextPath}/api/reserve/detailcheck.do?num=${num}" method="post">
-				<div class="pwdCheckFormList">
-					<label class="pwdCheckFormLabel" for="pwd">비밀번호</label>
-					<input class="widthPull" type="password" name="pwd" id="pwd"/>
-				</div>
-				<div class=" btn-wrap btn-center">
-					<button class="pwdCheckButton reservListBtn btn btn-s btn-black" href="${pageContext.request.contextPath}/reserve/list.do">목록보기</button>
-					<button class="pwdCheckButton reserveSubmitBtn btn btn-s btn-white" type="submit">확인</button>
-				</div>
-			</form>
-		</div>
-	</div>
-	
-	<footer-component></footer-component>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
-<script>
-	const base_url="http://localhost:8888/spring";
-	new Vue({
-	    el : "#reserveDetailCheck",
-	    data:{
-			cpath: "${pageContext.request.contextPath}",
-			id: "${sessionScope.id}",
-		   }
-	  });	
-</script>
+	<c:choose>
+		<c:when test="${isSuccess }">
+			<script>
+		        location.href="${pageContext.request.contextPath }/reserve/detail.do?num=${num}";
+		    </script>
+		</c:when>
+		<c:otherwise>
+			<script>
+		    	alert("비밀번호가 틀립니다.");
+		        location.href="${pageContext.request.contextPath }/reserve/detailcheckform.do?num=${num}";
+		    </script>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>

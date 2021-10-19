@@ -117,8 +117,9 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 	
 	@Override
-	public Map<String, Object> getListPaging(int pageNum) {
+	public Map<String, Object> getListPaging(HttpServletRequest request) {
 		
+		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
 		//한 페이지에 몇개씩 표시할 것인지
 		final int PAGE_ROW_COUNT = 8;
 		//하단 페이지를 몇개씩 표시할 것인지
@@ -148,17 +149,13 @@ public class ReserveServiceImpl implements ReserveService {
 
 	
 	@Override
-	public Map<String, Object> insert(ReserveDto dto, HttpServletRequest request) {
+	public void insert(ReserveDto dto, HttpServletRequest request) {
 
 		String id =(String)request.getSession().getAttribute("id");
 
 		dto.setWriter(id);
 		dao.insert(dto);
 		
-		Map<String, Object> map=new HashMap<>();
-		map.put("isSuccess", true);
-		
-		return map;
 	}
   
 
@@ -186,27 +183,18 @@ public class ReserveServiceImpl implements ReserveService {
 	   
    
 	@Override
-	public Map<String, Object> update(ReserveDto dto) {
+	public void update(ReserveDto dto) {
 
 		dao.update(dto);
-
-		Map<String, Object> map = new HashMap<>();
-		map.put("isSuccess", true);
-
-		return map;
 
 	} 
 	
 	
 	@Override
-	public Map<String, Object> delete(int num) {
+	public void delete(int num) {
 
 		dao.delete(num);
 
-		Map<String, Object> map = new HashMap<>();
-		map.put("isSuccess", true);
-
-		return map;
 	}
 	
 	
@@ -253,8 +241,10 @@ public class ReserveServiceImpl implements ReserveService {
 		
 		// 로그인된 아이디
 		String id = (String) request.getSession().getAttribute("id");
+		/*
 		// ajax 요청 파라미터로 넘어오는 댓글의 페이지 번호를 읽어낸다.
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		*/
 		// ajax 이용해서 pageNum 으로 current 를 넘겨줘서
 		// ajax 요청 파라미터로 넘어오는 원글의 페이지 번호를 읽어낸다.
 		int num = Integer.parseInt(request.getParameter("num"));
@@ -262,6 +252,7 @@ public class ReserveServiceImpl implements ReserveService {
 		/*
 		 * [ 댓글 페이징 처리에 관련된 로직 ]
 		 */
+		/*
 		// 한 페이지에 몇개씩 표시할 것인지
 		final int PAGE_ROW_COUNT = 10;
 
@@ -269,26 +260,31 @@ public class ReserveServiceImpl implements ReserveService {
 		int startRowNum = 1 + (pageNum - 1) * PAGE_ROW_COUNT;
 		// 보여줄 페이지의 끝 ROWNUM
 		int endRowNum = pageNum * PAGE_ROW_COUNT;
-
+		*/
 		// 원글의 글번호를 이용해서 해당글에 달린 댓글 목록을 얻어온다.
 		ReserveCommentDto commentDto = new ReserveCommentDto();
 		commentDto.setRef_group(num);
+		/*
 		// 1 페이지에 해당하는 startRowNum 과 endRowNum 을 dto 에 담아서
 		commentDto.setStartRowNum(startRowNum);
 		commentDto.setEndRowNum(endRowNum);
-
+		*/
 		// 1 페이지에 해당하는 댓글 목록만 select 되도록한다.
 		List<ReserveCommentDto> commentList = commentDao.getList(commentDto);
 
+		/*
 		// 원글의 글번호를 이용해서 댓글 전체의 갯수를 얻어낸다.
 		int totalRow = commentDao.getCount(num);
 		// 댓글 전체 페이지의 갯수
 		int totalPageCount = (int) Math.ceil(totalRow / (double) PAGE_ROW_COUNT);
-
+		*/
+	
 		// view page 에 필요한 값 request 에 담아주기
 		request.setAttribute("commentList", commentList);
 		request.setAttribute("num", num); // 원글의 글번호
+		/*
 		request.setAttribute("pageNum", pageNum); // 댓글의 페이지 번호
+		*/
 	}
 	
 	
@@ -369,13 +365,13 @@ public class ReserveServiceImpl implements ReserveService {
 		// 댓글 정보를 DB 에 저장하기
 		commentDao.insert(dto);
 		// 응답하기 (원글 자세히 보기로 다시 리다일렉트 시킨다)
-		String cPath = request.getContextPath();
+		//String cPath = request.getContextPath();
 	}
 
 	
 	//댓글 삭제
 	@Override
-	public Map<String, Object> deleteComment(HttpServletRequest request) {
+	public void deleteComment(HttpServletRequest request) {
 		// 삭제할 댓글 번호를 읽어온다.
 		int num = Integer.parseInt(request.getParameter("num"));
 		ReserveCommentDto dto = commentDao.getData(num);
@@ -388,23 +384,14 @@ public class ReserveServiceImpl implements ReserveService {
 		// DB 에서 삭제한다.
 		commentDao.delete(num);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("isSuccess", true);
-		
-		return map;
 	}
 
 	
 	//댓글 수정
 	@Override
-	public Map<String, Object> updateComment(ReserveCommentDto dto) {
+	public void updateComment(ReserveCommentDto dto) {
 
 		commentDao.update(dto);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("isSuccess", true);
-		
-		return map;
 
 	}
 	
@@ -455,19 +442,18 @@ public class ReserveServiceImpl implements ReserveService {
 	
 	
 	@Override
-	public Map<String, Object> detailCheck(int num, String pwd) {
+	public void detailCheck(int num, String pwd, HttpServletRequest request) {
 		
 		ReserveDto dto2=dao.getDetailPwd(num);
 		
-		Map<String, Object> map=new HashMap<>();
+		//Map<String, Object> map=new HashMap<>();
 		
+		request.setAttribute("num", num);
+		//request.setAttribute("pageNum", pageNum);
 		if(pwd.equals(dto2.getPwd())) {
-			map.put("isSuccess", true);
-		}else {
-			map.put("isSuccess", false);
+			request.setAttribute("isSuccess", true);
 		}
 		
-		return map;
 	}
 	
 
