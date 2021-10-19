@@ -43,6 +43,7 @@ public class AdoptLikeController {
 	public String testInsert(HttpServletRequest request) {
 		
 		String id=(String)request.getSession().getAttribute("id");
+		int num=Integer.parseInt(request.getParameter("num"));
 		int isExist=service.isExist(request);
 		
 		if(isExist < 1) {
@@ -51,7 +52,7 @@ public class AdoptLikeController {
 			service.updateY(request);
 		}
 		
-		return "redirect:/adopt/list.do";
+		return "redirect:/adopt/detail.do?num="+num;
 	}
 
   
@@ -67,11 +68,14 @@ public class AdoptLikeController {
 		return map;
 	}
 	
-	@RequestMapping(value="/api/adoptlike/unlike", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> updateN(HttpServletRequest request){
+	@RequestMapping("/api/adoptlike/unlike")
+	public String updateN(HttpServletRequest request){
 		
-		return service.updateN(request);
+		int num=Integer.parseInt(request.getParameter("num"));
+		
+		service.updateN(request);
+		
+		return "redirect:/adopt/detail.do?num="+num;
 	}
 	 
 	

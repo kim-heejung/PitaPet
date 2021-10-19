@@ -244,7 +244,7 @@ public class AdoptServiceImpl implements AdoptService {
 	}
 	
 	@Override
-	public Map<String, Object> insert(AdoptDto dto, HttpServletRequest request) {
+	public void insert(AdoptDto dto, HttpServletRequest request) {
 		
 		//업로드된 파일의 정보를 가지고 있는 MultipartFile 객체의 참조값을 얻어오기
 		MultipartFile image = dto.getImage();
@@ -282,17 +282,12 @@ public class AdoptServiceImpl implements AdoptService {
 		dto.setOrgImageName(orgImageName);
 
 		dao.insert(dto);
-
-		Map<String, Object> map=new HashMap<>();
-		map.put("isSuccess", true);
-		
-		
-		return map;			
+	
 	}
 	
 	
 	@Override
-	public Map<String, Object> update(AdoptDto dto, HttpServletRequest request) {
+	public void update(AdoptDto dto, HttpServletRequest request) {
 		
 		//String newImage=dto.getImage().getOriginalFilename();
 		
@@ -334,22 +329,14 @@ public class AdoptServiceImpl implements AdoptService {
 		*/
 		dao.update(dto);
 		
-		Map<String, Object> map=new HashMap<>();
-		map.put("isSuccess", true);
-		
-		return map;
 	}
 	
 	
 	@Override
-	public Map<String, Object> delete(int num) {
+	public void delete(int num) {
 		
 		dao.delete(num);
 
-		Map<String, Object> map = new HashMap<>();
-		map.put("isSuccess", true);
-
-		return map;
 	}
 	
 	

@@ -107,6 +107,93 @@
 	.commentsList{
 		text-align:left;
 	}
+	
+	
+	
+	.comments{
+		text-align:left;
+	}
+	/* ul 요소의 기본 스타일 제거 */
+   .comments ul{
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+   }
+   .comments dt{
+      margin-top: 5px;
+   }
+   .comments dd{
+      margin-left: 50px;
+   }
+   .comment-form textarea, .comment-form button{
+      float: left;
+   }
+   .comments li{
+      clear: left;
+   }
+   .comments ul li{
+      border-top: 1px solid #888;
+   }
+   .comment-form textarea{
+      width: 84%;
+      height: 100px;
+   }
+   .comment-form button{
+      width: 14%;
+      height: 100px;
+   }
+   /* 댓글에 댓글을 다는 폼과 수정폼은 일단 숨긴다. */
+   .comments .comment-form{
+      /*display: none;*/
+      
+   }
+   /* .reply_icon 을 li 요소를 기준으로 배치 하기 */
+   .comments li{
+      position: relative;
+   }
+   .comments .reply-icon{
+      position: absolute;
+      top: 1em;
+      left: 1em;
+      color: red;
+   }
+   pre {
+     display: block;
+     padding: 9.5px;
+     margin: 0 0 10px;
+     font-size: 13px;
+     line-height: 1.42857143;
+     color: #333333;
+     word-break: break-all;
+     word-wrap: break-word;
+     background-color: #f5f5f5;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+   }   
+   
+   .loader{
+      /* 로딩 이미지를 가운데 정렬하기 위해 */
+      text-align: center;
+      /* 일단 숨겨 놓기 */
+      display: none;
+   }   
+   
+   .loader svg{
+      animation: rotateAni 1s ease-out infinite;
+   }
+   
+   @keyframes rotateAni{
+      0%{
+         transform: rotate(0deg);
+      }
+      100%{
+         transform: rotate(360deg);
+      }
+   }
+   
+   
+   
+   
 </style>
 </head>
 <body>
@@ -192,7 +279,7 @@
 			  	<a class="allButton" href="${pageContext.request.contextPath}/reserve/list.do">목록보기</a>
 			 	<c:if test="${dto.writer eq id }">
 			    	<a class="allButton" href="${pageContext.request.contextPath}/reserve/private/updateform.do?num=${dto.num }">수정</a>
-			        <a class="allButton" href="${pageContext.request.contextPath}/api/reserve/delete.do?num=${dto.num }">삭제</a>
+			        <a class="allButton reserveDel" id="best" href="javascript:reserveDeleteList()">삭제</a>
 			  	</c:if>
 			  </li>
 		   	  	
@@ -203,90 +290,95 @@
 		      
 		   </ul>
 
-		   <!-- 댓글 목록 -->
-		   <div class="commentsList">
-		      <ul>
-		         <c:forEach var="tmp" items="${commentList }">
-		            <c:choose>
-		               <c:when test="${tmp.deleted eq 'yes' }">
-		                  <li>삭제된 댓글 입니다.</li>
-		               </c:when>
-		               <c:otherwise>
-		                  <c:if test="${tmp.num eq tmp.comment_group }">
-		                     <li id="reli${tmp.num }">
-		                  </c:if>
-		                  <c:if test="${tmp.num ne tmp.comment_group }">
-		                     <li id="reli${tmp.num }" style="padding-left:50px;">
-		                        <svg class="reply-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-		                             <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
-		                        </svg>
-		                  </c:if>
-		                        <dl>
-		                           <dt style="display:flex;">
-		                              <span style="margin:0 6px;">${tmp.writer }</span>
-		                              <c:if test="${tmp.num ne tmp.comment_group }">
-		                                 @<i style="margin:0 6px;">${tmp.target_id }</i>
-		                              </c:if>
-		                              <span>${tmp.regdate }</span>
-		                              <a style="margin:0 2px 0 8px;" data-num="${tmp.num }" href="javascript:" class="reply-link">답글</a>
-		                              <c:if test="${ (id ne null) and (tmp.writer eq id) }">
-		                                 <a style="margin:0 2px;" data-num="${tmp.num }" class="update-link" href="javascript:">수정</a>
-		                                 <a style="margin:0 2px;" data-num="${tmp.num }" class="delete-link" href="${pageContext.request.contextPath}/api/reserve/commentdelete.do?num=${tmp.num}">삭제</a>
-										 <!-- 쌤이 원래는 이런 방식으로 하셨습니다. 헷갈리실 까봐 남겨놓습니다. -->
-										 <!--<a data-num="${tmp.num }" class="delete-link" href="javascript:">삭제</a>-->
-		                              </c:if>
-		                           </dt>
-		                           <dd>
-		                              <pre id="pre${tmp.num }">${tmp.content }</pre>                  
-		                           </dd>
-		                        </dl>
-		                        <!-- 대댓글 -->
-		                        <form style="display:none;" id="reForm${tmp.num }" class="animate__animated comment-form re-insert-form" action="${pageContext.request.contextPath}/api/reserve/commentinsert.do" method="post">
-		                           <input type="hidden" name="ref_group" value="${dto.num }"/>
-		                           <input type="hidden" name="target_id" value="${tmp.writer }"/>
-		                           <input type="hidden" name="comment_group" value="${tmp.comment_group }"/>
-		                           <textarea name="content"></textarea>
-		                           <button type="submit">등록</button>
-		                        </form>
-		                     <c:if test="${tmp.writer eq id }">
-		                        <form style="display:none;" id="updateForm${tmp.num }" class="comment-form update-form" action="${pageContext.request.contextPath}/api/reserve/commentupdate.do" method="post">
-		                           <input type="hidden" name="num" value="${tmp.num }" />
-		                           <textarea name="content">${tmp.content }</textarea>
-		                           <button type="submit">수정</button>
-		                        </form>
-		                     </c:if>
-		                     </li>      
-		               </c:otherwise>
-		            </c:choose>
-		         </c:forEach>
-		      </ul>
-		   </div>      
-		   <div class="loader">
-		      <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-		           <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-		           <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-		      </svg>
-		   </div>
-
-		   <!-- 원글에 댓글을 작성할 폼 -->
-		   <form class="comment-form insert-form" action="${pageContext.request.contextPath}/api/reserve/commentinsert.do" method="post">
-		      <!-- 원글의 글번호가 댓글의 ref_group 번호가 된다. -->
-		      <input type="hidden" name="ref_group" value="${dto.num }"/>
-		      <!-- 원글의 작성자가 댓글의 대상자가 된다. -->
-		      <input type="hidden" name="target_id" value="${dto.writer }"/>
-
-		      <textarea name="content">${empty id ? '댓글 작성을 위해 로그인이 필요 합니다.' : '' }</textarea>
-		      <button type="submit">등록</button>
-		   </form> 
-		</div>
-	</div>
+		   
+	
+	
+	
+	<div class="comments">
+      <ul>
+         <c:forEach var="tmp" items="${commentList }">
+            <c:choose>
+               <c:when test="${tmp.deleted eq 'yes' }">
+                  <li>삭제된 댓글 입니다.</li>
+               </c:when>
+               <c:otherwise>
+                  <c:if test="${tmp.num eq tmp.comment_group }">
+                     <li id="reli${tmp.num }">
+                  </c:if>
+                  <c:if test="${tmp.num ne tmp.comment_group }">
+                     <li id="reli${tmp.num }" style="padding-left:50px;">
+                        <svg class="reply-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                             <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+                        </svg>
+                  </c:if>
+                        <dl>
+                           <dt>
+                              <span>${tmp.writer }</span>
+                              <c:if test="${tmp.num ne tmp.comment_group }">
+                                 @<i>${tmp.target_id }</i>
+                              </c:if>
+                              <span>${tmp.regdate }</span>
+                              <a id="test" data-num="${tmp.num }" class="reply-link" href="javascript:">답글</a>
+                              <c:if test="${ (id ne null) and (tmp.writer eq id) }">
+                                 <a data-num="${tmp.num }" class="update-link" href="javascript:">수정</a>
+                                 <a data-num="${tmp.num }" class="delete-link" href="javascript:">삭제</a>
+                              </c:if>
+                           </dt>
+                           <dd>
+                              <pre id="pre${tmp.num }">${tmp.content }</pre>                  
+                           </dd>
+                        </dl>
+                        <form id="reForm${tmp.num }" class="animate__animated comment-form re-insert-form" action="${pageContext.request.contextPath}/reserve/private/comment_insert.do" method="post">
+                           <input type="hidden" name="pageNum" value="${pageNum }"/>
+                           <input type="hidden" name="ref_group" value="${dto.num }"/>
+                           <input type="hidden" name="target_id" value="${tmp.writer }"/>
+                           <input type="hidden" name="comment_group" value="${tmp.comment_group }"/>
+                           <textarea name="content"></textarea>
+                           <button type="submit">등록</button>
+                        </form>
+                     <c:if test="${tmp.writer eq id }">
+                        <form id="updateForm${tmp.num }" class="comment-form update-form" action="${pageContext.request.contextPath}/api/reserve/commentupdate.do" method="post">
+                           <input type="hidden" name="pageNum" value="${pageNum }"/>
+                           <input type="hidden" name="ref_group" value="${dto.num }"/>
+                           <input type="hidden" name="num" value="${tmp.num }" />
+                           <textarea name="content">${tmp.content }</textarea>
+                           <button type="submit">수정</button>
+                        </form>
+                     </c:if>
+                     </li>      
+               </c:otherwise>
+            </c:choose>
+         </c:forEach>
+      </ul>
+   </div>      
+   <div class="loader">
+      <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+           <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+           <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+      </svg>
+   </div>
+   
+   <!-- 원글에 댓글을 작성할 폼 -->
+   <form class="comment-form insert-form" action="${pageContext.request.contextPath}/reserve/private/comment_insert.do" method="post">
+      <input type="hidden" name="pageNum" value="${pageNum }"/>
+      <!-- 원글의 글번호가 댓글의 ref_group 번호가 된다. -->
+      <input type="hidden" name="ref_group" value="${dto.num }"/>
+      <!-- 원글의 작성자가 댓글의 대상자가 된다. -->
+      <input type="hidden" name="target_id" value="${dto.writer }"/>
+      <textarea name="content">${empty id ? '댓글 작성을 위해 로그인이 필요 합니다.' : '' }</textarea>
+      <button type="submit">등록</button>
+   </form>
+   
+</div>
 	<footer-component></footer-component>
 </div>
+
+</body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/page_category.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/footer.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/gura_util.js"></script>
+
 <script>
 	const base_url="http://localhost:8888/spring";
 	new Vue({
@@ -296,38 +388,65 @@
 			id: "${sessionScope.id}",
 		   }
 	  });
+	
+		
+	function reserveDeleteList(){
+		document.querySelector(".reserveDel").addEventListener("click", function(){
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href="${pageContext.request.contextPath}/api/reserve/delete.do?num=${dto.num }";
+			}
+		});
+	}
+	
+	
+	addReplyListener(".reply-link");
+	addUpdateFormListener(".update-link");
+	addDeleteListener(".delete-link");
 
+	function addReplyListener(sel){
+		let replyLinks=document.querySelectorAll(sel);
+		for(let i=0; i<replyLinks.length; i++){
+			replyLinks[i].addEventListener("click", function(){
+				const num=this.getAttribute("data-num");
+	            const form=document.querySelector("#reForm"+num);
+	            let current = this.innerText;
+	            if(current == "답글"){
+	            	form.style.display="block";
+		            this.innerText="취소";
+	            }else if(current == "취소"){
+	                this.innerText="답글";
+	                form.style.display="none";
+	             }
+			});
+		}
+	}
+	
+	function addUpdateFormListener(sel){
+		let updateForms=document.querySelectorAll(sel);
+		for(let i=0; i<updateForms.length; i++){
+			updateForms[i].addEventListener("click", function(){
+				const num=this.getAttribute("data-num"); //댓글의 글번호
+	            document.querySelector("#updateForm"+num).style.display="block";		
+			});
+		}
+	}
    
-   addDeleteListener(".delete-link");
-   
-   function addDeleteListener(sel){
-      //댓글 삭제 링크의 참조값을 배열에 담아오기 
-      let deleteLinks=document.querySelectorAll(sel);
-      for(let i=0; i<deleteLinks.length; i++){
-         deleteLinks[i].addEventListener("click", function(){
-            //click 이벤트가 일어난 바로 그 요소의 data-num 속성의 value 값을 읽어온다. 
-            const num=this.getAttribute("data-num"); //댓글의 글번호
-            const isDelete=confirm("댓글을 삭제 하시겠습니까?");
-            if(isDelete){
-               // gura_util.js 에 있는 함수들 이용해서 ajax 요청
-               ajaxPromise("reserve/private/comment_delete.do", "post", "num="+num)
-               .then(function(response){
-                  return response.json();
-               })
-               .then(function(data){
-                  //만일 삭제 성공이면 
-                  if(data.isSuccess){
-                     //댓글이 있는 곳에 삭제된 댓글입니다를 출력해 준다. 
-                     document.querySelector("#reli"+num).innerText="삭제된 댓글입니다.";
-                  }
-               });
-            }
-         });
-      }
-   }
-
+	function addDeleteListener(sel){
+    	//댓글 삭제 링크의 참조값을 배열에 담아오기 
+      	let deleteLinks=document.querySelectorAll(sel);
+      	for(let i=0; i<deleteLinks.length; i++){
+        	deleteLinks[i].addEventListener("click", function(){
+	            //click 이벤트가 일어난 바로 그 요소의 data-num 속성의 value 값을 읽어온다. 
+	            const num=this.getAttribute("data-num"); //댓글의 글번호
+	            const isDelete=confirm("댓글을 삭제하시겠습니까?");
+	            if(isDelete){
+	               location.href="${pageContext.request.contextPath}/api/reserve/commentdelete.do?pageNum=${pageNum}&ref_group=${dto.num}&num="+num;
+	            }
+        	});
+      	}
+	}	
+	
 </script>
-</body>
 </html>
 
 

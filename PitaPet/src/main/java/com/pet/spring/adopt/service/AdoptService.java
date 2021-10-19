@@ -22,9 +22,9 @@ public interface AdoptService {
 	//테스트용
 	public AdoptDto testGetDetail(HttpServletRequest request);
 	public AdoptDto updateDetail(HttpServletRequest request);
-	public Map<String, Object> insert(AdoptDto dto, HttpServletRequest request);	
-	public Map<String, Object> update(AdoptDto dto, HttpServletRequest request);
-	public Map<String, Object> delete(int num);
+	public void insert(AdoptDto dto, HttpServletRequest request);	
+	public void update(AdoptDto dto, HttpServletRequest request);
+	public void delete(int num);
 	//생일 메인 노출
 	public AdoptDto mainBirthData();
 	public List<AdoptDto> mainBirthList();

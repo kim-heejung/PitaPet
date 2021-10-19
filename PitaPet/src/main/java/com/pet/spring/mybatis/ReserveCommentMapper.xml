@@ -3,18 +3,13 @@
 <mapper namespace="reserveComment">
 	
 	<select id="getList" parameterType="reserveCommentDto" resultType="reserveCommentDto">
-      SELECT *
-      FROM
-         (SELECT result1.*, ROWNUM AS rnum
+      SELECT result1.*, ROWNUM AS rnum
          FROM
-            (SELECT r.num, writer, content, target_id, ref_group,
-               comment_group, deleted, TO_CHAR(r.regdate,'YYYY.MM.DD') regdate
-            FROM board_reserve_comment r
-            INNER JOIN shelter s
-            ON writer=id
+            (SELECT num, writer, content, target_id, ref_group,
+               comment_group, deleted, TO_CHAR(regdate,'YYYY.MM.DD') regdate
+            FROM board_reserve_comment
             WHERE ref_group=#{ref_group}
-            ORDER BY comment_group ASC, r.num ASC) result1)
-      WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+            ORDER BY comment_group ASC, num ASC) result1
    </select>
    
    <update id="delete" parameterType="int">
@@ -57,6 +52,7 @@
    <select id="getAllCount" resultType="reserveCommentDto">
    	  SELECT ref_group, count(ref_group) AS cnt
 	  FROM board_reserve_comment
+	  WHERE deleted = 'no'
 	  GROUP BY ref_group
    </select>
    

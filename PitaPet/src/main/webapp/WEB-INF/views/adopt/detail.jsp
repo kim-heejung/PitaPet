@@ -18,6 +18,22 @@
 				<div class="card mb-3">
 					<div class="card-body">
 						<p class="card-text detail_tit">${dto.title}</p>
+						<c:choose>
+				         	<c:when test="${empty idCheck }">
+				         		<p style="color:red;">♡</p>	
+				         	</c:when>
+				         	<c:otherwise>
+				         		<c:choose>
+				         			<c:when test="${like.liked eq 'yes' }">
+				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/api/adoptlike/unlike.do?num=${dto.num }">♥</a></p>
+				         			</c:when>
+				         			<c:otherwise>
+				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/adoptlike/like.do?num=${dto.num }">♡</a></p>
+				         			</c:otherwise>
+				         		</c:choose>
+				         	</c:otherwise>
+				         </c:choose>
+				   		 <span style="color:red;">${count }</span>
 						<div class="detail_info">
 							<span>${dto.writer}</span>
 							<span>${dto.name}</span>
@@ -49,7 +65,7 @@
 					<a class="btn btn-s btn-black" href="${pageContext.request.contextPath}/adopt/list.do" style="margin-right:20px;">목록보기</a>
 					<c:if test="${dto.writer eq id }">
 						<a class="btn btn-s btn-white" href="${pageContext.request.contextPath}/adopt/private/updateform.do?num=${dto.num }" style="margin-right:20px;">수정</a>
-						<a class="btn btn-s btn-white" href="${pageContext.request.contextPath}/api/adopt/delete.do?num=${dto.num }" style="margin-right:20px;">삭제</a>
+						<a class="btn btn-s btn-white" id="adoptDel" href="javascript:" style="margin-right:20px;">삭제</a>
 					</c:if>
 					<a href="${pageContext.request.contextPath}/reserve/private/insertform.do" class="btn btn-s btn-black">상담예약</a>
 				</div>
@@ -93,6 +109,12 @@
 			cpath: "${pageContext.request.contextPath}",
 			id: "${sessionScope.id}"
 		},
+  });
+  
+  document.querySelector("#adoptDel").addEventListener("click", function(){
+	  if(confirm("정말 삭제하시겠습니까?")){
+		  location.href="${pageContext.request.contextPath}/api/adopt/delete.do?num=${dto.num }";
+	  }
   });
 </script>
 </body>

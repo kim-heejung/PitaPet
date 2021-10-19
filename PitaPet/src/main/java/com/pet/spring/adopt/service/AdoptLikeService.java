@@ -21,7 +21,7 @@ public interface AdoptLikeService {
 	public void testUpdateY(HttpServletRequest request);
 	
 	//좋아요 해제 시 (liked가 no 일 때)
-	public Map<String, Object> updateN(HttpServletRequest request);
+	public void updateN(HttpServletRequest request);
 	
 	public List<AdoptLikeDto> getYCountList();
 	//테스트용-후에 삭제될 부분

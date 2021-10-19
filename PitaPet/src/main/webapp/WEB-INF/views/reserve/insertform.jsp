@@ -8,6 +8,11 @@
 <title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
 <jsp:include page="/resources/resource.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
+<style>
+.require-star{
+	color:red;
+}
+</style>
 </head>
 <body>
 <div id="reserveInsert">
@@ -20,8 +25,8 @@
 			      	<div class="mb-3 insertFormList">
 			         	<label class="form-label" for="scope">공개 여부</label>
 			         	<div>
-			         		<label class="form-check-label insertFormLabel scopeLabel"><input class="form-check-input scopeInput" type="radio" name="scope" id="scope" value="public"/>공개글</label>
-			         		<label class="form-check-label insertFormLabel scopeLabel"><input class="form-check-input scopeInput" type="radio" name="scope" id="scope" value="private"/>비밀글</label>
+			         		<label class="form-check-label insertFormLabel scopeLabel"><input class="form-check-input scopeInput" type="radio" name="scope" id="public" value="public"/>공개글</label>
+			         		<label class="form-check-label insertFormLabel scopeLabel"><input class="form-check-input scopeInput" type="radio" name="scope" id="private" value="private" checked/>비밀글</label>
 			         	</div>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
@@ -29,8 +34,8 @@
 			         	<input class="form-control" type="password" name="pwd" id="pwd"/>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
-			      		<label class="form-label" for="shelterName">보호소 선택</label>
-			      		<select class="form-select" name="shelterName" id="shelterName">
+			      		<label class="form-label" for="shelterName">보호소 <span class="require-star">*</span></label>
+			      		<select class="form-select require" name="shelterName" id="shelterName">
 				   			<option value="">보호소 선택</option>
 				   			<option value="강동리본센터">강동리본센터</option>
 				   			<option value="남양유기견보호센터">남양유기견보호센터</option>
@@ -43,12 +48,12 @@
 						</select>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
-			         	<label class="form-label" for="title">제목</label>
-			         	<input class="form-control" type="text" name="title" id="title"/>
+			         	<label class="form-label" for="title">제목 <span class="require-star">*</span></label>
+			         	<input class="form-control require" type="text" name="title" id="title"/>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
-			      		<label class="form-label" for="reservedDate">날짜</label>
-			      		<select class="form-select" name="reservedDate" id="reservedDate">
+			      		<label class="form-label" for="reservedDate">날짜 <span class="require-star">*</span></label>
+			      		<select class="form-select require" name="reservedDate" id="reservedDate">
 				   			<option value="">날짜 선택</option>
 				   			<option value="9월 13일">9월 13일</option>
 				   			<option value="9월 14일">9월 14일</option>
@@ -58,8 +63,8 @@
 						</select>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
-			         	<label class="form-label" for="reservedTime">시간</label>
-			         	<select class="form-select" name="reservedTime" id="reservedTime">
+			         	<label class="form-label" for="reservedTime">시간 <span class="require-star">*</span></label>
+			         	<select class="form-select require" name="reservedTime" id="reservedTime">
 				   			<option value="">시간 선택</option>
 				   			<option value="10:00">10:00</option>
 				   			<option value="11:00">11:00</option>
@@ -69,12 +74,12 @@
 						</select>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
-			         	<label class="form-label" for="name">이름</label>
-			         	<input class="form-control" type="text" name="name" id="name"/>
+			         	<label class="form-label" for="name">이름 <span class="require-star">*</span></label>
+			         	<input class="form-control require" type="text" name="name" id="name"/>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
-			         	<label class="form-label" for="phoneNumber">연락처</label>
-			         	<input class="form-control" type="text" name="phoneNumber" id="phoneNumber"/>
+			         	<label class="form-label" for="phoneNumber">연락처 <span class="require-star">*</span></label>
+			         	<input class="form-control require" type="text" name="phoneNumber" id="phoneNumber"/>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
 			         	<label class="form-label" for="title">내용</label>
@@ -102,7 +107,30 @@
 			cpath: "${pageContext.request.contextPath}",
 			id: "${sessionScope.id}",
 		   }
-	  });	
+	  });
+	
+	document.querySelector("#insertForm").addEventListener("submit", function(e){
+		for(let i=0; i<6; i++){
+			let require=document.querySelectorAll(".require")[i].value;
+			let scopePri=document.querySelector('input[name="scope"]:checked').value;
+			if(scopePri=="private"){
+				let pwd=document.querySelector("#pwd").value;
+					if(pwd==""){
+						alert("비밀글 확인 시 사용할 비밀번호를 입력해 주세요.");
+						e.preventDefault();
+						break;
+					}else if(require==""){
+						alert("* 표시된 필수 입력 사항을 빠짐없이 입력해 주세요.");
+			            e.preventDefault();
+			            break;
+					}
+			}else if(scopePri=="public" && require==""){
+				alert("* 표시된 필수 입력 사항을 빠짐없이 입력해 주세요.");
+	            e.preventDefault();
+	            break;
+			}
+		}
+	});
 </script>
 </body>
 </html>
