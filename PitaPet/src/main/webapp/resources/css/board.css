@@ -113,7 +113,7 @@
    border: 1px solid #cecece;
    border-radius: 50%;
 }
-/* ul 요소의 기본 스타일 제거 */
+/* ul 요소의 기본 스타일 제거
 .comments ul{
    padding: 0;
    margin: 0;
@@ -142,6 +142,36 @@
    width: 14%;
    height: 100px;
 }
+ */
+ /* ul 요소의 기본 스타일 제거 */
+   .comments ul{
+      padding: 0;
+      margin: 0;
+      list-style-type: none; 
+      margin-bottom:20px; 
+   }
+   .comments li{
+   	  clear:left;
+      
+   }
+   .comments dt{
+      margin-top: 10px;   
+   }
+   .comments dd{
+		margin-top:10px;
+   }
+   .comment-form textarea, .comment-form button{
+      float: left;
+   }
+   .comment-form textarea{
+      width: 84%;
+      height: 100px;
+   }
+   .comment-form button{
+      width: 16%;
+      height: 100px;
+   }
+   
 /* 댓글에 댓글을 다는 폼과 수정폼은 일단 숨긴다. */
 .comments .comment-form{
    display: none;

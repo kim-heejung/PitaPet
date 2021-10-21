@@ -128,6 +128,9 @@ public class ReserveController {
 		
 		List<ShelterDto> dto2=service.getCheckedList();
 		request.setAttribute("checked", dto2);
+		
+		List<ReserveCommentDto> commentCountList=service.getAllCount();
+		request.setAttribute("commentCountList", commentCountList);
 
 		return "reserve/detail";
 	}

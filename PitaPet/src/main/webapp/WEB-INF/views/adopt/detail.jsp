@@ -8,6 +8,22 @@
 <title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
 <jsp:include page="/resources/resource.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
+<style>
+	.like-detail{
+		color:red;
+	}
+	.like-detail-count{
+		margin-left:-4px;
+	}
+	
+	.detail_info p{
+		display:inline-block;
+		font-size:1.6rem;
+	}
+	.detail_info a:hover{
+		color:red;
+	}
+</style>
 </head>
 <body>
 	<div id="adoptUpdate">
@@ -18,22 +34,6 @@
 				<div class="card mb-3">
 					<div class="card-body">
 						<p class="card-text detail_tit">${dto.title}</p>
-						<c:choose>
-				         	<c:when test="${empty idCheck }">
-				         		<p style="color:red;">♡</p>	
-				         	</c:when>
-				         	<c:otherwise>
-				         		<c:choose>
-				         			<c:when test="${like.liked eq 'yes' }">
-				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/api/adoptlike/unlike.do?num=${dto.num }">♥</a></p>
-				         			</c:when>
-				         			<c:otherwise>
-				         				<p><a style="color:red;" href="${pageContext.request.contextPath}/adoptlike/like.do?num=${dto.num }">♡</a></p>
-				         			</c:otherwise>
-				         		</c:choose>
-				         	</c:otherwise>
-				         </c:choose>
-				   		 <span style="color:red;">${count }</span>
 						<div class="detail_info">
 							<span>${dto.writer}</span>
 							<span>${dto.name}</span>
@@ -45,7 +45,24 @@
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="bi bi-clock"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path> <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path></svg>
 								${dto.regdate}
 							</span>
+							<c:choose>
+					         	<c:when test="${empty idCheck }">
+					         		<p class="like-detail">♡</p>	
+					         	</c:when>
+					         	<c:otherwise>
+					         		<c:choose>
+					         			<c:when test="${like.liked eq 'yes' }">
+					         				<p><a class="like-detail" href="${pageContext.request.contextPath}/api/adoptlike/unlike.do?num=${dto.num }">♥</a></p>
+					         			</c:when>
+					         			<c:otherwise>
+					         				<p><a class="like-detail" href="${pageContext.request.contextPath}/adoptlike/like.do?num=${dto.num }">♡</a></p>
+					         			</c:otherwise>
+					         		</c:choose>
+					         	</c:otherwise>
+					         </c:choose>
+					   		 <span class="like-detail like-detail-count">${count }</span>
 						</div>
+						
 						<div class="detail_content">
 							<div class="content">
 							 	<img class="card-img-top" src="${pageContext.request.contextPath}${dto.imagePath}" />

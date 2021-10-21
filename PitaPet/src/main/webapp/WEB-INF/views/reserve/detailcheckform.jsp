@@ -8,6 +8,7 @@
 <title>핏어펫(Pit a Pet) - 사지않고 유기동물을 입양하는 문화를 만듭니다</title>
 <jsp:include page="/resources/resource.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" />
 <style>
 	.board-wrap{
 		text-align:center;
@@ -34,10 +35,6 @@
 	*/
 	
 	
-	.pwdCheckForm{
-		padding-bottom:120px;
-	}
-	
 	.pwdCheckTitle{
 		font-weight:bold;
 	}
@@ -57,6 +54,12 @@
 	
 	.checkform-btn{
 		margin:0 4px;
+	}
+	
+	
+	.board-wrap{
+		padding-bottom:120px;
+		min-height:0;
 	}
 </style>
 </head>
@@ -78,9 +81,9 @@
 			<p>
 				이 글은 비밀글 입니다.
 				<br /> 
-				비밀번호를 입력해주세요
+				비밀번호를 입력해 주세요.
 			</p>
-			<form class="pwdCheckForm" action="${pageContext.request.contextPath}/api/reserve/detailcheck.do?num=${num}" method="post">
+			<form style="padding-bottom:0" class="pwdCheckForm" action="${pageContext.request.contextPath}/api/reserve/detailcheck.do?num=${num}" method="post">
 				<div class="pwdCheckFormList">
 					<label class="pwdCheckFormLabel" for="pwd">비밀번호</label>
 					<input class="widthPull" type="password" name="pwd" id="pwd"/>
