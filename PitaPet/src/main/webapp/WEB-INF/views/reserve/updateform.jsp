@@ -28,12 +28,12 @@
 			         	<label class="form-label" for="scope">공개 여부</label>
 			         	<div>
 			         		<label class="form-check-label insertFormLabel scopeLabel">
-			         			<input class="form-check-input scopeInput" type="radio" name="scope" 
+			         			<input class="form-check-input scopeInput scope-input-public" type="radio" name="scope" 
 			         			id="public" value="public" ${dto.scope eq 'public' ? "checked" : "" }/>
 			         			공개글
 			         		</label>
 			         		<label class="form-check-label insertFormLabel scopeLabel">
-			         			<input class="form-check-input scopeInput" type="radio" name="scope" 
+			         			<input class="form-check-input scopeInput scope-input-private" type="radio" name="scope" 
 			         			id="private" value="private" ${dto.scope eq 'private' ? "checked" : "" }/>
 			         			비밀글
 			         		</label>
@@ -41,7 +41,7 @@
 			      	</div>
 			      	<div class="mb-3 insertFormList">
 			         	<label class="form-label" for="pwd">비밀번호</label>
-			         	<input class="form-control" type="password" name="pwd" id="pwd"/>
+			         	<input class="form-control" type="password" name="pwd" id="pwd" ${dto.scope eq 'private' ? "disabled" : "" }/>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
 			      		<label class="form-label" for="shelterName">보호소 선택 <span class="require-star">*</span></label>
@@ -117,6 +117,24 @@
 			id: "${sessionScope.id}",
 		   }
 	  });
+	
+	
+	let pwdInput=document.getElementById("pwd");
+	
+	document.querySelector(".scope-input-private").addEventListener("click", function(e){
+		let scopePri=document.querySelector('input[name="scope"]:checked').value;
+		if(scopePri=="private"){
+			pwdInput.setAttribute("disabled", "disabled");
+		}
+	});
+	
+	document.querySelector(".scope-input-public").addEventListener("click", function(e){
+		let scopePri=document.querySelector('input[name="scope"]:checked').value;
+		if(scopePri=="public"){
+			pwdInput.removeAttribute("disabled");
+		}
+	});
+	
 	
 	document.querySelector("#updateForm").addEventListener("submit", function(e){
 		for(let i=0; i<6; i++){

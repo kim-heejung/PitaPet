@@ -25,8 +25,8 @@
 			      	<div class="mb-3 insertFormList">
 			         	<label class="form-label" for="scope">공개 여부</label>
 			         	<div>
-			         		<label class="form-check-label insertFormLabel scopeLabel"><input class="form-check-input scopeInput" type="radio" name="scope" id="public" value="public"/>공개글</label>
-			         		<label class="form-check-label insertFormLabel scopeLabel"><input class="form-check-input scopeInput" type="radio" name="scope" id="private" value="private" checked/>비밀글</label>
+			         		<label class="form-check-label insertFormLabel scopeLabel"><input class="form-check-input scopeInput scope-input-public" type="radio" name="scope" id="public" value="public"/>공개글</label>
+			         		<label class="form-check-label insertFormLabel scopeLabel"><input class="form-check-input scopeInput scope-input-private" type="radio" name="scope" id="private" value="private"/>비밀글</label>
 			         	</div>
 			      	</div>
 			      	<div class="mb-3 insertFormList">
@@ -108,6 +108,24 @@
 			id: "${sessionScope.id}",
 		   }
 	  });
+	
+	
+	let pwdInput=document.getElementById("pwd");
+	
+	document.querySelector(".scope-input-private").addEventListener("click", function(e){
+		let scopePri=document.querySelector('input[name="scope"]:checked').value;
+		if(scopePri=="private"){
+			pwdInput.setAttribute("disabled", "disabled");
+		}
+	});
+	
+	document.querySelector(".scope-input-public").addEventListener("click", function(e){
+		let scopePri=document.querySelector('input[name="scope"]:checked').value;
+		if(scopePri=="public"){
+			pwdInput.removeAttribute("disabled");
+		}
+	});
+	
 	
 	document.querySelector("#insertForm").addEventListener("submit", function(e){
 		for(let i=0; i<6; i++){
