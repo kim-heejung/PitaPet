@@ -89,7 +89,7 @@
 				TO_CHAR(a.regdate,'YYYY.MM.DD') AS regdate
 				FROM board_adopt a INNER JOIN shelter ON writer = id
 				ORDER BY a.regdate DESC) result2)
-		WHERE rnum BETWEEN 2 AND 12
+		WHERE rnum BETWEEN 2 AND 13
 	</select>
 	
 </mapper>

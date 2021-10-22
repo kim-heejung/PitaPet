@@ -918,6 +918,7 @@
     transition:1s;
 }
 #AdoptFamily .gallery-thumb>img{
+	width:100%;
 	height:100%;
 	position:relative;
 	z-index:1;
@@ -942,6 +943,7 @@
     transform: translateX(-50%);
     width: 100px;
     height: 140px;
+    z-index:2;
 }
 #AdoptFamily .gallery-thumb::after {
     content: "";

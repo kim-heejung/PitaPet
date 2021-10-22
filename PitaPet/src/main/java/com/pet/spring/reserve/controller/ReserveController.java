@@ -109,14 +109,14 @@ public class ReserveController {
 
 	@RequestMapping("/api/reserve/detail")
 	@ResponseBody
-	public ReserveDto dtail(HttpServletRequest request) {
+	public ReserveDto detail(HttpServletRequest request) {
 
 		return service.getDetail(request);
 
 	}
 	//테스트용-후에 삭제될 부분
 	@RequestMapping("/reserve/detail")
-	public String testDtail(HttpServletRequest request) {
+	public String testDetail(HttpServletRequest request) {
 
 		int num=Integer.parseInt(request.getParameter("num"));
 		service.addViewCount(num);
