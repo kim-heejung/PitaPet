@@ -19,7 +19,7 @@
 		<div class="board-wrap form-wrap">
 			<page-category :cpath="cpath" :index="0"></page-category>
 			<div class="container">
-			   	<form class="insertForm" action="${pageContext.request.contextPath}/api/adopt/insert.do" method="post" enctype="multipart/form-data">
+			   	<form class="insertForm" action="${pageContext.request.contextPath}/adopt/insert.do" method="post" enctype="multipart/form-data">
 			      	<div class="mb-3 insertFormList">
 			      		<label class="form-label">동물 분류 <span class="require-star">*</span></label>
 			      		<select class="form-select require" name="animalType" id="animalType">

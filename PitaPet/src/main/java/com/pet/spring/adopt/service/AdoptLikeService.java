@@ -4,35 +4,27 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pet.spring.adopt.dto.AdoptLikeDto;
 
 public interface AdoptLikeService {
 	
-	public Map<String, Object> insert(HttpServletRequest request);
-	public void testInsert(HttpServletRequest request);
-	
-	
-	public Map<String, Object> updateY(HttpServletRequest request);
-	//좋아요 클릭 시 (liked가 yes 일 때)
-	public void testUpdateY(HttpServletRequest request);
-	
-	//좋아요 해제 시 (liked가 no 일 때)
-	public void updateN(HttpServletRequest request);
-	
-	public List<AdoptLikeDto> getYCountList();
-	//테스트용-후에 삭제될 부분
-	public List<AdoptLikeDto> testGetYCountList(HttpServletRequest request);
-	
-	public AdoptLikeDto getData(HttpServletRequest request); 
-	
-	public Map<String, Object> getCount(int num);
-	//테스트용-후에 삭제될 부분
-	public int getTestCount(int num);
-	
+	//아이디별 해당 게시글에 좋아요 insert 됐는지 확인용
 	public int isExist(HttpServletRequest request);
+	public void likeInsert(HttpServletRequest request);
+	//public Map<String, Object> apiLikeInsert(HttpServletRequest request);
+	//좋아요 재등록(수정)
+	public Map<String, Object> likeUpdateY(HttpServletRequest request);
+	//public void apiLikeUpdateY(HttpServletRequest request);
+	//좋아요 취소
+	public void likeUpdateN(HttpServletRequest request);
+	//게시글 전체의 좋아요 갯수
+	//public List<AdoptLikeDto> likeCountList();
+	//public List<AdoptLikeDto> apiLikeCountList(HttpServletRequest request);
+	//아이디별 해당 게시글의 좋아요 여부
+	public AdoptLikeDto likeGetData(HttpServletRequest request); 
+	//해당 게시글의 좋아요 갯수
+	public int likeCount(int num);
+	//public Map<String, Object> apiLikeCount(int num);
 
 }

@@ -5,15 +5,15 @@ import java.util.List;
 import com.pet.spring.adopt.dto.AdoptDto;
 
 public interface AdoptDao {
+	
 	public List<AdoptDto> getList(AdoptDto dto);
 	public int getCount(AdoptDto dto);
-	public AdoptDto getData(AdoptDto dto);
 	public void addViewCount(int num);
+	public AdoptDto getData(AdoptDto dto);
 	public void insert(AdoptDto dto);
 	public void update(AdoptDto dto);
 	public void delete(int num);
-	//생일 메인 노출
-	public AdoptDto mainBirthData();
-	public List<AdoptDto> mainBirthList();
+	public AdoptDto getBirthData();
+	public List<AdoptDto> getBirthList();
 	
 }

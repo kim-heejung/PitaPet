@@ -14,7 +14,6 @@ public class AdoptDaoImpl implements AdoptDao {
 	@Autowired
 	private SqlSession session;
 	
-	
 	@Override
     public List<AdoptDto> getList(AdoptDto dto) {
         return session.selectList("adopt.getList", dto);
@@ -24,15 +23,15 @@ public class AdoptDaoImpl implements AdoptDao {
 	public int getCount(AdoptDto dto) {
 		return session.selectOne("adopt.getCount", dto);
 	}
+	
+	@Override
+	public void addViewCount(int num) {
+		session.update("adopt.addViewCount", num);
+	}
 
 	@Override
 	public AdoptDto getData(AdoptDto dto) {
 		return session.selectOne("adopt.getData", dto);
-	}
-
-	@Override
-	public void addViewCount(int num) {
-		session.update("adopt.addViewCount", num);
 	}
 
 	@Override
@@ -50,15 +49,14 @@ public class AdoptDaoImpl implements AdoptDao {
 		session.update("adopt.delete", num);
 	}
 
-	//생일 메인 노출
 	@Override
-	public AdoptDto mainBirthData() {
-		return session.selectOne("adopt.mainBirthData");
+	public AdoptDto getBirthData() {
+		return session.selectOne("adopt.getBirthData");
 	}
 
 	@Override
-	public List<AdoptDto> mainBirthList() {
-		return session.selectList("adopt.mainBirthList");
+	public List<AdoptDto> getBirthList() {
+		return session.selectList("adopt.getBirthList");
 	}
 	
 }

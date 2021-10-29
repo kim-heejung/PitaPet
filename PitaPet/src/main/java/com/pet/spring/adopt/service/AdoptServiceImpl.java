@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +22,11 @@ public class AdoptServiceImpl implements AdoptService {
 	
 	
 	@Override
-	public List<AdoptDto> getList(HttpServletRequest request) {
+	public List<AdoptDto> apiGetList(HttpServletRequest request) {
 		
 		//한 페이지에 몇개씩 표시할 것인지
 		final int PAGE_ROW_COUNT = 8;
-		//하단 페이지를 몇개씩 표시할 것인지
-		final int PAGE_DISPLAY_COUNT = 5;
-
+		
 		//보여줄 페이지의 번호를 일단 1이라고 초기값 지정
 		int pageNum = 1;
 		//페이지 번호가 파라미터로 전달되는지 읽어와 본다.
@@ -63,7 +60,7 @@ public class AdoptServiceImpl implements AdoptService {
 
 		return list;
 	}
-	//테스트용-후에 삭제될 부분
+	/*
 	@Override
 	public void testGetList(HttpServletRequest request) {
 		
@@ -123,11 +120,11 @@ public class AdoptServiceImpl implements AdoptService {
 		request.setAttribute("pageNum", pageNum); // 현재 페이지 번호
 		request.setAttribute("totalPageCount", totalPageCount); // 모든 페이지 count
 		request.setAttribute("animalType", animalType);
-
 	}
+	*/
 	
 	@Override
-	public Map<String, Object> getListPaging(HttpServletRequest request) {
+	public Map<String, Object> apiPaging(HttpServletRequest request) {
 		
 		int pageNum=Integer.parseInt(request.getParameter("pageNum"));
 		String animalType=(String)request.getParameter("animalType");
@@ -182,29 +179,7 @@ public class AdoptServiceImpl implements AdoptService {
 	}
 	
 	@Override
-	public AdoptDto getDetail(HttpServletRequest request) {
-		
-		int num=Integer.parseInt(request.getParameter("num"));
-		String animalType = request.getParameter("animalType");
-		
-		if (animalType == null) {
-			animalType = "";
-		}
-		
-		AdoptDto dto=new AdoptDto();
-		dto.setNum(num);
-		
-		if(!animalType.equals("")) {
-			dto.setAnimalType(animalType);
-		}
-		
-		AdoptDto dto2 = dao.getData(dto);
-		
-		return dto2;
-	}
-	//테스트용
-	@Override
-	public AdoptDto testGetDetail(HttpServletRequest request) {
+	public AdoptDto detail(HttpServletRequest request) {
 		
 		int num=Integer.parseInt(request.getParameter("num"));
 		String animalType = request.getParameter("animalType");
@@ -226,22 +201,30 @@ public class AdoptServiceImpl implements AdoptService {
 		
 		return dto2;
 	}
-	
-	
+	/*
 	@Override
-	public AdoptDto updateDetail(HttpServletRequest request) {
+	public AdoptDto apiDetail(HttpServletRequest request) {
 		
 		int num=Integer.parseInt(request.getParameter("num"));
+		String animalType = request.getParameter("animalType");
+		
+		if (animalType == null) {
+			animalType = "";
+		}
 		
 		AdoptDto dto=new AdoptDto();
 		dto.setNum(num);
 		
-		AdoptDto data = dao.getData(dto);
+		if(!animalType.equals("")) {
+			dto.setAnimalType(animalType);
+		}
 		
-		request.setAttribute("dto", data);
+		AdoptDto dto2 = dao.getData(dto);
 		
-		return data;
+		return dto2;
 	}
+	*/
+	
 	
 	@Override
 	public void insert(AdoptDto dto, HttpServletRequest request) {
@@ -282,7 +265,22 @@ public class AdoptServiceImpl implements AdoptService {
 		dto.setOrgImageName(orgImageName);
 
 		dao.insert(dto);
+	}
 	
+	
+	@Override
+	public AdoptDto updateDetail(HttpServletRequest request) {
+		
+		int num=Integer.parseInt(request.getParameter("num"));
+		
+		AdoptDto dto=new AdoptDto();
+		dto.setNum(num);
+		
+		AdoptDto data = dao.getData(dto);
+		
+		request.setAttribute("dto", data);
+		
+		return data;
 	}
 	
 	
@@ -328,7 +326,6 @@ public class AdoptServiceImpl implements AdoptService {
 		}
 		*/
 		dao.update(dto);
-		
 	}
 	
 	
@@ -336,22 +333,20 @@ public class AdoptServiceImpl implements AdoptService {
 	public void delete(int num) {
 		
 		dao.delete(num);
-
 	}
 	
 	
 	//생일 메인 노출
 	@Override
-	public AdoptDto mainBirthData() {
+	public AdoptDto apiBirthData() {
 
-		return dao.mainBirthData();
+		return dao.getBirthData();
 	}
 	
 	@Override
-	public List<AdoptDto> mainBirthList() {
+	public List<AdoptDto> apiBirthList() {
 		
-		return dao.mainBirthList();
+		return dao.getBirthList();
 	}
-
 
 }

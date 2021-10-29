@@ -20,6 +20,43 @@
 		FROM reserve INNER JOIN shelter s ON shelterName = s.name
 	</select>
 	
+	<update id="addViewCount" parameterType="int">
+		UPDATE reserve
+		SET viewCount=viewCount+1
+		WHERE num=#{num}
+	</update>
+	
+	<select id="getPrivatePwd" parameterType="int" resultType="reserveDto">
+		SELECT pwd
+		FROM reserve
+		WHERE num=#{num}
+	</select>
+	
+	<select id="getData" parameterType="int" resultType="reserveDto">
+		SELECT num, shelterName, title, writer, viewCount, 
+		TO_CHAR(regdate,'YYYY.MM.DD') regdate, reservedDate, reservedTime, 
+		name, phoneNumber, content, checked, scope
+		FROM reserve
+		WHERE num = #{num}
+	</select>
+	
+	<select id="getShelterList" resultType="shelterDto">
+		SELECT id, name
+		FROM shelter
+	</select>
+	
+	<update id="getReserveY" parameterType="int">
+		UPDATE reserve
+		SET checked='yes'
+		WHERE num=#{num}
+	</update>
+	
+	<update id="getReserveN" parameterType="int">
+		UPDATE reserve
+		SET checked='no'
+		WHERE num=#{num}
+	</update>
+	
 	<insert id="insert" parameterType="reserveDto">
 		INSERT INTO reserve
 		(num, title, scope, pwd, writer, shelterName, reservedDate, reservedTime, name, phoneNumber, content,
@@ -28,20 +65,6 @@
 		#{reservedTime}, #{name}, #{phoneNumber}, #{content}, SYSDATE)
 	</insert>
 
-	<select id="getData" parameterType="int" resultType="reserveDto">
-		SELECT num, shelterName, title, writer, viewCount, 
-		TO_CHAR(regdate,'YYYY.MM.DD') regdate, reservedDate, reservedTime, 
-		name, phoneNumber, content, checked, scope
-		FROM reserve
-		WHERE num = #{num}
-	</select>
-
-	<update id="addViewCount" parameterType="int">
-		UPDATE reserve
-		SET viewCount=viewCount+1
-		WHERE num=#{num}
-	</update>
-	
 	<update id="update" parameterType="reserveDto">
 		UPDATE reserve
 		SET scope=#{scope}, pwd=#{pwd}, shelterName=#{shelterName}, title=#{title}, reservedDate=#{reservedDate}, reservedTime=#{reservedTime},
@@ -53,28 +76,5 @@
 		DELETE FROM reserve
 		WHERE num=#{num}
 	</delete>
-	
-	<select id="getCheckedList" resultType="shelterDto">
-		SELECT id, name
-		FROM shelter
-	</select>
-	
-	<update id="getCheckedY" parameterType="int">
-		UPDATE reserve
-		SET checked='yes'
-		WHERE num=#{num}
-	</update>
-	
-	<update id="getCheckedN" parameterType="int">
-		UPDATE reserve
-		SET checked='no'
-		WHERE num=#{num}
-	</update>
-	
-	<select id="getDetailPwd" parameterType="int" resultType="reserveDto">
-		SELECT pwd
-		FROM reserve
-		WHERE num=#{num}
-	</select>
 	
 </mapper>

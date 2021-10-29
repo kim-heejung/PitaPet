@@ -15,31 +15,51 @@ public class ReserveDaoImpl implements ReserveDao {
 	@Autowired
 	private SqlSession session;
 	
+	
 	@Override
 	public List<ReserveDto> getList(ReserveDto dto) {
 		return session.selectList("reserve.getList", dto);
 	}
 
-	
 	@Override
 	public int getCount() {
 		return session.selectOne("reserve.getCount");
 	}
 	
-
 	@Override
-	public void insert(ReserveDto dto) {
-		session.insert("reserve.insert", dto);
+	public void addViewCount(int num) {
+		session.update("reserve.addViewCount", num);
 	}
-
+	
+	@Override
+	public ReserveDto getPrivatePwd(int num) {
+		
+		return session.selectOne("reserve.getPrivatePwd", num);
+	}
+	
 	@Override
 	public ReserveDto getData(int num) {
 		return session.selectOne("reserve.getData", num);
 	}
+	
+	@Override
+	public List<ShelterDto> getShelterList() {
+		return session.selectList("reserve.getShelterList");
+	}
+	
+	@Override
+	public void getReserveY(int num) {
+		session.update("reserve.getReserveY", num);
+	}
+	
+	@Override
+	public void getReserveN(int num) {
+		session.update("reserve.getReserveN", num);
+	}
 
 	@Override
-	public void addViewCount(int num) {
-		session.update("reserve.addViewCount", num);
+	public void insert(ReserveDto dto) {
+		session.insert("reserve.insert", dto);
 	}
 
 	@Override
@@ -50,28 +70,6 @@ public class ReserveDaoImpl implements ReserveDao {
 	@Override
 	public void delete(int num) {
 		session.delete("reserve.delete", num);
-	}
-
-	@Override
-	public List<ShelterDto> getCheckedList() {
-		return session.selectList("reserve.getCheckedList");
-	}
-
-	@Override
-	public void getCheckedY(int num) {
-		session.update("reserve.getCheckedY", num);
-	}
-	
-	@Override
-	public void getCheckedN(int num) {
-		session.update("reserve.getCheckedN", num);
-	}
-
-
-	@Override
-	public ReserveDto getDetailPwd(int num) {
-		
-		return session.selectOne("reserve.getDetailPwd", num);
 	}
 
 }
