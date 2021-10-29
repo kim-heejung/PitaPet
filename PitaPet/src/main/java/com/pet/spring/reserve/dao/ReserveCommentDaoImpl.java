@@ -14,49 +14,50 @@ public class ReserveCommentDaoImpl implements ReserveCommentDao {
 	@Autowired
 	private SqlSession session;
 
+	
 	@Override
 	public List<ReserveCommentDto> getList(ReserveCommentDto dto) {
 		
 		return session.selectList("reserveComment.getList", dto);
 	}
-
+	
 	@Override
-	public void delete(int num) {
+	public int getCount(int ref_group) {
 		
-		session.update("reserveComment.delete", num);
-		
+		return session.selectOne("reserveComment.getCount", ref_group);
 	}
-
+	
+	@Override
+	public int getSequence() {
+		
+		return session.selectOne("reserveComment.getSequence");
+	}
+	
 	@Override
 	public void insert(ReserveCommentDto dto) {
 		
 		session.insert("reserveComment.insert", dto);
 		
 	}
-
-	@Override
-	public int getSequence() {
-		
-		return session.selectOne("reserveComment.getSequence");
-	}
-
-	@Override
-	public void update(ReserveCommentDto dto) {
-		
-		session.update("reserveComment.update", dto);
-		
-	}
-
+	
+	/*
 	@Override
 	public ReserveCommentDto getData(int num) {
 		
 		return session.selectOne("reserveComment.getData", num);
 	}
+	*/
+	
+	@Override
+	public void update(ReserveCommentDto dto) {
+		
+		session.update("reserveComment.update", dto);
+	}
 
 	@Override
-	public int getCount(int ref_group) {
+	public void delete(int num) {
 		
-		return session.selectOne("reserveComment.getCount", ref_group);
+		session.update("reserveComment.delete", num);	
 	}
 
 	@Override
@@ -64,4 +65,5 @@ public class ReserveCommentDaoImpl implements ReserveCommentDao {
 		
 		return session.selectList("reserveComment.getAllCount");
 	}
+	
 }

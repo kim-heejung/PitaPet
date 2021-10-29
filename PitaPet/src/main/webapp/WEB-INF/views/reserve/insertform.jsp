@@ -21,7 +21,7 @@
 	<div class="board-wrap form-wrap">
 		<page-category class="reserve" :cpath="cpath" :index="5"></page-category>
 		<div class="container">
-			<form id="insertForm" action="${pageContext.request.contextPath}/api/reserve/insert.do" method="post">
+			<form id="insertForm" action="${pageContext.request.contextPath}/reserve/insert.do" method="post">
 			      	<div class="mb-3 insertFormList">
 			         	<label class="form-label" for="scope">공개 여부</label>
 			         	<div>

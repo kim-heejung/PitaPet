@@ -108,8 +108,6 @@
 	
 	
 	
-	
-	
 	/*댓글*/
 	.comments{
 		text-align:left;
@@ -209,8 +207,6 @@
 	.myReply-list{
 		margin-left:4px;
 	}
-	 
-	
 </style>
 </head>
 <body>
@@ -276,17 +272,16 @@
 			      	</p>
 		      	</div>   
 		   </div>
-
 		   <ul class="buttonList">
 		      <li class="shelterBtnList">
 		      	<c:forEach var="check" items="${checked }">
 					<c:if test="${check.id eq id and check.name eq dto.shelterName}">
 				    	<c:choose>
 				      		<c:when test="${dto.checked eq 'yes' }">
-				      			<a class="allButton" href="${pageContext.request.contextPath}/api/reserve/checkedno.do?num=${dto.num}">예약 취소</a>
+				      			<a class="allButton" href="${pageContext.request.contextPath}/api/reserve/reserveno.do?num=${dto.num}">예약 취소</a>
 				      		</c:when>
 				      		<c:otherwise>
-				      			<a class="allButton" href="${pageContext.request.contextPath}/api/reserve/checkedyes.do?num=${dto.num}">예약 확정</a>
+				      			<a class="allButton" href="${pageContext.request.contextPath}/api/reserve/reserveyes.do?num=${dto.num}">예약 확정</a>
 				      		</c:otherwise>
 				      	</c:choose>
 				    </c:if>
@@ -299,45 +294,38 @@
 			        <a class="btn allButton reserveDel" id="best" href="javascript:reserveDeleteList()">삭제</a>
 			  	</c:if>
 			  </li>
-		   	  	
-		      <br />
-		      
-		      	
-		      
-		      
 		   </ul>
-
-	<div class="comments">
-		<p class="reply-title">
-			<!--  
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
-			  <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-			  <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z"/>
-			</svg>
-			-->
-			댓글 
-			<c:forEach var="countList" items="${commentCountList }">
-				<c:if test="${dto.num eq countList.ref_group }">
-            		<span>${countList.cnt }</span>
-            	</c:if>
-			</c:forEach>
-		</p>
-		<ul>
-        	<c:forEach var="tmp" items="${commentList }">
-            	<c:choose>
-               		<c:when test="${tmp.deleted eq 'yes' }">
-                  		<li>삭제된 댓글 입니다.</li>
-               		</c:when>
-               		<c:otherwise>
-                  		<c:if test="${tmp.num eq tmp.comment_group }">
-                     		<li id="reli${tmp.num }">
-                  		</c:if>
-                  		<c:if test="${tmp.num ne tmp.comment_group }">
-                     		<li id="reli${tmp.num }" style="padding-left:50px;">
-                        	<svg class="reply-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-                            	<path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
-                        	</svg>
-                  		</c:if>
+			<div class="comments">
+				<p class="reply-title">
+					<!--  
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+			  			<path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+			  			<path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z"/>
+					</svg>
+					-->
+					댓글 
+					<c:forEach var="countList" items="${commentCountList }">
+						<c:if test="${dto.num eq countList.ref_group }">
+            				<span>${countList.cnt }</span>
+            			</c:if>
+					</c:forEach>
+				</p>
+				<ul>
+        			<c:forEach var="tmp" items="${commentList }">
+            			<c:choose>
+               				<c:when test="${tmp.deleted eq 'yes' }">
+                  				<li>삭제된 댓글 입니다.</li>
+               				</c:when>
+               				<c:otherwise>
+                  				<c:if test="${tmp.num eq tmp.comment_group }">
+                     				<li id="reli${tmp.num }">
+                  				</c:if>
+                  				<c:if test="${tmp.num ne tmp.comment_group }">
+                     				<li id="reli${tmp.num }" style="padding-left:50px;">
+                        				<svg class="reply-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                            				<path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+                        				</svg>
+                  				</c:if>
                         		<dl>
                            			<dt class="reply-list-users">
                               			<span class="reply-users-items">${tmp.writer }</span>
@@ -357,7 +345,7 @@
                               			<pre id="pre${tmp.num }">${tmp.content }</pre>                  
                            			</dd>
                         		</dl>
-                        		<form id="reForm${tmp.num }" class="animate__animated comment-form re-insert-form" action="${pageContext.request.contextPath}/reserve/private/comment_insert.do" method="post">
+                        		<form id="reForm${tmp.num }" class="animate__animated comment-form re-insert-form" action="${pageContext.request.contextPath}/reserve/private/commentinsert.do" method="post">
                            			<input type="hidden" name="pageNum" value="${pageNum }"/>
                            			<input type="hidden" name="ref_group" value="${dto.num }"/>
                            			<input type="hidden" name="target_id" value="${tmp.writer }"/>
@@ -374,26 +362,24 @@
                            				<button type="submit">수정</button>
                         			</form>
                      			</c:if>
-                    	</li>      
-               		</c:otherwise>
-            	</c:choose>
-        	</c:forEach>
-    	</ul>
-	</div>      
-		<!-- 원글에 댓글을 작성할 폼 -->
-		<form class="comment-form insert-form" action="${pageContext.request.contextPath}/reserve/private/comment_insert.do" method="post">
-      		<input type="hidden" name="pageNum" value="${pageNum }"/>
-      		<!-- 원글의 글번호가 댓글의 ref_group 번호가 된다. -->
-      		<input type="hidden" name="ref_group" value="${dto.num }"/>
-      		<!-- 원글의 작성자가 댓글의 대상자가 된다. -->
-      		<input type="hidden" name="target_id" value="${dto.writer }"/>
-      		<textarea name="content">${empty id ? '댓글 작성을 위해 로그인이 필요 합니다.' : '' }</textarea>
-      		<button type="submit">등록</button>
-   		</form>
-   		
-</div>
-	
-</div>
+                    			</li>      
+               				</c:otherwise>
+            			</c:choose>
+        			</c:forEach>
+    			</ul>
+			</div>      
+			<!-- 원글에 댓글을 작성할 폼 -->
+			<form class="comment-form insert-form" action="${pageContext.request.contextPath}/reserve/private/commentinsert.do" method="post">
+      			<input type="hidden" name="pageNum" value="${pageNum }"/>
+      			<!-- 원글의 글번호가 댓글의 ref_group 번호가 된다. -->
+      			<input type="hidden" name="ref_group" value="${dto.num }"/>
+      			<!-- 원글의 작성자가 댓글의 대상자가 된다. -->
+      			<input type="hidden" name="target_id" value="${dto.writer }"/>
+      			<textarea name="content">${empty id ? '댓글 작성을 위해 로그인이 필요 합니다.' : '' }</textarea>
+      			<button type="submit">등록</button>
+   			</form>
+		</div>
+	</div>
 	<footer-component></footer-component>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -415,7 +401,7 @@
 	function reserveDeleteList(){
 		document.querySelector(".reserveDel").addEventListener("click", function(){
 			if(confirm("정말 삭제하시겠습니까?")){
-				location.href="${pageContext.request.contextPath}/api/reserve/delete.do?num=${dto.num }";
+				location.href="${pageContext.request.contextPath}/reserve/delete.do?num=${dto.num }";
 			}
 		});
 	}

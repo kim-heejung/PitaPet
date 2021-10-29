@@ -20,7 +20,7 @@
 		<div class="board-wrap form-wrap">
 			<page-category :cpath="cpath" :index="0"></page-category>
 			<div class="container">
-			   	<form class="updateForm" action="${pageContext.request.contextPath}/api/adopt/update.do" method="post" enctype="multipart/form-data">
+			   	<form class="updateForm" action="${pageContext.request.contextPath}/adopt/update.do" method="post" enctype="multipart/form-data">
 			      	<input type="hidden" name="num" value="${dto.num}"/>
 			      	<div class="mb-3 updateFormList">
 			      		<label class="form-label">동물 분류 <span class="require-star">*</span></label>

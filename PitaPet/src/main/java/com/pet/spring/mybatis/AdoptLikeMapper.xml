@@ -2,16 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adoptLike">
 
-	<select id="getYCountList" resultType="adoptLikeDto">
-		SELECT likeNum, cnt, a.num
-		FROM
-			(SELECT num AS likeNum, COUNT(num) AS cnt
-			FROM adoptlike
-			WHERE liked ='yes'
-			GROUP BY num) result1
-		RIGHT OUTER JOIN board_adopt a
-		ON likeNum = a.num
-		ORDER BY a.num DESC
+	<select id="isExist" parameterType="adoptLikeDto" resultType="int">
+		SELECT count(*) AS count
+		FROM adoptLike
+		WHERE num=#{num} AND id=#{id}
 	</select>
 	
 	<insert id="insert" parameterType="adoptLikeDto">
@@ -31,6 +25,18 @@
 		SET liked='no'
 		WHERE num=#{num} AND id=#{id}
 	</update>
+
+	<select id="getYCountList" resultType="adoptLikeDto">
+		SELECT likeNum, cnt, a.num
+		FROM
+			(SELECT num AS likeNum, COUNT(num) AS cnt
+			FROM adoptlike
+			WHERE liked ='yes'
+			GROUP BY num) result1
+		RIGHT OUTER JOIN board_adopt a
+		ON likeNum = a.num
+		ORDER BY a.num DESC
+	</select>
 	
 	<select id="getData" parameterType="adoptLikeDto" resultType="adoptLikeDto">
 		SELECT num, liked
@@ -42,12 +48,6 @@
 		SELECT count(*) AS count
 		FROM adoptLike
 		WHERE num=#{num} AND liked='yes'
-	</select>
-					
-	<select id="isExist" parameterType="adoptLikeDto" resultType="int">
-		SELECT count(*) AS count
-		FROM adoptLike
-		WHERE num=#{num} AND id=#{id}
 	</select>
 					
 </mapper>

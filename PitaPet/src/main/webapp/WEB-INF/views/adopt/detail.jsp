@@ -52,7 +52,7 @@
 					         	<c:otherwise>
 					         		<c:choose>
 					         			<c:when test="${like.liked eq 'yes' }">
-					         				<p><a class="like-detail" href="${pageContext.request.contextPath}/api/adoptlike/unlike.do?num=${dto.num }">♥</a></p>
+					         				<p><a class="like-detail" href="${pageContext.request.contextPath}/adoptlike/unlike.do?num=${dto.num }">♥</a></p>
 					         			</c:when>
 					         			<c:otherwise>
 					         				<p><a class="like-detail" href="${pageContext.request.contextPath}/adoptlike/like.do?num=${dto.num }">♡</a></p>
@@ -130,7 +130,7 @@
   
   document.querySelector("#adoptDel").addEventListener("click", function(){
 	  if(confirm("정말 삭제하시겠습니까?")){
-		  location.href="${pageContext.request.contextPath}/api/adopt/delete.do?num=${dto.num }";
+		  location.href="${pageContext.request.contextPath}/adopt/delete.do?num=${dto.num }";
 	  }
   });
 </script>

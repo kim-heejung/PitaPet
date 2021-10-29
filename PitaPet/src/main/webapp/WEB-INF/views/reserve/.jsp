@@ -83,7 +83,7 @@
 				<br /> 
 				비밀번호를 입력해 주세요.
 			</p>
-			<form style="padding-bottom:0" class="pwdCheckForm" action="${pageContext.request.contextPath}/api/reserve/detailcheck.do?num=${num}" method="post">
+			<form style="padding-bottom:0" class="pwdCheckForm" action="${pageContext.request.contextPath}/reserve/detailcheck.do?num=${num}" method="post">
 				<div class="pwdCheckFormList">
 					<label class="pwdCheckFormLabel" for="pwd">비밀번호</label>
 					<input class="widthPull" type="password" name="pwd" id="pwd"/>

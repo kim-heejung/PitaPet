@@ -41,7 +41,7 @@
 									<img src="https://img0001.echosting.cafe24.com/front/type_b/image/common/icon_lock.gif" alt="" />
 									{{ tmp.title }}
 								</a>
-								<a v-if="id != tmp.id && tmp.scope == 'private'" class="contentTitleLink" :href="cpath + '/reserve/detailcheckform.do?num=' + tmp.num ">
+								<a v-if="id != tmp.id && tmp.scope == 'private'" class="contentTitleLink" :href="cpath + '/reserve/privatepwdform.do?num=' + tmp.num ">
 									<img src="https://img0001.echosting.cafe24.com/front/type_b/image/common/icon_lock.gif" alt="" />
 									{{tmp.title }}
 								</a>
@@ -105,7 +105,7 @@
 		   },
 			listAllCount(){
 				const self = this;
-				axios.get(base_url + "/api/reserve/listallcount.do")
+				axios.get(base_url + "/api/reserve/commentallcount.do")
  				.then(function(response){
  					console.log(response.data);
  					if(response.status == 200){

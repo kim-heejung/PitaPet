@@ -21,7 +21,7 @@
 	<div class="board-wrap form-wrap">
 		<page-category class="reserve" :cpath="cpath" :index="5"></page-category>
 		<div class="container">
-			<form id="updateForm" action="${pageContext.request.contextPath}/api/reserve/update.do" method="post">
+			<form id="updateForm" action="${pageContext.request.contextPath}/reserve/update.do" method="post">
 			      	<input type="hidden" name="num" value="${dto.num}"/>
 			      	<input type="hidden" name="pageNum" value="${param.pageNum}"/>
 			      	<div class="mb-3 insertFormList">

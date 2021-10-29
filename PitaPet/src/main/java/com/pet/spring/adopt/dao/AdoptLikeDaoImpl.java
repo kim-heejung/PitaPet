@@ -16,32 +16,16 @@ public class AdoptLikeDaoImpl implements AdoptLikeDao {
 	private SqlSession session;
 	
 	@Override
-	public List<AdoptLikeDto> getYCountList() {
+	public int isExist(AdoptLikeDto dto) {
 		
-		return session.selectList("adoptLike.getYCountList");
+		return session.selectOne("adoptLike.isExist", dto);
 	}
-	
-	/*
-	public List<AdoptLikeDto> getYList(AdoptLikeDto dto){
-		
-		return session.selectList("adoptLike.getYList", dto);
-	}
-	*/
-	
-	
-	@Override
-	public List<AdoptLikeDto> getIdYList(AdoptLikeDto dto) {
-		
-		return session.selectList("adoptLike.getIdYList", dto);
-	}
-	
-	
 	
 	@Override
 	public void insert(AdoptLikeDto dto) {
 		session.insert("adoptLike.insert", dto);
 	}
-
+	
 	@Override
 	public void updateY(AdoptLikeDto dto) {
 		session.update("adoptLike.updateY", dto);
@@ -51,15 +35,23 @@ public class AdoptLikeDaoImpl implements AdoptLikeDao {
 	public void updateN(AdoptLikeDto dto) {
 		session.update("adoptLike.updateN", dto);
 	}
-
+	
 	@Override
-	public AdoptLikeDto getData(AdoptLikeDto dto) {
-		return session.selectOne("adoptLike.getData", dto);
+	public List<AdoptLikeDto> getCountList() {
+		
+		return session.selectList("adoptLike.getYCountList");
 	}
-
+	
+	/*
 	@Override
 	public List<AdoptLikeDto> getMyList(String id) {
 		return session.selectList("adoptLike.getMyList", id);
+	}
+	*/
+	
+	@Override
+	public AdoptLikeDto getData(AdoptLikeDto dto) {
+		return session.selectOne("adoptLike.getData", dto);
 	}
 
 	@Override
@@ -67,12 +59,4 @@ public class AdoptLikeDaoImpl implements AdoptLikeDao {
 		return session.selectOne("adoptLike.getCount", num);
 	}
 
-	@Override
-	public int isExist(AdoptLikeDto dto) {
-		
-		return session.selectOne("adoptLike.isExist", dto);
-	}
-
-	
-	
 }

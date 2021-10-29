@@ -7,6 +7,7 @@
 			WHERE animalType = #{animalType}
 		</if>
 	</sql>
+	
 	<select id="getList" parameterType="adoptDto" resultType="adoptDto">
 		SELECT *
 		FROM
@@ -19,12 +20,19 @@
 				ORDER BY num DESC) result2)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
+	
 	<select id="getCount" parameterType="adoptDto" resultType="int">
 		SELECT NVL(MAX(ROWNUM), 0)
 		FROM board_adopt INNER JOIN shelter
 		ON writer = id
 		<include refid="adoptAnimalType"/>
 	</select>
+	
+	<update id="addViewCount" parameterType="int">
+		UPDATE board_adopt
+		SET viewCount=viewCount+1
+		WHERE num=#{num}
+	</update>
 	
 	<select id="getData" parameterType="adoptDto" resultType="adoptDto">
 		SELECT *
@@ -40,12 +48,6 @@
 			)
 		WHERE num = #{num}
 	</select>
-	
-	<update id="addViewCount" parameterType="int">
-		UPDATE board_adopt
-		SET viewCount=viewCount+1
-		WHERE num=#{num}
-	</update>
 	
 	<insert id="insert" parameterType="adoptDto">
 		INSERT INTO board_adopt
@@ -68,7 +70,7 @@
 		WHERE num=#{num}
 	</delete>
 	
-	<select id="mainBirthData" resultType="adoptDto">
+	<select id="getBirthData" resultType="adoptDto">
 		SELECT *
 		FROM
 			(SELECT result2.*, ROWNUM AS rnum
@@ -80,7 +82,7 @@
 		WHERE rnum = 1
 	</select>
 
-	<select id="mainBirthList" resultType="adoptDto">
+	<select id="getBirthList" resultType="adoptDto">
 		SELECT *
 		FROM
 			(SELECT result2.*, ROWNUM AS rnum
